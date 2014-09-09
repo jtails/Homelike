@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_bg"
+    android:padding="15dp"
+    android:layout_gravity="center">
+
+    <ImageView android:id="@+id/img_service_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_service_water"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:id="@+id/lbl_service_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="Agua"
+        android:textSize="25sp"
+        homelike:typeface="fonts/Roboto-Thin.ttf"/>
+
+</LinearLayout>

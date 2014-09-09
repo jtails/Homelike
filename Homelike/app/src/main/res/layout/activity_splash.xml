@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_homelike_splash_logo"
+            android:layout_margin="15dp"/>
+
+        <LinearLayout android:id="@+id/frame_homelike"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="29sp"
+                android:textColor="#e0f2f1"
+                android:text="Home"
+                homelike:typeface="fonts/Roboto-Thin.ttf"/>
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="29sp"
+                android:textColor="#e0f2f1"
+                android:text="Like"
+                homelike:typeface="fonts/Roboto-Medium.ttf"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#e0f2f1"
+            android:text="powered by"
+            homelike:typeface="fonts/RobotoCondensed-Light.ttf"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:textColor="#e0f2f1"
+            android:text="jtails"
+            homelike:typeface="fonts/RobotoCondensed-Bold.ttf"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</LinearLayout>
