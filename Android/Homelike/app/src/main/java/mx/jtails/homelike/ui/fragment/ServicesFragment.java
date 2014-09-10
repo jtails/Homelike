@@ -1,8 +1,8 @@
 package mx.jtails.homelike.ui.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -45,9 +45,9 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ActionBar ab = ((ActionBarActivity) activity).getSupportActionBar();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
         ab.setSubtitle("Services");
     }
 
