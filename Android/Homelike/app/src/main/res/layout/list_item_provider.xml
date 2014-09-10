@@ -7,27 +7,21 @@
     android:background="@drawable/card_bg"
     android:padding="10dp">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:padding="5dp">
 
-        <ImageView android:id="@+id/img_provider_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_homelike_splash_logo"
-            android:adjustViewBounds="true"/>
+    <ImageView android:id="@+id/img_provider_logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_homelike_splash_logo"/>
 
-    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="1">
-
+        android:layout_weight="1"
+        android:layout_marginLeft="6dp">
 
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_provider_name"
@@ -36,7 +30,16 @@
                 homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
                 android:textSize="27sp"
                 android:text="Aguapura"
-                android:layout_toLeftOf="@+id/img_comments"
+                android:singleLine="true"/>
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_provider_slogan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                homelike:typeface="fonts/RobotoCondensed-LightItalic.ttf"
+                android:textSize="16sp"
+                android:layout_marginLeft="3dp"
+                android:text="Aguapura"
                 android:singleLine="true"/>
 
             <LinearLayout
@@ -57,11 +60,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Comentarios"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
-
 
     </LinearLayout>
 

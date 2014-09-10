@@ -2,6 +2,9 @@ package mx.jtails.homelike;
 
 import android.app.Application;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.util.HomelikePreferences;
 
@@ -15,6 +18,13 @@ public class HomelikeApplication extends Application {
         super.onCreate();
         HomelikeDBManager.init(this);
         HomelikePreferences.init(this);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+                getApplicationContext())
+                .diskCacheSize(20 * 1024 * 1024)
+                .diskCacheFileCount(20)
+                .writeDebugLogs()
+                .build();
+        ImageLoader.getInstance().init(config);
     }
 
     public void logout(){
