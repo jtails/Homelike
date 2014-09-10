@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -43,6 +44,8 @@ public class MyAddressesAdapter extends ArrayAdapter<Direccion> {
         holder.lblAddress.get().setText(
                 address.getCalle() + " #" + address.getNexterior() + ", "
                 + address.getColonia() + ", " + address.getDelegacion());
+        holder.imgBookmark.get().setVisibility(
+                address.getEsDefault() == 1 ? View.VISIBLE : View.GONE);
 
         return view;
     }
@@ -90,12 +93,15 @@ public class MyAddressesAdapter extends ArrayAdapter<Direccion> {
 
         private WeakReference<TextView> lblAlias;
         private WeakReference<TextView> lblAddress;
+        private WeakReference<ImageView> imgBookmark;
 
         public ViewHolder(View view) {
             this.lblAlias = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_alias));
             this.lblAddress = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_resumed_address));
+            this.imgBookmark = new WeakReference<ImageView>(
+                    (ImageView) view.findViewById(R.id.img_bookmark));
         }
 
     }

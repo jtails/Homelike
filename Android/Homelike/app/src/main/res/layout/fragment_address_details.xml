@@ -14,274 +14,256 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/layout_ab_holder">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="13dp">
+            android:orientation="vertical">
 
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="13dp">
 
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Alias"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText android:id="@+id/edit_alias"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Home, Work, etc."
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    android:singleLine="true"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Calle"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_street"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Av. Insurgentes"
-                    android:layout_weight="1"
-                    android:inputType="text"
-                    android:singleLine="true"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Exterior"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_street_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Número exterior"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:inputType="numberDecimal"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Interior"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_interior"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="(Opcional)"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:inputType="number"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Colonia"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_colony"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Roma Sur"
-                    android:layout_weight="1"
-                    android:inputType="text"
-                    android:singleLine="true"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="C.P."
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_zip_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="55555"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:singleLine="true"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Delegación"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Cuauhtémoc"
-                    android:layout_weight="1"
-                    android:inputType="text"
-                    android:singleLine="true"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Estado"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_state"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Distrito Federal"
-                    android:layout_weight="1"
-                    android:singleLine="true"
-                    android:inputType="text"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <mx.jtails.homelike.ui.widget.TypeFacedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Referencia"
-                    android:textSize="19sp"
-                    homelike:typeface="fonts/Roboto-Light.ttf"
-                    android:layout_marginRight="5dp"/>
-
-                <EditText android:id="@+id/edit_reference"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Fachada, entre calles, etc."
-                    android:layout_weight="1"
-                    android:inputType="textMultiLine"/>
-
-            </TableRow>
-
-            <TableRow android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:visibility="invisible">
-
-                    <Button
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Alias"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_alias"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Home, Work, etc."
                         android:layout_weight="1"
-                        android:text="Select"
-                        android:textSize="18sp"
-                        android:textColor="#33b5e5"
-                        android:padding="15dp"
-                        android:background="@drawable/card_bg"
-                        android:layout_margin="3dp"/>
+                        android:inputType="textPersonName"
+                        android:singleLine="true"/>
 
-                </LinearLayout>
+                </TableRow>
 
-            </TableRow>
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </TableLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Calle"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_street"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Av. Insurgentes"
+                        android:layout_weight="1"
+                        android:inputType="text"
+                        android:singleLine="true"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Exterior"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_street_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Número exterior"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:inputType="numberDecimal"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Interior"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_interior"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="(Opcional)"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:inputType="number"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Colonia"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_colony"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Roma Sur"
+                        android:layout_weight="1"
+                        android:inputType="text"
+                        android:singleLine="true"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="C.P."
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_zip_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="55555"
+                        android:layout_weight="1"
+                        android:inputType="number"
+                        android:singleLine="true"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Delegación"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Cuauhtémoc"
+                        android:layout_weight="1"
+                        android:inputType="text"
+                        android:singleLine="true"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Estado"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Distrito Federal"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:inputType="text"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Referencia"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_reference"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Fachada, entre calles, etc."
+                        android:layout_weight="1"
+                        android:inputType="textMultiLine"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_column="1">
+
+                <Button android:id="@+id/btn_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Finish"
+                    android:textSize="18sp"
+                    android:textColor="#33b5e5"
+                    android:padding="15dp"
+                    android:background="@drawable/card_bg"
+                    android:layout_margin="3dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp">
-
-        <Button android:id="@+id/btn_finish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Finish"
-            android:textSize="18sp"
-            android:textColor="#33b5e5"
-            android:padding="15dp"
-            android:background="@drawable/card_bg"
-            android:layout_margin="3dp"/>
-
-    </LinearLayout>
 
 </RelativeLayout>

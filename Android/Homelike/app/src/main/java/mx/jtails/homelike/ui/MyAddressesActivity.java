@@ -17,16 +17,22 @@ import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Servicio;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.ui.adapter.MyAddressesAdapter;
+import mx.jtails.homelike.ui.widget.TrackableScrollView;
 
 public class MyAddressesActivity extends ActionBarActivity
-    implements AdapterView.OnItemClickListener {
+    implements AdapterView.OnItemClickListener, TrackableScrollView.Callbacks {
 
     public static final String ARG_REQUESTED_SERVICE_ID = "requested_service_id";
 
     private int mServiceId;
     private Servicio mService;
+
+    private TrackableScrollView mScrollView;
+    private View mHeader;
     private ListView mListViewAddresses;
     private MyAddressesAdapter mMyAddressesAdapter;
+
+    private int mPhotoHeight;
 
     private List<Direccion> mAddresses = HomelikeDBManager.getDBManager().loadAddresses();
 
@@ -43,12 +49,18 @@ public class MyAddressesActivity extends ActionBarActivity
             this.loadService(savedInstanceState);
         }
 
+        this.mScrollView = (TrackableScrollView) this.findViewById(R.id.scroll_view);
+        this.mHeader = this.findViewById(R.id.layout_header);
         this.mListViewAddresses = (ListView) this.findViewById(R.id.list_addresses);
         this.mMyAddressesAdapter = new MyAddressesAdapter(this.getApplicationContext(),
             this.mAddresses);
 
+        this.mScrollView.addCallbacks(this);
         this.mListViewAddresses.setOnItemClickListener(this);
         this.mListViewAddresses.setAdapter(this.mMyAddressesAdapter);
+        this.onScrollChanged(0, 0);
+
+        this.mPhotoHeight = this.mHeader.getHeight();
     }
 
     private void loadService(Bundle args){
@@ -112,5 +124,12 @@ public class MyAddressesActivity extends ActionBarActivity
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(ARG_REQUESTED_SERVICE_ID, this.mServiceId);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onScrollChanged(int deltaX, int deltaY) {
+        int scrollY = this.mScrollView.getScrollY();
+        this.mHeader.setTranslationY(scrollY * 0.5f);
+
     }
 }

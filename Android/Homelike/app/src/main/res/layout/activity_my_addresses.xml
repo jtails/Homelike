@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<mx.jtails.homelike.ui.widget.TrackableScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout android:id="@+id/layout_header"
+    <LinearLayout android:id="@+id/frame_scroll_child"
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clipChildren="false">
 
-        <ImageView
+        <FrameLayout android:id="@+id/layout_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/img_header_map"
-            android:scaleType="centerCrop"/>
+            android:layout_height="170dp">
 
-    </FrameLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_header_map"
+                android:scaleType="centerCrop"/>
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/add_address_bg"
-        android:layout_marginTop="140dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"/>
+        </FrameLayout>
 
+        <mx.jtails.homelike.ui.widget.FullSizeListView
+            android:id="@+id/list_addresses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_header"
+            android:divider="@android:color/transparent"
+            android:background="@color/activity_bg"/>
 
-    <ListView android:id="@+id/list_addresses"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/layout_header"
-        android:paddingTop="25dp"
-        android:divider="@android:color/transparent"
-        />
+    </LinearLayout>
 
-</RelativeLayout>
+</mx.jtails.homelike.ui.widget.TrackableScrollView>

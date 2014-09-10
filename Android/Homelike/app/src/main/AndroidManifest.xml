@@ -41,8 +41,7 @@
         <activity android:name=".ui.MyAddressesActivity" />
         <activity android:name=".ui.ProvidersActivity" />
         <activity android:name=".ui.AddressActivity"
-            android:theme="@style/Theme.Homelike.Translucent"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/Theme.Homelike.Translucent"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
