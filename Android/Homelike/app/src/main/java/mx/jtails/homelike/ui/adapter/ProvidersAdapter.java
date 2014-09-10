@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
@@ -46,6 +47,7 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
 
         Proveedor provider = this.getItem(position);
         holder.lblProviderName.get().setText(provider.getNombre());
+        holder.lblRating.get().setText(String.valueOf((float) provider.getCalificacion()));
 
         return view;
     }
@@ -61,11 +63,18 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
     }
 
     private class ViewHolder {
+
+        private WeakReference<ImageView> imgProviderLogo;
         private WeakReference<TextView> lblProviderName;
+        private WeakReference<TextView> lblRating;
 
         public ViewHolder(View view) {
             this.lblProviderName = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_provider_name));
+            this.imgProviderLogo = new WeakReference<ImageView>(
+                    (ImageView) view.findViewById(R.id.img_provider_logo));
+            this.lblRating = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_rating));
         }
     }
 }

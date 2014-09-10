@@ -10,13 +10,13 @@
         android:layout_height="match_parent"
         android:visibility="gone">
 
-        <GridView android:id="@+id/list_providers"
+        <ListView android:id="@+id/list_providers"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="9dp"
-            android:paddingRight="9dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
             android:paddingTop="7dp"
-            android:numColumns="2"/>
+            android:divider="@android:color/transparent"/>
 
         <TextView
             android:id="@+id/lbl_empty"

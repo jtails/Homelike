@@ -1,13 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/card_bg">
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_bg"
+    android:padding="10dp">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:padding="5dp">
+
+        <ImageView android:id="@+id/img_provider_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_homelike_splash_logo"
+            android:adjustViewBounds="true"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_provider_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+                android:textSize="27sp"
+                android:text="Aguapura"
+                android:layout_toLeftOf="@+id/img_comments"
+                android:singleLine="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView android:id="@+id/img_comments"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_comments"
+                    android:layout_alignParentRight="true"
+                    android:adjustViewBounds="true"/>
+
+                <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comentarios"
+                    android:textSize="17sp"
+                    android:layout_marginLeft="5dp"/>
+
+            </LinearLayout>
+
+
+    </LinearLayout>
 
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
-        android:id="@+id/lbl_provider_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/lbl_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        homelike:typeface="fonts/Roboto-Thin.ttf"
+        android:textSize="45sp"
+        android:text="4.5"/>
 
 </LinearLayout>
