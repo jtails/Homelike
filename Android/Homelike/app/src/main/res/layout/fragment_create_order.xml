@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:homelike="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <mx.jtails.homelike.ui.widget.TrackableScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_total_content">
 
         <LinearLayout android:id="@+id/frame_scroll_child"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:clipChildren="false">
 
@@ -28,24 +27,50 @@
 
             </FrameLayout>
 
-            <mx.jtails.homelike.ui.widget.FullSizeListView
-                android:id="@+id/list_products"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_header"
-                android:divider="@android:color/transparent"
-                android:background="@color/activity_bg"/>
+                android:layout_height="match_parent">
 
+                <FrameLayout android:id="@+id/layout_products_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <mx.jtails.homelike.ui.widget.FullSizeListView
+                        android:id="@+id/list_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layout_header"
+                        android:divider="@android:color/transparent"
+                        android:background="@color/activity_bg"/>
+
+                    <TextView
+                        android:id="@+id/lbl_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="No products found"/>
+
+                </FrameLayout>
+
+                <ProgressBar android:id="@+id/progress_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+
+            </FrameLayout>
         </LinearLayout>
 
     </mx.jtails.homelike.ui.widget.TrackableScrollView>
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/layout_total_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#00796b"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:layout_alignParentBottom="true">
 
         <FrameLayout
             android:layout_width="40dp"
@@ -68,6 +93,17 @@
             android:background="@android:color/white"/>
 
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            homelike:typeface="fonts/Roboto-Light.ttf"
+            android:text="$"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:id="@+id/lbl_total"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -75,10 +111,9 @@
             android:textColor="@android:color/white"
             android:textSize="30sp"
             homelike:typeface="fonts/Roboto-Light.ttf"
-            android:text="$27.80"
+            android:text="0.0"
             android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"/>
+            android:gravity="center_vertical"/>
 
         <FrameLayout
             android:layout_width="1dp"
@@ -102,4 +137,4 @@
 
      </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

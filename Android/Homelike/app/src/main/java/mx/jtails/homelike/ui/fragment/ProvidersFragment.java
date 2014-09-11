@@ -159,7 +159,6 @@ public class ProvidersFragment extends Fragment
 
     @Override
     public void onListProvidersResponse(List<Proveedor> providers) {
-        this.mProvidersRequest = null;
         this.mProviders = providers;
 
         if(this.mProviders.size() > 0){

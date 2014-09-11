@@ -81,7 +81,6 @@ public class CheckOrderActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         this.onTryToLeave();
     }
 
