@@ -1,5 +1,7 @@
 package mx.jtails.homelike.ui.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Proveedor;
+import mx.jtails.homelike.ui.CheckOrderActivity;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
@@ -46,6 +49,12 @@ public class CreateOrderFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.mProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
+        view.findViewById(R.id.btn_cancel_order).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmCancelation();
+            }
+        });
     }
 
     @Override
@@ -60,6 +69,20 @@ public class CreateOrderFragment extends Fragment {
 
         ImageLoader.getInstance().displayImage(
             this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
+    }
+
+    public void confirmCancelation(){
+        new AlertDialog.Builder(this.getActivity())
+                .setTitle("Cancel")
+                .setMessage("Are you sure you want to cancel this order?")
+                .setPositiveButton("Cancel Order", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ((CheckOrderActivity) getActivity()).cancelOrder();
+                    }
+                })
+                .setNegativeButton("Continue", null)
+                .show();
     }
 
 }

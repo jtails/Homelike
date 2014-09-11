@@ -1,5 +1,7 @@
 package mx.jtails.homelike.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -70,10 +72,25 @@ public class CheckOrderActivity extends ActionBarActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                this.onTryToLeave();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.onTryToLeave();
+    }
+
+    private void onTryToLeave(){
+        if(this.mOrderProcessPager.getCurrentItem() == 1){
+            ((CreateOrderFragment) this.mOrderProcessAdapter.getItem(1))
+                    .confirmCancelation();
+        } else {
+            this.confirmLeaving();
         }
     }
 
@@ -117,4 +134,24 @@ public class CheckOrderActivity extends ActionBarActivity
                         this.getResources().getColor(R.color.primary), factor))
         );
     }
+
+    public void cancelOrder(){
+        this.originPage = 1;
+        this.mOrderProcessPager.setCurrentItem(0);
+    }
+
+    private void confirmLeaving(){
+        new AlertDialog.Builder(this)
+                .setTitle("Leave Orders")
+                .setMessage("Are your sure you want to leave this section?")
+                .setPositiveButton("Leave", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Stay", null)
+                .show();
+    }
+
 }
