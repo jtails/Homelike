@@ -14,14 +14,19 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
+import java.util.List;
+
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
+import mx.jtails.homelike.request.ListProductsRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
  */
-public class CreateOrderFragment extends Fragment {
+public class CreateOrderFragment extends Fragment
+    implements ListProductsRequest.ListProductsResponseHandler {
 
     private Proveedor mProvider;
 
@@ -69,6 +74,8 @@ public class CreateOrderFragment extends Fragment {
 
         ImageLoader.getInstance().displayImage(
             this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
+
+        new ListProductsRequest(this, this.mProvider.getIdProveedor()).executeAsync();
     }
 
     public void confirmCancelation(){
@@ -85,4 +92,8 @@ public class CreateOrderFragment extends Fragment {
                 .show();
     }
 
+    @Override
+    public void onListProductsResponse(List<Producto> products) {
+        System.out.println("Productos encontrados " + products.size());
+    }
 }
