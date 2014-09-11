@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mx.jtails.homelike.ui.ProvidersActivity">
+    tools:context="mx.jtails.homelike.ui.CheckOrderActivity">
 
     <FrameLayout android:id="@+id/layout_providers_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:layout_marginTop="?attr/actionBarSize">
 
         <ListView android:id="@+id/list_providers"
             android:layout_width="match_parent"

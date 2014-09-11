@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <mx.jtails.homelike.ui.widget.TrackableScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout android:id="@+id/frame_scroll_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:clipChildren="false">
+
+            <FrameLayout android:id="@+id/layout_header"
+                android:layout_width="match_parent"
+                android:layout_height="170dp">
+
+                <ImageView android:id="@+id/img_provider_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+
+            </FrameLayout>
+
+            <mx.jtails.homelike.ui.widget.FullSizeListView
+                android:id="@+id/list_addresses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_header"
+                android:divider="@android:color/transparent"
+                android:background="@color/activity_bg"/>
+
+        </LinearLayout>
+
+    </mx.jtails.homelike.ui.widget.TrackableScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#00796b"
+        android:padding="10dp">
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_cancel_order"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:id="@+id/lbl_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            homelike:typeface="fonts/Roboto-Light.ttf"
+            android:text="$27.80"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"/>
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_check_order"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"/>
+
+        </FrameLayout>
+
+     </LinearLayout>
+
+</LinearLayout>

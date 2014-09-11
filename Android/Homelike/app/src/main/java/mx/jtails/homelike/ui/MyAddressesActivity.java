@@ -111,10 +111,10 @@ public class MyAddressesActivity extends ActionBarActivity
             this.startActivity(intent);
         } else {
             Direccion address = this.mMyAddressesAdapter.getItem(position);
-            Intent intent = new Intent(this, ProvidersActivity.class);
+            Intent intent = new Intent(this, CheckOrderActivity.class);
 
-            args.putInt(ProvidersActivity.ARG_ADDRESS_ID, address.getIdDireccion());
-            args.putInt(ProvidersActivity.ARG_SERVICE_ID, this.mServiceId);
+            args.putInt(CheckOrderActivity.ARG_ADDRESS_ID, address.getIdDireccion());
+            args.putInt(CheckOrderActivity.ARG_SERVICE_ID, this.mServiceId);
             intent.putExtras(args);
             this.startActivity(intent);
         }
