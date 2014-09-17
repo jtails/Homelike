@@ -119,6 +119,13 @@ public class ProvidersFragment extends Fragment
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(ARG_ADDRESS_ID, this.mAddressId);
+        outState.putInt(ARG_SERVICE_ID, this.mServiceId);
+        super.onSaveInstanceState(outState);
+    }
+
     private void displayContentMode(ContentDisplayMode displayMode){
         switch (displayMode) {
             case LOAD: {

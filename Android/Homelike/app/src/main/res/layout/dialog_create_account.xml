@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"/>
+
+        <Spinner android:id="@+id/spinner_accounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mobile"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"/>
+
+        <EditText android:id="@+id/edit_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:textSize="16sp"/>
+
+    </TableRow>
+
+</TableLayout>

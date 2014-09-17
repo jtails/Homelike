@@ -11,7 +11,10 @@ public class HomelikePreferences {
     private static final String PREFS_NAME = "homelike_prefs";
 
     public static final String DEFAULT_ADDRESS = "default_address";
-    public static final String SESSION_COOKIE = "session_cookie";
+    public static final String REGISTRATION_ID = "registration_id";
+    public static final String APP_VERSION = "app_version";
+    public static final String ACCOUNT_ID = "account_id";
+    public static final String DEVICE_ID = "device_id";
 
     private static SharedPreferences preferences = null;
     private static SharedPreferences.Editor editor = null;
@@ -30,6 +33,10 @@ public class HomelikePreferences {
         return preferences.getInt(key, defValue);
     }
 
+    public static long loadLong(String key, long defValue) {
+        return preferences.getLong(key, defValue);
+    }
+
     public static boolean loadBoolean(String key, boolean defValue) {
         return preferences.getBoolean(key, defValue);
     }
@@ -41,6 +48,11 @@ public class HomelikePreferences {
 
     public static void saveInt(String key, int value) {
         editor.putInt(key, value);
+        editor.commit();
+    }
+
+    public static void saveLong(String key, long value) {
+        editor.putLong(key, value);
         editor.commit();
     }
 

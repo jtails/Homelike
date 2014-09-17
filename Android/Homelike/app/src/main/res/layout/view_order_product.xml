@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:orientation="vertical">
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:id="@+id/btn_add_product"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#0a7e07"
+            android:text="+"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:id="@+id/btn_remove_product"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#e64a19"
+            android:text="-"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"/>
+
+    </LinearLayout>
+
+    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:id="@+id/lbl_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        homelike:typeface="fonts/Roboto-Medium.ttf"
+        android:textSize="22sp"
+        android:singleLine="true"
+        android:layout_margin="5dp"/>
+
+    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:id="@+id/lbl_unit_price"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="3dp"
+        android:gravity="center_vertical"
+        homelike:typeface="fonts/Roboto-Light.ttf"
+        android:textSize="20sp"/>
+
+    <FrameLayout
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="#666"/>
+
+    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:id="@+id/lbl_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        homelike:typeface="fonts/Roboto-Light.ttf"
+        android:textSize="25sp"
+        android:layout_margin="5dp"/>
+
+</merge>

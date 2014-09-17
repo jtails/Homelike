@@ -89,7 +89,7 @@ public class CheckOrderActivity extends ActionBarActivity
             ((CreateOrderFragment) this.mOrderProcessAdapter.getItem(1))
                     .confirmCancelation();
         } else {
-            this.confirmLeaving();
+            super.onBackPressed();
         }
     }
 

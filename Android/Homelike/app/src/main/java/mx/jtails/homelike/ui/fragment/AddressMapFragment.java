@@ -54,11 +54,14 @@ public class AddressMapFragment extends Fragment
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        MapsInitializer.initialize(activity);
         try {
             this.mAddressSelectedListener = (OnAddressLocationSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException("Activity must implement AddressMapFragment.OnAddressLocationSelectedListener");
         }
+
+        this.mLocationClient = new LocationClient(activity, this, this);
     }
 
     @Override
@@ -67,7 +70,6 @@ public class AddressMapFragment extends Fragment
 
         this.mAddressMap = (MapView) view.findViewById(R.id.map_address);
         this.mAddressMap.onCreate(savedInstanceState);
-        MapsInitializer.initialize(this.getActivity());
 
         return view;
     }
@@ -127,8 +129,6 @@ public class AddressMapFragment extends Fragment
         mapUISettings.setRotateGesturesEnabled(false);
         mapUISettings.setZoomControlsEnabled(false);
         mapUISettings.setTiltGesturesEnabled(false);
-
-        this.mLocationClient = new LocationClient(this.getActivity(), this, this);
     }
 
     @Override

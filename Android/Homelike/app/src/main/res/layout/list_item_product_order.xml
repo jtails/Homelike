@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx.jtails.homelike.ui.widget.OrderProductView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ord_product"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="10dp"/>

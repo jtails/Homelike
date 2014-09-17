@@ -1,6 +1,7 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -19,20 +21,33 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.api.model.Direccion;
+import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
+import mx.jtails.homelike.model.provider.HomelikeDBManager;
+import mx.jtails.homelike.request.InsertOrderRequest;
 import mx.jtails.homelike.request.ListProductsRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
 import mx.jtails.homelike.ui.adapter.ProductsAdapter;
+import mx.jtails.homelike.ui.fragment.dialog.ConfirmOrderDialog;
+import mx.jtails.homelike.ui.widget.OrderProductView;
+import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
  */
 public class CreateOrderFragment extends Fragment
-    implements ListProductsRequest.ListProductsResponseHandler {
+    implements ListProductsRequest.ListProductsResponseHandler,
+    OrderProductView.OnProductQuantityChangedListener,
+    ConfirmOrderDialog.ConfirmOrderDialogCallbacks,
+    InsertOrderRequest.OnInsertOrderResponseHandler {
 
     private enum ContentDisplayMode {
         LOAD, CONTENT, CONTENT_EMPTY;
@@ -42,16 +57,39 @@ public class CreateOrderFragment extends Fragment
 
     private Proveedor mProvider;
     private List<Producto> mProducts = new ArrayList<Producto>();
+    private Map<Integer, Integer> mSubtotals = new HashMap<Integer, Integer>();
+    private Map<Producto, Integer> mOrder = new LinkedHashMap<Producto, Integer>();
 
     private ImageView mProviderLogo;
     private View mLayoutContent;
     private ProgressBar mProgress;
     private TextView mLblEmpty;
+    private TextView mLblTotal;
 
     private AbsListView mListView;
     private ProductsAdapter mProductsAdapter;
 
     private DisplayImageOptions mLoaderOptions;
+
+    private ProgressDialog mCreatingDialog;
+
+    private int mAddressId;
+    private int mServiceId;
+    private Direccion mAddress;
+
+    private static final String ARG_ADDRESS_ID = "arg_address_id";
+    private static final String ARG_SERVICE_ID = "arg_service_id";
+
+    public static CreateOrderFragment getInstance(int addressId, int serviceId){
+        Bundle extras = new Bundle();
+        extras.putInt(ARG_ADDRESS_ID, addressId);
+        extras.putInt(ARG_SERVICE_ID, serviceId);
+
+        CreateOrderFragment fragment = new CreateOrderFragment();
+        fragment.setArguments(extras);
+
+        return fragment;
+    }
 
     public CreateOrderFragment(){
         this.mLoaderOptions = new DisplayImageOptions.Builder()
@@ -66,8 +104,26 @@ public class CreateOrderFragment extends Fragment
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.loadAddress(savedInstanceState == null ? this.getArguments() : savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_order, container, false);
+    }
+
+    private void loadAddress(Bundle args){
+        this.mAddressId = args.getInt(ARG_ADDRESS_ID);
+        this.mServiceId = args.getInt(ARG_SERVICE_ID);
+
+        this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
+        if(this.mAddress == null){
+            Toast.makeText(this.getActivity(), "Failed to recover address with id: "
+                    + this.mAddressId, Toast.LENGTH_SHORT).show();
+            this.getActivity().finish();
+        }
     }
 
     @Override
@@ -77,14 +133,22 @@ public class CreateOrderFragment extends Fragment
         this.mListView = (ListView) view.findViewById(R.id.list_products);
         this.mProgress = (ProgressBar) view.findViewById(R.id.progress_products);
         this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
+        this.mLblTotal = (TextView) view.findViewById(R.id.lbl_total);
 
-        this.mProductsAdapter = new ProductsAdapter(this.getActivity(), this.mProducts);
+        this.mProductsAdapter = new ProductsAdapter(this.getActivity(),
+                this.mProducts, this);
         this.mListView.setAdapter(this.mProductsAdapter);
 
         view.findViewById(R.id.btn_cancel_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 confirmCancelation();
+            }
+        });
+        view.findViewById(R.id.btn_check_order).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmOrder();
             }
         });
     }
@@ -121,6 +185,31 @@ public class CreateOrderFragment extends Fragment
                 .show();
     }
 
+    public void confirmOrder(){
+        if(!this.buildOrderMap()){
+            new AlertDialog.Builder(this.getActivity())
+                .setTitle("Empty Order")
+                .setMessage("The Order is Empty");
+            return;
+        }
+
+        ConfirmOrderDialog confirmDialog = ConfirmOrderDialog.getInstance(
+                this.mOrder, this);
+        confirmDialog.show(this.getFragmentManager(), null);
+    }
+
+    private boolean buildOrderMap(){
+        this.mOrder.clear();
+        int quantities = 0;
+
+        for(Integer position : this.mSubtotals.keySet()) {
+            quantities += this.mSubtotals.get(position);
+            this.mOrder.put(this.mProducts.get(position), this.mSubtotals.get(position));
+        }
+
+        return quantities > 0;
+    }
+
     @Override
     public void onListProductsResponse(List<Producto> products) {
         this.mProducts = products;
@@ -129,6 +218,27 @@ public class CreateOrderFragment extends Fragment
         } else {
             this.displayContentMode(ContentDisplayMode.CONTENT);
         }
+    }
+
+    @Override
+    public void onProductQuantityChanged(int position, int newQuantity) {
+        this.mSubtotals.put(position, newQuantity);
+        this.updateTotal();
+    }
+
+    private void updateTotal(){
+        this.mLblTotal.setText(String.valueOf(this.getOrderTotal()));
+    }
+
+    private float getOrderTotal(){
+        float total = 0.0f;
+
+        for(Integer position : this.mSubtotals.keySet()) {
+            total += this.mSubtotals.get(position)
+                    * (float) this.mProducts.get(position).getCostoUnitario();
+        }
+
+        return total;
     }
 
     private void displayContentMode(ContentDisplayMode displayMode){
@@ -154,6 +264,34 @@ public class CreateOrderFragment extends Fragment
                 this.mListView.setVisibility(View.GONE);
                 break;
             }
+        }
+    }
+
+    @Override
+    public void onConfirmOrderClicked() {
+        this.mCreatingDialog = ProgressDialog.show(this.getActivity(),
+                "New Order", "Please wait...", false, false);
+        new InsertOrderRequest(this, this.getActivity(),
+                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, 3),
+                this.mOrder, this.mProvider, this.mAddressId).executeAsync();
+    }
+
+    @Override
+    public void onEditOrderClicked() {
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putInt(ARG_ADDRESS_ID, this.mAddressId);
+        outState.putInt(ARG_SERVICE_ID, this.mServiceId);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onInsertOrderResponse(Pedido order) {
+        if(order == null){
+            this.mCreatingDialog.dismiss();
         }
     }
 }

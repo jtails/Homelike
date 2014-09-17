@@ -27,14 +27,19 @@ public class HomeActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if(!HomelikePreferences.containsPreference(HomelikePreferences.SESSION_COOKIE)){
-            this.goToSplash();
-        }
+        this.validateUserSignedIn();
 
         this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_home);
         this.setupActivity();
+    }
+
+    private void validateUserSignedIn(){
+        if(//!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)
+                //||
+        !HomelikePreferences.containsPreference(HomelikePreferences.DEVICE_ID)){
+            this.goToSplash();
+        }
     }
 
     private void goToSplash(){

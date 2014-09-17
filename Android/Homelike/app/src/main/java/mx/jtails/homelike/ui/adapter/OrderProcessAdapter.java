@@ -22,7 +22,7 @@ public class OrderProcessAdapter extends FragmentPagerAdapter {
         this.mOrderProcessFragments = new ArrayList<Fragment>();
 
         this.mOrderProcessFragments.add(ProvidersFragment.getInstance(addressId, serviceId));
-        this.mOrderProcessFragments.add(new CreateOrderFragment());
+        this.mOrderProcessFragments.add(CreateOrderFragment.getInstance(addressId, serviceId));
     }
 
     @Override

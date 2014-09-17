@@ -34,6 +34,15 @@ public abstract class HomelikeApiRequest {
         this.mAsyncTask.execute();
     }
 
+    public Object executeOnThread(){
+        try {
+            return this.doRequest();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void cancelRequest(){
         if(this.mAsyncTask != null && !this.mAsyncTask.isCancelled()){
             this.mAsyncTask.cancel(true);
