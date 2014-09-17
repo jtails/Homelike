@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">--><web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee">
+
+  <!-- Servlets -->
+  
+  <servlet>
+    <servlet-name>rproveedor</servlet-name>
+    <servlet-class>mx.jtails.homelike.view.servlets.ProveedorServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>rproveedor</servlet-name>
+    <url-pattern>/rproveedor</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>rcuenta</servlet-name>
+    <servlet-class>mx.jtails.homelike.view.servlets.CuentaServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>rcuenta</servlet-name>
+    <url-pattern>/rcuenta</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>proveedor</servlet-name>
+    <servlet-class>mx.jtails.homelike.view.servlets.PanelPServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>proveedor</servlet-name>
+    <url-pattern>/proveedor</url-pattern>
+  </servlet-mapping>
+  
+  
+ <servlet>
+    <servlet-name>cliente</servlet-name>
+    <servlet-class>mx.jtails.homelike.view.servlets.PanelCServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>cliente</servlet-name>
+    <url-pattern>/cliente</url-pattern>
+  </servlet-mapping>
+  
+  <!--<servlet>
+    <servlet-name>clientes</servlet-name>
+    <servlet-class>mx.jtails.homelike.servlets.ClientesServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>clientes</servlet-name>
+    <url-pattern>/clientes</url-pattern>
+  </servlet-mapping>-->
+  
+    <servlet>
+    <servlet-name>ofertaproveedor</servlet-name>
+    <servlet-class>mx.jtails.homelike.view.servlets.OfertaProveedorServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>ofertaproveedor</servlet-name>
+    <url-pattern>/ofertaproveedor</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <servlet>
+    <servlet-name>SystemServiceServlet</servlet-name>
+    <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+    <init-param>
+      <param-name>services</param-name>
+      <param-value>mx.jtails.homelike.model.endpoints.CProductoEndpoint,mx.jtails.homelike.model.endpoints.CantidadPagoEndpoint,mx.jtails.homelike.model.endpoints.CuentaEndpoint,mx.jtails.homelike.model.endpoints.PedidoEndpoint,mx.jtails.homelike.model.endpoints.ProductoEndpoint,mx.jtails.homelike.model.endpoints.ProveedorEndpoint,mx.jtails.homelike.model.endpoints.ServicioEndpoint,mx.jtails.homelike.model.endpoints.SugerenciaspEndpoint,mx.jtails.homelike.model.endpoints.TpedidoEndpoint</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SystemServiceServlet</servlet-name>
+    <url-pattern>/_ah/spi/*</url-pattern>
+  </servlet-mapping>
+  
+  <jsp-config>
+  	<jsp-property-group>
+  		<url-patterm>*.jsp</url-patterm>
+  		<el-ignored>false</el-ignored>
+  		<scripting-invalid>true</scripting-invalid>
+  	</jsp-property-group>
+  </jsp-config>
+
+</web-app>
