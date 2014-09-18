@@ -23,6 +23,12 @@
 
         </FrameLayout>
 
+        <LinearLayout android:id="@+id/layout_addresses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/activity_bg"/>
+<!--
         <mx.jtails.homelike.ui.widget.FullSizeListView
             android:id="@+id/list_addresses"
             android:layout_width="match_parent"
@@ -30,7 +36,7 @@
             android:layout_below="@+id/layout_header"
             android:divider="@android:color/transparent"
             android:background="@color/activity_bg"/>
-
+-->
     </LinearLayout>
 
 </mx.jtails.homelike.ui.widget.TrackableScrollView>
