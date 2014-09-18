@@ -3,6 +3,7 @@ package mx.jtails.homelike.ui.fragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.api.model.CantidadPago;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.Producto;
@@ -35,6 +37,7 @@ import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.InsertOrderRequest;
 import mx.jtails.homelike.request.ListProductsRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProductsAdapter;
 import mx.jtails.homelike.ui.fragment.dialog.ConfirmOrderDialog;
 import mx.jtails.homelike.ui.widget.OrderProductView;
@@ -189,7 +192,8 @@ public class CreateOrderFragment extends Fragment
         if(!this.buildOrderMap()){
             new AlertDialog.Builder(this.getActivity())
                 .setTitle("Empty Order")
-                .setMessage("The Order is Empty");
+                .setMessage("The order is empty, please select your products")
+                .setPositiveButton("Ok", null).show();
             return;
         }
 
@@ -268,12 +272,12 @@ public class CreateOrderFragment extends Fragment
     }
 
     @Override
-    public void onConfirmOrderClicked() {
+    public void onConfirmOrderClicked(CantidadPago paymentQuantity) {
         this.mCreatingDialog = ProgressDialog.show(this.getActivity(),
                 "New Order", "Please wait...", false, false);
         new InsertOrderRequest(this, this.getActivity(),
-                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, 3),
-                this.mOrder, this.mProvider, this.mAddressId).executeAsync();
+                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1),
+                this.mOrder, this.mProvider, paymentQuantity, this.mAddressId).executeAsync();
     }
 
     @Override
@@ -290,8 +294,18 @@ public class CreateOrderFragment extends Fragment
 
     @Override
     public void onInsertOrderResponse(Pedido order) {
+        this.mCreatingDialog.dismiss();
         if(order == null){
-            this.mCreatingDialog.dismiss();
+            new AlertDialog.Builder(this.getActivity())
+                    .setTitle("Error")
+                    .setMessage("Failed to create your order, try again later")
+                    .setPositiveButton("Ok", null).show();
+            return;
+        } else {
+            // TODO set current content preference to orders
+            Intent intent = new Intent(this.getActivity(), HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            this.getActivity().startActivity(intent);
         }
     }
 }

@@ -32,8 +32,6 @@ public class MyAddressesActivity extends ActionBarActivity
     private ListView mListViewAddresses;
     private MyAddressesAdapter mMyAddressesAdapter;
 
-    private int mPhotoHeight;
-
     private List<Direccion> mAddresses = HomelikeDBManager.getDBManager().loadAddresses();
 
     @Override
@@ -59,8 +57,6 @@ public class MyAddressesActivity extends ActionBarActivity
         this.mListViewAddresses.setOnItemClickListener(this);
         this.mListViewAddresses.setAdapter(this.mMyAddressesAdapter);
         this.onScrollChanged(0, 0);
-
-        this.mPhotoHeight = this.mHeader.getHeight();
     }
 
     private void loadService(Bundle args){
@@ -130,6 +126,5 @@ public class MyAddressesActivity extends ActionBarActivity
     public void onScrollChanged(int deltaX, int deltaY) {
         int scrollY = this.mScrollView.getScrollY();
         this.mHeader.setTranslationY(scrollY * 0.5f);
-
     }
 }

@@ -128,4 +128,17 @@ public class HomelikeUtils {
         }
     }
 
+    public static String getImageUrlInSize(int dim, String imageUrl){
+        String newSizeQuery = "?sz=" + dim;
+        String newImageUrl;
+
+        if(imageUrl.contains("?sz=")){
+            newImageUrl = imageUrl.replaceAll("\\?sz=[0-9]+", newSizeQuery);
+        } else {
+            newImageUrl = imageUrl + newSizeQuery;
+        }
+
+        return newImageUrl;
+    }
+
 }

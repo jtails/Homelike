@@ -12,6 +12,7 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Cuenta;
@@ -50,6 +51,7 @@ public class SplashActivity extends ActionBarActivity
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addScope(Plus.SCOPE_PLUS_PROFILE)
                 .build();
     }
 
@@ -114,10 +116,10 @@ public class SplashActivity extends ActionBarActivity
     @Override
     public void onInsertAccountResponse(Cuenta account) {
         this.mSigningInDialog.dismiss();
-        if(account == null){
+        if(account == null || account.getIdCuenta() <= 0){
             new AlertDialog.Builder(this)
                     .setTitle("Error")
-                    .setMessage("Couldn't register your account, please try again later or contact us for support")
+                    .setMessage("La cuenta ya fue registrada previamente")
                     .setCancelable(false)
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
@@ -126,14 +128,22 @@ public class SplashActivity extends ActionBarActivity
                         }
                     }).show();
         } else {
-            HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
-                    account.getIdCuenta());
-            HomelikePreferences.saveInt(HomelikePreferences.DEVICE_ID,
-                    account.getDispositivos().get(0).getIdDispositivo());
-
-            this.startActivity(new Intent(this, HomeActivity.class));
-            this.finish();
+            this.goToHome(account);
         }
+    }
+
+    private void goToHome(Cuenta account){
+        Person person = Plus.PeopleApi.getCurrentPerson(this.mGoogleApiClient);
+        HomelikePreferences.saveString(HomelikePreferences.USER_NAME,
+                person.getDisplayName());
+        HomelikePreferences.saveString(HomelikePreferences.USER_IMG,
+                person.getImage().getUrl());
+        HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
+                account.getIdCuenta());
+        HomelikePreferences.saveInt(HomelikePreferences.DEVICE_ID,
+                account.getDispositivos().get(0).getIdDispositivo());
+        this.startActivity(new Intent(this, HomeActivity.class));
+        this.finish();
     }
 
     @Override
@@ -142,14 +152,7 @@ public class SplashActivity extends ActionBarActivity
         if(account == null){
             new CreateAccountDialog().show(this.getSupportFragmentManager(), null);
         } else {
-            // TODO save account data
-            HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
-                account.getIdCuenta());
-            HomelikePreferences.saveInt(HomelikePreferences.DEVICE_ID,
-                account.getDispositivos().get(0).getIdDispositivo());
-
-            this.startActivity(new Intent(this, HomeActivity.class));
-            this.finish();
+            this.goToHome(account);
         }
     }
 }

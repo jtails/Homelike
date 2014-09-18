@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 import mx.jtails.homelike.api.endpoint.pedidoendpoint.Pedidoendpoint;
+import mx.jtails.homelike.api.model.CantidadPago;
 import mx.jtails.homelike.api.model.Cuenta;
 import mx.jtails.homelike.api.model.DetallePedido;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
-import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/16/14.
@@ -25,7 +25,8 @@ public class InsertOrderRequest extends HomelikeApiRequest {
     private Context mContext;
 
     public InsertOrderRequest(HomelikeResponseHandler handler, Context context,
-        int accountId, Map<Producto, Integer> rawOrder, Proveedor provider, int addressId) {
+        int accountId, Map<Producto, Integer> rawOrder, Proveedor provider,
+        CantidadPago paymentQuantity, int addressId) {
         super(handler);
         this.mEndpoint = new Pedidoendpoint.Builder(HTTP_TRANSPORT,
                 JSON_FACTORY, null).build();
@@ -34,6 +35,7 @@ public class InsertOrderRequest extends HomelikeApiRequest {
         this.mAccountId = accountId;
 
         this.mOrder = new Pedido();
+        this.mOrder.setCantidadPago(paymentQuantity);
         this.mOrder.setDetallePedido(this.generateOrderDetail(rawOrder));
         this.mOrder.setDireccion(HomelikeDBManager.getDBManager().getAddress(addressId));
         this.mOrder.setProveedor(provider);
@@ -60,8 +62,9 @@ public class InsertOrderRequest extends HomelikeApiRequest {
             return null;
         }
 
-        this.mOrder.setCuenta((Cuenta) objCuenta);
-        this.mOrder.setDispositivo(HomelikeUtils.newApiDeviceInstance(mContext));
+        Cuenta account = (Cuenta) objCuenta;
+        this.mOrder.setCuenta(account);
+        this.mOrder.setDispositivo(account.getDispositivos().get(0));
         return ((Pedidoendpoint) this.mEndpoint).insertPedido(this.mOrder).execute();
     }
 
