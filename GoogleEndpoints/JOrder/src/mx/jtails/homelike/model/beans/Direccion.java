@@ -64,6 +64,8 @@ public class Direccion implements Serializable {
 	private String referencia1;
 
 	private String referencia2;
+	
+	private String alias;
 
 	//bi-directional many-to-one association to Cuenta
 	//@JsonBackReference para evitar recursividad durante la lectura del JSON
@@ -214,6 +216,14 @@ public class Direccion implements Serializable {
 
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
+	}
+	
+	public String getAlias() {
+		return alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 
 }

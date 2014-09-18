@@ -83,6 +83,7 @@ public class CuentaEndpoint {
 							pdireccion.setPais(cuenta.getDirecciones().get(0).getPais());
 							pdireccion.setReferencia1(cuenta.getDirecciones().get(0).getReferencia1());
 							pdireccion.setReferencia2(cuenta.getDirecciones().get(0).getReferencia2());
+							pdireccion.setAlias(cuenta.getDirecciones().get(0).getAlias());
 							addDireccion=false;
 							logger.warning("Actualizando direccion : "+user);
 						}
