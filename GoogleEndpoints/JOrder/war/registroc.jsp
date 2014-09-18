@@ -58,6 +58,7 @@
 	<input type="hidden" id="tipo" name="tipo" value="${sessionScope.dispositivo.tipoDispositivo}">
 	<input type="hidden" id="usuario" name="usuario" value="${sessionScope.cuenta.usuario}">
 
+	<input type="text" id="idDireccion" name="idDireccion" value="${sessionScope.direccion.idDireccion}">
 	<input type="hidden" id="calle" name="calle" value="${sessionScope.direccion.calle}">
 	<input type="hidden" id="numeroe" name="numeroe" value="${sessionScope.direccion.nexterior}">
 	<input type="hidden" id="numeroi" name="numeroi" value="${sessionScope.direccion.ninterior}">

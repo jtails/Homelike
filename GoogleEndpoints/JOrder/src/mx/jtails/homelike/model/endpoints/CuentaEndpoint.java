@@ -29,6 +29,7 @@ public class CuentaEndpoint {
 
 	/**
 	 * Persiste el objeto cuenta con referencias a direccion y dispositivo,si la cuenta ya esta persistida realiza una operacion update
+	 * Este metodo tambien permite la actualizacion de una direccion asociada a la cuenta existente o la insercion de nuevas direcciones a una cuenta existente, siempre debe enviarse solo una direccion
 	 * @param cuenta
 	 * La cuenta a ser agregada o actualizada
 	 * @param user
@@ -62,21 +63,35 @@ public class CuentaEndpoint {
 					//Copiamos los valores del Bean JSON al Bean Persistido
 					pcuenta.setTelefono(cuenta.getTelefono());
 					pcuenta.setUsuario(cuenta.getUsuario());
-					Direccion pdireccion=pcuenta.getDirecciones().get(0);
-					pdireccion.setCalle(cuenta.getDirecciones().get(0).getCalle());
-					pdireccion.setCalle1(cuenta.getDirecciones().get(0).getCalle1());
-					pdireccion.setCalle2(cuenta.getDirecciones().get(0).getCalle2());
-					pdireccion.setColonia(cuenta.getDirecciones().get(0).getColonia());
-					pdireccion.setCp(cuenta.getDirecciones().get(0).getCp());
-					pdireccion.setDelegacion(cuenta.getDirecciones().get(0).getDelegacion());
-					pdireccion.setEstado(cuenta.getDirecciones().get(0).getEstado());
-					pdireccion.setLatitud(cuenta.getDirecciones().get(0).getLatitud());
-					pdireccion.setLongitud(cuenta.getDirecciones().get(0).getLongitud());
-					pdireccion.setNexterior(cuenta.getDirecciones().get(0).getNexterior());
-					pdireccion.setNinterior(cuenta.getDirecciones().get(0).getNinterior());
-					pdireccion.setPais(cuenta.getDirecciones().get(0).getPais());
-					pdireccion.setReferencia1(cuenta.getDirecciones().get(0).getReferencia1());
-					pdireccion.setReferencia2(cuenta.getDirecciones().get(0).getReferencia2());
+					
+					
+					boolean addDireccion=true;
+					for(Direccion pdireccion:pcuenta.getDirecciones()){
+						//Actualizamos una direccion existente
+						if(pdireccion.getIdDireccion()==cuenta.getDirecciones().get(0).getIdDireccion()){
+							pdireccion.setCalle(cuenta.getDirecciones().get(0).getCalle());
+							pdireccion.setCalle1(cuenta.getDirecciones().get(0).getCalle1());
+							pdireccion.setCalle2(cuenta.getDirecciones().get(0).getCalle2());
+							pdireccion.setColonia(cuenta.getDirecciones().get(0).getColonia());
+							pdireccion.setCp(cuenta.getDirecciones().get(0).getCp());
+							pdireccion.setDelegacion(cuenta.getDirecciones().get(0).getDelegacion());
+							pdireccion.setEstado(cuenta.getDirecciones().get(0).getEstado());
+							pdireccion.setLatitud(cuenta.getDirecciones().get(0).getLatitud());
+							pdireccion.setLongitud(cuenta.getDirecciones().get(0).getLongitud());
+							pdireccion.setNexterior(cuenta.getDirecciones().get(0).getNexterior());
+							pdireccion.setNinterior(cuenta.getDirecciones().get(0).getNinterior());
+							pdireccion.setPais(cuenta.getDirecciones().get(0).getPais());
+							pdireccion.setReferencia1(cuenta.getDirecciones().get(0).getReferencia1());
+							pdireccion.setReferencia2(cuenta.getDirecciones().get(0).getReferencia2());
+							addDireccion=false;
+							logger.warning("Actualizando direccion : "+user);
+						}
+					}
+					if(addDireccion){//Agregamos una nueva direccion
+						pcuenta.addDireccion(cuenta.getDirecciones().get(0));
+						logger.warning("Agregando direccion : "+user);
+					}
+					
 					Dispositivo pdispositivo=pcuenta.getDispositivos().get(0);
 					pdispositivo.setGcmid(cuenta.getDispositivos().get(0).getGcmid());
 					pdispositivo.setImei(cuenta.getDispositivos().get(0).getImei());

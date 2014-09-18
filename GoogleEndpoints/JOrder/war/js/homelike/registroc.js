@@ -59,6 +59,7 @@
 				google.appengine.homelike.cuenta.insert(
 					document.querySelector('#idCuenta').value,
 					document.querySelector('#telefono').value,
+					document.querySelector('#idDireccion').value,
 					document.querySelector('#latitud').value,
 					document.querySelector('#longitud').value,
 					document.querySelector('#calle1').value,
@@ -90,11 +91,11 @@
 	}
 	
 	google.appengine.homelike.cuenta.insert = function(
-			idCuenta,telefono,latitud,longitud,calle1,calle2,referencia1,referencia2,
+			idCuenta,telefono,idDireccion,latitud,longitud,calle1,calle2,referencia1,referencia2,
 			calle,numeroe,numeroi,colonia,delegacion,cp,estado,pais,idDispositivo,
 			gcmid,imei,modelo,usuario,plataforma,tipo){
 		gapi.client.cuentaendpoint.insertCuenta({'idCuenta': idCuenta,'telefono': telefono,'usuario': usuario,
-														'direcciones': [{'calle': calle,'nexterior': numeroe,'ninterior': numeroi,
+														'direcciones': [{'idDireccion':idDireccion,'calle': calle,'nexterior': numeroe,'ninterior': numeroi,
 														'colonia': colonia,'delegacion': delegacion,
 														'cp': cp,'estado': estado,'pais': pais,
 														'calle1': calle1,'calle2': calle2,
