@@ -50,6 +50,7 @@ public class HomelikeDatabase extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + Tables.ADDRESSES + "("
                 + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + HomelikeContract.AddressesColumns.ADDRESS_ID + " INTEGER NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_ALIAS + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_STREET + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER + " TEXT NOT NULL, "
@@ -62,7 +63,7 @@ public class HomelikeDatabase extends SQLiteOpenHelper {
                 + HomelikeContract.AddressesColumns.ADDRESS_DEFAULT + " BOOLEAN NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_LATITUDE + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_LONGITUDE + " TEXT NOT NULL, "
-                + "UNIQUE (" + HomelikeContract.AddressesColumns.ADDRESS_ALIAS + ") ON CONFLICT REPLACE)");
+                + "UNIQUE (" + HomelikeContract.AddressesColumns.ADDRESS_ID + ") ON CONFLICT REPLACE)");
     }
 
     @Override

@@ -131,12 +131,18 @@ public class HomelikeDBManager {
         return services;
     }
 
-    // TODO validate affected rows
-    public int registerAddress(String alias, Direccion address) {
+    public void saveAddresses(List<Direccion> addresses){
+        for(Direccion a : addresses){
+            this.saveAddress(a);
+        }
+    }
+
+    public int saveAddress(Direccion address) {
         this.prepareDB(true);
 
         ContentValues cv = new ContentValues();
-        cv.put(HomelikeContract.AddressesColumns.ADDRESS_ALIAS, alias);
+        cv.put(HomelikeContract.AddressesColumns.ADDRESS_ID, address.getIdDireccion());
+        cv.put(HomelikeContract.AddressesColumns.ADDRESS_ALIAS, address.getAlias());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_STREET, address.getCalle());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER, address.getNexterior());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_INTERIOR, address.getNinterior());
@@ -167,7 +173,7 @@ public class HomelikeDBManager {
         this.prepareDB(false);
 
         String [] projection = {
-                BaseColumns._ID,
+                HomelikeContract.AddressesColumns.ADDRESS_ID,
                 HomelikeContract.AddressesColumns.ADDRESS_ALIAS,
                 HomelikeContract.AddressesColumns.ADDRESS_STREET,
                 HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER,
@@ -187,8 +193,8 @@ public class HomelikeDBManager {
         if(!c.moveToFirst()) { return addresses; }
         do {
             Direccion d = new Direccion();
-            d.setIdDireccion(c.getInt(c.getColumnIndex(BaseColumns._ID)));
-            d.setReferencia2(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ALIAS)));
+            d.setIdDireccion(c.getInt(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ID)));
+            d.setAlias(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ALIAS)));
             d.setCalle(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STREET)));
             d.setNexterior(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER)));
             d.setNinterior(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_INTERIOR)));
@@ -213,7 +219,7 @@ public class HomelikeDBManager {
         this.prepareDB(false);
 
         String [] projection = {
-                BaseColumns._ID,
+                HomelikeContract.AddressesColumns.ADDRESS_ID,
                 HomelikeContract.AddressesColumns.ADDRESS_ALIAS,
                 HomelikeContract.AddressesColumns.ADDRESS_STREET,
                 HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER,
@@ -228,13 +234,13 @@ public class HomelikeDBManager {
                 HomelikeContract.AddressesColumns.ADDRESS_LONGITUDE };
         String [] selection = { String.valueOf(addressId) };
 
-        Cursor c = this.db.query(HomelikeDatabase.Tables.ADDRESSES,
-                projection, BaseColumns._ID + " = ?", selection, null, null, null);
+        Cursor c = this.db.query(HomelikeDatabase.Tables.ADDRESSES, projection,
+                HomelikeContract.AddressesColumns.ADDRESS_ID + " = ?", selection, null, null, null);
 
         if(!c.moveToFirst()) { return null; }
         Direccion address = new Direccion();
-        address.setIdDireccion(c.getInt(c.getColumnIndex(BaseColumns._ID)));
-        address.setReferencia2(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ALIAS)));
+        address.setIdDireccion(c.getInt(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ID)));
+        address.setAlias(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ALIAS)));
         address.setCalle(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STREET)));
         address.setNexterior(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER)));
         address.setNinterior(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_INTERIOR)));

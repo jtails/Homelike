@@ -12,7 +12,7 @@ public class HomelikeContract {
     }
 
     interface AddressesColumns {
-        //String ADDRESS_ID = "address_id";
+        String ADDRESS_ID = "address_id";
         String ADDRESS_ALIAS = "address_alias";
         String ADDRESS_STREET = "address_street";
         String ADDRESS_STREET_NUMBER = "address_street_number";

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +20,12 @@ import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Servicio;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
+import mx.jtails.homelike.request.HomelikeApiRequest;
+import mx.jtails.homelike.request.ListAddressesRequest;
 import mx.jtails.homelike.ui.widget.TrackableScrollView;
 
 public class MyAddressesActivity extends ActionBarActivity
-    implements TrackableScrollView.Callbacks {
+    implements TrackableScrollView.Callbacks, ListAddressesRequest.OnListAddressesResponseHandler {
 
     public static final String ARG_REQUESTED_SERVICE_ID = "requested_service_id";
 
@@ -33,11 +36,14 @@ public class MyAddressesActivity extends ActionBarActivity
     private View mHeader;
     private ViewGroup mLayoutAddresses;
 
+    private HomelikeApiRequest mListAddressesRequest;
+
     private List<Direccion> mAddresses = HomelikeDBManager.getDBManager().loadAddresses();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         this.setContentView(R.layout.activity_my_addresses);
 
         this.setupActionBar();
@@ -54,6 +60,8 @@ public class MyAddressesActivity extends ActionBarActivity
 
         this.mScrollView.addCallbacks(this);
         this.onScrollChanged(0, 0);
+
+        this.mListAddressesRequest = new ListAddressesRequest(this);
     }
 
     private void loadService(Bundle args) {
@@ -89,6 +97,8 @@ public class MyAddressesActivity extends ActionBarActivity
     @Override
     protected void onResume() {
         super.onResume();
+        this.setSupportProgressBarIndeterminateVisibility(true);
+        this.mListAddressesRequest.executeAsync();
         this.mAddresses = HomelikeDBManager.getDBManager().loadAddresses();
         this.updateContent();
     }
@@ -159,6 +169,15 @@ public class MyAddressesActivity extends ActionBarActivity
     public void onScrollChanged(int deltaX, int deltaY) {
         int scrollY = this.mScrollView.getScrollY();
         this.mHeader.setTranslationY(scrollY * 0.5f);
+    }
+
+    @Override
+    public void onListAddressesResponse(List<Direccion> addresses) {
+        HomelikeDBManager dbManager = HomelikeDBManager.getDBManager();
+        dbManager.saveAddresses(addresses);
+        this.mAddresses = dbManager.loadAddresses();
+        this.updateContent();
+        this.setSupportProgressBarIndeterminateVisibility(false);
     }
 
     private class ViewHolder {

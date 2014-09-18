@@ -20,6 +20,10 @@ public class InsertAccountRequest extends HomelikeApiRequest {
     private String mEmail;
     private String mMobile;
 
+    private Cuenta mAccount;
+
+    private boolean byAccountObj = false;
+
     public InsertAccountRequest(OnInsertAccountResponseHandler handler,
             Context context, String email, String mobile) {
         super(handler);
@@ -30,8 +34,20 @@ public class InsertAccountRequest extends HomelikeApiRequest {
         this.mMobile = mobile;
     }
 
+    public InsertAccountRequest(OnInsertAccountResponseHandler handler, Cuenta account) {
+        super(handler);
+        this.mEndpoint = new Cuentaendpoint.Builder(HTTP_TRANSPORT,
+                JSON_FACTORY, null).build();
+        this.mAccount = account;
+        this.byAccountObj = true;
+    }
+
     @Override
     protected Object doRequest() throws Exception {
+        if(this.byAccountObj){
+            return ((Cuentaendpoint) this.mEndpoint).insertCuenta(this.mAccount).execute();
+        }
+
         Dispositivo device = HomelikeUtils.newApiDeviceInstance(this.mContext);
 
         Cuenta account = new Cuenta();
@@ -39,6 +55,7 @@ public class InsertAccountRequest extends HomelikeApiRequest {
         account.setUsuario(this.mEmail);
         account.setDirecciones(new ArrayList<Direccion>());
         account.setDispositivos(new ArrayList<Dispositivo>(Arrays.asList(device)));
+
         return ((Cuentaendpoint) this.mEndpoint).insertCuenta(account).execute();
     }
 

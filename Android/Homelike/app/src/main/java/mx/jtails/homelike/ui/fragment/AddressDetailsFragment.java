@@ -20,12 +20,14 @@ import java.util.List;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
+import mx.jtails.homelike.request.InsertAddressRequest;
 import mx.jtails.homelike.ui.AddressActivity;
 
 /**
  * Created by GrzegorzFeathers on 9/4/14.
  */
-public class AddressDetailsFragment extends Fragment {
+public class AddressDetailsFragment extends Fragment
+    implements InsertAddressRequest.OnInsertAddressResponseHandler {
 
     private String mAddressMode = AddressActivity.MODE_REGISTER_ADDRESS;
 
@@ -78,8 +80,8 @@ public class AddressDetailsFragment extends Fragment {
 
     public void reloadFormContent(String addresMode, Direccion address, String alias) {
         this.mAddress = address;
-        this.mEditAlias.setText(alias);
 
+        this.mEditAlias.setText(alias);
         this.mEditStreet.setText(address.getCalle());
         this.mEditStreetNumber.setText(address.getNexterior());
         this.mEditInterior.setText(address.getNinterior());
@@ -96,7 +98,7 @@ public class AddressDetailsFragment extends Fragment {
 
     private void onFinishClicked() {
         if(this.validateFields()) {
-
+            this.mAddress.setAlias(this.mEditAlias.getText().toString());
             this.mAddress.setCalle(this.mEditStreet.getText().toString());
             this.mAddress.setNexterior(this.mEditStreetNumber.getText().toString());
             this.mAddress.setNinterior(this.mEditInterior.getText().toString());
@@ -112,10 +114,7 @@ public class AddressDetailsFragment extends Fragment {
                 this.mAddress.setEsDefault(0);
             }
 
-            int affectedRows = HomelikeDBManager.getDBManager().registerAddress(
-                    this.mEditAlias.getText().toString(), this.mAddress);
-            Toast.makeText(this.getActivity(), "Dirección guardada", Toast.LENGTH_SHORT).show();
-            this.getActivity().finish();
+            new InsertAddressRequest(null, this.mAddress).executeAsync();
         }
     }
 
@@ -181,4 +180,18 @@ public class AddressDetailsFragment extends Fragment {
         return errors;
     }
 
+    @Override
+    public void onInsertAddressResponse(boolean addressUpdated) {
+        if(addressUpdated){
+            Toast.makeText(this.getActivity(), "Dirección guardada", Toast.LENGTH_SHORT).show();
+            this.getActivity().finish();
+        } else {
+            new AlertDialog.Builder(this.getActivity())
+                    .setCancelable(false)
+                    .setTitle("Error")
+                    .setMessage("Failed to register address, try again later")
+                    .setPositiveButton("Ok", null)
+                    .show();
+        }
+    }
 }
