@@ -6,7 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -14,19 +16,27 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import mx.jtails.homelike.R;
-import mx.jtails.homelike.util.HomeMenuOption;
+import mx.jtails.homelike.ui.adapter.HomeMenuAdapter;
+import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 import mx.jtails.homelike.util.HomelikeUtils;
 
-public class HomeMenuFragment extends Fragment {
+/**
+ * Created by GrzegorzFeathers on 9/19/14.
+ */
 
-    public static final HomeMenuOption DEFAULT_HOME_CONTENT = HomeMenuOption.SERVICES;
+public class HomeSectionsFragment extends Fragment
+    implements AdapterView.OnItemClickListener {
 
-    private OnHomeMenuOptionSelectedListener mListener;
+    public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.SERVICES;
+
+    private ListView mListSections;
 
     private DisplayImageOptions mLoaderOptions;
 
-    public HomeMenuFragment(){
+    private OnHomeMenuOptionSelectedListener mListener;
+
+    public HomeSectionsFragment(){
         this.mLoaderOptions = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_homelike_splash_logo)
                 .showImageForEmptyUri(R.drawable.ic_homelike_splash_logo)
@@ -38,18 +48,13 @@ public class HomeMenuFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
             mListener = (OnHomeMenuOptionSelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -67,16 +72,39 @@ public class HomeMenuFragment extends Fragment {
                 HomelikeUtils.getImageUrlInSize(displayImage.getLayoutParams().height,
                         HomelikePreferences.loadString(HomelikePreferences.USER_IMG, "")),
                 displayImage, this.mLoaderOptions);
+
+        this.mListSections = (ListView) view.findViewById(R.id.list_home_menu);
+        this.mListSections.setOnItemClickListener(this);
+        this.mListSections.setAdapter(new HomeMenuAdapter(this.getActivity()));
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        this.notifyNewContent(position);
+    }
+
+    public interface OnHomeMenuOptionSelectedListener {
+        public void onHomeMenuOptionSelected(HomeMenuSection option);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.notifyNewContent(HomelikePreferences.loadInt(
+              HomelikePreferences.CURRENT_HOME_SECTION,
+            DEFAULT_HOME_CONTENT.ordinal()));
+    }
+
+    private void notifyNewContent(int section){
+        if(this.mListener != null){
+            this.mListener.onHomeMenuOptionSelected(HomeMenuSection.values()[section]);
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnHomeMenuOptionSelectedListener {
-        public void onHomeMenuOptionSelected(HomeMenuOption option);
+        this.mListener = null;
     }
 
 }

@@ -10,31 +10,30 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Locale;
 
 import mx.jtails.homelike.R;
-import mx.jtails.homelike.api.model.Servicio;
+import mx.jtails.homelike.api.model.Pedido;
 
 /**
  * Created by GrzegorzFeathers on 9/1/14.
  */
-public class OrdersAdapter extends ArrayAdapter<Servicio> {
+public class OrdersAdapter extends ArrayAdapter<Pedido> {
 
-    private List<Servicio> mServices;
+    private List<Pedido> mOrders;
 
-    public OrdersAdapter(Context context, List<Servicio> services){
-        super(context, R.layout.list_item_service, services);
-        this.mServices = services;
+    public OrdersAdapter(Context context, List<Pedido> orders){
+        super(context, R.layout.list_item_service, orders);
+        this.mOrders = orders;
     }
 
     @Override
     public int getCount() {
-        return this.mServices.size();
+        return this.mOrders.size();
     }
 
     @Override
-    public Servicio getItem(int position) {
-        return this.mServices.get(position);
+    public Pedido getItem(int position) {
+        return this.mOrders.get(position);
     }
 
     @Override
@@ -51,17 +50,17 @@ public class OrdersAdapter extends ArrayAdapter<Servicio> {
             holder = (ViewHolder) view.getTag();
         }
 
-        Servicio service = this.getItem(position);
-        holder.lblServiceName.get().setText(service.getNombre());
-        holder.imgServiceIcon.get().setImageResource(
-                service.getNombre().toLowerCase(Locale.ENGLISH).equals("agua") ?
-                    R.drawable.ic_service_water : R.drawable.ic_service_gas);
+        Pedido order = this.getItem(position);
+        holder.lblServiceName.get().setText(order.getCuenta().getUsuario());
+        //holder.imgServiceIcon.get().setImageResource(
+          //      service.getNombre().toLowerCase(Locale.ENGLISH).equals("agua") ?
+            //        R.drawable.ic_service_water : R.drawable.ic_service_gas);
 
         return view;
     }
 
-    public void updateContent(List<Servicio> services){
-        this.mServices = services;
+    public void updateContent(List<Pedido> orders){
+        this.mOrders = orders;
         this.notifyDataSetInvalidated();
     }
 

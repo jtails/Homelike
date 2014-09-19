@@ -1,10 +1,12 @@
 package mx.jtails.homelike.request;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import mx.jtails.homelike.api.model.Cuenta;
 import mx.jtails.homelike.api.model.Direccion;
+import mx.jtails.homelike.api.model.Dispositivo;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -21,14 +23,23 @@ public class InsertAddressRequest extends HomelikeApiRequest {
 
     @Override
     protected Object doRequest() throws Exception {
+        /*
         Object objAccount = new GetAccountRequest(null, HomelikePreferences.loadInt(
                 HomelikePreferences.ACCOUNT_ID, -1)).executeOnThread();
         if(objAccount == null){ return null; }
 
         Cuenta account = (Cuenta) objAccount;
-        List<Direccion> addresses = new ArrayList<Direccion>();
-        addresses.add(this.mAddress);
-        account.setDirecciones(addresses);
+        */
+        Cuenta account = new Cuenta();
+        account.setIdCuenta(HomelikePreferences.loadInt(
+                HomelikePreferences.ACCOUNT_ID, -1));
+
+        Dispositivo device = new Dispositivo();
+        device.setIdDispositivo(HomelikePreferences.loadInt(
+                HomelikePreferences.DEVICE_ID, -1));
+
+        account.setDirecciones(new ArrayList<Direccion>(Arrays.asList(this.mAddress)));
+        account.setDispositivos(new ArrayList<Dispositivo>(Arrays.asList(device)));
 
         return new InsertAccountRequest(null, account).executeOnThread();
     }
@@ -37,11 +48,12 @@ public class InsertAddressRequest extends HomelikeApiRequest {
     protected void notifyResponseHandler(Object o) {
         if(this.mReponseHandler != null){
             ((OnInsertAddressResponseHandler) this.mReponseHandler).onInsertAddressResponse(
-                o != null);
+                o == null || ((Cuenta) o).getDirecciones() == null ?
+                null : ((Cuenta) o).getDirecciones());
         }
     }
 
     public interface OnInsertAddressResponseHandler extends HomelikeResponseHandler {
-        public void onInsertAddressResponse(boolean addressUpdated);
+        public void onInsertAddressResponse(List<Direccion> addresses);
     }
 }

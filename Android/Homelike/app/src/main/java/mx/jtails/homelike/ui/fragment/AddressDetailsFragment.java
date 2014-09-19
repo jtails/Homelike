@@ -1,6 +1,7 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -40,9 +41,12 @@ public class AddressDetailsFragment extends Fragment
     private EditText mEditZipCode;
     private EditText mEditCity;
     private EditText mEditState;
+    private EditText mEditCountry;
     private EditText mEditReference;
 
     private Direccion mAddress;
+
+    private ProgressDialog mInsertingDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class AddressDetailsFragment extends Fragment
         this.mEditZipCode = (EditText) view.findViewById(R.id.edit_zip_code);
         this.mEditCity = (EditText) view.findViewById(R.id.edit_city);
         this.mEditState = (EditText) view.findViewById(R.id.edit_state);
+        this.mEditCountry = (EditText) view.findViewById(R.id.edit_country);
         this.mEditReference = (EditText) view.findViewById(R.id.edit_reference);
 
         return view;
@@ -98,6 +103,9 @@ public class AddressDetailsFragment extends Fragment
 
     private void onFinishClicked() {
         if(this.validateFields()) {
+            this.mInsertingDialog = ProgressDialog.show(this.getActivity(),
+                    null, "Saving address...", false, false);
+
             this.mAddress.setAlias(this.mEditAlias.getText().toString());
             this.mAddress.setCalle(this.mEditStreet.getText().toString());
             this.mAddress.setNexterior(this.mEditStreetNumber.getText().toString());
@@ -106,6 +114,7 @@ public class AddressDetailsFragment extends Fragment
             this.mAddress.setCp(this.mEditZipCode.getText().toString());
             this.mAddress.setDelegacion(this.mEditCity.getText().toString());
             this.mAddress.setEstado(this.mEditState.getText().toString());
+            this.mAddress.setPais(this.mEditCountry.getText().toString());
             this.mAddress.setReferencia1(this.mEditReference.getText().toString());
 
             if(!HomelikeDBManager.getDBManager().hasFavoriteAddress()) {
@@ -114,7 +123,7 @@ public class AddressDetailsFragment extends Fragment
                 this.mAddress.setEsDefault(0);
             }
 
-            new InsertAddressRequest(null, this.mAddress).executeAsync();
+            new InsertAddressRequest(this, this.mAddress).executeAsync();
         }
     }
 
@@ -175,14 +184,17 @@ public class AddressDetailsFragment extends Fragment
         if(this.mEditZipCode.getText().toString().isEmpty()){ errors.add("Código Postal"); }
         if(this.mEditCity.getText().toString().isEmpty()){ errors.add("Delegación"); }
         if(this.mEditState.getText().toString().isEmpty()){ errors.add("Estado"); }
+        if(this.mEditCountry.getText().toString().isEmpty()) { errors.add("Pais"); }
         if(this.mEditReference.getText().toString().isEmpty()){ errors.add("Referencia"); }
 
         return errors;
     }
 
     @Override
-    public void onInsertAddressResponse(boolean addressUpdated) {
-        if(addressUpdated){
+    public void onInsertAddressResponse(List<Direccion> addresses) {
+        if(this.mInsertingDialog != null){ this.mInsertingDialog.dismiss(); }
+        if(addresses != null){
+            HomelikeDBManager.getDBManager().saveAddresses(addresses);
             Toast.makeText(this.getActivity(), "Dirección guardada", Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         } else {

@@ -212,6 +212,28 @@
                 <TableRow android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="País"
+                        android:textSize="19sp"
+                        homelike:typeface="fonts/Roboto-Light.ttf"
+                        android:layout_marginRight="5dp"/>
+
+                    <EditText android:id="@+id/edit_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mexico"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:inputType="text"/>
+
+                </TableRow>
+
+                <TableRow android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="20dp"/>

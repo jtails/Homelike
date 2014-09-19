@@ -1,11 +1,13 @@
 package mx.jtails.homelike.ui.fragment;
 
+import android.support.v4.app.Fragment;
+
 /**
  * Created by GrzegorzFeathers on 9/8/14.
  */
-public class OrdersFragment  {
-    //extends Fragment implements AdapterView.OnItemClickListener,
-      //  ListServicesRequest.ListServicesResponseHandler {
+public class OrdersFragment extends Fragment {
+    //implements AdapterView.OnItemClickListener,
+      //  ListOrdersRequest.ListOrdersResponseHandler {
 /*
     private OrdersAdapter mAdapter;
     private HomelikeApiRequest mApiRequest;
@@ -31,7 +33,8 @@ public class OrdersFragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setHasOptionsMenu(true);
-        this.mApiRequest = new ListServicesRequest(this);
+        this.mApiRequest = new ListOrdersRequest(this,
+                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
     }
 
     @Override
@@ -51,7 +54,7 @@ public class OrdersFragment  {
         this.mListView = (AbsListView) view.findViewById(R.id.list_services);
         this.mLayoutContent = view.findViewById(R.id.layout_services_content);
         this.mProgressMain = (ProgressBar) view.findViewById(R.id.progress_main);
-        this.mAdapter = new ServicesAdapter(this.getActivity(), this.mServices);
+        this.mAdapter = new OrdersAdapter(this.getActivity(), this.mOrders);
 
         this.mListView.setOnItemClickListener(this);
         this.mListView.setAdapter(this.mAdapter);
@@ -60,8 +63,8 @@ public class OrdersFragment  {
     @Override
     public void onResume() {
         super.onResume();
-        this.mServices = HomelikeDBManager.getDBManager().loadServices();
-        this.loadServices(this.mServices.isEmpty());
+        //this.mOrders = HomelikeDBManager.getDBManager().loadServices();
+        this.loadServices(this.mOrders.isEmpty());
     }
 
     @Override
@@ -69,9 +72,9 @@ public class OrdersFragment  {
         if(HomelikePreferences.containsPreference(HomelikePreferences.DEFAULT_ADDRESS)) {
             // TODO display dialog with default address
         }
-        Servicio service = this.mAdapter.getItem(position);
+        Pedido order = this.mAdapter.getItem(position);
         Bundle args = new Bundle();
-        args.putInt(MyAddressesActivity.ARG_REQUESTED_SERVICE_ID, service.getIdServicio());
+        //args.putInt(MyAddressesActivity.ARG_REQUESTED_SERVICE_ID, service.getIdServicio());
 
         Intent intent = new Intent(this.getActivity(), MyAddressesActivity.class);
         intent.putExtras(args);
@@ -100,7 +103,7 @@ public class OrdersFragment  {
                 ((ActionBarActivity) this.getActivity())
                         .setSupportProgressBarIndeterminateVisibility(true);
 
-                this.mAdapter.updateContent(this.mServices);
+                this.mAdapter.updateContent(this.mOrders);
                 break;
             }
             case CONTENT: {
@@ -109,19 +112,19 @@ public class OrdersFragment  {
                 ((ActionBarActivity) this.getActivity())
                         .setSupportProgressBarIndeterminateVisibility(false);
 
-                if( invalidate ) { this.mAdapter.updateContent(this.mServices); }
+                if( invalidate ) { this.mAdapter.updateContent(this.mOrders); }
                 break;
             }
         }
     }
 
     @Override
-    public void onListServicesResponse(List<Servicio> services) {
+    public void onListOrdersResponse(List <Pedido> orders) {
         HomelikeDBManager dbManager = HomelikeDBManager.getDBManager();
 
         int affectedRows = dbManager.saveServices(services);
-        if(affectedRows > this.mServices.size()){
-            this.mServices = dbManager.loadServices();
+        if(affectedRows > this.mOrders.size()){
+            //this.mOrders = dbManager.loadServices();
             this.displayContentMode(ContentDisplayMode.CONTENT, true);
         } else {
             this.displayContentMode(ContentDisplayMode.CONTENT, false);

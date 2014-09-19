@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -14,12 +15,12 @@ import android.view.Window;
 
 import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.R;
-import mx.jtails.homelike.ui.fragment.HomeMenuFragment;
-import mx.jtails.homelike.util.HomeMenuOption;
+import mx.jtails.homelike.ui.fragment.HomeSectionsFragment;
+import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 public class HomeActivity extends ActionBarActivity
-        implements HomeMenuFragment.OnHomeMenuOptionSelectedListener {
+    implements HomeSectionsFragment.OnHomeMenuOptionSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -56,8 +57,6 @@ public class HomeActivity extends ActionBarActivity
     private void setupActivity(){
         this.setupActionBar();
         this.setupNavigationDrawer();
-
-        this.onHomeMenuOptionSelected(HomeMenuFragment.DEFAULT_HOME_CONTENT);
     }
 
     private void setupActionBar(){
@@ -96,7 +95,8 @@ public class HomeActivity extends ActionBarActivity
     }
 
     @Override
-    public void onHomeMenuOptionSelected(HomeMenuOption option) {
+    public void onHomeMenuOptionSelected(HomeMenuSection option) {
+        this.mDrawerLayout.closeDrawer(GravityCompat.START);
         FragmentManager fm = this.getSupportFragmentManager();
         fm.beginTransaction()
                 .replace(R.id.layout_home_content, option.getFragmentInstance())

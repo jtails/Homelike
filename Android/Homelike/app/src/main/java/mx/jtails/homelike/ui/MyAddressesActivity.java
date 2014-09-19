@@ -113,7 +113,7 @@ public class MyAddressesActivity extends ActionBarActivity
             rowView.setTag(holder);
 
             Direccion a = this.mAddresses.get(i);
-            holder.lblAlias.get().setText(a.getReferencia2());
+            holder.lblAlias.get().setText(a.getAlias());
             holder.lblAddress.get().setText(
                     a.getCalle() + " #" + a.getNexterior() + ", "
                             + a.getColonia() + ", " + a.getDelegacion());

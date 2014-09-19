@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/drawer_menu"
-        android:name="mx.jtails.homelike.ui.fragment.HomeMenuFragment"
+        android:name="mx.jtails.homelike.ui.fragment.HomeSectionsFragment"
         android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"

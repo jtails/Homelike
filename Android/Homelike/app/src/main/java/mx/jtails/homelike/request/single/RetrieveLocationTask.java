@@ -18,6 +18,7 @@ import mx.jtails.homelike.api.model.Direccion;
 public class RetrieveLocationTask extends AsyncTask<LatLng, Integer, Address> {
 
     private Context mContext;
+    private LatLng mLocation;
     private OnLocationDataRetrievedListener mListener;
 
     public RetrieveLocationTask(Context context, OnLocationDataRetrievedListener listener){
@@ -27,13 +28,13 @@ public class RetrieveLocationTask extends AsyncTask<LatLng, Integer, Address> {
 
     @Override
     protected Address doInBackground(LatLng... params) {
-        LatLng location = params[0];
+        this.mLocation = params[0];
 
         Geocoder geocoder = new Geocoder(this.mContext);
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(
-                    location.latitude, location.longitude, 1);
+                    this.mLocation.latitude, this.mLocation.longitude, 1);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -51,7 +52,9 @@ public class RetrieveLocationTask extends AsyncTask<LatLng, Integer, Address> {
         Direccion address;
 
         if(gAddress == null){
-            address = null;
+            address = new Direccion();
+            address.setLatitud(String.valueOf(this.mLocation.latitude));
+            address.setLongitud(String.valueOf(this.mLocation.longitude));
         } else {
             address = new Direccion();
             address.setLatitud(String.valueOf(gAddress.getLatitude()));

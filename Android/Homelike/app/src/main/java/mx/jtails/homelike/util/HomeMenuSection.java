@@ -2,20 +2,23 @@ package mx.jtails.homelike.util;
 
 import android.support.v4.app.Fragment;
 
+import mx.jtails.homelike.R;
+import mx.jtails.homelike.ui.fragment.OrdersFragment;
 import mx.jtails.homelike.ui.fragment.ServicesFragment;
 
 /**
- * Created by GrzegorzFeathers on 9/1/14.
+ * Created by GrzegorzFeathers on 9/19/14.
  */
-public enum HomeMenuOption {
+public enum HomeMenuSection {
 
-    SERVICES(ServicesFragment.class, 0, 0);
+    SERVICES(ServicesFragment.class, R.string.home_services, R.drawable.ic_menu_services),
+    ORDERS(OrdersFragment.class, R.string.home_orders, R.drawable.ic_menu_orders);
 
-    private Class<?> fragmentClass;
+    private Class<? extends Fragment> fragmentClass;
     private int subtitleRes;
     private int iconRes;
 
-    private HomeMenuOption(Class<?> fragmentClass, int subtitleRes, int iconRes){
+    private HomeMenuSection(Class<? extends Fragment> fragmentClass, int subtitleRes, int iconRes){
         this.fragmentClass = fragmentClass;
         this.subtitleRes = subtitleRes;
         this.iconRes = iconRes;
@@ -33,4 +36,11 @@ public enum HomeMenuOption {
         return null;
     }
 
+    public int getIconRes(){
+        return this.iconRes;
+    }
+
+    public int getSubtitleRes(){
+        return this.subtitleRes;
+    }
 }

@@ -3,36 +3,42 @@ package mx.jtails.homelike.request;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.api.endpoint.servicioendpoint.Servicioendpoint;
-import mx.jtails.homelike.api.model.CollectionResponseServicio;
-import mx.jtails.homelike.api.model.Servicio;
+import mx.jtails.homelike.api.endpoint.pedidoendpoint.Pedidoendpoint;
+import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.api.model.PedidoCollection;
 
 /**
  * Created by GrzegorzFeathers on 9/1/14.
  */
 public class ListOrdersRequest extends HomelikeApiRequest {
 
-    public ListOrdersRequest(ListServicesResponseHandler handler){
+    private int mAccountId;
+
+    public ListOrdersRequest(ListOrdersResponseHandler handler, int accountId){
         super(handler);
-        this.mEndpoint = new Servicioendpoint.Builder(HTTP_TRANSPORT,
+        this.mEndpoint = new Pedidoendpoint.Builder(HTTP_TRANSPORT,
                 JSON_FACTORY, null).build();
+        this.mAccountId = accountId;
     }
 
     protected Object doRequest() throws Exception {
-        CollectionResponseServicio serviceCollection =
-                ((Servicioendpoint) this.mEndpoint).listServicio().execute();
-        return serviceCollection.getItems();
+        Pedidoendpoint.ListPedidosByCuenta request =
+                ((Pedidoendpoint) this.mEndpoint).listPedidosByCuenta();
+        request.put("idCuenta", this.mAccountId);
+        PedidoCollection pedidoCollection = request.execute();
+        return pedidoCollection.getItems();
     }
 
     protected void notifyResponseHandler(Object o){
-        List<Servicio> locatedServices = o == null ?
-                new ArrayList<Servicio>() : (List<Servicio>) o;
-        ((ListServicesResponseHandler) this.mReponseHandler)
-                .onListServicesResponse(locatedServices);
+        if(this.mReponseHandler != null){
+            List<Pedido> orders = o == null ? new ArrayList<Pedido>() : (List<Pedido>) o;
+            ((ListOrdersResponseHandler) this.mReponseHandler)
+                    .onListOrdersResponse(orders);
+        }
     }
 
-    public interface ListServicesResponseHandler extends HomelikeResponseHandler {
-        public void onListServicesResponse(List<Servicio> services);
+    public interface ListOrdersResponseHandler extends HomelikeResponseHandler {
+        public void onListOrdersResponse(List<Pedido> orders);
     }
 
 }

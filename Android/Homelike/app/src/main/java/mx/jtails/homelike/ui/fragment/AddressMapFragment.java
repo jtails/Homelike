@@ -219,10 +219,13 @@ public class AddressMapFragment extends Fragment
     }
 
     @Override
-    public void onLocationDataRetrieved(final Direccion address) {
+    public void onLocationDataRetrieved(Direccion address) {
         this.mLocationDialog.dismiss();
         this.mLocationDialog = null;
         if(address == null){
+            final Direccion emptyAddress = new Direccion();
+            emptyAddress.setLatitud(String.valueOf(this.mSelectedLatLng.latitude));
+            emptyAddress.setLongitud(String.valueOf(this.mSelectedLatLng.longitude));
             AlertDialog alertDialog = new AlertDialog.Builder(this.getActivity())
                     .setCancelable(true)
                     .setTitle("Location")
@@ -232,7 +235,7 @@ public class AddressMapFragment extends Fragment
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             if(mAddressSelectedListener != null){
-                                mAddressSelectedListener.onAddressLocationSelectedListener(address);
+                                mAddressSelectedListener.onAddressLocationSelectedListener(emptyAddress);
                             }
                         }
                     }).show();
