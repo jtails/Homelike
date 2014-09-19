@@ -8,7 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import mx.jtails.homelike.R;
@@ -21,9 +28,24 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
 
     private List<Pedido> mOrders;
 
+    private DisplayImageOptions mLoaderOptions;
+    private SimpleDateFormat mDateFormat;
+    private SimpleDateFormat mTimeFormat;
+
     public OrdersAdapter(Context context, List<Pedido> orders){
-        super(context, R.layout.list_item_service, orders);
+        super(context, R.layout.list_item_order, orders);
         this.mOrders = orders;
+        this.mDateFormat = new SimpleDateFormat("dd.MMM.y");
+        this.mTimeFormat = new SimpleDateFormat("HH:mm");
+        this.mLoaderOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_homelike_splash_logo)
+                .showImageForEmptyUri(R.drawable.ic_homelike_splash_logo)
+                .showImageOnFail(R.drawable.ic_homelike_splash_logo)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .cacheInMemory(false)
+                .cacheOnDisk(true)
+                .displayer(new FadeInBitmapDisplayer(500))
+                .build();
     }
 
     @Override
@@ -42,7 +64,7 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
         ViewHolder holder = null;
 
         if(view == null){
-            view = LayoutInflater.from(this.getContext()).inflate(R.layout.list_item_service,
+            view = LayoutInflater.from(this.getContext()).inflate(R.layout.list_item_order,
                     parent, false);
             holder = new ViewHolder(view);
             view.setTag(holder);
@@ -51,10 +73,15 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
         }
 
         Pedido order = this.getItem(position);
-        holder.lblServiceName.get().setText(order.getCuenta().getUsuario());
-        //holder.imgServiceIcon.get().setImageResource(
-          //      service.getNombre().toLowerCase(Locale.ENGLISH).equals("agua") ?
-            //        R.drawable.ic_service_water : R.drawable.ic_service_gas);
+
+        holder.lblOrderDate.get().setText(this.mDateFormat.format(
+                new Date(order.getFechaHoraPedido().getValue())));
+        holder.lblOrderTime.get().setText(this.mTimeFormat.format(
+                new Date(order.getFechaHoraPedido().getValue())) + " hrs");
+        holder.lblOrderProvider.get().setText(order.getProveedor().getNombre());
+        holder.lblOrderId.get().setText("ID." + order.getIdPedido());
+        ImageLoader.getInstance().displayImage(order.getProveedor().getLogo(),
+                holder.imgProviderLogo.get(), this.mLoaderOptions);
 
         return view;
     }
@@ -66,15 +93,27 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
 
     private class ViewHolder {
 
+        private WeakReference<ImageView> imgProviderLogo;
+        private WeakReference<ImageView> imgServiceIcon;
+        private WeakReference<TextView> lblOrderDate;
+        private WeakReference<TextView> lblOrderTime;
+        private WeakReference<TextView> lblOrderProvider;
+        private WeakReference<TextView> lblOrderId;
+
         private ViewHolder(View view) {
-            this.lblServiceName = new WeakReference<TextView>(
-                    (TextView) view.findViewById(R.id.lbl_service_name));
+            this.imgProviderLogo = new WeakReference<ImageView>(
+                    (ImageView) view.findViewById(R.id.img_provider_logo));
             this.imgServiceIcon = new WeakReference<ImageView>(
                     (ImageView) view.findViewById(R.id.img_service_icon));
+            this.lblOrderDate = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_order_date));
+            this.lblOrderTime = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_order_time));
+            this.lblOrderProvider = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_order_provider));
+            this.lblOrderId = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_order_id));
         }
-
-        private WeakReference<TextView> lblServiceName;
-        private WeakReference<ImageView> imgServiceIcon;
 
     }
 }
