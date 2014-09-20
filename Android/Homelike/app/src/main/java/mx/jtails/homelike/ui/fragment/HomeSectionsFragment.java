@@ -28,7 +28,7 @@ import mx.jtails.homelike.util.HomelikeUtils;
 public class HomeSectionsFragment extends Fragment
     implements AdapterView.OnItemClickListener {
 
-    public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.ORDERS;
+    public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.SERVICES;
 
     private ListView mListSections;
 
