@@ -1,5 +1,7 @@
 package mx.jtails.homelike.ui.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,13 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Servicio;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListServicesRequest;
+import mx.jtails.homelike.ui.CheckOrderActivity;
 import mx.jtails.homelike.ui.MyAddressesActivity;
 import mx.jtails.homelike.ui.adapter.ServicesAdapter;
-import mx.jtails.homelike.util.HomelikePreferences;
 
 public class ServicesFragment extends Fragment implements AdapterView.OnItemClickListener,
         ListServicesRequest.ListServicesResponseHandler {
@@ -89,12 +92,45 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(HomelikePreferences.containsPreference(HomelikePreferences.DEFAULT_ADDRESS)) {
-            // TODO display dialog with default address
+        final int serviceId = this.mAdapter.getItem(position).getIdServicio();
+        if(HomelikeDBManager.getDBManager().hasFavoriteAddress()) {
+            final Direccion a = HomelikeDBManager.getDBManager().getFavouriteAddress();
+            new AlertDialog.Builder(this.getActivity())
+                    .setTitle("Favourite Address")
+                    .setMessage("Do you want to use your favourite address for the new order:\n\n" +
+                            a.getAlias() + ":\n\n" +
+                            a.getCalle() + " #" + a.getNexterior() + ", "
+                                + a.getColonia() + ", " + a.getDelegacion())
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goToNewOrder(a.getIdDireccion(), serviceId);
+                        }
+                    })
+                    .setNegativeButton("Change Address", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goToAddressSelection(serviceId);
+                        }
+                    })
+                    .show();
+        } else {
+            this.goToAddressSelection(serviceId);
         }
-        Servicio service = this.mAdapter.getItem(position);
+    }
+
+    private void goToNewOrder(int addressId, int serviceId){
         Bundle args = new Bundle();
-        args.putInt(MyAddressesActivity.ARG_REQUESTED_SERVICE_ID, service.getIdServicio());
+        Intent intent = new Intent(this.getActivity(), CheckOrderActivity.class);
+        args.putInt(CheckOrderActivity.ARG_ADDRESS_ID, addressId);
+        args.putInt(CheckOrderActivity.ARG_SERVICE_ID, serviceId);
+        intent.putExtras(args);
+        this.startActivity(intent);
+    }
+
+    private void goToAddressSelection(int serviceId){
+        Bundle args = new Bundle();
+        args.putInt(MyAddressesActivity.ARG_REQUESTED_SERVICE_ID, serviceId);
 
         Intent intent = new Intent(this.getActivity(), MyAddressesActivity.class);
         intent.putExtras(args);

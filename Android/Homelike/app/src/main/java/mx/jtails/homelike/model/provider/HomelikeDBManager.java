@@ -280,4 +280,35 @@ public class HomelikeDBManager {
         return hasFavourite;
     }
 
+    public Direccion getFavouriteAddress(){
+        this.prepareDB(false);
+
+        String where = HomelikeContract.AddressesColumns.ADDRESS_DEFAULT + " = 1";
+
+        Cursor c = db.query(HomelikeDatabase.Tables.ADDRESSES,
+                null, where, null, null, null, null);
+
+        if(!c.moveToFirst()) { return null; }
+        Direccion address = new Direccion();
+        address.setIdDireccion(c.getInt(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ID)));
+        address.setAlias(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ALIAS)));
+        address.setCalle(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STREET)));
+        address.setNexterior(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STREET_NUMBER)));
+        address.setNinterior(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_INTERIOR)));
+        address.setColonia(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_COLONY)));
+        address.setCp(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE)));
+        address.setDelegacion(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_CITY)));
+        address.setEstado(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STATE)));
+        address.setPais(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_COUNTRY)));
+        address.setReferencia1(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_REFERENCE)));
+        address.setEsDefault(c.getInt(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_DEFAULT)));
+        address.setLatitud(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_LATITUDE)));
+        address.setLongitud(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_LONGITUDE)));
+
+        c.close();
+        this.releaseDB();
+
+        return address;
+    }
+
 }
