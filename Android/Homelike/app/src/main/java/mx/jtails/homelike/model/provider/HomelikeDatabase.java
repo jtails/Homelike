@@ -59,6 +59,7 @@ public class HomelikeDatabase extends SQLiteOpenHelper {
                 + HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_CITY + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_STATE + " TEXT NOT NULL, "
+                + HomelikeContract.AddressesColumns.ADDRESS_COUNTRY + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_REFERENCE + " TEXT NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_DEFAULT + " BOOLEAN NOT NULL, "
                 + HomelikeContract.AddressesColumns.ADDRESS_LATITUDE + " TEXT NOT NULL, "

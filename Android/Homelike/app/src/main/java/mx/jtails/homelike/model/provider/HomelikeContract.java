@@ -21,6 +21,7 @@ public class HomelikeContract {
         String ADDRESS_ZIP_CODE = "address_zip_code";
         String ADDRESS_CITY = "address_city";
         String ADDRESS_STATE = "address_state";
+        String ADDRESS_COUNTRY = "address_country";
         String ADDRESS_DEFAULT = "address_default";
         String ADDRESS_REFERENCE = "address_reference";
 

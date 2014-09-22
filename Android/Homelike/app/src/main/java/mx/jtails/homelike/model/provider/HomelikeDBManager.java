@@ -150,6 +150,7 @@ public class HomelikeDBManager {
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE, address.getCp());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_CITY, address.getDelegacion());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_STATE, address.getEstado());
+        cv.put(HomelikeContract.AddressesColumns.ADDRESS_COUNTRY, address.getPais());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_REFERENCE, address.getReferencia1());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_DEFAULT, address.getEsDefault());
         cv.put(HomelikeContract.AddressesColumns.ADDRESS_LATITUDE, address.getLatitud());
@@ -182,6 +183,7 @@ public class HomelikeDBManager {
                 HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE,
                 HomelikeContract.AddressesColumns.ADDRESS_CITY,
                 HomelikeContract.AddressesColumns.ADDRESS_STATE,
+                HomelikeContract.AddressesColumns.ADDRESS_COUNTRY,
                 HomelikeContract.AddressesColumns.ADDRESS_REFERENCE,
                 HomelikeContract.AddressesColumns.ADDRESS_DEFAULT,
                 HomelikeContract.AddressesColumns.ADDRESS_LATITUDE,
@@ -202,6 +204,7 @@ public class HomelikeDBManager {
             d.setCp(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE)));
             d.setDelegacion(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_CITY)));
             d.setEstado(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STATE)));
+            d.setPais(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_COUNTRY)));
             d.setReferencia1(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_REFERENCE)));
             d.setEsDefault(c.getInt(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_DEFAULT)));
             d.setLatitud(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_LATITUDE)));
@@ -228,6 +231,7 @@ public class HomelikeDBManager {
                 HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE,
                 HomelikeContract.AddressesColumns.ADDRESS_CITY,
                 HomelikeContract.AddressesColumns.ADDRESS_STATE,
+                HomelikeContract.AddressesColumns.ADDRESS_COUNTRY,
                 HomelikeContract.AddressesColumns.ADDRESS_REFERENCE,
                 HomelikeContract.AddressesColumns.ADDRESS_DEFAULT,
                 HomelikeContract.AddressesColumns.ADDRESS_LATITUDE,
@@ -248,6 +252,7 @@ public class HomelikeDBManager {
         address.setCp(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_ZIP_CODE)));
         address.setDelegacion(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_CITY)));
         address.setEstado(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_STATE)));
+        address.setPais(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_COUNTRY)));
         address.setReferencia1(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_REFERENCE)));
         address.setEsDefault(c.getInt(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_DEFAULT)));
         address.setLatitud(c.getString(c.getColumnIndex(HomelikeContract.AddressesColumns.ADDRESS_LATITUDE)));
