@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,6 @@ import mx.jtails.homelike.ui.AddressActivity;
  */
 public class AddressDetailsFragment extends Fragment
     implements InsertAddressRequest.OnInsertAddressResponseHandler {
-
-    private String mAddressMode = AddressActivity.MODE_REGISTER_ADDRESS;
 
     private Button mBtnFinish;
     private EditText mEditAlias;
@@ -47,6 +47,8 @@ public class AddressDetailsFragment extends Fragment
     private Direccion mAddress;
 
     private ProgressDialog mInsertingDialog;
+
+    private boolean mEditMode = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,10 +85,10 @@ public class AddressDetailsFragment extends Fragment
         });
     }
 
-    public void reloadFormContent(String addresMode, Direccion address, String alias) {
+    public void reloadFormContent(Direccion address) {
         this.mAddress = address;
 
-        this.mEditAlias.setText(alias);
+        this.mEditAlias.setText(address.getAlias());
         this.mEditStreet.setText(address.getCalle());
         this.mEditStreetNumber.setText(address.getNexterior());
         this.mEditInterior.setText(address.getNinterior());
@@ -94,11 +96,8 @@ public class AddressDetailsFragment extends Fragment
         this.mEditZipCode.setText(address.getCp());
         this.mEditCity.setText(address.getDelegacion());
         this.mEditState.setText(address.getEstado());
+        this.mEditCountry.setText(address.getPais());
         this.mEditReference.setText(address.getReferencia1());
-    }
-
-    public void reloadFormContent(String addresMode, Direccion address) {
-        this.reloadFormContent(addresMode, address, "");
     }
 
     private void onFinishClicked() {
@@ -129,17 +128,37 @@ public class AddressDetailsFragment extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.address_details, menu);
+        if(!this.mEditMode){
+            inflater.inflate(R.menu.address_details, menu);
+        }
+    }
+
+    public void setEditMode(){
+        this.mEditMode = true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_map:
-                ((AddressActivity) this.getActivity()).backToMap();
+                LatLng location = new LatLng(Double.valueOf(this.mAddress.getLatitud()),
+                        Double.valueOf(this.mAddress.getLongitud()));
+                ((AddressActivity) this.getActivity()).backToMap(location);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void updateAddress(Direccion address){
+        this.mAddress = address;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(this.mAddress != null){
+            this.reloadFormContent(this.mAddress);
         }
     }
 

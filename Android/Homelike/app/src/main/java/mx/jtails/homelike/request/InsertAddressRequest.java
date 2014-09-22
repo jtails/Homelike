@@ -23,13 +23,6 @@ public class InsertAddressRequest extends HomelikeApiRequest {
 
     @Override
     protected Object doRequest() throws Exception {
-        /*
-        Object objAccount = new GetAccountRequest(null, HomelikePreferences.loadInt(
-                HomelikePreferences.ACCOUNT_ID, -1)).executeOnThread();
-        if(objAccount == null){ return null; }
-
-        Cuenta account = (Cuenta) objAccount;
-        */
         Cuenta account = new Cuenta();
         account.setIdCuenta(HomelikePreferences.loadInt(
                 HomelikePreferences.ACCOUNT_ID, -1));

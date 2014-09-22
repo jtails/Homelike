@@ -10,5 +10,6 @@
 
     <string name="home_services">Services</string>
     <string name="home_orders">Orders</string>
+    <string name="home_my_addresses">My Addresses</string>
 
 </resources>

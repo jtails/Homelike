@@ -97,6 +97,9 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onHomeMenuOptionSelected(HomeMenuSection option) {
+        if(option != HomeMenuSection.ORDERS){
+            //HomelikePreferences.saveInt(HomelikePreferences.CURRENT_HOME_SECTION, option.ordinal());
+        }
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         FragmentManager fm = this.getSupportFragmentManager();
         fm.beginTransaction()

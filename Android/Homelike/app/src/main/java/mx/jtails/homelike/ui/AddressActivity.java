@@ -9,8 +9,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
+import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.ui.adapter.AddressAdapter;
 import mx.jtails.homelike.ui.fragment.AddressDetailsFragment;
 import mx.jtails.homelike.ui.fragment.AddressMapFragment;
@@ -81,7 +84,14 @@ public class AddressActivity extends ActionBarActivity
             this.setAddressModeRegister();
         } else {
             this.mAddressMode = MODE_OPEN_ADDRESS;
-            this.originPage = 1;
+            this.mSelectedAddress = HomelikeDBManager.getDBManager().getAddress(addressId);
+
+            ((AddressDetailsFragment) this.mSectionsPagerAdapter.getItem(1))
+                    .updateAddress(this.mSelectedAddress);
+            ((AddressDetailsFragment) this.mSectionsPagerAdapter.getItem(1))
+                    .setEditMode();
+
+            this.originPage = 0;
             this.mViewPager.setCurrentItem(1);
         }
     }
@@ -104,13 +114,14 @@ public class AddressActivity extends ActionBarActivity
 
         AddressDetailsFragment detailsFragment = (AddressDetailsFragment)
                 this.mSectionsPagerAdapter.getItem(1);
-        detailsFragment.reloadFormContent(this.mAddressMode, this.mSelectedAddress);
+        detailsFragment.reloadFormContent(this.mSelectedAddress);
         this.originPage = 0;
         this.mViewPager.setCurrentItem(1);
     }
 
-    public void backToMap() {
+    public void backToMap(LatLng currentLatLng) {
         this.originPage = 1;
+        ((AddressMapFragment) this.mSectionsPagerAdapter.getItem(0)).moveMapCameraTo(currentLatLng);
         this.mViewPager.setCurrentItem(0);
     }
 

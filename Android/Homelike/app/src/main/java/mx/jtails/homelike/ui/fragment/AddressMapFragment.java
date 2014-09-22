@@ -97,8 +97,9 @@ public class AddressMapFragment extends Fragment
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                mSelectedLatLng = latLng;
-                moveMapCameraToSelected();
+                //mSelectedLatLng = latLng;
+                //moveMapCameraToSelected();
+                moveMapCameraTo(latLng);
             }
         });
 
@@ -113,14 +114,13 @@ public class AddressMapFragment extends Fragment
             public void onMarkerDragStart(Marker marker) {}
 
             @Override
-            public void onMarkerDrag(Marker marker) {
-                moveMapCameraTo(marker.getPosition());
-            }
+            public void onMarkerDrag(Marker marker) {}
 
             @Override
             public void onMarkerDragEnd(Marker marker) {
-                mSelectedLatLng = marker.getPosition();
-                moveMapCameraToSelected();
+                //mSelectedLatLng = marker.getPosition();
+                //moveMapCameraToSelected();
+                moveMapCameraTo(marker.getPosition());
             }
         });
 
@@ -163,26 +163,22 @@ public class AddressMapFragment extends Fragment
 
     @Override
     public void onConnected(Bundle bundle) {
-        GoogleMap map = this.mAddressMap.getMap();
-
         Location currentLocation = this.mLocationClient.getLastLocation();
         LatLng currentLocationLatLng = new LatLng(currentLocation.getLatitude(),
                 currentLocation.getLongitude());
 
-        this.mSelectedLatLng = currentLocationLatLng;
-        this.moveMapCameraToSelected();
+        //this.mSelectedLatLng = currentLocationLatLng;
+        //this.moveMapCameraToSelected();
+        this.moveMapCameraTo(currentLocationLatLng);
     }
 
     public void moveMapCameraTo(LatLng latLng) {
+        this.mSelectedLatLng = latLng;
         CameraPosition position = new CameraPosition.Builder()
                 .target(this.mSelectedLatLng)
                 .zoom(17)
                 .build();
         this.mAddressMap.getMap().animateCamera(CameraUpdateFactory.newCameraPosition(position));
-    }
-
-    private void moveMapCameraToSelected() {
-        this.moveMapCameraTo(this.mSelectedLatLng);
         this.mAddressMap.getMap().clear();
         this.mAddressMap.getMap().addMarker(new MarkerOptions()
                 .position(this.mSelectedLatLng)
@@ -226,7 +222,7 @@ public class AddressMapFragment extends Fragment
             final Direccion emptyAddress = new Direccion();
             emptyAddress.setLatitud(String.valueOf(this.mSelectedLatLng.latitude));
             emptyAddress.setLongitud(String.valueOf(this.mSelectedLatLng.longitude));
-            AlertDialog alertDialog = new AlertDialog.Builder(this.getActivity())
+            new AlertDialog.Builder(this.getActivity())
                     .setCancelable(true)
                     .setTitle("Location")
                     .setMessage("No location data could be found at the point you selected. Would you like to continue?")
