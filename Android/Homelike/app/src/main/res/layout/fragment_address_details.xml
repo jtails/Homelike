@@ -5,14 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout android:id="@+id/layout_ab_holder"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"/>
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/layout_ab_holder">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +29,8 @@
                         android:text="Alias"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_alias"
                         android:layout_width="match_parent"
@@ -42,7 +38,9 @@
                         android:hint="Home, Work, etc."
                         android:layout_weight="1"
                         android:inputType="textPersonName"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -65,7 +63,8 @@
                         android:text="Calle"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_street"
                         android:layout_width="wrap_content"
@@ -73,7 +72,9 @@
                         android:hint="Av. Insurgentes"
                         android:layout_weight="1"
                         android:inputType="text"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -87,7 +88,8 @@
                         android:text="Exterior"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_street_number"
                         android:layout_width="wrap_content"
@@ -95,7 +97,9 @@
                         android:hint="Número exterior"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="numberDecimal"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -109,7 +113,8 @@
                         android:text="Interior"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_interior"
                         android:layout_width="wrap_content"
@@ -117,7 +122,9 @@
                         android:hint="(Opcional)"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -131,7 +138,8 @@
                         android:text="Colonia"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_colony"
                         android:layout_width="wrap_content"
@@ -139,7 +147,9 @@
                         android:hint="Roma Sur"
                         android:layout_weight="1"
                         android:inputType="text"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -153,7 +163,8 @@
                         android:text="C.P."
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_zip_code"
                         android:layout_width="wrap_content"
@@ -161,7 +172,9 @@
                         android:hint="55555"
                         android:layout_weight="1"
                         android:inputType="number"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -175,7 +188,8 @@
                         android:text="Delegación"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_city"
                         android:layout_width="match_parent"
@@ -183,7 +197,9 @@
                         android:hint="Cuauhtémoc"
                         android:layout_weight="1"
                         android:inputType="text"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -197,7 +213,8 @@
                         android:text="Estado"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_state"
                         android:layout_width="match_parent"
@@ -205,7 +222,9 @@
                         android:hint="Distrito Federal"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -219,7 +238,8 @@
                         android:text="País"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_country"
                         android:layout_width="match_parent"
@@ -227,7 +247,9 @@
                         android:hint="Mexico"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:inputType="text"/>
+                        android:inputType="text"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 
@@ -250,14 +272,17 @@
                         android:text="Referencia"
                         android:textSize="19sp"
                         homelike:typeface="fonts/Roboto-Light.ttf"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="5dp"
+                        android:textColor="@android:color/white"/>
 
                     <EditText android:id="@+id/edit_reference"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Fachada, entre calles, etc."
                         android:layout_weight="1"
-                        android:inputType="textMultiLine"/>
+                        android:inputType="textMultiLine"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#eee"/>
 
                 </TableRow>
 

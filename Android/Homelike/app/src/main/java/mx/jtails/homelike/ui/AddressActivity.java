@@ -134,6 +134,7 @@ public class AddressActivity extends ActionBarActivity
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
+        /*
         switch (originPage) {
             case 0:
                 if( i == 1 ) { this.updateActionBarAlpha(1.0f); }
@@ -144,6 +145,7 @@ public class AddressActivity extends ActionBarActivity
                 else { this.updateActionBarAlpha(1.0f - v); }
                 break;
         }
+        */
     }
 
     @Override

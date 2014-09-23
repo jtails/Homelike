@@ -50,7 +50,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle("Services");
+        ab.setSubtitle("My Services");
     }
 
     @Override
@@ -149,7 +149,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
     private void displayContentMode(ContentDisplayMode displayMode, boolean invalidate){
         switch (displayMode) {
             case LOAD: {
-                this.mLayoutContent.setVisibility(View.GONE);
+                this.mLayoutContent.setVisibility(View.INVISIBLE);
                 this.mProgressMain.setVisibility(View.VISIBLE);
                 break;
             }

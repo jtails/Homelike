@@ -30,7 +30,8 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_service_water"
                 android:adjustViewBounds="true"
-                android:layout_alignRight="@+id/img_provider_logo"/>
+                android:layout_alignRight="@+id/img_provider_logo"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

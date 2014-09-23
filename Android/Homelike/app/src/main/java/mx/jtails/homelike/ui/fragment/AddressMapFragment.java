@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -102,12 +101,6 @@ public class AddressMapFragment extends Fragment
                 moveMapCameraTo(latLng);
             }
         });
-
-        final TypedArray styledAttributes = this.getActivity().getTheme().obtainStyledAttributes(
-                new int[] { android.R.attr.actionBarSize });
-        int actionBarSize = (int) styledAttributes.getDimension(0, 0);
-        map.setPadding(0, actionBarSize, 0, actionBarSize);
-        styledAttributes.recycle();
 
         map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override

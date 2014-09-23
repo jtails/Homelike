@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,6 +57,8 @@ public class ServicesAdapter extends ArrayAdapter<Servicio> {
         holder.imgServiceIcon.get().setImageResource(
                 service.getNombre().toLowerCase(Locale.ENGLISH).equals("agua") ?
                     R.drawable.ic_service_water : R.drawable.ic_service_gas);
+        holder.frameRightDivider.get().setVisibility(position % 2 == 0 ?
+            View.VISIBLE : View.GONE);
 
         return view;
     }
@@ -72,10 +75,13 @@ public class ServicesAdapter extends ArrayAdapter<Servicio> {
                     (TextView) view.findViewById(R.id.lbl_service_name));
             this.imgServiceIcon = new WeakReference<ImageView>(
                     (ImageView) view.findViewById(R.id.img_service_icon));
+            this.frameRightDivider = new WeakReference<FrameLayout>(
+                    (FrameLayout) view.findViewById(R.id.frame_right_divider));
         }
 
         private WeakReference<TextView> lblServiceName;
         private WeakReference<ImageView> imgServiceIcon;
+        private WeakReference<FrameLayout> frameRightDivider;
 
     }
 }

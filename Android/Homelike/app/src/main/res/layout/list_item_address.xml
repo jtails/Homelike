@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:homelike="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/card_bg">
+    android:layout_height="wrap_content">
 
     <ImageView android:id="@+id/img_bookmark"
         android:layout_width="wrap_content"
@@ -29,7 +28,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginBottom="3dp"
             android:textSize="23sp"
-            android:textColor="#000"
+            android:textColor="@android:color/white"
             homelike:typeface="fonts/Roboto-Light.ttf"/>
 
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
@@ -37,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="17sp"
-            android:textColor="#666"
+            android:textColor="#ddd"
             homelike:typeface="fonts/Roboto-ThinItalic.ttf"
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="12dp"

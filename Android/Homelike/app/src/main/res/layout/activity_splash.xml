@@ -54,7 +54,7 @@
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="#e0f2f1"
             android:text="powered by"
             homelike:typeface="fonts/RobotoCondensed-Light.ttf"/>
@@ -62,7 +62,7 @@
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="19sp"
+            android:textSize="22sp"
             android:textColor="#e0f2f1"
             android:text="jtails"
             homelike:typeface="fonts/RobotoCondensed-Bold.ttf"/>
