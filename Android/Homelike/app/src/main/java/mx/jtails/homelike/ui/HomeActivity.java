@@ -3,6 +3,7 @@ package mx.jtails.homelike.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -102,19 +103,20 @@ public class HomeActivity extends ActionBarActivity
         }
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         FragmentManager fm = this.getSupportFragmentManager();
+
+        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
         fm.beginTransaction()
                 .replace(R.id.layout_home_content, option.getFragmentInstance())
                 .commit();
         this.supportInvalidateOptionsMenu();
     }
 
-    /*
     public void addToStack(Fragment stackFragment){
         FragmentManager fm = this.getSupportFragmentManager();
         fm.beginTransaction()
                 .replace(R.id.layout_home_content, stackFragment)
-                .addToBackStack(null)
+                .addToBackStack("")
                 .commit();
     }
-    */
 }
