@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+        android:textColor="@android:color/white"
+        android:text="Another client comments"
+        android:textSize="20sp"
+        android:layout_margin="5dp"/>
+
+    <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:id="@+id/lbl_client_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        homelike:typeface="fonts/RobotoCondensed-Thin.ttf"
+        android:textColor="#ddd"
+        android:textSize="16sp"
+        android:layout_margin="8dp"/>
+
+</LinearLayout>
