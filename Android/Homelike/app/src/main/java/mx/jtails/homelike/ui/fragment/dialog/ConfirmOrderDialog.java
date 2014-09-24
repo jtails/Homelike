@@ -28,6 +28,7 @@ public class ConfirmOrderDialog extends DialogFragment
     implements ListPaymentQuantitiesRequest.OnListPaymentQuantitiesResponseHandler {
 
     private ViewGroup mRootView;
+    private TextView mLblTotal;
     private View mProgressLayout;
     private View mMainContainer;
     private Spinner mSpinnerPayment;
@@ -49,6 +50,7 @@ public class ConfirmOrderDialog extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());
         View view = inflater.inflate(R.layout.dialog_confirm_order, null);
+        this.mLblTotal = (TextView) view.findViewById(R.id.lbl_total);
         this.mProgressLayout = view.findViewById(R.id.layout_loading);
         this.mMainContainer = view.findViewById(R.id.layout_content);
         this.mSpinnerPayment = (Spinner) view.findViewById(R.id.spinner_payments);
@@ -80,17 +82,22 @@ public class ConfirmOrderDialog extends DialogFragment
 
     private void insertOrderProductsToView(){
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());
+        float total = 0.0f;
 
         for(Producto p : this.mOrder.keySet()){
+            total += this.mOrder.get(p) * (float) p.getCostoUnitario();
+
             View rowView = inflater.inflate(
                     R.layout.list_item_product_confirm, this.mRootView, false);
             ((TextView) rowView.findViewById(R.id.lbl_product_name)).setText(
                     p.getCproducto().getDescripcion() + " - "
                             + p.getCproducto().getPresentacion());
             ((TextView) rowView.findViewById(R.id.lbl_quantity)).setText(
-                    String.valueOf(this.mOrder.get(p)));
+                    this.mOrder.get(p) + " x " + p.getCostoUnitario());
             this.mRootView.addView(rowView);
         }
+
+        this.mLblTotal.setText(String.valueOf(total));
     }
 
     private void onConfirmClicked(){

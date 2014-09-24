@@ -5,16 +5,90 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout android:id="@+id/layout_header"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:homelike="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
 
         <ImageView android:id="@+id/img_provider_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_homelike_splash_logo"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp">
 
-    </FrameLayout>
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_provider_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+                android:textSize="27sp"
+                android:text="Aguapura"
+                android:singleLine="true"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"/>
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_provider_slogan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                homelike:typeface="fonts/RobotoCondensed-LightItalic.ttf"
+                android:textSize="16sp"
+                android:layout_marginLeft="3dp"
+                android:text="Aguapura"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView android:id="@+id/img_comments"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_comments"
+                    android:layout_alignParentRight="true"
+                    android:adjustViewBounds="true"/>
+
+                <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comentarios"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/white"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:id="@+id/lbl_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            homelike:typeface="fonts/Roboto-Thin.ttf"
+            android:textSize="45sp"
+            android:text="4.5"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -31,8 +105,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_header"
-                android:divider="@android:color/transparent"
-                android:background="@color/activity_bg"/>
+                android:divider="#ddd"
+                android:dividerHeight="1dp"/>
 
             <TextView
                 android:id="@+id/lbl_empty"

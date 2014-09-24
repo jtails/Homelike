@@ -64,6 +64,9 @@ public class CreateOrderFragment extends Fragment
     private Map<Producto, Integer> mOrder = new LinkedHashMap<Producto, Integer>();
 
     private ImageView mProviderLogo;
+    private TextView mProviderName;
+    private TextView mProviderSlogan;
+    private TextView mProviderRating;
     private View mLayoutContent;
     private ProgressBar mProgress;
     private TextView mLblEmpty;
@@ -132,6 +135,9 @@ public class CreateOrderFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.mProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
+        this.mProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
+        this.mProviderSlogan = (TextView) view.findViewById(R.id.lbl_provider_slogan);
+        this.mProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
         this.mLayoutContent = view.findViewById(R.id.layout_products_content);
         this.mListView = (ListView) view.findViewById(R.id.list_products);
         this.mProgress = (ProgressBar) view.findViewById(R.id.progress_products);
@@ -168,6 +174,9 @@ public class CreateOrderFragment extends Fragment
 
         ImageLoader.getInstance().displayImage(
             this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
+        this.mProviderName.setText(this.mProvider.getNombre());
+        this.mProviderSlogan.setText(this.mProvider.getSlogan());
+        this.mProviderRating.setText(String.valueOf((float) this.mProvider.getCalificacion()));
 
         this.displayContentMode(ContentDisplayMode.LOAD);
         this.mProductsRequest = new ListProductsRequest(this, this.mProvider.getIdProveedor());

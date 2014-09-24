@@ -33,7 +33,6 @@
         <activity
             android:name=".ui.HomeActivity"
             android:label="@string/app_name"
-            android:icon="@drawable/ic_ab_navigation"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,8 +49,7 @@
             android:icon="@drawable/ic_ab_navigation"/>
         <activity
             android:name=".ui.CheckOrderActivity"
-            android:icon="@drawable/ic_ab_navigation"
-            android:theme="@style/Theme.Homelike.Translucent" />
+            android:icon="@drawable/ic_ab_navigation" />
         <activity
             android:name=".ui.AddressActivity"
             android:icon="@drawable/ic_ab_navigation" />

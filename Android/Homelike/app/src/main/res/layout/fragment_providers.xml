@@ -8,8 +8,7 @@
     <FrameLayout android:id="@+id/layout_providers_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:visibility="gone">
 
         <ListView android:id="@+id/list_providers"
             android:layout_width="match_parent"
@@ -17,7 +16,8 @@
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:paddingTop="7dp"
-            android:divider="@android:color/transparent"/>
+            android:divider="#ddd"
+            android:dividerHeight="1dp"/>
 
         <TextView
             android:id="@+id/lbl_empty"

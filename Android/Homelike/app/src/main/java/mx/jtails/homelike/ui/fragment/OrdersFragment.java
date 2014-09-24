@@ -22,9 +22,7 @@ import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListOrdersRequest;
-import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.OrdersAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -144,7 +142,7 @@ public class OrdersFragment extends Fragment
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Pedido order = this.mAdapter.getItem(position);
-        ((HomeActivity) this.getActivity()).addToStack(HomeMenuSection.SERVICES.getFragmentInstance());
+        //((HomeActivity) this.getActivity()).addToStack(HomeMenuSection.SERVICES.getFragmentInstance());
     }
 
 }

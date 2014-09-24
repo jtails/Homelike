@@ -3,7 +3,6 @@ package mx.jtails.homelike.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -62,6 +61,7 @@ public class HomeActivity extends ActionBarActivity
 
     private void setupActionBar(){
         ActionBar ab = this.getSupportActionBar();
+        ab.setIcon(R.drawable.ic_ab_navigation);
         ab.setDisplayShowTitleEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
@@ -108,6 +108,7 @@ public class HomeActivity extends ActionBarActivity
         this.supportInvalidateOptionsMenu();
     }
 
+    /*
     public void addToStack(Fragment stackFragment){
         FragmentManager fm = this.getSupportFragmentManager();
         fm.beginTransaction()
@@ -115,4 +116,5 @@ public class HomeActivity extends ActionBarActivity
                 .addToBackStack(null)
                 .commit();
     }
+    */
 }

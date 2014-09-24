@@ -60,7 +60,7 @@ public class CheckOrderActivity extends ActionBarActivity
         ab.setHomeButtonEnabled(true);
         ab.setTitle("Homelike");
         ab.setSubtitle("Providers");
-        this.updateActionBarAlpha(1.0f);
+        //this.updateActionBarAlpha(1.0f);
     }
 
     private void loadAddress(Bundle args){
@@ -110,6 +110,7 @@ public class CheckOrderActivity extends ActionBarActivity
 
     @Override
     public void onPageScrolled(int i, float v, int i2) {
+        /*
         switch (originPage) {
             case 0:
                 if( i == 1 ) { this.updateActionBarAlpha(0.0f); }
@@ -120,6 +121,7 @@ public class CheckOrderActivity extends ActionBarActivity
                 else { this.updateActionBarAlpha(v); }
                 break;
         }
+        */
     }
 
     @Override
