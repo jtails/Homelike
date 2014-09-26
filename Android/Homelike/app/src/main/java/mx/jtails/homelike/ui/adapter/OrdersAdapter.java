@@ -20,6 +20,7 @@ import java.util.List;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/1/14.
@@ -80,6 +81,7 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
                 new Date(order.getFechaHoraPedido().getValue())) + " hrs");
         holder.lblOrderProvider.get().setText(order.getProveedor().getNombre());
         holder.lblOrderId.get().setText("ID." + order.getIdPedido());
+        holder.lblOrderStatus.get().setText(HomelikeUtils.getOrderStatusString(order.getStatus()));
         ImageLoader.getInstance().displayImage(order.getProveedor().getLogo(),
                 holder.imgProviderLogo.get(), this.mLoaderOptions);
 
@@ -94,19 +96,19 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
     private class ViewHolder {
 
         private WeakReference<ImageView> imgProviderLogo;
-        private WeakReference<ImageView> imgServiceIcon;
         private WeakReference<TextView> lblOrderDate;
         private WeakReference<TextView> lblOrderTime;
         private WeakReference<TextView> lblOrderProvider;
         private WeakReference<TextView> lblOrderId;
+        private WeakReference<TextView> lblOrderStatus;
 
         private ViewHolder(View view) {
             this.imgProviderLogo = new WeakReference<ImageView>(
                     (ImageView) view.findViewById(R.id.img_provider_logo));
-            this.imgServiceIcon = new WeakReference<ImageView>(
-                    (ImageView) view.findViewById(R.id.img_service_icon));
             this.lblOrderDate = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_order_date));
+            this.lblOrderStatus = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_status));
             this.lblOrderTime = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_order_time));
             this.lblOrderProvider = new WeakReference<TextView>(

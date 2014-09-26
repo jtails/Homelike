@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
         android:textColor="@android:color/white"
-        android:text="Another client comments"
+        android:text="Client comment"
         android:textSize="20sp"
         android:layout_margin="5dp"/>
 

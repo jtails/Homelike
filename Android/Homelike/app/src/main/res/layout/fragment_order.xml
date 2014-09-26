@@ -13,22 +13,38 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="5dp">
 
-
-            <ImageView android:id="@+id/img_provider_logo"
+            <RelativeLayout
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_homelike_splash_logo"/>
+                android:layout_height="100dp">
+
+                <ImageView android:id="@+id/img_provider_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_homelike_splash_logo"/>
+
+                <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                    android:id="@+id/lbl_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="#99ffffff"
+                    homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+                    android:textColor="#333"
+                    android:gravity="center"
+                    android:padding="2dp"/>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp">
+                android:padding="10dp">
 
                 <mx.jtails.homelike.ui.widget.TypeFacedTextView
                     android:id="@+id/lbl_provider_name"
@@ -76,7 +92,9 @@
                 homelike:typeface="fonts/Roboto-Thin.ttf"
                 android:textSize="45sp"
                 android:text="4.5"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"/>
 
         </LinearLayout>
 

@@ -10,7 +10,6 @@ public class HomelikePreferences {
 
     private static final String PREFS_NAME = "homelike_prefs";
 
-    public static final String DEFAULT_ADDRESS = "default_address";
     public static final String REGISTRATION_ID = "registration_id";
     public static final String APP_VERSION = "app_version";
 

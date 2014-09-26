@@ -21,7 +21,6 @@
     <permission
         android:name="mx.jtails.homelike.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-
     <uses-permission android:name="mx.jtails.homelike.permission.C2D_MESSAGE" />
 
     <application
@@ -60,6 +59,15 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDlkZclUADB7kTu9oEmnT1HJxzBRigge98" />
+
+        <service android:name=".OrderStatusService"/>
+        <receiver android:name=".OrderStatusReciever"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="mx.jtails.homelike"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

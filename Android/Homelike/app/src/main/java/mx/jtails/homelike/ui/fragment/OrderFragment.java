@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.DetallePedido;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/23/14.
@@ -30,6 +31,7 @@ public class OrderFragment extends Fragment {
     private TextView mLblProviderRating;
     private TextView mLblOrderId;
     private ImageView mImgProviderLogo;
+    private TextView mLblStatus;
 
     private DisplayImageOptions mLoaderOptions;
 
@@ -68,6 +70,7 @@ public class OrderFragment extends Fragment {
         this.mLblProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
         this.mLblOrderId = (TextView) view.findViewById(R.id.lbl_order_id);
         this.mLblProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
+        this.mLblStatus = (TextView) view.findViewById(R.id.lbl_status);
     }
 
     @Override
@@ -84,6 +87,7 @@ public class OrderFragment extends Fragment {
         this.mLblProviderName.setText(this.mOrder.getProveedor().getNombre());
         this.mLblOrderId.setText("ID. " + this.mOrder.getIdPedido());
         this.mLblProviderRating.setText("" + (float) this.mOrder.getProveedor().getCalificacion());
+        this.mLblStatus.setText(HomelikeUtils.getOrderStatusString(this.mOrder.getStatus()));
 
         this.addOrderContent();
         this.addClientComments();

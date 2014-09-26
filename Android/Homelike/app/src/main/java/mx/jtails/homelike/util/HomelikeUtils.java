@@ -27,8 +27,6 @@ public class HomelikeUtils {
     private static final String SENDER_ID = "429890560769";
     private static final String PLATFORM = "Android";
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
-
     public static int colorWithAlpha(int color, float factor) {
         int alpha = Math.round(Color.alpha(color) * factor);
         int red = Color.red(color);
@@ -139,6 +137,21 @@ public class HomelikeUtils {
         }
 
         return newImageUrl;
+    }
+
+    public static String getOrderStatusString(int status){
+        String statusString;
+        switch (status){
+            case 0:
+                statusString = "New Order"; break;
+            case 1:
+                statusString = "Confirmed"; break;
+            case 2:
+                statusString = "Delivered"; break;
+            default:
+                statusString = "Unknown Status"; break;
+        }
+        return statusString;
     }
 
 }

@@ -25,6 +25,12 @@ public class HomelikeApplication extends Application {
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
+
+        this.startOrderUpdateService();
+    }
+
+    private void startOrderUpdateService(){
+
     }
 
     public void logout(){
