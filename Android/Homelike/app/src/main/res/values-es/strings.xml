@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application -->
+    <string name="app_name">Homelike</string>
+    <string name="action_map">Mostrar Mapa</string>
+    <string name="action_logout">Cerrar Sesión</string>
+
+    <!-- Home Menu -->
+    <string name="home_services">Servicios</string>
+    <string name="home_orders">Pedidos</string>
+    <string name="home_my_addresses">Mis Direcciones</string>
+    <string name="no_username">Sin Nombre</string>
+
+    <!-- Dialogs -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_process">Continuar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="edit">Editar</string>
+    <string name="reselect">Reelegir</string>
+    <string name="leave">Salir</string>
+    <string name="discard">Descartar</string>
+    <string name="wait">Por favor espere…</string>
+
+    <!-- Errors -->
+    <string name="error">Error</string>
+    <string name="error_load_address">Error al recuperar la dirección con id: %d</string>
+    <string name="error_create_order">Error al crear tu orden, intenta de nuevo más tarde.</string>
+    <string name="error_play_services">Error al cargar Google Play Services…</string>
+    <string name="error_retrieving_location">No se encontraron datos de la ubicación que seleccionaste. ¿Deseas continuar?</string>
+    <string name="error_field_validation">Los siguientes campos son necesarios para continuar con el registro de la dirección: \n</string>
+    <string name="error_register_address">Error al guardar tu dirección. Intentar de nuevo más tarde.</string>
+    <string name="error_registered_account">La cuanta ya ha sido registrada con otro dispositivo</string>
+
+    <!-- Create Account -->
+    <string name="register_account">Registrar Cuenta</string>
+    <string name="register">Registrar</string>
+    <string name="missing_email">Falta un correo</string>
+    <string name="missing_mobile">Falta un número telefónico</string>
+    <string name="wrong_field">Campo inválido</string>
+    <string name="registering_account">Registrando nueva cuenta…</string>
+    <string name="signing_in">Iniciando sesión…</string>
+
+    <!-- Order -->
+    <string name="confirm_order">Confirmar Pedido</string>
+    <string name="confirm_order_message">¿Estás seguro que quieres cancelar la orden?</string>
+    <string name="cancel_order">Cancelar Pedido</string>
+    <string name="empty_order">Pedido Vacío</string>
+    <string name="empty_order_message">El pedido está vacío, por favor selecciona tus productos.</string>
+    <string name="new_order">Nuevo pedido</string>
+    <string name="no_comments">Sin Comentarios</string>
+    <string name="client_comment">Comentarios del cliente</string>
+    <string name="provider_comment">Comentarios del proveedor</string>
+    <string name="providers">Proveedores</string>
+    <string name="leave_orders">Salir de pedidos</string>
+    <string name="leave_orders_message">¿Estás seguro que quieres abandonar esta sección?</string>
+    <string name="finish_order">Terminar</string>
+    <string name="your_orders">Tus pedidos</string>
+    <string name="preparing_order">Preparando nuevo pedido…</string>
+    <string name="payment_quantity">Cantidad de pago</string>
+    <string name="comments">Comentarios</string>
+    <string name="comments_hint">Comentarios al proveedor</string>
+
+    <!-- Address -->
+    <string name="location">Ubicación</string>
+    <string name="retrieving_location">Recuperando información de ubicación…</string>
+    <string name="saving_address">Guardando la dirección…</string>
+    <string name="required_fields">Campos requeridos</string>
+    <string name="field_alias">Alias</string>
+    <string name="field_street">Calle</string>
+    <string name="field_street_number">Exterior</string>
+    <string name="field_colony">Colonia</string>
+    <string name="field_zip_code">Código Postal</string>
+    <string name="field_city">Delegación</string>
+    <string name="field_state">Estado</string>
+    <string name="field_country">País</string>
+    <string name="field_reference">Referencia</string>
+    <string name="address_saved">Dirección Guardada</string>
+    <string name="add_new_address">Agregar nueva dirección</string>
+    <string name="discard_address_message">¿Estás seguro que quieres deshacer tu selección?</string>
+
+    <!-- Services -->
+    <string name="favourite_address">Dirección Favorita</string>
+    <string name="use_favourite_address">
+        ¿Quieres usar tu dirección favorita para el nuevo pedido?\n\n%s.
+    </string>
+    <string name="change_address">Cambiar Dirección</string>
+
+    <!-- Order Status -->
+    <string name="status_new">Nuevo Pedido</string>
+    <string name="status_confirmed">Confirmado</string>
+    <string name="status_delivered">Entregado</string>
+    <string name="status_unknown">Desconocido</string>
+
+</resources>

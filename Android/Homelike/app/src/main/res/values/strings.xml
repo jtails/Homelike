@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Application -->
     <string name="app_name">Homelike</string>
     <string name="title_activity_address">AddressActivity</string>
     <string name="action_map">Show Map</string>
@@ -8,8 +9,91 @@
     <string name="title_activity_new_order">NewOrderActivity</string>
     <string name="title_activity_orders">OrdersActivity</string>
 
+    <!-- Home Menu -->
     <string name="home_services">Services</string>
     <string name="home_orders">Orders</string>
     <string name="home_my_addresses">My Addresses</string>
+    <string name="no_username">No user name</string>
+
+    <!-- Dialogs -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="continue_process">Continue</string>
+    <string name="confirm">Confirm</string>
+    <string name="edit">Edit</string>
+    <string name="reselect">Reselect</string>
+    <string name="leave">Leave</string>
+    <string name="discard">Discard</string>
+
+    <!-- Errors -->
+    <string name="error">Error</string>
+    <string name="error_load_address">Failed to recover address with id: %d</string>
+    <string name="error_create_order">Failed to create your order, try again later</string>
+    <string name="error_play_services">Failed to load Google Play Services…</string>
+    <string name="error_retrieving_location">No location data could be found at the point you selected. Would you like to continue?</string>
+    <string name="error_field_validation">The following fields are required to continue with registration: \n</string>
+    <string name="error_register_address">Failed to register address, try again later</string>
+    <string name="error_registered_account">The account was already registered with other device</string>
+
+    <!-- Create Account -->
+    <string name="register_account">Register Account</string>
+    <string name="register">Register</string>
+    <string name="missing_email">Missing email</string>
+    <string name="missing_mobile">Missing mobile</string>
+    <string name="wrong_field">Wrong Field</string>
+    <string name="registering_account">Registering account…</string>
+    <string name="signing_in">Signing in…</string>
+
+    <!-- Order -->
+    <string name="confirm_order">Confirm Order</string>
+    <string name="confirm_order_message">Are you sure you want to cancel this order?</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="empty_order">Empty Order</string>
+    <string name="empty_order_message">The order is empty, please select your products</string>
+    <string name="new_order">New Order</string>
+    <string name="wait">Please wait…</string>
+    <string name="no_comments">No comments</string>
+    <string name="client_comment">Client Comment</string>
+    <string name="provider_comment">Provider Comment</string>
+    <string name="providers">Providers</string>
+    <string name="leave_orders">Leave Orders</string>
+    <string name="leave_orders_message">Are your sure you want to leave this section?</string>
+    <string name="finish_order">Finish</string>
+    <string name="your_orders">Your orders</string>
+    <string name="preparing_order">Preparing new order…</string>
+    <string name="payment_quantity">Payment Quantity</string>
+
+    <!-- Address -->
+    <string name="location">Location</string>
+    <string name="retrieving_location">Retrieving location data…</string>
+    <string name="saving_address">Saving address…</string>
+    <string name="required_fields">Required Fields</string>
+    <string name="field_alias">Alias</string>
+    <string name="field_street">Street</string>
+    <string name="field_street_number">Exterior</string>
+    <string name="field_colony">Colony</string>
+    <string name="field_zip_code">Zip Code</string>
+    <string name="field_city">City</string>
+    <string name="field_state">State</string>
+    <string name="field_country">Country</string>
+    <string name="field_reference">Reference</string>
+    <string name="address_saved">Address Saved</string>
+    <string name="add_new_address">Add new address</string>
+    <string name="discard_address_message">Are your sure you want to discard your selection?</string>
+
+    <!-- Services -->
+    <string name="favourite_address">Favourite Address</string>
+    <string name="use_favourite_address">
+        Do you want to use your favourite address for the new order:\n\n%s.
+    </string>
+    <string name="change_address">Change Address</string>
+
+    <!-- Order Status -->
+    <string name="status_new">New Order</string>
+    <string name="status_confirmed">Confirmed</string>
+    <string name="status_delivered">Delivered</string>
+    <string name="status_unknown">Status Unknown</string>
+    <string name="comments">Comments</string>
+    <string name="comments_hint">Comments to the provider</string>
 
 </resources>
