@@ -15,6 +15,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 
+import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Dispositivo;
 
 /**
@@ -139,19 +140,19 @@ public class HomelikeUtils {
         return newImageUrl;
     }
 
-    public static String getOrderStatusString(int status){
-        String statusString;
+    public static int getOrderStatusString(int status){
+        int statusRes;
         switch (status){
             case 0:
-                statusString = "New Order"; break;
+                statusRes = R.string.status_new; break;
             case 1:
-                statusString = "Confirmed"; break;
+                statusRes = R.string.status_confirmed; break;
             case 2:
-                statusString = "Delivered"; break;
+                statusRes = R.string.status_delivered; break;
             default:
-                statusString = "Unknown Status"; break;
+                statusRes = R.string.status_unknown; break;
         }
-        return statusString;
+        return statusRes;
     }
 
 }

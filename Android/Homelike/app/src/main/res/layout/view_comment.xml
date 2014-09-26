@@ -6,16 +6,16 @@
     android:layout_height="wrap_content">
 
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        android:id="@+id/lbl_comment_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
         android:textColor="@android:color/white"
-        android:text="Client comment"
         android:textSize="20sp"
         android:layout_margin="5dp"/>
 
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
-        android:id="@+id/lbl_client_comment"
+        android:id="@+id/lbl_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         homelike:typeface="fonts/RobotoCondensed-Light.ttf"

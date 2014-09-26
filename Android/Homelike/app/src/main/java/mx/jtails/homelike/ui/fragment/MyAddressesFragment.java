@@ -22,6 +22,7 @@ import mx.jtails.homelike.request.ListAddressesRequest;
 import mx.jtails.homelike.ui.AddressActivity;
 import mx.jtails.homelike.ui.CheckOrderActivity;
 import mx.jtails.homelike.ui.adapter.MyAddressesAdapter;
+import mx.jtails.homelike.util.HomeMenuSection;
 
 /**
  * Created by GrzegorzFeathers on 9/19/14.
@@ -73,7 +74,7 @@ public class MyAddressesFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle("My Addresses");
+        ab.setSubtitle(HomeMenuSection.ADDRESSES.getSubtitleRes());
 
         ((ActionBarActivity) this.getActivity()).setSupportProgressBarIndeterminateVisibility(true);
         this.mListAddressesRequest.executeAsync();

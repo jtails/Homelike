@@ -85,8 +85,8 @@ public class AddressMapFragment extends Fragment
     }
 
     private void retrieveLocationData() {
-        this.mLocationDialog = ProgressDialog.show(this.getActivity(), "Location",
-                "Retrieving location data...", false, false);
+        this.mLocationDialog = ProgressDialog.show(this.getActivity(), this.getString(R.string.location),
+                this.getString(R.string.retrieving_location), false, false);
         new RetrieveLocationTask(this.getActivity(), this).execute(this.mSelectedLatLng);
     }
 
@@ -193,7 +193,7 @@ public class AddressMapFragment extends Fragment
                 e.printStackTrace();
             }
         } else {
-            Toast.makeText(this.getActivity(), "Failed to load Google Play Services...",
+            Toast.makeText(this.getActivity(), R.string.error_play_services,
                     Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         }
@@ -217,13 +217,13 @@ public class AddressMapFragment extends Fragment
             emptyAddress.setLongitud(String.valueOf(this.mSelectedLatLng.longitude));
             new AlertDialog.Builder(this.getActivity())
                     .setCancelable(true)
-                    .setTitle("Location")
-                    .setMessage("No location data could be found at the point you selected. Would you like to continue?")
-                    .setNegativeButton("Reselect", null)
-                    .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.location)
+                    .setMessage(R.string.error_retrieving_location)
+                    .setNegativeButton(R.string.reselect, null)
+                    .setPositiveButton(R.string.continue_process, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            if(mAddressSelectedListener != null){
+                            if (mAddressSelectedListener != null) {
                                 mAddressSelectedListener.onAddressLocationSelectedListener(emptyAddress);
                             }
                         }

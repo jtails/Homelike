@@ -70,16 +70,16 @@ public class CreateAccountDialog extends DialogFragment {
         this.mEditMobile.setText(tMgr.getLine1Number());
 
         return new AlertDialog.Builder(this.getActivity())
-            .setTitle("Register Account")
+            .setTitle(R.string.register_account)
             .setView(this.mRootView)
             .setCancelable(false)
-            .setPositiveButton("Register", new DialogInterface.OnClickListener() {
+            .setPositiveButton(R.string.register, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onRegisterClicked();
                 }
             })
-            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onCancelClicked();
@@ -106,12 +106,12 @@ public class CreateAccountDialog extends DialogFragment {
         String mobile = this.mEditMobile.getText().toString();
 
         if(email.isEmpty()){
-            this.notifyError("Missing email");
+            this.notifyError(this.getActivity().getString(R.string.missing_email));
             return;
         }
 
         if(mobile.isEmpty()){
-            this.notifyError("Missing mobile");
+            this.notifyError(this.getActivity().getString(R.string.missing_mobile));
             return;
         }
 
@@ -123,9 +123,9 @@ public class CreateAccountDialog extends DialogFragment {
 
     private void notifyError(String message){
         new AlertDialog.Builder(this.getActivity())
-                .setTitle("Wrong Field")
+                .setTitle(R.string.wrong_field)
                 .setMessage(message)
-                .setPositiveButton("Ok", null).show();
+                .setPositiveButton(R.string.ok, null).show();
     }
 
     public interface CreateAccountDialogCallbacks {

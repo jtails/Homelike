@@ -2,6 +2,7 @@ package mx.jtails.homelike.ui.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +60,14 @@ public class HomeSectionsFragment extends Fragment
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.notifyNewContent(HomelikePreferences.loadInt(
+                HomelikePreferences.CURRENT_HOME_SECTION,
+                DEFAULT_HOME_CONTENT.ordinal()));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home_menu, container, false);
     }
@@ -66,7 +75,8 @@ public class HomeSectionsFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         ((TextView) view.findViewById(R.id.lbl_user_name)).setText(
-                HomelikePreferences.loadString(HomelikePreferences.USER_NAME, "No user name"));
+                HomelikePreferences.loadString(HomelikePreferences.USER_NAME,
+                        this.getString(R.string.no_username)));
         ImageView displayImage = (ImageView) view.findViewById(R.id.img_display_img);
         ImageLoader.getInstance().displayImage(
                 HomelikeUtils.getImageUrlInSize(displayImage.getLayoutParams().height,
@@ -85,14 +95,6 @@ public class HomeSectionsFragment extends Fragment
 
     public interface OnHomeMenuOptionSelectedListener {
         public void onHomeMenuOptionSelected(HomeMenuSection option);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        this.notifyNewContent(HomelikePreferences.loadInt(
-              HomelikePreferences.CURRENT_HOME_SECTION,
-            DEFAULT_HOME_CONTENT.ordinal()));
     }
 
     private void notifyNewContent(int section){

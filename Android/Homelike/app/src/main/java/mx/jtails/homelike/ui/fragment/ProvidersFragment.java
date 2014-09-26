@@ -113,8 +113,9 @@ public class ProvidersFragment extends Fragment
 
         this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
         if(this.mAddress == null){
-            Toast.makeText(this.getActivity(), "Failed to recover address with id: "
-                + this.mAddressId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(),
+                String.format(this.getString(R.string.error_load_address), this.mAddressId),
+                Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         }
     }

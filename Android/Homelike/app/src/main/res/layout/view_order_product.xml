@@ -4,35 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="40dp"
-        android:layout_height="60dp"
-        android:orientation="vertical">
-
-        <mx.jtails.homelike.ui.widget.TypeFacedTextView
-            android:id="@+id/btn_add_product"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#0a7e07"
-            android:text="+"
-            android:textSize="25sp"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"/>
-
-        <mx.jtails.homelike.ui.widget.TypeFacedTextView
-            android:id="@+id/btn_remove_product"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#e64a19"
-            android:text="-"
-            android:textSize="25sp"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"/>
-
-    </LinearLayout>
-
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
         android:id="@+id/lbl_product_name"
         android:layout_width="wrap_content"
@@ -40,7 +11,7 @@
         android:layout_weight="1"
         android:gravity="center_vertical"
         homelike:typeface="fonts/Roboto-Medium.ttf"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:singleLine="true"
         android:layout_margin="5dp"
         android:textColor="@android:color/white"/>
@@ -67,8 +38,34 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         homelike:typeface="fonts/Roboto-Light.ttf"
-        android:textSize="25sp"
-        android:layout_margin="5dp"
+        android:textSize="20sp"
+        android:layout_margin="3dp"
         android:textColor="@android:color/white"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp">
+
+        <ImageButton
+            android:id="@+id/btn_remove_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_remove_product"
+            android:textColor="@android:color/white"
+            android:layout_margin="3dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_add_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add_product"
+            android:textColor="@android:color/white"
+            android:layout_margin="3dp"/>
+
+    </LinearLayout>
 
 </merge>

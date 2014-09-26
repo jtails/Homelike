@@ -104,7 +104,6 @@
                 android:id="@+id/list_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_header"
                 android:divider="#ddd"
                 android:dividerHeight="1dp"/>
 
@@ -125,75 +124,69 @@
 
     </FrameLayout>
 
-    <LinearLayout android:id="@+id/layout_total_content"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#00796b"
-        android:padding="10dp">
+        android:gravity="center"
+        android:padding="15dp">
 
-        <FrameLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="10dp">
-
-            <ImageButton android:id="@+id/btn_cancel_order"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_cancel_order"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"/>
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_orders"/>
 
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
-            homelike:typeface="fonts/Roboto-Light.ttf"
-            android:text="$"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"/>
+            homelike:typeface="fonts/RobotoCondensed-Light.ttf"
+            android:text="@string/your_orders"
+            android:textSize="18sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:id="@+id/lbl_total"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             homelike:typeface="fonts/Roboto-Light.ttf"
-            android:text="0.0"
+            android:background="@drawable/bg_order_total"
+            android:padding="10dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"/>
 
-        <FrameLayout
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+    </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp">
+    <LinearLayout android:id="@+id/layout_total_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
-            <ImageButton  android:id="@+id/btn_check_order"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_check_order"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"/>
+        <Button android:id="@+id/btn_cancel_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:text="@string/cancel"
+            android:textColor="#33b5e5"
+            android:background="@drawable/card_bg"/>
 
-        </FrameLayout>
+        <Button android:id="@+id/btn_check_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:text="@string/finish_order"
+            android:textColor="#33b5e5"
+            android:background="@drawable/card_bg"/>
 
      </LinearLayout>
 

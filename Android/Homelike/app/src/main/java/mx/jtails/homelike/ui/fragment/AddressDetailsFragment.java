@@ -103,7 +103,7 @@ public class AddressDetailsFragment extends Fragment
     private void onFinishClicked() {
         if(this.validateFields()) {
             this.mInsertingDialog = ProgressDialog.show(this.getActivity(),
-                    null, "Saving address...", false, false);
+                    null, this.getString(R.string.saving_address), false, false);
 
             this.mAddress.setAlias(this.mEditAlias.getText().toString());
             this.mAddress.setCalle(this.mEditStreet.getText().toString());
@@ -165,15 +165,15 @@ public class AddressDetailsFragment extends Fragment
     private boolean validateFields() {
         List<String> empties = this.validateEmpties();
         if(!empties.isEmpty()){
-            this.notifyErrors("Campos necesarios",
-                    "Los siguientes campos son necesarios: \n", empties);
+            this.notifyErrors(R.string.required_fields,
+                    R.string.error_field_validation, empties);
             return false;
         } else {
             return true;
         }
     }
 
-    private void notifyErrors(String title, String validation, List<String> errors){
+    private void notifyErrors(int title, int validation, List<String> errors){
         String errorFields = "\n";
 
         for(int i = 0 ; i < errors.size() ; i++) {
@@ -189,22 +189,31 @@ public class AddressDetailsFragment extends Fragment
                 .setCancelable(false)
                 .setTitle(title)
                 .setMessage(validation + errorFields)
-                .setPositiveButton("Ok", null)
+                .setPositiveButton(R.string.ok, null)
                 .show();
     }
 
     private List<String> validateEmpties(){
         List<String> errors = new ArrayList<String>();
 
-        if(this.mEditAlias.getText().toString().isEmpty()){ errors.add("Alias"); }
-        if(this.mEditStreet.getText().toString().isEmpty()){ errors.add("Calle"); }
-        if(this.mEditStreetNumber.getText().toString().isEmpty()){ errors.add("Exterior"); }
-        if(this.mEditColony.getText().toString().isEmpty()){ errors.add("Colonia"); }
-        if(this.mEditZipCode.getText().toString().isEmpty()){ errors.add("Código Postal"); }
-        if(this.mEditCity.getText().toString().isEmpty()){ errors.add("Delegación"); }
-        if(this.mEditState.getText().toString().isEmpty()){ errors.add("Estado"); }
-        if(this.mEditCountry.getText().toString().isEmpty()) { errors.add("Pais"); }
-        if(this.mEditReference.getText().toString().isEmpty()){ errors.add("Referencia"); }
+        if(this.mEditAlias.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_alias)); }
+        if(this.mEditStreet.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_street)); }
+        if(this.mEditStreetNumber.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_street_number)); }
+        if(this.mEditColony.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_colony)); }
+        if(this.mEditZipCode.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_zip_code)); }
+        if(this.mEditCity.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_city)); }
+        if(this.mEditState.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_state)); }
+        if(this.mEditCountry.getText().toString().isEmpty()) { errors.add(
+                this.getString(R.string.field_country)); }
+        if(this.mEditReference.getText().toString().isEmpty()){ errors.add(
+                this.getString(R.string.field_reference)); }
 
         return errors;
     }
@@ -214,14 +223,14 @@ public class AddressDetailsFragment extends Fragment
         if(this.mInsertingDialog != null){ this.mInsertingDialog.dismiss(); }
         if(addresses != null){
             HomelikeDBManager.getDBManager().saveAddresses(addresses);
-            Toast.makeText(this.getActivity(), "Dirección guardada", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), R.string.address_saved, Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         } else {
             new AlertDialog.Builder(this.getActivity())
                     .setCancelable(false)
-                    .setTitle("Error")
-                    .setMessage("Failed to register address, try again later")
-                    .setPositiveButton("Ok", null)
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.error_register_address)
+                    .setPositiveButton(R.string.ok, null)
                     .show();
         }
     }

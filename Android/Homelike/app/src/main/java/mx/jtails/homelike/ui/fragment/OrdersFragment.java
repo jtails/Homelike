@@ -24,6 +24,7 @@ import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListOrdersRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.OrdersAdapter;
+import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -39,6 +40,8 @@ public class OrdersFragment extends Fragment
 
     private HomelikeApiRequest mApiRequest;
 
+    private boolean mIsLoading = false;
+
     private AbsListView mListView;
     private View mLayoutContent;
     private ProgressBar mProgressMain;
@@ -51,7 +54,7 @@ public class OrdersFragment extends Fragment
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         ActionBar ab = ((ActionBarActivity) activity).getSupportActionBar();
-        ab.setSubtitle("Orders");
+        ab.setSubtitle(HomeMenuSection.ORDERS.getSubtitleRes());
     }
 
     @Override
@@ -60,6 +63,8 @@ public class OrdersFragment extends Fragment
         this.setHasOptionsMenu(true);
         this.mApiRequest = new ListOrdersRequest(this,
                 HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
+        this.mIsLoading = true;
+        this.mApiRequest.executeAsync();
     }
 
     @Override
@@ -88,12 +93,11 @@ public class OrdersFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        this.loadOrders();
-    }
-
-    private void loadOrders(){
-        this.displayContentMode(ContentDisplayMode.LOAD, true);
-        this.mApiRequest.executeAsync();
+        if(this.mIsLoading){
+            this.displayContentMode(ContentDisplayMode.LOAD, true);
+        } else {
+            this.displayContentMode(ContentDisplayMode.CONTENT, true);
+        }
     }
 
     @Override
@@ -108,7 +112,8 @@ public class OrdersFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                this.loadOrders();
+                this.displayContentMode(ContentDisplayMode.LOAD, true);
+                this.mApiRequest.executeAsync();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -136,6 +141,7 @@ public class OrdersFragment extends Fragment
 
     @Override
     public void onListOrdersResponse(List<Pedido> orders) {
+        this.mIsLoading = false;
         this.mOrders = orders;
         this.displayContentMode(ContentDisplayMode.CONTENT, true);
     }

@@ -181,15 +181,15 @@ public class AddressActivity extends ActionBarActivity
 
     private void confirmDiscard(){
         new AlertDialog.Builder(this)
-                .setTitle("Discard")
-                .setMessage("Are your sure you want to discard your selection?")
-                .setPositiveButton("Leave", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.discard)
+                .setMessage(R.string.discard_address_message)
+                .setPositiveButton(R.string.leave, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNegativeButton("Stay", null)
+                .setNegativeButton(R.string.continue_process, null)
                 .show();
     }
 

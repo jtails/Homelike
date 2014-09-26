@@ -36,7 +36,6 @@
                 android:layout_height="wrap_content"
                 homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
                 android:textSize="27sp"
-                android:text="Aguapura"
                 android:singleLine="true"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -49,7 +48,6 @@
                 homelike:typeface="fonts/RobotoCondensed-LightItalic.ttf"
                 android:textSize="16sp"
                 android:layout_marginLeft="3dp"
-                android:text="Aguapura"
                 android:singleLine="true"
                 android:gravity="center_vertical"
                 android:layout_weight="1"
@@ -88,7 +86,6 @@
         android:layout_height="wrap_content"
         homelike:typeface="fonts/Roboto-Thin.ttf"
         android:textSize="45sp"
-        android:text="4.5"
         android:textColor="@android:color/white"/>
 
 </LinearLayout>

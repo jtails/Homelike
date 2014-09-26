@@ -91,6 +91,7 @@ public class OrderFragment extends Fragment {
 
         this.addOrderContent();
         this.addClientComments();
+        this.addProviderComments();
     }
 
     private void addOrderContent(){
@@ -111,11 +112,25 @@ public class OrderFragment extends Fragment {
     private void addClientComments(){
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());
 
-        View view = inflater.inflate(R.layout.view_client_comment,
+        View view = inflater.inflate(R.layout.view_comment,
                 this.mLayoutOrderDetails, false);
-        ((TextView) view.findViewById(R.id.lbl_client_comment)).setText(
-                this.mOrder.getComentarioCliente() == null ?
-                    "No comments" : this.mOrder.getComentarioCliente());
+        ((TextView) view.findViewById(R.id.lbl_comment_title)).setText(R.string.client_comment);
+        ((TextView) view.findViewById(R.id.lbl_comment)).setText(
+                this.mOrder.getComentarioCliente() == null || this.mOrder.getComentarioCliente().isEmpty() ?
+                        this.getString(R.string.no_comments) : this.mOrder.getComentarioCliente());
+
+        this.mLayoutOrderDetails.addView(view);
+    }
+
+    private void addProviderComments(){
+        LayoutInflater inflater = LayoutInflater.from(this.getActivity());
+
+        View view = inflater.inflate(R.layout.view_comment,
+                this.mLayoutOrderDetails, false);
+        ((TextView) view.findViewById(R.id.lbl_comment_title)).setText(R.string.provider_comment);
+        ((TextView) view.findViewById(R.id.lbl_comment)).setText(
+                this.mOrder.getComentarioProveedor() == null || this.mOrder.getComentarioProveedor().isEmpty() ?
+                        this.getString(R.string.no_comments) : this.mOrder.getComentarioProveedor());
 
         this.mLayoutOrderDetails.addView(view);
     }

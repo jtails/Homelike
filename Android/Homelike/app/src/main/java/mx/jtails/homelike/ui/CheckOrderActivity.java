@@ -9,9 +9,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
+import java.util.Map;
+
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.ui.adapter.OrderProcessAdapter;
+import mx.jtails.homelike.ui.fragment.ConfirmOrderFragment;
 import mx.jtails.homelike.ui.fragment.CreateOrderFragment;
 import mx.jtails.homelike.ui.fragment.ProvidersFragment;
 import mx.jtails.homelike.util.HomelikeUtils;
@@ -58,8 +62,8 @@ public class CheckOrderActivity extends ActionBarActivity
         ab.setDisplayShowTitleEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
-        ab.setTitle("Homelike");
-        ab.setSubtitle("Providers");
+        ab.setTitle(R.string.app_name);
+        ab.setSubtitle(R.string.providers);
         //this.updateActionBarAlpha(1.0f);
     }
 
@@ -141,17 +145,30 @@ public class CheckOrderActivity extends ActionBarActivity
         this.mOrderProcessPager.setCurrentItem(0);
     }
 
+    public void confirmOrder(Map<Producto, Integer> order, Proveedor provider){
+        this.originPage = 1;
+        ConfirmOrderFragment confirmFragment =
+                (ConfirmOrderFragment) this.mOrderProcessAdapter.getItem(2);
+        confirmFragment.setupFragmentWith(this.mAddressId, order, provider);
+        this.mOrderProcessPager.setCurrentItem(2);
+    }
+
+    public void editOrder(){
+        this.originPage = 2;
+        this.mOrderProcessPager.setCurrentItem(1);
+    }
+
     private void confirmLeaving(){
         new AlertDialog.Builder(this)
-                .setTitle("Leave Orders")
-                .setMessage("Are your sure you want to leave this section?")
-                .setPositiveButton("Leave", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.leave_orders)
+                .setMessage(R.string.leave_orders_message)
+                .setPositiveButton(R.string.leave, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNegativeButton("Stay", null)
+                .setNegativeButton(R.string.continue_process, null)
                 .show();
     }
 

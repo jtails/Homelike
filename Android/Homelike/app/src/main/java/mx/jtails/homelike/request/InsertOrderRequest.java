@@ -26,7 +26,7 @@ public class InsertOrderRequest extends HomelikeApiRequest {
 
     public InsertOrderRequest(HomelikeResponseHandler handler, Context context,
         int accountId, Map<Producto, Integer> rawOrder, Proveedor provider,
-        CantidadPago paymentQuantity, int addressId) {
+        CantidadPago paymentQuantity, int addressId, String comments) {
         super(handler);
         this.mEndpoint = new Pedidoendpoint.Builder(HTTP_TRANSPORT,
                 JSON_FACTORY, null).build();
@@ -39,7 +39,7 @@ public class InsertOrderRequest extends HomelikeApiRequest {
         this.mOrder.setDetallePedido(this.generateOrderDetail(rawOrder));
         this.mOrder.setDireccion(HomelikeDBManager.getDBManager().getAddress(addressId));
         this.mOrder.setProveedor(provider);
-
+        this.mOrder.setComentarioCliente(comments);
     }
 
     private List<DetallePedido> generateOrderDetail(Map<Producto, Integer> rawOrder){

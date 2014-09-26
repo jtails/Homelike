@@ -63,7 +63,7 @@ public class SplashActivity extends ActionBarActivity
     @Override
     public void onConnected(Bundle bundle) {
         this.mSigningInDialog = ProgressDialog.show(this, null,
-                "Signing in...", false, false);
+                this.getString(R.string.signing_in), false, false);
 
         new GetAccountRequest(this,
                 Plus.AccountApi.getAccountName(this.mGoogleApiClient)).executeAsync();
@@ -102,7 +102,7 @@ public class SplashActivity extends ActionBarActivity
 
     @Override
     public void onRegisterAccount(String email, String mobile) {
-        this.mSigningInDialog.setMessage("Registering account...");
+        this.mSigningInDialog.setMessage(this.getString(R.string.registering_account));
         this.mSigningInDialog.show();
         new InsertAccountRequest(this, this, email, mobile).executeAsync();
     }
@@ -118,10 +118,10 @@ public class SplashActivity extends ActionBarActivity
         this.mSigningInDialog.dismiss();
         if(account == null || account.getIdCuenta() <= 0){
             new AlertDialog.Builder(this)
-                    .setTitle("Error")
-                    .setMessage("La cuenta ya fue registrada previamente")
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.error_registered_account)
                     .setCancelable(false)
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();

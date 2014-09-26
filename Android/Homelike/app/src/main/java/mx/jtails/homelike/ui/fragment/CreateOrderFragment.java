@@ -3,7 +3,6 @@ package mx.jtails.homelike.ui.fragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,29 +27,21 @@ import java.util.List;
 import java.util.Map;
 
 import mx.jtails.homelike.R;
-import mx.jtails.homelike.api.model.CantidadPago;
 import mx.jtails.homelike.api.model.Direccion;
-import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
-import mx.jtails.homelike.request.InsertOrderRequest;
 import mx.jtails.homelike.request.ListProductsRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
-import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProductsAdapter;
-import mx.jtails.homelike.ui.fragment.dialog.ConfirmOrderDialog;
 import mx.jtails.homelike.ui.widget.OrderProductView;
-import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
  */
 public class CreateOrderFragment extends Fragment
     implements ListProductsRequest.ListProductsResponseHandler,
-    OrderProductView.OnProductQuantityChangedListener,
-    ConfirmOrderDialog.ConfirmOrderDialogCallbacks,
-    InsertOrderRequest.OnInsertOrderResponseHandler {
+    OrderProductView.OnProductQuantityChangedListener {
 
     private enum ContentDisplayMode {
         LOAD, CONTENT, CONTENT_EMPTY;
@@ -126,8 +117,9 @@ public class CreateOrderFragment extends Fragment
 
         this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
         if(this.mAddress == null){
-            Toast.makeText(this.getActivity(), "Failed to recover address with id: "
-                    + this.mAddressId, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(),
+                    String.format(this.getString(R.string.error_load_address), this.mAddressId),
+                    Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         }
     }
@@ -143,6 +135,7 @@ public class CreateOrderFragment extends Fragment
         this.mProgress = (ProgressBar) view.findViewById(R.id.progress_products);
         this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
         this.mLblTotal = (TextView) view.findViewById(R.id.lbl_total);
+        this.updateTotal();
 
         this.mProductsAdapter = new ProductsAdapter(this.getActivity(),
                 this.mProducts, this);
@@ -185,30 +178,28 @@ public class CreateOrderFragment extends Fragment
 
     public void confirmCancelation(){
         new AlertDialog.Builder(this.getActivity())
-                .setTitle("Cancel")
-                .setMessage("Are you sure you want to cancel this order?")
-                .setPositiveButton("Cancel Order", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.cancel)
+                .setMessage(R.string.confirm_order_message)
+                .setPositiveButton(R.string.cancel_order, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((CheckOrderActivity) getActivity()).cancelOrder();
                     }
                 })
-                .setNegativeButton("Continue", null)
+                .setNegativeButton(R.string.continue_process, null)
                 .show();
     }
 
     public void confirmOrder(){
         if(!this.buildOrderMap()){
             new AlertDialog.Builder(this.getActivity())
-                .setTitle("Empty Order")
-                .setMessage("The order is empty, please select your products")
-                .setPositiveButton("Ok", null).show();
+                .setTitle(R.string.empty_order)
+                .setMessage(R.string.empty_order_message)
+                .setPositiveButton(R.string.ok, null).show();
             return;
         }
 
-        ConfirmOrderDialog confirmDialog = ConfirmOrderDialog.getInstance(
-                this.mOrder, this);
-        confirmDialog.show(this.getFragmentManager(), null);
+        ((CheckOrderActivity) this.getActivity()).confirmOrder(this.mOrder, this.mProvider);
     }
 
     private boolean buildOrderMap(){
@@ -281,40 +272,9 @@ public class CreateOrderFragment extends Fragment
     }
 
     @Override
-    public void onConfirmOrderClicked(CantidadPago paymentQuantity) {
-        this.mCreatingDialog = ProgressDialog.show(this.getActivity(),
-                "New Order", "Please wait...", false, false);
-        new InsertOrderRequest(this, this.getActivity(),
-                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1),
-                this.mOrder, this.mProvider, paymentQuantity, this.mAddressId).executeAsync();
-    }
-
-    @Override
-    public void onEditOrderClicked() {
-
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putInt(ARG_ADDRESS_ID, this.mAddressId);
         outState.putInt(ARG_SERVICE_ID, this.mServiceId);
         super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onInsertOrderResponse(Pedido order) {
-        this.mCreatingDialog.dismiss();
-        if(order == null){
-            new AlertDialog.Builder(this.getActivity())
-                    .setTitle("Error")
-                    .setMessage("Failed to create your order, try again later")
-                    .setPositiveButton("Ok", null).show();
-            return;
-        } else {
-            // TODO set current content preference to orders
-            Intent intent = new Intent(this.getActivity(), HomeActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            this.getActivity().startActivity(intent);
-        }
     }
 }

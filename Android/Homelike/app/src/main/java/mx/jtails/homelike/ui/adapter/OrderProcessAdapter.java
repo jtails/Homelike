@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.jtails.homelike.ui.fragment.ConfirmOrderFragment;
 import mx.jtails.homelike.ui.fragment.CreateOrderFragment;
 import mx.jtails.homelike.ui.fragment.ProvidersFragment;
 
@@ -23,6 +24,7 @@ public class OrderProcessAdapter extends FragmentPagerAdapter {
 
         this.mOrderProcessFragments.add(ProvidersFragment.getInstance(addressId, serviceId));
         this.mOrderProcessFragments.add(CreateOrderFragment.getInstance(addressId, serviceId));
+        this.mOrderProcessFragments.add(new ConfirmOrderFragment());
     }
 
     @Override

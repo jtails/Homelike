@@ -29,6 +29,7 @@ import mx.jtails.homelike.request.ListServicesRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
 import mx.jtails.homelike.ui.MyAddressesActivity;
 import mx.jtails.homelike.ui.adapter.ServicesAdapter;
+import mx.jtails.homelike.util.HomeMenuSection;
 
 public class ServicesFragment extends Fragment implements AdapterView.OnItemClickListener,
         ListServicesRequest.ListServicesResponseHandler {
@@ -50,7 +51,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle("My Services");
+        ab.setSubtitle(HomeMenuSection.SERVICES.getSubtitleRes());
     }
 
     @Override
@@ -95,19 +96,21 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
         final int serviceId = this.mAdapter.getItem(position).getIdServicio();
         if(HomelikeDBManager.getDBManager().hasFavoriteAddress()) {
             final Direccion a = HomelikeDBManager.getDBManager().getFavouriteAddress();
+
+            String addressString = a.getAlias() + ":\n\n" + a.getCalle() + " #" + a.getNexterior()
+                    + ", " + a.getColonia() + ", " + a.getDelegacion();
+
             new AlertDialog.Builder(this.getActivity())
-                    .setTitle("Favourite Address")
-                    .setMessage("Do you want to use your favourite address for the new order:\n\n" +
-                            a.getAlias() + ":\n\n" +
-                            a.getCalle() + " #" + a.getNexterior() + ", "
-                                + a.getColonia() + ", " + a.getDelegacion())
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.favourite_address)
+                    .setMessage(String.format(this.getString(R.string.use_favourite_address),
+                            addressString))
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             goToNewOrder(a.getIdDireccion(), serviceId);
                         }
                     })
-                    .setNegativeButton("Change Address", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.change_address, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             goToAddressSelection(serviceId);

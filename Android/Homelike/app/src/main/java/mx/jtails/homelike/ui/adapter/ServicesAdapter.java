@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.Locale;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Servicio;
@@ -55,7 +54,7 @@ public class ServicesAdapter extends ArrayAdapter<Servicio> {
         Servicio service = this.getItem(position);
         holder.lblServiceName.get().setText(service.getNombre());
         holder.imgServiceIcon.get().setImageResource(
-                service.getNombre().toLowerCase(Locale.ENGLISH).equals("agua") ?
+                service.getNombre().equalsIgnoreCase("agua") ?
                     R.drawable.ic_service_water : R.drawable.ic_service_gas);
         holder.frameRightDivider.get().setVisibility(position % 2 == 0 ?
             View.VISIBLE : View.GONE);
