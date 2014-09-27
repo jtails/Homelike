@@ -92,6 +92,9 @@ public class CheckOrderActivity extends ActionBarActivity
         if(this.mOrderProcessPager.getCurrentItem() == 1){
             ((CreateOrderFragment) this.mOrderProcessAdapter.getItem(1))
                     .confirmCancelation();
+            //this.cancelOrder();
+        } else if(this.mOrderProcessPager.getCurrentItem() == 2){
+            this.editOrder();
         } else {
             super.onBackPressed();
         }

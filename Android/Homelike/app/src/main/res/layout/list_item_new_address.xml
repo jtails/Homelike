@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/card_bg"
+        android:background="@drawable/bg_btn"
         android:layout_gravity="center">
 
         <ImageView
@@ -22,7 +22,7 @@
         <FrameLayout
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="#6633b5e5"
+            android:background="#ddd"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"/>
 
@@ -30,9 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:text="@string/add_new_address"
-            android:textColor="#33b5e5"
+            android:gravity="center"
+            android:textColor="@android:color/white"
             android:textSize="18sp"/>
 
     </LinearLayout>

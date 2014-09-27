@@ -1,7 +1,5 @@
 package mx.jtails.homelike.ui.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.jtails.homelike.R;
-import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Servicio;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.HomelikeApiRequest;
@@ -94,12 +91,12 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         final int serviceId = this.mAdapter.getItem(position).getIdServicio();
+        /*
         if(HomelikeDBManager.getDBManager().hasFavoriteAddress()) {
             final Direccion a = HomelikeDBManager.getDBManager().getFavouriteAddress();
 
             String addressString = a.getAlias() + ":\n\n" + a.getCalle() + " #" + a.getNexterior()
                     + ", " + a.getColonia() + ", " + a.getDelegacion();
-
             new AlertDialog.Builder(this.getActivity())
                     .setTitle(R.string.favourite_address)
                     .setMessage(String.format(this.getString(R.string.use_favourite_address),
@@ -118,8 +115,9 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
                     })
                     .show();
         } else {
+        */
             this.goToAddressSelection(serviceId);
-        }
+        //}
     }
 
     private void goToNewOrder(int addressId, int serviceId){

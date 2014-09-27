@@ -174,8 +174,9 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:text="@string/cancel"
-            android:textColor="#33b5e5"
-            android:background="@drawable/card_bg"/>
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn"
+            android:visibility="gone"/>
 
         <Button android:id="@+id/btn_check_order"
             android:layout_width="wrap_content"
@@ -185,8 +186,8 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:text="@string/finish_order"
-            android:textColor="#33b5e5"
-            android:background="@drawable/card_bg"/>
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn"/>
 
      </LinearLayout>
 
