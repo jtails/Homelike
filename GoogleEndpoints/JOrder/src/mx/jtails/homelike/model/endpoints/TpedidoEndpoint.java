@@ -7,8 +7,10 @@ import mx.jtails.homelike.model.emanagers.TpedidoManager;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
+import java.io.IOException;
 import java.util.List;
 
 @Api(name = "tpedidoendpoint", 
@@ -20,7 +22,7 @@ clientIds = {Constants.WEB_CLIENT_ID}
 public class TpedidoEndpoint {
 
 	@ApiMethod(name = "listTpedidosByCuenta",path="listTpedidosByCuenta")
-	public List<Tpedido> listTpedidosByCuenta(Cuenta cuenta,User user) {
+	public List<Tpedido> listTpedidosByCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			TpedidoManager tpedidoM=new TpedidoManager();
 			return tpedidoM.listTpedidosByCuenta(cuenta);

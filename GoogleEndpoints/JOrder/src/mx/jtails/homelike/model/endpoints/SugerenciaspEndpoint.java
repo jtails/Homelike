@@ -11,9 +11,11 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 import com.google.appengine.datanucleus.query.JPACursorHelper;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -34,7 +36,7 @@ public class SugerenciaspEndpoint {
 	private static final Logger logger = Logger.getLogger(SugerenciaspEndpoint.class.getName());
 
 	@ApiMethod(name = "listSugerenciasp")
-	public CollectionResponse<Sugerenciasp> listSugerenciasp(User user) {
+	public CollectionResponse<Sugerenciasp> listSugerenciasp(User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			SugerenciaspManager sugerenciaspM=new SugerenciaspManager();
 			return sugerenciaspM.listSugerenciasp(null,null);
@@ -44,7 +46,7 @@ public class SugerenciaspEndpoint {
 
 
 	@ApiMethod(name = "insertSugerenciasp")
-	public Sugerenciasp insertSugerenciasp(Sugerenciasp sugerenciasp,User user) {
+	public Sugerenciasp insertSugerenciasp(Sugerenciasp sugerenciasp,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			SugerenciaspManager sugerenciaspM=new SugerenciaspManager();
 			ProveedorManager proveedorM=new ProveedorManager();

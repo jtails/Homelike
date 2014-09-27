@@ -10,9 +10,11 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 import com.google.appengine.datanucleus.query.JPACursorHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -38,7 +40,7 @@ public class CProductoEndpoint {
 	 * persisted and a cursor to the next page.
 	 */
 	@ApiMethod(name = "listCProducto")
-	public CollectionResponse<CProducto> listCProducto(User user) {
+	public CollectionResponse<CProducto> listCProducto(User user)throws OAuthRequestException, IOException  {
 		//if (user!=null){
 			CProductoManager cproductoM=new CProductoManager();
 			return cproductoM.listCProducto(null,null);
@@ -47,7 +49,7 @@ public class CProductoEndpoint {
 	}
 	
 	@ApiMethod(name = "listCProductoByServicio",path="listCProductoByServicio")
-	public List<CProducto> listCProductoByServicio(Servicio servicio,User user) {
+	public List<CProducto> listCProductoByServicio(Servicio servicio,User user)throws OAuthRequestException, IOException  {
 		//if (user!=null){
 			CProductoManager cproductoM=new CProductoManager();
 			return cproductoM.listCProductoByServicio(servicio);

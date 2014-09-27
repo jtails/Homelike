@@ -9,8 +9,10 @@ import mx.jtails.homelike.model.emanagers.ProveedorManager;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -39,7 +41,7 @@ public class ProveedorEndpoint {
 	 * Retorna una lista de proveedores cercanos a un cliente que brindan un servicio en particular
 	 */
 	@ApiMethod(name = "listProveedoresinRange",path="listProveedoresinRange")
-	public List<Proveedor> getProveedoresinRange(@Named("latitud") String latitud,@Named("longitud") String longitud,@Named("idServicio") int idServicio,User user) {
+	public List<Proveedor> getProveedoresinRange(@Named("latitud") String latitud,@Named("longitud") String longitud,@Named("idServicio") int idServicio,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
 			List<Proveedor> proveedores=proveedorM.getProveedoresinRagne(latitud, longitud,idServicio);
@@ -72,7 +74,7 @@ public class ProveedorEndpoint {
 	 * Retorna un objeto Proveedor persistido
 	 */
 	@ApiMethod(name = "getProveedor")
-	public Proveedor getProveedor(@Named("id") Long id,User user) {
+	public Proveedor getProveedor(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
 			Proveedor proveedor=proveedorM.getProveedor(id);
@@ -99,7 +101,7 @@ public class ProveedorEndpoint {
 	 * Retorna el objeto proveedor persistido,este contiene el ID del proveedor generado,en caso de un error regresara un Status -1
 	 */
 	@ApiMethod(name = "insertProveedor")
-	public Proveedor insertProveedor(Proveedor proveedor,User user) {
+	public Proveedor insertProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
 			ServicioManager servicioM=new ServicioManager();

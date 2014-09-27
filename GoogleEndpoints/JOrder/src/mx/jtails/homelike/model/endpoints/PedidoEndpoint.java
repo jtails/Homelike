@@ -20,8 +20,10 @@ import mx.jtails.homelike.model.emanagers.ProveedorManager;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,7 +52,7 @@ public class PedidoEndpoint {
 	 * Retorna una lista de Pedidos con Status diferente a 2
 	 */
 	@ApiMethod(name = "listPedidosByCuenta",path="listPedidosByCuenta")
-	public List<Pedido> listPedidosByCuenta(Cuenta cuenta,User user) {
+	public List<Pedido> listPedidosByCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.listPedidosByCuenta(cuenta);
@@ -68,7 +70,7 @@ public class PedidoEndpoint {
 	 * Retorna una lista de Pedidos con Status 2
 	 */
 	@ApiMethod(name = "listHistoricoPedidosByCuenta",path="listHistoricoPedidosByCuenta")
-	public List<Pedido> listHistoricoPedidosByCuenta(Cuenta cuenta,User user) {
+	public List<Pedido> listHistoricoPedidosByCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.listHistoricoPedidosByCuenta(cuenta);
@@ -86,7 +88,7 @@ public class PedidoEndpoint {
 	 * Retorna una lista de Pedidos con Status diferente a 2
 	 */
 	@ApiMethod(name = "listPedidosByProveedor",path="listPedidosByProveedor")
-	public List<Pedido> listPedidosByProveedor(Proveedor proveedor,User user) {
+	public List<Pedido> listPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.listPedidosByProveedor(proveedor);
@@ -104,7 +106,7 @@ public class PedidoEndpoint {
 	 * Retorna una lista de Pedidos con Status 2
 	 */
 	@ApiMethod(name = "listHistoricoPedidosByProveedor",path="listHistoricoPedidosByProveedor")
-	public List<Pedido> listHistoricoPedidosByProveedor(Proveedor proveedor,User user) {
+	public List<Pedido> listHistoricoPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.listHistoricoPedidosByProveedor(proveedor);
@@ -122,7 +124,7 @@ public class PedidoEndpoint {
 	 * Retorna una lista de Pedidos con comentarios y fecha de comentario de los ultimos 20 pedidos con Status 2
 	 */
 	@ApiMethod(name = "getComentariosPedidosByProveedor",path="getComentariosPedidosByProveedor")
-	public List<Pedido> getComentariosPedidosByProveedor(Proveedor proveedor,User user) {
+	public List<Pedido> getComentariosPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			List<Pedido> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(proveedor,20);
@@ -141,7 +143,7 @@ public class PedidoEndpoint {
 	 * Retorna un objeto Proveedor con el campo numPedidos conteniendo el total de pedidos con Status diferente a 2 (Pedidos no terminados)
 	 */
 	@ApiMethod(name = "countActivePedidosByProveedor",path="countActivePedidosByProveedor")
-	public Proveedor countActivePedidosByProveedor(Proveedor proveedor,User user) {
+	public Proveedor countActivePedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.countActivePedidosByProveedor(proveedor);
@@ -159,7 +161,7 @@ public class PedidoEndpoint {
 	 * Retorna un objeto Proveedor con el campo numPedidos conteniendo el total de pedidos de un proveedor
 	 */
 	@ApiMethod(name = "countTotalPedidosByProveedor",path="countTotalPedidosByProveedor")
-	public Proveedor countTotalPedidosByProveedor(Proveedor proveedor,User user) {
+	public Proveedor countTotalPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.countTotalPedidosByProveedor(proveedor);
@@ -177,7 +179,7 @@ public class PedidoEndpoint {
 	 * Retorna un objeto List de Graficos con los valores del numero de pedidos con Status 2(Pedidos terminados) y fecha de los ultimos 10 dias
 	 */
 	@ApiMethod(name = "getHistoricoPedidosByDayProveedor",path="getHistoricoPedidosByDayProveedor")
-	public List<Grafico> getHistoricoPedidosByDayProveedor(Proveedor proveedor,User user) {
+	public List<Grafico> getHistoricoPedidosByDayProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			List<Grafico> grafico=new ArrayList<Grafico>();
@@ -206,7 +208,7 @@ public class PedidoEndpoint {
 	 * Retorna un objeto List de Graficos con los valores del numero de pedidos con Status 2(Pedidos terminados) y fecha de los ultimos 10 meses
 	 */
 	@ApiMethod(name = "getHistoricoPedidosByMesProveedor",path="getHistoricoPedidosByMesProveedor")
-	public List<Grafico> getHistoricoPedidosByMesProveedor(Proveedor proveedor,User user) {
+	public List<Grafico> getHistoricoPedidosByMesProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			List<Grafico> grafico=new ArrayList<Grafico>();
@@ -240,7 +242,7 @@ public class PedidoEndpoint {
 	 * Retorna un objeto List de Graficos con los valores de las ganancias de pedidos con Status 2(Pedidos terminados) y fecha de los ultimos 10 meses
 	 */
 	@ApiMethod(name = "getHistoricoGananciaByMesProveedor",path="getHistoricoGananciaByMesProveedor")
-	public List<Grafico> getHistoricoGananciaByMesProveedor(Proveedor proveedor,User user) {
+	public List<Grafico> getHistoricoGananciaByMesProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			List<Grafico> grafico=new ArrayList<Grafico>();
@@ -274,7 +276,7 @@ public class PedidoEndpoint {
 	 * Retorna un objeto Pedido persistido
 	 */
 	@ApiMethod(name = "getPedido")
-	public Pedido getPedido(@Named("id") Long id,User user) {
+	public Pedido getPedido(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 			return pedidoM.getPedido(id);
@@ -292,7 +294,7 @@ public class PedidoEndpoint {
 	 * Retorna el objeto pedido persistido,este contiene el ID del pedido generado
 	 */
 	@ApiMethod(name = "insertPedido")
-	public Pedido insertPedido(Pedido pedido,User user) {
+	public Pedido insertPedido(Pedido pedido,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
 		

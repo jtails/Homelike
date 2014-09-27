@@ -1,5 +1,7 @@
 package mx.jtails.homelike.model.endpoints;
 
+import java.io.IOException;
+
 import mx.jtails.homelike.model.beans.Servicio;
 import mx.jtails.homelike.model.emanagers.ServicioManager;
 
@@ -7,6 +9,7 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
 
@@ -26,7 +29,7 @@ public class ServicioEndpoint {
 	 * Retorna una lista de Servicios
 	 */
 	@ApiMethod(name = "listServicio")
-	public CollectionResponse<Servicio> listServicio(User user) {
+	public CollectionResponse<Servicio> listServicio(User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ServicioManager servicioM=new ServicioManager();
 			return servicioM.listServicio(null,null);

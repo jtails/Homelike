@@ -10,8 +10,10 @@ import mx.jtails.homelike.model.emanagers.PedidoManager;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -38,7 +40,7 @@ public class CuentaEndpoint {
 	 * Retorna el objeto cuenta persistido,este contiene el ID de la cuenta generado,en caso de un error regresara un Status -1
 	 */
 	@ApiMethod(name = "insertCuenta")
-	public Cuenta insertCuenta(Cuenta cuenta,User user) {
+	public Cuenta insertCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			CuentaManager cuentaM=new CuentaManager();
 		
@@ -61,8 +63,9 @@ public class CuentaEndpoint {
 				Cuenta pcuenta=cuentaM.getCuenta(Long.valueOf(cuenta.getIdCuenta()));
 				try {
 					//Copiamos los valores del Bean JSON al Bean Persistido
-					pcuenta.setTelefono(cuenta.getTelefono());
-					pcuenta.setUsuario(cuenta.getUsuario());
+					//Descomentar para update de cuenta
+					//pcuenta.setTelefono(cuenta.getTelefono());
+					//pcuenta.setUsuario(cuenta.getUsuario());
 					
 					
 					boolean addDireccion=true;
@@ -93,12 +96,13 @@ public class CuentaEndpoint {
 						logger.warning("Agregando direccion : "+user);
 					}
 					
-					Dispositivo pdispositivo=pcuenta.getDispositivos().get(0);
-					pdispositivo.setGcmid(cuenta.getDispositivos().get(0).getGcmid());
-					pdispositivo.setImei(cuenta.getDispositivos().get(0).getImei());
-					pdispositivo.setModelo(cuenta.getDispositivos().get(0).getModelo());
-					pdispositivo.setPlataforma(cuenta.getDispositivos().get(0).getPlataforma());
-					pdispositivo.setTipoDispositivo(cuenta.getDispositivos().get(0).getTipoDispositivo());
+					//Descomentar para update de dispositivo
+					//Dispositivo pdispositivo=pcuenta.getDispositivos().get(0);
+					//pdispositivo.setGcmid(cuenta.getDispositivos().get(0).getGcmid());
+					//pdispositivo.setImei(cuenta.getDispositivos().get(0).getImei());
+					//pdispositivo.setModelo(cuenta.getDispositivos().get(0).getModelo());
+					//pdispositivo.setPlataforma(cuenta.getDispositivos().get(0).getPlataforma());
+					//pdispositivo.setTipoDispositivo(cuenta.getDispositivos().get(0).getTipoDispositivo());
 				
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -120,7 +124,7 @@ public class CuentaEndpoint {
 	 * Retorna el objeto cuenta persistido,este contiene referencia al dispositivo y a la direccion
 	 */
 	@ApiMethod(name = "getCuenta", path="getCuenta")
-	public Cuenta getCuenta(@Named("id") Long id,User user){
+	public Cuenta getCuenta(@Named("id") Long id,User user)throws OAuthRequestException, IOException {
 	//	if(user!=null){
 		CuentaManager cuentaM=new CuentaManager();
 		return cuentaM.getCuenta(id);
@@ -140,7 +144,7 @@ public class CuentaEndpoint {
 	 * Retorna una lista con las cuentas que contienen referencia a los dispositivos cercanos a la ubicacion del proveedor
 	 */
 	@ApiMethod(name = "listClientesinRange",path="listClientesinRange")
-	public List<Cuenta> getClientesinRange(Proveedor proveedor,User user) {
+	public List<Cuenta> getClientesinRange(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			CuentaManager cuentaM=new CuentaManager();
 			PedidoManager pedidoM=new PedidoManager();
@@ -168,7 +172,7 @@ public class CuentaEndpoint {
 	 * Retorna el proveedor con el campo numClientes conteniendo el total de clientes que han realizado pedidos con el proveedor
 	 */
 	@ApiMethod(name = "getClienteswithPedidoByProveedor",path="getClienteswithPedidoByProveedor")
-	public Proveedor getClienteswithPedidoByProveedor(Proveedor proveedor,User user) {
+	public Proveedor getClienteswithPedidoByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			CuentaManager cuentaM=new CuentaManager();
 			return cuentaM.getClienteswithPedidoByProveedor(proveedor);
@@ -187,7 +191,7 @@ public class CuentaEndpoint {
 	 * Retorna el objeto cuenta persistido, con referencia a las direcciones y dispositivos
 	 */
 	@ApiMethod(name = "getCuentaByUser",path="getCuentaByUser")
-	public Cuenta getCuentaByUser(Cuenta cuenta,User user) {
+	public Cuenta getCuentaByUser(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			CuentaManager cuentaM=new CuentaManager();
 			return cuentaM.getCuentaByUser(cuenta);

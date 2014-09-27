@@ -11,8 +11,10 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -30,7 +32,7 @@ public class ProductoEndpoint {
 
 
 	@ApiMethod(name = "listProducto")
-	public CollectionResponse<Producto> listProducto(User user) {
+	public CollectionResponse<Producto> listProducto(User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();
 			return productoM.listProducto(null,null);
@@ -48,10 +50,12 @@ public class ProductoEndpoint {
 	 * Retorna una lista de Productos
 	 */
 	@ApiMethod(name = "listProductosByProveedor",path="listProductosByProveedor")
-	public List<Producto> listProductosByProveedor(Proveedor proveedor,User user) {
+	public List<Producto> listProductosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();
-			return productoM.listProductosByProveedor(proveedor);
+			List<Producto> productos=productoM.listProductosByProveedor(proveedor);
+			logger.warning("Productos encontrados "+productos.size()+" :"+user);
+			return productos;
 		//}
 		//return null;
 	}
@@ -66,7 +70,7 @@ public class ProductoEndpoint {
 	 * Retorna el objeto Producto persistido con su ID
 	 */
 	@ApiMethod(name = "insertProducto")
-	public Producto insertProducto(Producto producto,User user) {
+	public Producto insertProducto(Producto producto,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();
 			CProductoManager cproductoM=new CProductoManager();
@@ -94,7 +98,7 @@ public class ProductoEndpoint {
 	}
 
 	@ApiMethod(name = "removeProducto")
-	public void removeProducto(@Named("id") Long id,User user) {
+	public void removeProducto(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();
 			productoM.removeProducto(id);
