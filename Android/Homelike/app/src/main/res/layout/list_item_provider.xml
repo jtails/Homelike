@@ -94,12 +94,14 @@
 
     </LinearLayout>
 
+    <!--
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
         android:id="@+id/lbl_rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         homelike:typeface="fonts/Roboto-Thin.ttf"
         android:textSize="45sp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
+    -->
 
 </LinearLayout>
