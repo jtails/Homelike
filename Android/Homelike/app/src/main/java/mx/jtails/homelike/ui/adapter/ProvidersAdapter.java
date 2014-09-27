@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -64,7 +65,8 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
         Proveedor provider = this.getItem(position);
         holder.lblProviderName.get().setText(provider.getNombre());
         holder.lblProviderSlogan.get().setText(provider.getSlogan());
-        holder.lblRating.get().setText(String.valueOf((float) provider.getCalificacion()));
+        //holder.lblRating.get().setText(String.valueOf((float) provider.getCalificacion()));
+        holder.ratingProvider.get().setRating((float) provider.getCalificacion());
         ImageLoader.getInstance().displayImage(
                 provider.getLogo(), holder.imgProviderLogo.get(), this.loaderOptions);
 
@@ -86,7 +88,8 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
         private WeakReference<ImageView> imgProviderLogo;
         private WeakReference<TextView> lblProviderName;
         private WeakReference<TextView> lblProviderSlogan;
-        private WeakReference<TextView> lblRating;
+        private WeakReference<RatingBar> ratingProvider;
+        //private WeakReference<TextView> lblRating;
 
         public ViewHolder(View view) {
             this.lblProviderName = new WeakReference<TextView>(
@@ -95,8 +98,10 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
                     (TextView) view.findViewById(R.id.lbl_provider_slogan));
             this.imgProviderLogo = new WeakReference<ImageView>(
                     (ImageView) view.findViewById(R.id.img_provider_logo));
-            this.lblRating = new WeakReference<TextView>(
-                    (TextView) view.findViewById(R.id.lbl_rating));
+            this.ratingProvider = new WeakReference<RatingBar>(
+                    (RatingBar) view.findViewById(R.id.rating_provider));
+            //this.lblRating = new WeakReference<TextView>(
+              //      (TextView) view.findViewById(R.id.lbl_rating));
         }
     }
 }

@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,11 +58,12 @@ public class CreateOrderFragment extends Fragment
     private ImageView mProviderLogo;
     private TextView mProviderName;
     private TextView mProviderSlogan;
-    private TextView mProviderRating;
+    //private TextView mProviderRating;
     private View mLayoutContent;
     private ProgressBar mProgress;
     private TextView mLblEmpty;
     private TextView mLblTotal;
+    private RatingBar mRatingProvider;
 
     private AbsListView mListView;
     private ProductsAdapter mProductsAdapter;
@@ -129,12 +131,13 @@ public class CreateOrderFragment extends Fragment
         this.mProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
         this.mProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
         this.mProviderSlogan = (TextView) view.findViewById(R.id.lbl_provider_slogan);
-        this.mProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
+        //this.mProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
         this.mLayoutContent = view.findViewById(R.id.layout_products_content);
         this.mListView = (ListView) view.findViewById(R.id.list_products);
         this.mProgress = (ProgressBar) view.findViewById(R.id.progress_products);
         this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
         this.mLblTotal = (TextView) view.findViewById(R.id.lbl_total);
+        this.mRatingProvider = (RatingBar) view.findViewById(R.id.rating_provider);
         this.updateTotal();
 
         this.mProductsAdapter = new ProductsAdapter(this.getActivity(),
@@ -169,7 +172,8 @@ public class CreateOrderFragment extends Fragment
             this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
         this.mProviderName.setText(this.mProvider.getNombre());
         this.mProviderSlogan.setText(this.mProvider.getSlogan());
-        this.mProviderRating.setText(String.valueOf((float) this.mProvider.getCalificacion()));
+        //this.mProviderRating.setText(String.valueOf((float) this.mProvider.getCalificacion()));
+        this.mRatingProvider.setRating((float) this.mProvider.getCalificacion());
 
         this.displayContentMode(ContentDisplayMode.LOAD);
         this.mProductsRequest = new ListProductsRequest(this, this.mProvider.getIdProveedor());

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -28,7 +29,8 @@ public class OrderFragment extends Fragment {
 
     private ViewGroup mLayoutOrderDetails;
     private TextView mLblProviderName;
-    private TextView mLblProviderRating;
+    //private TextView mLblProviderRating;
+    private RatingBar mRatingProvider;
     private TextView mLblOrderId;
     private ImageView mImgProviderLogo;
     private TextView mLblStatus;
@@ -69,7 +71,8 @@ public class OrderFragment extends Fragment {
         this.mImgProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
         this.mLblProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
         this.mLblOrderId = (TextView) view.findViewById(R.id.lbl_order_id);
-        this.mLblProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
+        //this.mLblProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
+        this.mRatingProvider = (RatingBar) view.findViewById(R.id.rating_provider);
         this.mLblStatus = (TextView) view.findViewById(R.id.lbl_status);
     }
 
@@ -86,7 +89,8 @@ public class OrderFragment extends Fragment {
                 this.mImgProviderLogo, this.mLoaderOptions);
         this.mLblProviderName.setText(this.mOrder.getProveedor().getNombre());
         this.mLblOrderId.setText("ID. " + this.mOrder.getIdPedido());
-        this.mLblProviderRating.setText("" + (float) this.mOrder.getProveedor().getCalificacion());
+        //this.mLblProviderRating.setText("" + (float) this.mOrder.getProveedor().getCalificacion());
+        this.mRatingProvider.setRating((float) this.mOrder.getProveedor().getCalificacion());
         this.mLblStatus.setText(HomelikeUtils.getOrderStatusString(this.mOrder.getStatus()));
 
         this.addOrderContent();

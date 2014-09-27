@@ -51,12 +51,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
-                    android:textSize="27sp"
-                    android:text="Aguapura"
+                    android:textSize="23sp"
                     android:singleLine="true"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
                     android:textColor="@android:color/white"/>
+
+                <RatingBar android:id="@+id/rating_provider"
+                    style="@style/Widget.Homelike.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:isIndicator="true"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,7 +81,6 @@
                         android:id="@+id/lbl_order_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Agua"
                         android:layout_gravity="center_vertical"
                         android:textSize="16sp"
                         android:layout_marginLeft="5dp"
@@ -85,16 +91,17 @@
 
             </LinearLayout>
 
+            <!--
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 homelike:typeface="fonts/Roboto-Thin.ttf"
                 android:textSize="45sp"
-                android:text="4.5"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"/>
+            -->
 
         </LinearLayout>
 
