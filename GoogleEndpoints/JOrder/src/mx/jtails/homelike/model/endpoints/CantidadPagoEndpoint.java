@@ -10,12 +10,14 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.api.log.AppLogLine;
+import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 import com.google.appengine.datanucleus.query.JPACursorHelper;
 import com.google.apphosting.api.logservice.LogServicePb;
 import com.google.apphosting.api.logservice.LogServicePb.LogLine;
 import com.google.apphosting.api.logservice.LogServicePb.RequestLog;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +43,7 @@ public class CantidadPagoEndpoint {
 	 * El usuario autenticado con Google
 	 */
 	@ApiMethod(name = "listCantidadPago")
-	public CollectionResponse<CantidadPago> listCantidadPago(User user) {
+	public CollectionResponse<CantidadPago> listCantidadPago(User user)throws OAuthRequestException, IOException{
 		//if(user!=null){
 			CantidadPagoManager cantidadPagoM=new CantidadPagoManager();
 			return cantidadPagoM.listCantidadPago(null,null);

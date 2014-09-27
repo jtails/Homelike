@@ -15,6 +15,9 @@ import java.util.List;
 @NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s")
 public class Servicio implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public Servicio() {
+	}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,9 +25,8 @@ public class Servicio implements Serializable {
 	private int idServicio;
 
 	private String nombre;
-
-	public Servicio() {
-	}
+	
+	private String image;
 
 	public int getIdServicio() {
 		return this.idServicio;
@@ -40,6 +42,14 @@ public class Servicio implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
