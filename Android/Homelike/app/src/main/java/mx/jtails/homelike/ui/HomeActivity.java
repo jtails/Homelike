@@ -57,12 +57,6 @@ public class HomeActivity extends ActionBarActivity
         }
     }
 
-    private void goToSplash(){
-        ((HomelikeApplication) this.getApplication()).logout();
-        this.startActivity(new Intent(this, SplashActivity.class));
-        this.finish();
-    }
-
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -103,7 +97,7 @@ public class HomeActivity extends ActionBarActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = this.getMenuInflater();
-        inflater.inflate(R.menu.home, menu);
+        inflater.inflate(R.menu.logout, menu);
         return true;
     }
 
@@ -119,6 +113,12 @@ public class HomeActivity extends ActionBarActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void goToSplash(){
+        ((HomelikeApplication) this.getApplication()).logout();
+        this.startActivity(new Intent(this, SplashActivity.class));
+        this.finish();
     }
 
     @Override

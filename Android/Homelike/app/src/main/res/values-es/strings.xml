@@ -60,7 +60,7 @@
     <string name="preparing_order">Preparando nuevo pedido…</string>
     <string name="payment_quantity">Cantidad de pago</string>
     <string name="comments">Comentarios</string>
-    <string name="comments_hint">Comentarios al proveedor</string>
+    <string name="comments_hint">Comentarios al proveedor como la denominación de su pago</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>

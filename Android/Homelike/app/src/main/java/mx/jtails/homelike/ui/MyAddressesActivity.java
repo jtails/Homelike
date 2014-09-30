@@ -1,11 +1,15 @@
 package mx.jtails.homelike.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 
+import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.ui.fragment.MyAddressesFragment;
 
@@ -47,10 +51,26 @@ public class MyAddressesActivity extends ActionBarActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = this.getMenuInflater();
+        inflater.inflate(R.menu.logout, menu);
+        return true;
+    }
+
+    private void goToSplash(){
+        ((HomelikeApplication) this.getApplication()).logout();
+        this.startActivity(new Intent(this, SplashActivity.class));
+        this.finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch(item.getItemId()) {
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.action_logout:
+                this.goToSplash();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

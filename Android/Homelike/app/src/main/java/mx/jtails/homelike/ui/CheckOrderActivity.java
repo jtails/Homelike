@@ -2,15 +2,19 @@ package mx.jtails.homelike.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.Map;
 
+import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
@@ -73,10 +77,26 @@ public class CheckOrderActivity extends ActionBarActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = this.getMenuInflater();
+        inflater.inflate(R.menu.logout, menu);
+        return true;
+    }
+
+    private void goToSplash(){
+        ((HomelikeApplication) this.getApplication()).logout();
+        this.startActivity(new Intent(this, SplashActivity.class));
+        this.finish();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:
                 this.onTryToLeave();
+                return true;
+            case R.id.action_logout:
+                this.goToSplash();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

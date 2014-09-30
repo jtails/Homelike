@@ -91,6 +91,6 @@
     <string name="status_delivered">Delivered</string>
     <string name="status_unknown">Status Unknown</string>
     <string name="comments">Comments</string>
-    <string name="comments_hint">Comments to the provider</string>
+    <string name="comments_hint">Comments to the provider like payment quantity</string>
 
 </resources>

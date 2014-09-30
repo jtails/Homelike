@@ -33,8 +33,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:padding="15dp"
-                android:visibility="gone">
+                android:padding="15dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -69,7 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="5dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -100,15 +100,19 @@
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     android:text="@string/comments"
-                    homelike:typeface="fonts/Roboto-Regular.ttf"/>
+                    homelike:typeface="fonts/Roboto-Regular.ttf"
+                    android:visibility="gone"/>
 
                 <EditText android:id="@+id/edit_comments"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
-                    android:lines="3"
-                    android:textColorHint="#eee"
-                    android:hint="@string/comments_hint"/>
+                    android:lines="5"
+                    android:textColorHint="#333"
+                    android:hint="@string/comments_hint"
+                    android:background="#99ffffff"
+                    android:gravity="top|center_horizontal"
+                    android:padding="5dp"/>
 
             </LinearLayout>
 
