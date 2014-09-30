@@ -8,8 +8,8 @@ android {
         applicationId "mx.jtails.homelike"
         minSdkVersion 11
         targetSdkVersion 20
-        versionCode 7
-        versionName "1.0.6"
+        versionCode 8
+        versionName "1.0.7"
     }
     buildTypes {
         release {
