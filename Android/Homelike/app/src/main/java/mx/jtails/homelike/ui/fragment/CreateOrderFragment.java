@@ -1,7 +1,6 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,6 +35,8 @@ import mx.jtails.homelike.request.ListProductsRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
 import mx.jtails.homelike.ui.adapter.ProductsAdapter;
 import mx.jtails.homelike.ui.widget.OrderProductView;
+import mx.jtails.homelike.util.HomelikePreferences;
+import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
@@ -69,8 +70,6 @@ public class CreateOrderFragment extends Fragment
     private ProductsAdapter mProductsAdapter;
 
     private DisplayImageOptions mLoaderOptions;
-
-    private ProgressDialog mCreatingDialog;
 
     private int mAddressId;
     private int mServiceId;
@@ -141,7 +140,7 @@ public class CreateOrderFragment extends Fragment
         this.updateTotal();
 
         this.mProductsAdapter = new ProductsAdapter(this.getActivity(),
-                this.mProducts, this);
+                this.mProducts, this.mSubtotals, this);
         this.mListView.setAdapter(this.mProductsAdapter);
 
         view.findViewById(R.id.btn_cancel_order).setOnClickListener(new View.OnClickListener() {
@@ -172,7 +171,6 @@ public class CreateOrderFragment extends Fragment
             this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
         this.mProviderName.setText(this.mProvider.getNombre());
         this.mProviderSlogan.setText(this.mProvider.getSlogan());
-        //this.mProviderRating.setText(String.valueOf((float) this.mProvider.getCalificacion()));
         this.mRatingProvider.setRating((float) this.mProvider.getCalificacion());
 
         this.displayContentMode(ContentDisplayMode.LOAD);
@@ -262,7 +260,8 @@ public class CreateOrderFragment extends Fragment
                 this.mLblEmpty.setVisibility(View.GONE);
                 this.mListView.setVisibility(View.VISIBLE);
 
-                this.mProductsAdapter.updateContent(this.mProducts);
+                this.loadTempOrder();
+                this.mProductsAdapter.updateContent(this.mProducts, this.mSubtotals);
                 break;
             }
             case CONTENT_EMPTY: {
@@ -273,6 +272,42 @@ public class CreateOrderFragment extends Fragment
                 break;
             }
         }
+    }
+
+    public void saveTempOrder(){
+        if(!this.buildOrderMap()){
+            return;
+        }
+        HomelikePreferences.saveBoolean(HomelikePreferences.HAS_TEMP_ORDER, true);
+        HomelikePreferences.saveInt(HomelikePreferences.TEMP_ORDER_PROVIDER_ID,
+                this.mProvider.getIdProveedor());
+        HomelikePreferences.saveInt(HomelikePreferences.TEMP_ORDER_ADDRESS_ID,
+                this.mAddressId);
+        HomelikePreferences.saveInt(HomelikePreferences.TEMP_ORDER_SERVICE_ID,
+                this.mServiceId);
+        HomelikePreferences.saveStringSet(HomelikePreferences.TEMP_ORDER_SUBTOTAL_SET,
+                HomelikeUtils.getSerializedSubtotal(this.mSubtotals));
+    }
+
+    private void loadTempOrder(){
+        boolean hasTempOrder = HomelikePreferences.loadBoolean(
+                HomelikePreferences.HAS_TEMP_ORDER, false);
+        HomelikePreferences.saveBoolean(HomelikePreferences.HAS_TEMP_ORDER, false);
+
+        int providerId = HomelikePreferences.loadInt(
+                HomelikePreferences.TEMP_ORDER_PROVIDER_ID, -1);
+        int addressId = HomelikePreferences.loadInt(
+                HomelikePreferences.TEMP_ORDER_ADDRESS_ID, -1);
+        int serviceId = HomelikePreferences.loadInt(
+                HomelikePreferences.TEMP_ORDER_SERVICE_ID, -1);
+        if(!hasTempOrder || this.mProvider.getIdProveedor() != providerId
+                || this.mAddressId != addressId || this.mServiceId != serviceId){
+            this.mSubtotals = new HashMap<Integer, Integer>();
+            return;
+        }
+
+        this.mSubtotals = HomelikeUtils.getDeserializedSubtotal(HomelikePreferences
+                .loadStringSet(HomelikePreferences.TEMP_ORDER_SUBTOTAL_SET, null));
     }
 
     @Override

@@ -14,6 +14,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Dispositivo;
@@ -153,6 +157,29 @@ public class HomelikeUtils {
                 statusRes = R.string.status_unknown; break;
         }
         return statusRes;
+    }
+
+    public static Set<String> getSerializedSubtotal(Map<Integer, Integer> subtotal){
+        Set<String> serializedSubtotal = new HashSet<String>();
+
+        for(Integer position : subtotal.keySet()){
+            serializedSubtotal.add(position + ";" + subtotal.get(position));
+        }
+
+        return serializedSubtotal;
+    }
+
+    public static Map<Integer, Integer> getDeserializedSubtotal(Set<String> serializedSubtotal){
+        Map<Integer, Integer> deserializedSubtotal = new HashMap<Integer, Integer>();
+        if(serializedSubtotal == null) { return deserializedSubtotal; }
+
+        for(String subtotalItem : serializedSubtotal){
+            String[] splittedSubtotal = subtotalItem.split(";");
+            deserializedSubtotal.put(Integer.parseInt(splittedSubtotal[0]),
+                    Integer.parseInt(splittedSubtotal[1]));
+        }
+
+        return deserializedSubtotal;
     }
 
 }

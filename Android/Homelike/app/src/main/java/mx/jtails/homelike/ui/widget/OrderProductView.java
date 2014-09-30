@@ -18,7 +18,7 @@ public class OrderProductView extends LinearLayout {
 
     private Producto mProduct;
     private int mPosition;
-    private int mQuantity = 0;
+    private QuantityHolder mHolder;
 
     private TextView mLblProductName;
     private TextView mLblUnitPrice;
@@ -66,14 +66,15 @@ public class OrderProductView extends LinearLayout {
         });
     }
 
-    public void setProduct(Producto product, int position){
+    public void setProduct(Producto product, int position, QuantityHolder holder){
         this.mProduct = product;
         this.mPosition = position;
+        this.mHolder = holder;
 
         this.mLblProductName.setText(this.mProduct.getCproducto().getDescripcion()
             + " - " + this.mProduct.getCproducto().getPresentacion());
         this.mLblUnitPrice.setText("$" + String.valueOf(this.mProduct.getCostoUnitario()));
-        this.mLblQuantity.setText(String.valueOf(this.mQuantity));
+        this.mLblQuantity.setText(String.valueOf(this.mHolder.getProductQuantity(this.mPosition)));
     }
 
     public void setOnProductQuantityChangedListener(OnProductQuantityChangedListener listener){
@@ -81,25 +82,33 @@ public class OrderProductView extends LinearLayout {
     }
 
     private void onAddProductClicked() {
-        this.mQuantity++;
-        this.mLblQuantity.setText(String.valueOf(this.mQuantity));
+        this.mHolder.addProduct(this.mPosition);
+        this.mLblQuantity.setText(String.valueOf(this.mHolder.getProductQuantity(this.mPosition)));
         if(this.mOnProductQuantityChangedListener != null){
             this.mOnProductQuantityChangedListener.onProductQuantityChanged(
-                    this.mPosition, this.mQuantity);
+                    this.mPosition, this.mHolder.getProductQuantity(this.mPosition));
         }
     }
 
     private void onRemoveProductClicked() {
-        if(this.mQuantity > 0) this.mQuantity--;
-        this.mLblQuantity.setText(String.valueOf(this.mQuantity));
+        if(this.mHolder.getProductQuantity(this.mPosition) > 0){
+            this.mHolder.removeProduct(this.mPosition);
+        }
+        this.mLblQuantity.setText(String.valueOf(this.mHolder.getProductQuantity(this.mPosition)));
         if(this.mOnProductQuantityChangedListener != null){
             this.mOnProductQuantityChangedListener.onProductQuantityChanged(
-                    this.mPosition, this.mQuantity);
+                    this.mPosition, this.mHolder.getProductQuantity(this.mPosition));
         }
     }
 
     public interface OnProductQuantityChangedListener {
         public void onProductQuantityChanged(int position, int newQuantity);
+    }
+
+    public interface QuantityHolder {
+        public int getProductQuantity(int position);
+        public void addProduct(int position);
+        public void removeProduct(int position);
     }
 
 }

@@ -90,9 +90,11 @@ public class CheckOrderActivity extends ActionBarActivity
 
     private void onTryToLeave(){
         if(this.mOrderProcessPager.getCurrentItem() == 1){
+            //((CreateOrderFragment) this.mOrderProcessAdapter.getItem(1))
+              //      .confirmCancelation();
             ((CreateOrderFragment) this.mOrderProcessAdapter.getItem(1))
-                    .confirmCancelation();
-            //this.cancelOrder();
+                    .saveTempOrder();
+            this.cancelOrder();
         } else if(this.mOrderProcessPager.getCurrentItem() == 2){
             this.editOrder();
         } else {

@@ -3,6 +3,8 @@ package mx.jtails.homelike.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Set;
+
 /**
  * Created by GrzegorzFeathers on 9/3/14.
  */
@@ -20,6 +22,13 @@ public class HomelikePreferences {
     public static final String USER_IMG = "user_img";
     public static final String ACCOUNT_ID = "account_id";
     public static final String DEVICE_ID = "device_id";
+
+    //Temporal Order
+    public static final String HAS_TEMP_ORDER = "has_temp_order";
+    public static final String TEMP_ORDER_PROVIDER_ID = "temp_order_provider_id";
+    public static final String TEMP_ORDER_ADDRESS_ID = "temp_order_address_id";
+    public static final String TEMP_ORDER_SERVICE_ID = "temp_order_service_id";
+    public static final String TEMP_ORDER_SUBTOTAL_SET = "temp_order_subtotal_set";
 
     private static SharedPreferences preferences = null;
     private static SharedPreferences.Editor editor = null;
@@ -46,6 +55,10 @@ public class HomelikePreferences {
         return preferences.getBoolean(key, defValue);
     }
 
+    public static Set<String> loadStringSet(String key, Set<String> defValue){
+        return preferences.getStringSet(key, defValue);
+    }
+
     public static void saveString(String key, String value) {
         editor.putString(key, value);
         editor.commit();
@@ -63,6 +76,11 @@ public class HomelikePreferences {
 
     public static void saveBoolean(String key, boolean value) {
         editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static void saveStringSet(String key, Set<String> value){
+        editor.putStringSet(key, value);
         editor.commit();
     }
 
