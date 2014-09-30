@@ -3,12 +3,10 @@
     <!-- Base application theme. -->
     <style name="Theme.Homelike" parent="@style/Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/Widget.Homelike.Actionbar</item>
-        <!--<item name="android:windowBackground">@color/activity_bg</item>-->
         <item name="android:windowBackground">@drawable/bg_homelike</item>
     </style>
 
     <style name="Widget.Homelike.Actionbar" parent="Widget.AppCompat.ActionBar.Solid">
-        <!--<item name="android:background">@color/primary</item>-->
         <item name="android:titleTextStyle">@style/TextAppearance.Homelike.Widget.ActionBar.Title</item>
         <item name="android:subtitleTextStyle">@style/TextAppearance.Homelike.Widget.ActionBar.Subtitle</item>
     </style>
@@ -28,7 +26,7 @@
 
     <!-- Splash Theme -->
     <style name="Theme.Homelike.Splash" parent="Theme.Homelike.NoActionBar">
-        <!--<item name="android:windowBackground">@color/splash_bg</item>-->
+        <item name="android:windowBackground">@drawable/bg_splash</item>
     </style>
 
     <!-- Translucent Actionbar -->

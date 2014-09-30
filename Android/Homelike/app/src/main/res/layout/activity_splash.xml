@@ -28,14 +28,14 @@
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="29sp"
+                android:textSize="32sp"
                 android:textColor="#e0f2f1"
                 android:text="Home"
                 homelike:typeface="fonts/Roboto-Thin.ttf"/>
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="29sp"
+                android:textSize="32sp"
                 android:textColor="#e0f2f1"
                 android:text="Like"
                 homelike:typeface="fonts/Roboto-Medium.ttf"/>
