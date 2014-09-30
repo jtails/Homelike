@@ -27,6 +27,7 @@ import mx.jtails.homelike.request.InsertOrderRequest;
 import mx.jtails.homelike.request.ListPaymentQuantitiesRequest;
 import mx.jtails.homelike.ui.CheckOrderActivity;
 import mx.jtails.homelike.ui.HomeActivity;
+import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -168,6 +169,9 @@ public class ConfirmOrderFragment extends Fragment
         } else {
             Intent intent = new Intent(this.getActivity(), HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Bundle args = new Bundle();
+            args.putInt(HomeActivity.ARG_HOME_CONTENT_ORD, HomeMenuSection.ORDERS.ordinal());
+            intent.putExtras(args);
             this.getActivity().startActivity(intent);
         }
     }

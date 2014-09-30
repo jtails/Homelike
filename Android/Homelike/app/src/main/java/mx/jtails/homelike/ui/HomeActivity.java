@@ -23,17 +23,31 @@ import mx.jtails.homelike.util.HomelikePreferences;
 public class HomeActivity extends ActionBarActivity
     implements HomeSectionsFragment.OnHomeMenuOptionSelectedListener {
 
+    public static final String ARG_HOME_CONTENT_ORD = "arg_home_content";
+
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+
+    private int mTempHomeSection = -1;
+    private HomeMenuSection mCurrentSection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.validateUserSignedIn();
+        this.loadArguments(this.getIntent().getExtras());
 
         this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_home);
         this.setupActivity();
+    }
+
+    private void loadArguments(Bundle args){
+        if(args == null){
+            return;
+        }
+
+        this.mTempHomeSection = args.getInt(ARG_HOME_CONTENT_ORD, -1);
     }
 
     private void validateUserSignedIn(){
@@ -68,6 +82,17 @@ public class HomeActivity extends ActionBarActivity
         ab.setHomeButtonEnabled(true);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(this.mTempHomeSection < 0){
+            return;
+        }
+
+        this.onHomeMenuOptionSelected(HomeMenuSection.values()[this.mTempHomeSection]);
+        this.mTempHomeSection = -1;
+    }
+
     private void setupNavigationDrawer(){
         this.mDrawerLayout = (DrawerLayout) this.findViewById(R.id.layout_home_drawer);
         this.mDrawerToggle = new ActionBarDrawerToggle(this, this.mDrawerLayout,
@@ -98,6 +123,7 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onHomeMenuOptionSelected(HomeMenuSection option) {
+        this.mCurrentSection = option;
         if(option != HomeMenuSection.ORDERS){
             //HomelikePreferences.saveInt(HomelikePreferences.CURRENT_HOME_SECTION, option.ordinal());
         }
@@ -118,5 +144,14 @@ public class HomeActivity extends ActionBarActivity
                 .replace(R.id.layout_home_content, stackFragment)
                 .addToBackStack("")
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(this.mCurrentSection != HomeMenuSection.SERVICES){
+            this.onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
