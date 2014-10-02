@@ -34,12 +34,12 @@
 
     </LinearLayout>
 
+    <!-- android:background="#455a64" -->
     <ListView
         android:id="@+id/list_home_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@android:color/transparent"
-        android:background="#455a64"/>
+        android:divider="@android:color/transparent"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -51,7 +51,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:paddingRight="10dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="30dp"

@@ -105,6 +105,7 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
 
     private void updateContent(Pedido order){
         this.mOrder = order;
+        this.mLayoutOrderDetails.removeAllViews();
 
         ImageLoader.getInstance().displayImage(this.mOrder.getProveedor().getLogo(),
                 this.mImgProviderLogo, this.mLoaderOptions);

@@ -3,7 +3,9 @@
     xmlns:homelike="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
         android:id="@+id/lbl_comment_title"

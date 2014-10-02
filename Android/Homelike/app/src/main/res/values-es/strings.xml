@@ -99,5 +99,8 @@
     <string name="status_delivered">Entregado</string>
     <string name="status_unknown">Desconocido</string>
     <string name="comment_sent">¡Comentario enviado!</string>
+    <string name="rating">Calificación</string>
+    <string name="rate_provider_message">Califica el desempeño del proveedor</string>
+    <string name="comments_to_provider_hint">Comentarios al proveedor</string>
 
 </resources>

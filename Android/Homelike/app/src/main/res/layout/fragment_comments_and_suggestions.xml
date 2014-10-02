@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
                         homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
-                        android:text="Rating"
+                        android:text="@string/rating"
                         android:textColor="@android:color/white"
                         android:layout_marginLeft="10dp"/>
 
@@ -47,7 +47,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
                         homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
-                        android:text="Califica el desempeño del proveedor"
+                        android:text="@string/rate_provider_message"
                         android:textColor="#ddd"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"/>
@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
                         homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
-                        android:text="Comentarios"
+                        android:text="@string/comments"
                         android:textColor="@android:color/white"
                         android:layout_marginLeft="10dp"/>
 
@@ -101,7 +101,7 @@
                         android:textColor="@android:color/white"
                         android:lines="5"
                         android:textColorHint="#333"
-                        android:hint="Comentarios al cliente"
+                        android:hint="@string/comments_to_provider_hint"
                         android:background="#99ffffff"
                         android:gravity="top|center_horizontal"
                         android:layout_marginTop="10dp"/>
