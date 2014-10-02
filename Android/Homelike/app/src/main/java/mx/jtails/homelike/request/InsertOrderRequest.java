@@ -22,7 +22,6 @@ public class InsertOrderRequest extends HomelikeApiRequest {
 
     private Pedido mOrder;
     private int mAccountId;
-    private Context mContext;
 
     public InsertOrderRequest(HomelikeResponseHandler handler, Context context,
         int accountId, Map<Producto, Integer> rawOrder, Proveedor provider,
@@ -31,7 +30,6 @@ public class InsertOrderRequest extends HomelikeApiRequest {
         this.mEndpoint = new Pedidoendpoint.Builder(HTTP_TRANSPORT,
                 JSON_FACTORY, null).build();
 
-        this.mContext = context;
         this.mAccountId = accountId;
 
         this.mOrder = new Pedido();

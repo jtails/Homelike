@@ -1,8 +1,11 @@
 package mx.jtails.homelike.ui.fragment;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +21,26 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.DetallePedido;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.request.UpdateOrderRequest;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/23/14.
  */
-public class OrderFragment extends Fragment {
+public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpdateOrderResponseHandler {
 
     private Pedido mOrder;
 
     private ViewGroup mLayoutOrderDetails;
     private TextView mLblProviderName;
-    //private TextView mLblProviderRating;
     private RatingBar mRatingProvider;
     private TextView mLblOrderId;
     private ImageView mImgProviderLogo;
     private TextView mLblStatus;
+    private View mFinishButton;
+
+    private ProgressDialog mUpdatingOrder;
 
     private DisplayImageOptions mLoaderOptions;
 
@@ -74,6 +81,20 @@ public class OrderFragment extends Fragment {
         //this.mLblProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
         this.mRatingProvider = (RatingBar) view.findViewById(R.id.rating_provider);
         this.mLblStatus = (TextView) view.findViewById(R.id.lbl_status);
+        this.mFinishButton = view.findViewById(R.id.btn_finish_order);
+        this.mFinishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFinishOrderClicked();
+            }
+        });
+    }
+
+    private void onFinishOrderClicked(){
+        this.mOrder.setStatus(2);
+        this.mUpdatingOrder = ProgressDialog.show(this.getActivity(),
+                this.getString(R.string.updating), this.getString(R.string.wait), false, false);
+        new UpdateOrderRequest(this, this.mOrder).executeAsync();
     }
 
     @Override
@@ -89,13 +110,18 @@ public class OrderFragment extends Fragment {
                 this.mImgProviderLogo, this.mLoaderOptions);
         this.mLblProviderName.setText(this.mOrder.getProveedor().getNombre());
         this.mLblOrderId.setText("ID. " + this.mOrder.getIdPedido());
-        //this.mLblProviderRating.setText("" + (float) this.mOrder.getProveedor().getCalificacion());
         this.mRatingProvider.setRating((float) this.mOrder.getProveedor().getCalificacion());
         this.mLblStatus.setText(HomelikeUtils.getOrderStatusString(this.mOrder.getStatus()));
 
         this.addOrderContent();
         this.addClientComments();
         this.addProviderComments();
+
+        if(this.mOrder.getStatus() != 1){
+            this.mFinishButton.setVisibility(View.GONE);
+        } else {
+            this.mFinishButton.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addOrderContent(){
@@ -139,4 +165,20 @@ public class OrderFragment extends Fragment {
         this.mLayoutOrderDetails.addView(view);
     }
 
+    @Override
+    public void onUpdateOrderResponse(Pedido order) {
+        this.mUpdatingOrder.dismiss();
+        if(order == null){
+            new AlertDialog.Builder(this.getActivity())
+                    .setTitle(R.string.error)
+                    .setMessage(R.string.error_update_order)
+                    .setPositiveButton(R.string.ok, null)
+                    .show();
+        } else {
+            FragmentManager fm = this.getFragmentManager();
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            ((HomeActivity) this.getActivity()).addToStack(
+                    CommentsAndSuggestionsFragment.getInstance(this.mOrder));
+        }
+    }
 }

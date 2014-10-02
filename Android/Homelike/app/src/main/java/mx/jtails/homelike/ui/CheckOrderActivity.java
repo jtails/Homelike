@@ -85,7 +85,9 @@ public class CheckOrderActivity extends ActionBarActivity
 
     private void goToSplash(){
         ((HomelikeApplication) this.getApplication()).logout();
-        this.startActivity(new Intent(this, SplashActivity.class));
+        Intent intent = new Intent(this, SplashActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        this.startActivity(intent);
         this.finish();
     }
 

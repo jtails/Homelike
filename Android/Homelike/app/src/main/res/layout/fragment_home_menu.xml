@@ -4,35 +4,73 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splash_bg"
+    android:background="#607d8b"
     android:clickable="true">
 
-    <RelativeLayout android:id="@+id/layout_me"
+    <LinearLayout android:id="@+id/layout_me"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#33ffffff"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <ImageView android:id="@+id/img_display_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@null"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@null"
+            android:adjustViewBounds="true"/>
 
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:id="@+id/lbl_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/img_display_img"
-            android:layout_margin="10dp"
-            android:gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
             android:textSize="22sp"
+            android:singleLine="true"
             android:textColor="@android:color/white"
-            homelike:typeface="fonts/Roboto-LightItalic.ttf"/>
+            homelike:typeface="fonts/Roboto-LightItalic.ttf"
+            android:layout_marginLeft="10dp"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/list_home_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:background="#455a64"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33ffffff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="@null"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_menu_comments"
+            android:layout_gravity="center_vertical"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            homelike:typeface="fonts/Roboto-Regular.ttf"
+            android:textSize="18sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:text="@string/comments_and_suggestions"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

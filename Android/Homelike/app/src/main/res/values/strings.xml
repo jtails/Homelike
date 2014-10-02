@@ -11,6 +11,7 @@
     <string name="home_orders">Orders</string>
     <string name="home_my_addresses">My Addresses</string>
     <string name="no_username">No user name</string>
+    <string name="comments_and_suggestions">Comments and Suggestions</string>
 
     <!-- Dialogs -->
     <string name="ok">OK</string>
@@ -21,6 +22,7 @@
     <string name="reselect">Reselect</string>
     <string name="leave">Leave</string>
     <string name="discard">Discard</string>
+    <string name="sending">Sending</string>
 
     <!-- Errors -->
     <string name="error">Error</string>
@@ -31,6 +33,7 @@
     <string name="error_field_validation">The following fields are required to continue with registration: \n</string>
     <string name="error_register_address">Failed to register address, try again later</string>
     <string name="error_registered_account">The account was already registered with other device</string>
+    <string name="error_update_order">Failed to update order status. Try again later.</string>
 
     <!-- Create Account -->
     <string name="register_account">Register Account</string>
@@ -40,6 +43,8 @@
     <string name="wrong_field">Wrong Field</string>
     <string name="registering_account">Registering account…</string>
     <string name="signing_in">Signing in…</string>
+    <string name="updating">Updating</string>
+    <string name="send">Send</string>
 
     <!-- Order -->
     <string name="confirm_order">Confirm Order</string>
@@ -59,6 +64,7 @@
     <string name="your_orders">Your orders</string>
     <string name="preparing_order">Preparing new order…</string>
     <string name="payment_quantity">Payment Quantity</string>
+    <string name="comments_hint">Comments to the provider like payment quantity</string>
 
     <!-- Address -->
     <string name="location">Location</string>
@@ -84,6 +90,7 @@
         Do you want to use your favourite address for the new order:\n\n%s.
     </string>
     <string name="change_address">Change Address</string>
+    <string name="kind_of_service">What kind of service do you want?</string>
 
     <!-- Order Status -->
     <string name="status_new">New Order</string>
@@ -91,6 +98,6 @@
     <string name="status_delivered">Delivered</string>
     <string name="status_unknown">Status Unknown</string>
     <string name="comments">Comments</string>
-    <string name="comments_hint">Comments to the provider like payment quantity</string>
+    <string name="comment_sent">Comment sent!</string>
 
 </resources>

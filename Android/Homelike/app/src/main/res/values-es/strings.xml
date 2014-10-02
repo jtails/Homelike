@@ -11,6 +11,7 @@
     <string name="home_orders">Pedidos</string>
     <string name="home_my_addresses">Mis Direcciones</string>
     <string name="no_username">Sin Nombre</string>
+    <string name="comments_and_suggestions">Comentarios y Sugerencias</string>
 
     <!-- Dialogs -->
     <string name="ok">OK</string>
@@ -22,6 +23,9 @@
     <string name="leave">Salir</string>
     <string name="discard">Descartar</string>
     <string name="wait">Por favor espere…</string>
+    <string name="updating">Actualizando</string>
+    <string name="send">Enviar</string>
+    <string name="sending">Enviando</string>
 
     <!-- Errors -->
     <string name="error">Error</string>
@@ -31,7 +35,8 @@
     <string name="error_retrieving_location">No se encontraron datos de la ubicación que seleccionaste. ¿Deseas continuar?</string>
     <string name="error_field_validation">Los siguientes campos son necesarios para continuar con el registro de la dirección: \n</string>
     <string name="error_register_address">Error al guardar tu dirección. Intentar de nuevo más tarde.</string>
-    <string name="error_registered_account">La cuanta ya ha sido registrada con otro dispositivo</string>
+    <string name="error_registered_account">La cuenta ya ha sido registrada con otro dispositivo</string>
+    <string name="error_update_order">Error al actualizar el estado del pedido. Intenta de nuevo más tarde.</string>
 
     <!-- Create Account -->
     <string name="register_account">Registrar Cuenta</string>
@@ -86,11 +91,13 @@
         ¿Quieres usar tu dirección favorita para el nuevo pedido?\n\n%s.
     </string>
     <string name="change_address">Cambiar Dirección</string>
+    <string name="kind_of_service">¿Qué tipo de servicio deseas pedir?</string>
 
     <!-- Order Status -->
     <string name="status_new">Nuevo Pedido</string>
     <string name="status_confirmed">Confirmado</string>
     <string name="status_delivered">Entregado</string>
     <string name="status_unknown">Desconocido</string>
+    <string name="comment_sent">¡Comentario enviado!</string>
 
 </resources>

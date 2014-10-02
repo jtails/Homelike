@@ -145,13 +145,4 @@ public class HomeActivity extends ActionBarActivity
                 .addToBackStack("")
                 .commit();
     }
-
-    @Override
-    public void onBackPressed() {
-        if(this.mCurrentSection != HomeMenuSection.SERVICES){
-            this.onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
-        } else {
-            super.onBackPressed();
-        }
-    }
 }
