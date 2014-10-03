@@ -124,10 +124,11 @@ public class PedidoEndpoint {
 	 * Retorna una lista de Pedidos con comentarios y fecha de comentario de los ultimos 20 pedidos con Status 2
 	 */
 	@ApiMethod(name = "getComentariosPedidosByProveedor",path="getComentariosPedidosByProveedor")
-	public List<Pedido> getComentariosPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
+	public List<Pedido> getComentariosPedidosByProveedor(@Named("idProveedor") int idProveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
-			List<Pedido> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(proveedor,20);
+			List<Pedido> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(idProveedor,20);
+			logger.warning("Numero de Comentarios: "+pedidos.size()+", Proveedor: "+idProveedor+", User: "+user);
 			return pedidos;
 		//}
 		//return null;
@@ -330,15 +331,16 @@ public class PedidoEndpoint {
 			}else{
 				Pedido ppedido=pedidoM.getPedido(Long.valueOf(pedido.getIdPedido()));
 				ppedido.setStatus(pedido.getStatus());
+				Calendar calendar=Calendar.getInstance();
 				if(pedido.getStatus()==1){
 					ppedido.setComentarioProveedor(pedido.getComentarioProveedor());
-					ppedido.setFechaHoraAceptacion(pedido.getFechaHoraAceptacion());
+					ppedido.setFechaHoraAceptacion(calendar.getTime());
 					logger.warning("Pedido aceptado proveedor: "+user+" "+pedido.getComentarioEntregaProveedor());
 				}
 				if(pedido.getStatus()==2){
 					ppedido.setComentarioEntregaCliente(pedido.getComentarioEntregaCliente());
 					ppedido.setCalificacion(pedido.getCalificacion());
-					ppedido.setFechaHoraEntrega(pedido.getFechaHoraEntrega());
+					ppedido.setFechaHoraEntrega(calendar.getTime());
 					logger.warning("Pedido entregado cliente: "+user+" "+pedido.getComentarioEntregaCliente());
 				}
 				return pedidoM.updatePedido(ppedido);
