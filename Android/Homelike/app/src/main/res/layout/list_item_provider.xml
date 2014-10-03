@@ -4,13 +4,13 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:padding="5dp">
 
 
     <ImageView android:id="@+id/img_provider_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         android:adjustViewBounds="true"
         android:src="@drawable/ic_homelike_splash_logo"/>
 
@@ -25,10 +25,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:layout_marginLeft="6dp">
+        android:layout_marginLeft="6dp"
+        android:layout_gravity="center_vertical">
 
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_provider_name"
@@ -42,14 +43,6 @@
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/white"/>
 
-            <RatingBar android:id="@+id/rating_provider"
-                style="@style/Widget.Homelike.RatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical"
-                android:isIndicator="true"
-                android:layout_marginLeft="3dp"/>
-
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_provider_slogan"
                 android:layout_width="match_parent"
@@ -61,6 +54,27 @@
                 android:gravity="center_vertical"
                 android:layout_weight="1"
                 android:textColor="@android:color/white"/>
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_provider_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                homelike:typeface="fonts/RobotoCondensed-LightItalic.ttf"
+                android:textSize="16sp"
+                android:layout_marginLeft="3dp"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"/>
+
+            <RatingBar android:id="@+id/rating_provider"
+                style="@style/Widget.Homelike.RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:isIndicator="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

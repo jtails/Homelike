@@ -64,8 +64,9 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
 
         Proveedor provider = this.getItem(position);
         holder.lblProviderName.get().setText(provider.getNombre());
+        holder.lblProviderAddress.get().setText(provider.getCalle() + " #" + provider.getNexterior() + ", "
+                + provider.getColonia() + ", " + provider.getDelegacion());
         holder.lblProviderSlogan.get().setText(provider.getSlogan());
-        //holder.lblRating.get().setText(String.valueOf((float) provider.getCalificacion()));
         holder.ratingProvider.get().setRating((float) provider.getCalificacion());
         ImageLoader.getInstance().displayImage(
                 provider.getLogo(), holder.imgProviderLogo.get(), this.loaderOptions);
@@ -88,20 +89,20 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
         private WeakReference<ImageView> imgProviderLogo;
         private WeakReference<TextView> lblProviderName;
         private WeakReference<TextView> lblProviderSlogan;
+        private WeakReference<TextView> lblProviderAddress;
         private WeakReference<RatingBar> ratingProvider;
-        //private WeakReference<TextView> lblRating;
 
         public ViewHolder(View view) {
             this.lblProviderName = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_provider_name));
+            this.lblProviderAddress = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_provider_address));
             this.lblProviderSlogan = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_provider_slogan));
             this.imgProviderLogo = new WeakReference<ImageView>(
                     (ImageView) view.findViewById(R.id.img_provider_logo));
             this.ratingProvider = new WeakReference<RatingBar>(
                     (RatingBar) view.findViewById(R.id.rating_provider));
-            //this.lblRating = new WeakReference<TextView>(
-              //      (TextView) view.findViewById(R.id.lbl_rating));
         }
     }
 }
