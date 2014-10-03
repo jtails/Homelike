@@ -56,11 +56,18 @@
 						<h1>
 							<a href="#">Home<span class="bold">Like</span></a>
 						</h1>
+						
 					  </div>
 					</div>
 					<div class="col-md-8 col-sm-9">
+					 <div class="pull-right">
+					 	<h4><a href="#">Ingrese ahora mismo</a></h4>
+						<button type="button" class="btn btn-info btn-sm" id="loginp" name="loginp" disabled>Cargando ...</button>
+						<button type="button" class="btn btn-info btn-sm" id="loginc" name="loginc" disabled>Cargando ...</button>
+						</div>
 					</div>
 				</div>
+				
 			</div>
 		</header>
 		<!-- Seperator -->
@@ -115,24 +122,21 @@
 		  <div class="container">
 			<div class="row">
 			  <div class="col-md-4 col-sm-4">
-					<i class="fa fa-cloud"></i>
-					<h5><a href="#">HomeLike</a></h5>
-					<p class="meta">Realiza pedidos de servicios comunes desde la comodidad de tu hogar, o desde cualquier otro lugar donde asi lo desees .</p>
-					<p class="meta">Ubica los proveedores cercanos a tu localizacion de una manera rapida y eficaz y comienza a publicar nuevos pedidos</p>			  
+					<h4><i class="fa fa-location-arrow"></i><a href="#"><b>&iquest;Que es HomeLike?</b></a></h4>
+					<p class="meta" style="text-align:justify">HomeLike es una aplicaci&oacute;n pensada en aquellas personas que buscan realizar pedidos de servicios b&aacute;sicos, tales como Agua, Gas, Servicios de carpinter&iacute;a, tintorer&iacute;a, entre otros desde la comodidad de su hogar.</p>
+					<p class="meta" style="text-align:justify">HomeLike surge mediante la idea de facilitar a los personas el acceso a estos servicios.</p>
+					<p class="meta" style="text-align:justify">Con HomeLike realiza pedidos de servicios comunes desde la comodidad de tu hogar, solo necesitas tener un dispositivo m&oacute;vil o PC con acceso a internet.</p>
+					<p class="meta" style="text-align:justify">Ubica proveedores cercanos a tu ubicaci&oacute;n de manera r&aacute;pida y eficaz</p>			  
 			  </div>
 			  <div class="col-md-4 col-sm-4">
-					<i class="fa fa-gift"></i>
-					<h5><a href="#">HomeLike Multiplataforma</a></h5>
-					<p class="meta">Tenemos para usted una gama de plataformas disponibles desde las cuales podra realizar sus pedidos</p>
-					<p class="meta">Desde la version estandard basada en Web, hast alas versiones moviles para iOS y Android</p>     
+					<h4><a href="#"><b>&iquest;En que dispositivos puede utilizar HomeLike?</b></a></h4>
+					<p class="meta" style="text-align:justify">HomeLike esta pensada y dise&ntilde;ada para funcionar en cualquier dispositivo m&oacute;vil(Android & iOS) con conexi&oacute;n a internet.</p>
+					<p class="meta" style="text-align:justify">Para usuarios tradicionales que cuentan con una PC HomeLike tambi&eacute;n dispone de una versi&oacute;n amigable</p>
 			  </div>
-			  <div class="col-md-4 col-sm-4">
-				<i class="fa fa-home"></i>
-				<h5><a href="#">Ingrese ahora mismo</a></h5>
-				<p class="meta">Si usted es un proveedor ingrese aqui.</p>
-				<button type="button" class="btn btn-info btn-sm" id="loginp" name="loginp" disabled>Cargando ...</button>
-				<p class="meta">Si usted es un cliente ingrese aqui.</p>
-				<button type="button" class="btn btn-info btn-sm" id="loginc" name="loginc" disabled>Cargando ...</button>      
+			  <div class="col-md-4 col-sm-4">				      
+				<h4><a href="#"><b>HomeLike es Gratis</b></a></h4>
+				<p class="meta" style="text-align:justify">HomeLike cuenta con un esquema de negocio que permite darle a nuestros usuarios finales un costo nulo por el uso de la aplicaci&oacute;n,tanto solo requieres disponer de una cuenta de Google(Correo electr&oacute;nico), y listo</p>
+				<p class="meta" style="text-align:justify">HomeLike evoluciona, pronto incluiremos nuevos servicios de uso com&uacute;n para facilitar cada vez mas la vida de nuestros usuarios</p>
 			  </div>
 			</div>
 		  </div>
@@ -142,7 +146,6 @@
 
 
 		<!-- Newsletter ends -->
-		<br></br>
 		<br></br>
 		<!-- Footer starts -->
 		<footer>
@@ -154,15 +157,16 @@
 
 					  <div class="col-md-4">
 						<div class="widget">
-						  <h5>Contacto</h5>
+						  <h5>.:: Contacto ::.</h5>
 						  <hr />
-						  <p>Si usted tiene cualquier duda o inquietud estamos para brindarle el mejor servicio en el telefono y correo a continuacion: </p>
+						  <p>Si usted tiene cualquier duda o inquietud con el uso de esta aplicaci&oacute;n, estamos a sus ordenes para asesorarle.</p>
 						  <hr />
-						  <i class="fa fa-home"></i> &nbsp; Chicago 74,Napoles Benito Juarez,Mexico D.F.
+						  <i class="fa fa-home"></i> &nbsp; Chicago 74,Napoles Benito Ju&aacute;rez, M&eacute;xico D.F.
 						  <hr />
-						  <i class="fa fa-phone"></i> &nbsp; +52-55-21-06-70-45
+						  <i class="fa fa-phone"></i> &nbsp; 55-68-29-8778
+						  <i class="fa fa-phone"></i> &nbsp; +52-55-21-06-7045
 						  <hr />
-						  <i class="fa fa-envelope-o"></i> &nbsp; <a href="mailto:#">soportehomelikeg@jtails.mx</a>
+						  <i class="fa fa-envelope-o"></i> &nbsp; <a href="mailto:#">ramses.bernaldez@jtails.mx</a>
 						  <hr />
 							<div class="social">
 							  <!--<a href="#"><i class="fa fa-facebook facebook"></i></a>
@@ -175,23 +179,24 @@
 
 					  <div class="col-md-4">
 						<div class="widget">
-						  <h5>Acerca de nosotros</h5>
+						  <h5>.:: Acerca de nosotros ::.</h5>
 						  <hr />
-						  <p>HomeLike es un desarrollo propietario de la compania Jtails S.A de C.V, empresa mexicana dedicada al desarrollo de Software para dispositivos moviles en interaccion son servicios en la nube </p>
+						  <p>HomeLike es una aplicaci&oacute;n desarrollada por la compa&ntilde;ia Jtails S.A de C.V, empresa mexicana dedicada al desarrollo de Software para dispositivos m&oacute;viles</p>
 						</div>
 					  </div>
 
 					  <div class="col-md-4">
 						<div class="widget">
-						  <h5>Caracteristicas</h5>
+						  <h5>.:: Caracteristicas ::.</h5>
 						  <hr />
 						  <div class="two-col">
 							<div class="col-left">
 							  <ul>
-								<li><a href="#">Aplicacion para Proveedores y Clientes</a></li>
-								<li><a href="#">Ingrese a cualquier plataforma con su usuario de Google</a></li>
-								<li><a href="#">Interaccion con Mapas</a></li>
-								<li><a href="#">Interaccion con Notificaciones Push</a></li>
+								<li><a href="#">Aplicaci&oacute;n para Proveedores y Clientes</a></li>
+								<li><a href="#">Multiplataforma</a></li>
+								<li><a href="#">Acceso con Google+</a></li>
+								<li><a href="#">Interacci&oacute;n con Google Maps</a></li>
+								<li><a href="#">Interacci&oacute;n con Notificaciones Push</a></li>
 							  </ul>
 							</div>
 							<div class="clearfix"></div>
@@ -203,7 +208,7 @@
 
 					<hr />
 					<!-- Copyright info -->
-					<p class="copy">Copyright &copy; 2014 | <a href="http://jtails.mx">Jtails S.A de C.V</a> - <a href="#">HomeLike</a> </p>
+					<p class="copy">Copyright &copy; 2014 | <a href="http://jtails.mx">Jtails S.A de C.V, Todos los derechos reservados</a> - <a href="#">HomeLike</a> </p>
 			  </div>
 			</div>
 		  <div class="clearfix"></div>
