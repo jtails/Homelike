@@ -119,9 +119,9 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
         this.addProviderComments();
 
         if(this.mOrder.getStatus() != 1){
-            this.mFinishButton.setVisibility(View.GONE);
+            this.mFinishButton.setClickable(false);
         } else {
-            this.mFinishButton.setVisibility(View.VISIBLE);
+            this.mFinishButton.setClickable(true);
         }
     }
 
