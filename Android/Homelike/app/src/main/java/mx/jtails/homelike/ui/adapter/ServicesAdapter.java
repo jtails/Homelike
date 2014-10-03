@@ -9,6 +9,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -21,10 +25,20 @@ import mx.jtails.homelike.api.model.Servicio;
 public class ServicesAdapter extends ArrayAdapter<Servicio> {
 
     private List<Servicio> mServices;
+    private DisplayImageOptions loaderOptions;
 
     public ServicesAdapter(Context context, List<Servicio> services){
         super(context, R.layout.list_item_service, services);
         this.mServices = services;
+        this.loaderOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.ic_homelike_splash_logo)
+                .showImageForEmptyUri(R.drawable.ic_homelike_splash_logo)
+                .showImageOnFail(R.drawable.ic_homelike_splash_logo)
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .cacheInMemory(false)
+                .cacheOnDisk(true)
+                .displayer(new FadeInBitmapDisplayer(500))
+                .build();
     }
 
     @Override

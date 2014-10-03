@@ -32,7 +32,8 @@
         <activity
             android:name=".ui.HomeActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,16 +43,24 @@
         <activity
             android:name=".ui.SplashActivity"
             android:icon="@drawable/ic_ab_navigation"
-            android:theme="@style/Theme.Homelike.Splash" />
+            android:theme="@style/Theme.Homelike.Splash"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.MyAddressesActivity"
-            android:icon="@drawable/ic_ab_navigation"/>
+            android:icon="@drawable/ic_ab_navigation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.CheckOrderActivity"
-            android:icon="@drawable/ic_ab_navigation" />
+            android:icon="@drawable/ic_ab_navigation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.AddressActivity"
-            android:icon="@drawable/ic_ab_navigation" />
+            android:icon="@drawable/ic_ab_navigation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.CommentsActivity"
+            android:icon="@drawable/ic_ab_navigation"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

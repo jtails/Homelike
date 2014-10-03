@@ -1,6 +1,7 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.ListProvidersRequest;
+import mx.jtails.homelike.ui.CommentsActivity;
 import mx.jtails.homelike.ui.adapter.ProvidersAdapter;
 
 /**
@@ -27,7 +29,8 @@ import mx.jtails.homelike.ui.adapter.ProvidersAdapter;
  */
 public class ProvidersFragment extends Fragment
     implements AdapterView.OnItemClickListener,
-        ListProvidersRequest.ListProvidersResponseHandler {
+        ListProvidersRequest.ListProvidersResponseHandler,
+        ProvidersAdapter.OnShowCommentsClickedListener {
 
     public interface OnProviderSelectedListener {
         public void onProviderSelected(Proveedor proveedor);
@@ -84,7 +87,7 @@ public class ProvidersFragment extends Fragment
         this.mListView = (AbsListView) view.findViewById(R.id.list_providers);
         this.mProgress = (ProgressBar) view.findViewById(R.id.progress_providers);
         this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
-        this.mProvidersAdapter = new ProvidersAdapter(this.getActivity(), this.mProviders);
+        this.mProvidersAdapter = new ProvidersAdapter(this.getActivity(), this, this.mProviders);
 
         this.mListView.setAdapter(this.mProvidersAdapter);
         this.mListView.setOnItemClickListener(this);
@@ -174,6 +177,16 @@ public class ProvidersFragment extends Fragment
         } else {
             this.displayContentMode(ContentDisplayMode.CONTENT_EMPTY);
         }
+    }
+
+    @Override
+    public void onShowCommentsClicked(int position) {
+        Proveedor provider = this.mProvidersAdapter.getItem(position);
+        Intent intent = new Intent(this.getActivity(), CommentsActivity.class);
+        Bundle args = new Bundle();
+        args.putInt(CommentsActivity.ARG_PROVIDER_ID, provider.getIdProveedor());
+        intent.putExtras(args);
+        this.getActivity().startActivity(intent);
     }
 
 }

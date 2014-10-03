@@ -26,12 +26,14 @@ import mx.jtails.homelike.api.model.Proveedor;
 public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
 
     private List<Proveedor> mProviders;
-
+    private OnShowCommentsClickedListener mListener;
     private DisplayImageOptions loaderOptions;
 
-    public ProvidersAdapter(Context context, List<Proveedor> providers){
+    public ProvidersAdapter(Context context, OnShowCommentsClickedListener listener,
+                            List<Proveedor> providers){
         super(context, R.layout.list_item_provider, providers);
         this.mProviders = providers;
+        this.mListener = listener;
         this.loaderOptions = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_homelike_splash_logo)
                 .showImageForEmptyUri(R.drawable.ic_homelike_splash_logo)
@@ -49,7 +51,7 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         ViewHolder holder;
 
@@ -70,6 +72,12 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
         holder.ratingProvider.get().setRating((float) provider.getCalificacion());
         ImageLoader.getInstance().displayImage(
                 provider.getLogo(), holder.imgProviderLogo.get(), this.loaderOptions);
+        holder.layoutComments.get().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onShowCommentsClicked(position);
+            }
+        });
 
         return view;
     }
@@ -91,6 +99,7 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
         private WeakReference<TextView> lblProviderSlogan;
         private WeakReference<TextView> lblProviderAddress;
         private WeakReference<RatingBar> ratingProvider;
+        private WeakReference<View> layoutComments;
 
         public ViewHolder(View view) {
             this.lblProviderName = new WeakReference<TextView>(
@@ -103,6 +112,11 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
                     (ImageView) view.findViewById(R.id.img_provider_logo));
             this.ratingProvider = new WeakReference<RatingBar>(
                     (RatingBar) view.findViewById(R.id.rating_provider));
+            this.layoutComments = new WeakReference<View>(view.findViewById(R.id.layout_comments));
         }
+    }
+
+    public interface OnShowCommentsClickedListener {
+        public void onShowCommentsClicked(int position);
     }
 }
