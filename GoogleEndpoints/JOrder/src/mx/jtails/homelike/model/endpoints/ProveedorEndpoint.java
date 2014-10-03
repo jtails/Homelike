@@ -21,7 +21,7 @@ import javax.inject.Named;
 @Api(name = "proveedorendpoint", 
 namespace = @ApiNamespace(ownerDomain = "jtails.mx", ownerName = "jtails.mx", packagePath = "homelike.model.beans"),
 scopes = {Constants.EMAIL_SCOPE},
-clientIds = {Constants.WEB_CLIENT_ID}
+clientIds = {Constants.WEB_CLIENT_ID,Constants.ANDROID_CLIENT_ID}
 ,audiences = {Constants.ANDROID_AUDIENCE}
 )
 public class ProveedorEndpoint {

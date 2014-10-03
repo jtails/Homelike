@@ -30,8 +30,6 @@
 	    } , message: 'Espere un momento... cargando catalogo de productos' });
 		
 		apisToLoad = 3; // must match number of calls to gapi.client.load()
-		//Cambiar a HTTPS
-		//var ROOT = 'https://homelike-dot-valid-keep-552.appspot.com/_ah/api';
 		//var ROOT = 'http://localhost:8888/_ah/api';
 		var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
 		gapi.client.load('productoendpoint', 'v1',loadCallback, ROOT);

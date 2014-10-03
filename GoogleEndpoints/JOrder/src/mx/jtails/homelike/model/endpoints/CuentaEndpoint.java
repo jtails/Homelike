@@ -2,7 +2,6 @@ package mx.jtails.homelike.model.endpoints;
 
 import mx.jtails.homelike.model.beans.Cuenta;
 import mx.jtails.homelike.model.beans.Direccion;
-import mx.jtails.homelike.model.beans.Dispositivo;
 import mx.jtails.homelike.model.beans.Proveedor;
 import mx.jtails.homelike.model.emanagers.CuentaManager;
 import mx.jtails.homelike.model.emanagers.PedidoManager;
@@ -23,7 +22,7 @@ import javax.inject.Named;
 @Api(name = "cuentaendpoint",
 namespace = @ApiNamespace(ownerDomain = "jtails.mx", ownerName = "jtails.mx", packagePath = "homelike.model.beans"),
 scopes = {Constants.EMAIL_SCOPE},
-clientIds = {Constants.WEB_CLIENT_ID}
+clientIds = {Constants.WEB_CLIENT_ID,Constants.ANDROID_CLIENT_ID}
 ,audiences = {Constants.ANDROID_AUDIENCE}
 )
 public class CuentaEndpoint {

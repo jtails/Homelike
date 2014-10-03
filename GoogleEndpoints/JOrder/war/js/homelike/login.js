@@ -11,8 +11,6 @@
 	
 	//Inside your callback function, load your Endpoint:
 	function init() {
-		//Cambiar a HTTPS
-		//var ROOT = 'https://homelike-dot-valid-keep-552.appspot.com/_ah/api';
 		//var ROOT = 'http://localhost:8888/_ah/api';
 		var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
 		gapi.client.load('oauth2', 'v2', addEvents);
