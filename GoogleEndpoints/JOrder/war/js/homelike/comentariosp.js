@@ -61,7 +61,7 @@ function addComment(pedido){
 	$("#comentariosp").append(
 		"<li class='by-me'>"+
 			"<div class='avatar pull-left'>"+
-				"<img src='img/logo_.png' alt=''>"+
+				"<img src='img/logo_.png' alt='' style='width:50px;height:50px'>"+
 			"</div>"+
 			"<div class='chat-content'>"+
 				"<div class='chat-meta'>"+

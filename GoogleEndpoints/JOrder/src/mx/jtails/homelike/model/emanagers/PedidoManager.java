@@ -124,13 +124,13 @@ public class PedidoManager {
 	}
 	
 	@SuppressWarnings({ "unchecked", "unused" })
-	public List<Pedido> listHistoricoComentariosPedidosByProveedor(Proveedor proveedor,int limit) {
+	public List<Pedido> listHistoricoComentariosPedidosByProveedor(int idProveedor,int limit) {
 		EntityManager mgr = null;
 		Cursor cursor = null;
 		List<Pedido> pedidos = null;
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select Pedido.comentarioEntregaCliente,Pedido.fechaHoraEntrega from Pedido as Pedido where Pedido.proveedor.idProveedor=:idProveedor and Pedido.status=:status").setParameter("idProveedor",proveedor.getIdProveedor()).setParameter("status",2);
+			Query query = mgr.createQuery("select Pedido.comentarioEntregaCliente,Pedido.fechaHoraEntrega from Pedido as Pedido where Pedido.proveedor.idProveedor=:idProveedor and Pedido.status=:status and Pedido.comentarioEntregaCliente IS NOT NULL and Pedido.comentarioEntregaCliente<>''").setParameter("idProveedor",idProveedor).setParameter("status",2);
 			query.setMaxResults(limit);
 			pedidos = (List<Pedido>) query.getResultList();
 		} finally {

@@ -15,7 +15,6 @@ import com.google.appengine.api.users.User;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-
 @Api(name = "sugerenciaspendpoint",
 namespace = @ApiNamespace(ownerDomain = "jtails.mx", ownerName = "jtails.mx", packagePath = "homelike.model.beans"),
 scopes = {Constants.EMAIL_SCOPE},
