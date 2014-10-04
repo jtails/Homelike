@@ -5,6 +5,7 @@ import java.util.List;
 
 import mx.jtails.homelike.api.endpoint.pedidoendpoint.Pedidoendpoint;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.api.model.PedidoCollection;
 
 /**
  * Created by GrzegorzFeathers on 10/2/14.
@@ -22,10 +23,13 @@ public class ListOrderCommentsByProviderRequest extends HomelikeApiRequest {
 
     @Override
     protected Object doRequest() throws Exception {
+        //Proveedor provider = new Proveedor();
+        //provider.setIdProveedor(this.mProviderId);
         Pedidoendpoint.GetComentariosPedidosByProveedor tmpRequest =
-                ((Pedidoendpoint) this.mEndpoint).getComentariosPedidosByProveedor();
-        tmpRequest.put("idProveedor", this.mProviderId);
-        return tmpRequest.execute().getItems();
+                ((Pedidoendpoint) this.mEndpoint).getComentariosPedidosByProveedor(this.mProviderId);
+
+        PedidoCollection collection = tmpRequest.execute();
+        return collection.getItems();
     }
 
     @Override

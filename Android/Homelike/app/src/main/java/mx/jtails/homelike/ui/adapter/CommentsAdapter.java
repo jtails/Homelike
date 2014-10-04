@@ -86,7 +86,7 @@ public class CommentsAdapter extends ArrayAdapter<Pedido> {
                     (TextView) view.findViewById(R.id.lbl_comment_time));
             this.ratingService = new WeakReference<RatingBar>(
                     (RatingBar) view.findViewById(R.id.rating_order));
-            this.lblOrderDate = new WeakReference<TextView>(
+            this.lblComment = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_comment_content));
         }
 

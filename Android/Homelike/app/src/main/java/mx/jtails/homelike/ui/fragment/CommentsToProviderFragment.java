@@ -75,6 +75,7 @@ public class CommentsToProviderFragment extends ListFragment
     @Override
     public void onListCommentsResponse(List<Pedido> orders) {
         this.mAdapter.updateContent(orders);
+        this.getListView().setAdapter(this.mAdapter);
         this.displayContentMode(ContentDisplayMode.CONTENT);
     }
 }
