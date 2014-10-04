@@ -310,7 +310,10 @@ public class PedidoEndpoint {
 				//Obtenemos referencia a los objetos persistidos
 				Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(pedido.getProveedor().getIdProveedor()));
 				Cuenta pcuenta=cuentaM.getCuenta(Long.valueOf(pedido.getCuenta().getIdCuenta()));
-				Dispositivo pdispositivo=dispositivoM.getDispositivo(Long.valueOf(pedido.getDispositivo().getIdDispositivo()));
+				Dispositivo pdispositivo=null;
+				//Para el Caso de la Version Web, se pueden levantar pedidos sin dispositivo asociado
+				if(pedido.getDispositivo()!=null)
+					pdispositivo=dispositivoM.getDispositivo(Long.valueOf(pedido.getDispositivo().getIdDispositivo()));
 				Direccion pdireccion=direccionM.getDireccion(Long.valueOf(pedido.getDireccion().getIdDireccion()));
 				CantidadPago pcantidad=cantidadM.getCantidadPago(Long.valueOf(pedido.getCantidadPago().getIdCantidadPago()));
 		

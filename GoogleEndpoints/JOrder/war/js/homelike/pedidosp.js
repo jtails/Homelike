@@ -49,10 +49,9 @@ google.appengine.homelike.pedidos.list = function(idProveedor){
 			for(var i=0;i<output.items.length;i++){
 				var pedido=output.items[i];
 				var detallePedido=pedido.detallePedido;
-				var dispositivo=pedido.dispositivo;
 				var direccion=pedido.direccion;
 				var proveedor=pedido.proveedor;
-				addRow(pedido,detallePedido,direccion,dispositivo,proveedor);
+				addRow(pedido,detallePedido,direccion,proveedor);
 			}
 			$.unblockUI();
 		}
@@ -71,7 +70,7 @@ google.appengine.homelike.pedidos.update = function(idPedido,comentarioProveedor
 	});
 }
 	
-function addRow(pedido,detallePedido,direccion,dispositivo,proveedor){
+function addRow(pedido,detallePedido,direccion,proveedor){
 	$("#pedidos").append(	
 			"<div class='row'>"+
 				"<div class='col-md-12'>"+
@@ -179,7 +178,7 @@ function addRow(pedido,detallePedido,direccion,dispositivo,proveedor){
 			"<li>"+
 				"<i class='fa fa-sign-in'></i>"+
 				"<strong>Alias : </strong>"+
-				dispositivo.alias+
+				direccion.alias+
 			"</li>"+
 			"<li>"+
 				"<i class='fa fa-sign-in'></i>"+

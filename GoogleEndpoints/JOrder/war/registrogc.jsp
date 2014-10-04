@@ -66,36 +66,6 @@
                                               <input type="text" class="form-control" id="telefono" name="telefono" value="${sessionScope.cuenta.telefono}">
                                             </div>
                                           </div>
-                                          <div class="form-group">
-                                            <label class="control-label col-lg-3" for="name">Plataforma</label>
-                                            <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="plataforma" name="plataforma" value="${sessionScope.dispositivo.plataforma}">
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="control-label col-lg-3" for="name">Gcm ID</label>
-                                            <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="gcmid" name="gcmid" value="${sessionScope.dispositivo.gcmid}">
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="control-label col-lg-3" for="name">IMEI</label>
-                                            <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="imei" name="imei" value="${sessionScope.dispositivo.imei}">
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="control-label col-lg-3" for="name">Modelo Dispositivo</label>
-                                            <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="modelo" name="modelo" value="${sessionScope.dispositivo.modelo}">
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="control-label col-lg-3" for="name">Tipo Dispositivo</label>
-                                            <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="tipo" name="tipo" value="${sessionScope.dispositivo.tipoDispositivo}">
-                                            </div>
-                                          </div>                                           
                                           <!-- Username -->
                                           <div id="message">
         								  </div>
@@ -103,7 +73,6 @@
                                           <div class="form-group">
                                             <div class="col-lg-9 col-lg-offset-3">
                                               <input type="hidden" id="opcion" name="opcion" value="registrodc"/>
-                                              <input type="hidden" id="idDispositivo" name="idDispositivo" value="${sessionScope.dispositivo.idDispositivo}"/>
                                               <button type="reset" class="btn btn-sm btn-default">Reset</button>
                                               <button type="submit" class="btn btn-sm btn-info" name="btnenviar" id="btnenviar">Siguiente</button>
                                             </div>

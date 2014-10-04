@@ -85,7 +85,7 @@ public class PedidoManager {
 		List<Pedido> pedidos = null;
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from Pedido as Pedido where Pedido.cuenta.idCuenta=:idCuenta and Pedido.status=:status").setParameter("idCuenta",cuenta.getIdCuenta()).setParameter("status",2);
+			Query query = mgr.createQuery("select from Pedido as Pedido where YEAR(Pedido.fechaHoraPedido)=YEAR(:fechaHoraUltimoPedido) and MONTH(Pedido.fechaHoraPedido)=MONTH(:fechaHoraUltimoPedido) and DAY(Pedido.fechaHoraPedido)=DAY(:fechaHoraUltimoPedido) and Pedido.cuenta.idCuenta=:idCuenta and Pedido.status=:status").setParameter("fechaHoraUltimoPedido",cuenta.getFechaHoraUltimoPedido(),TemporalType.TIMESTAMP).setParameter("idCuenta",cuenta.getIdCuenta()).setParameter("status",2);
 			pedidos = (List<Pedido>) query.getResultList();
 		} finally {
 			mgr.close();

@@ -26,7 +26,25 @@ function init() {
 	gapi.client.load('oauth2', 'v2', loadCallback);
 }
 
-google.appengine.homelike.pedidos.list = function(idCuenta){
+
+function addEvents(){
+	$("#modalBox").load("fragments/comentarioshp.jsp");
+	$('#datetimepicker1').datetimepicker({
+		pickTime: false
+	}).on('changeDate',function(ev){
+		$("#tblPedidos").empty();
+		$('#datetimepicker1').datetimepicker("hide");
+		var split=$("#fecha").val().split("-");
+		//months from 0 to 11 JavaScript
+		var date=new Date(split[0],split[1]-1,split[2],0,0,0,0);
+		google.appengine.homelike.pedidos.list(
+			document.querySelector('#idCuenta').value,
+			date
+		)
+	});
+}
+
+google.appengine.homelike.pedidos.list = function(idCuenta,fechaHoraUltimoPedido){
 	$.blockUI({ css: { 
         border: 'none', 
         padding: '15px', 
@@ -37,7 +55,7 @@ google.appengine.homelike.pedidos.list = function(idCuenta){
         color: '#fff' 
     } , message: 'Espere un momento... cargando historico de pedidos' });
 	
-	gapi.client.pedidoendpoint.listHistoricoPedidosByCuenta({'idCuenta': idCuenta}).execute(
+	gapi.client.pedidoendpoint.listHistoricoPedidosByCuenta({'idCuenta': idCuenta,'fechaHoraUltimoPedido': fechaHoraUltimoPedido}).execute(
 	function(output){
 		output.items = output.items || [];
 		for(var i=0;i<output.items.length;i++){
@@ -61,18 +79,40 @@ google.appengine.homelike.pedidos.list = function(idCuenta){
 
 function addRow(style,pedido,detallePedido,direccion,proveedor){
 	var total=0;
+	var dpedido="";
 	for(var i=0;i<detallePedido.length;i++){
 		total+=detallePedido[i].producto.costoUnitario*detallePedido[i].cantidad;
+		dpedido+="<strong>"+detallePedido[i].cantidad+"</strong> "+detallePedido[i].producto.cproducto.descripcion+" "+detallePedido[i].producto.cproducto.presentacion+",";
 	}
 	$("#tblPedidos").append(
 		"<tr class='"+style+"'>"+
 			"<td class='  sorting_1'>"+pedido.idPedido+"</td>"+
-			"<td class=' '>"+direccion.calle+" "+direccion.colonia+" "+direccion.delegacion+"</td>"+
+			"<td class=' '>"+direccion.calle+" "+direccion.nexterior+", "+direccion.ninterior+" "+direccion.colonia+" "+direccion.delegacion+" "+direccion.cp+" "+direccion.estado+"</td>"+
 			"<td class=' '>"+proveedor.nombre+"</td>"+
-			"<td class=' '>"+total+"</td>"+
-			"<td class=' '>"+pedido.fechaHoraPedido+"</td>"+
+			"<td class=' '>$ "+total+"</td>"+
+			"<td class=' '>"+dpedido+"</td>"+
+			"<td class=' '>"+
+				"<a href='#modalBox' data-toggle='modal' id='comentarios-"+pedido.idPedido+"' title='Comentarios' style='cursor: pointer'>"+
+					"<div class='rateit' data-rateit-value='"+pedido.calificacion+"' data-rateit-resetable='false' data-rateit-readonly='true' data-rateit-step='1'></div>"+
+				"</a>"+
+			"</td>"+
 		"</tr>"
 	);
+	$(".rateit").rateit();
+	$("#comentarios-"+pedido.idPedido).click(function(){
+		//Primero limpiamos los comentarios ya que el Modal Box es Generico
+		$("#comentarioCliente").text((pedido.comentarioCliente!=undefined)?pedido.comentarioCliente:"");
+		$("#comentarioProveedor").text((pedido.comentarioProveedor!=undefined)?pedido.comentarioProveedor:"");
+		$("#comentarioEntregaCliente").text((pedido.comentarioEntregaCliente!=undefined)?pedido.comentarioEntregaCliente:"");
+		$("#comentarioEntregaProveedor").text((pedido.comentarioEntregaProveedor!=undefined)?pedido.comentarioEntregaProveedor:"");
+		if(pedido.fechaHoraPedido!=undefined && pedido.fechaHoraPedido!='')
+			$("#fechaHoraPedido").text(new Date(pedido.fechaHoraPedido).toLocaleDateString()+" "+new Date(pedido.fechaHoraPedido).toLocaleTimeString());
+		if(pedido.fechaHoraAceptacion!=undefined && pedido.fechaHoraAceptacion!='')
+			$("#fechaHoraAceptacion").text(new Date(pedido.fechaHoraAceptacion).toLocaleDateString()+" "+new Date(pedido.fechaHoraAceptacion).toLocaleTimeString());
+		if(pedido.fechaHoraEntrega!=undefined && pedido.fechaHoraEntrega!='')
+			$("#fechaHoraEntrega").text(new Date(pedido.fechaHoraEntrega).toLocaleDateString()+" "+new Date(pedido.fechaHoraEntrega).toLocaleTimeString());
+	});
+	
 }
 
 
@@ -91,8 +131,10 @@ function userAuthed() {
 	    if(output!=undefined && output.verified_email!=undefined){
 	    	if(output.verified_email){
 	    		google.appengine.homelike.pedidos.list(
-	    			document.querySelector('#idCuenta').value
+	    			document.querySelector('#idCuenta').value,
+	    			new Date()
 	    		);
+	    		addEvents();
 	    	}
 	    }else{
 	    	alert('No Login');

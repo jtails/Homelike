@@ -33,7 +33,7 @@
 	 * param {Object} to print.
 	 */
 	google.appengine.homelike.cuenta.setCuenta = function(output) {
-		if(output.dispositivos[0].status!=-1){
+		if(output.status!=-1){
 			$("#idCuenta").val(output.idCuenta);
 			$.ajax({type: 'post',
 				url: 'cliente',
@@ -57,6 +57,7 @@
 				google.appengine.homelike.cuenta.insert(
 					document.querySelector('#idCuenta').value,
 					document.querySelector('#telefono').value,
+					document.querySelector('#usuario').value,
 					document.querySelector('#idDireccion').value,
 					document.querySelector('#latitud').value,
 					document.querySelector('#longitud').value,
@@ -71,14 +72,7 @@
 					document.querySelector('#delegacion').value,
 					document.querySelector('#cp').value,
 					document.querySelector('#estado').value,
-					document.querySelector('#pais').value,
-					document.querySelector('#idDispositivo').value,
-					document.querySelector('#gcmid').value,
-					document.querySelector('#imei').value,
-					document.querySelector('#modelo').value,
-					document.querySelector('#usuario').value,
-					document.querySelector('#plataforma').value,
-					document.querySelector('#tipo').value
+					document.querySelector('#pais').value
 				);
 			}else{
 				$("#message").addClass("alert alert-warning"); 
@@ -89,18 +83,15 @@
 	}
 	
 	google.appengine.homelike.cuenta.insert = function(
-			idCuenta,telefono,idDireccion,latitud,longitud,calle1,calle2,referencia1,referencia2,
-			calle,numeroe,numeroi,colonia,delegacion,cp,estado,pais,idDispositivo,
-			gcmid,imei,modelo,usuario,plataforma,tipo){
+			idCuenta,telefono,usuario,idDireccion,latitud,longitud,calle1,calle2,referencia1,referencia2,
+			calle,numeroe,numeroi,colonia,delegacion,cp,estado,pais){
 		gapi.client.cuentaendpoint.insertCuenta({'idCuenta': idCuenta,'telefono': telefono,'usuario': usuario,
 														'direcciones': [{'idDireccion':idDireccion,'calle': calle,'nexterior': numeroe,'ninterior': numeroi,
 														'colonia': colonia,'delegacion': delegacion,
 														'cp': cp,'estado': estado,'pais': pais,
 														'calle1': calle1,'calle2': calle2,
 														'referencia1': referencia1,'referencia2': referencia2,
-														'latitud': latitud,'longitud': longitud}],
-														'dispositivos': [{'idDispositivo': idDispositivo,'gcmid': gcmid,'imei' : imei,'modelo': modelo,
-														'tipoDispositivo': tipo,'plataforma': plataforma}]}).execute(
+														'latitud': latitud,'longitud': longitud}]}).execute(
 		function(output) {
 			    google.appengine.homelike.cuenta.setCuenta(output);
 		});

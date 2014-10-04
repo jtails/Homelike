@@ -13,10 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import mx.jtails.homelike.model.beans.Cuenta;
 import mx.jtails.homelike.model.beans.Direccion;
-import mx.jtails.homelike.model.beans.Dispositivo;
-import mx.jtails.homelike.model.beans.Proveedor;
-import mx.jtails.homelike.model.beans.Servicio;
-import mx.jtails.homelike.model.emanagers.DispositivoManager;
 
 public class CuentaServlet extends HttpServlet{
 	public void init(ServletConfig config) throws ServletException {
@@ -42,13 +38,11 @@ public class CuentaServlet extends HttpServlet{
 		if(opcion.equalsIgnoreCase("registrodc")){
 			cuenta=cuenta(request,cuenta);
 			session.setAttribute("cuenta",cuenta);
-			session.setAttribute("dispositivo",cuenta.getDispositivos().get(0));
 			request.getRequestDispatcher("registrodc.jsp").forward(request,response);
 		}else{
 			if(opcion.equalsIgnoreCase("registroc")){
 				cuenta=cuenta2(request,cuenta);
 				session.setAttribute("cuenta",cuenta);
-				session.setAttribute("dispositivo",cuenta.getDispositivos().get(0));
 				session.setAttribute("direccion",cuenta.getDirecciones().get(0));
 				request.getRequestDispatcher("registroc.jsp").forward(request,response);
 			}
@@ -56,31 +50,11 @@ public class CuentaServlet extends HttpServlet{
 	}
 	
 	private Cuenta cuenta(HttpServletRequest request,Cuenta cuenta){
-		String telefono=request.getParameter("telefono");
-		String plataforma=request.getParameter("plataforma");
-		String gcmid=request.getParameter("gcmid");
-		String imei=request.getParameter("imei");
-		String modelo=request.getParameter("modelo");
-		String tipo=request.getParameter("tipo");
 		String usuario=request.getParameter("usuario");
+		String telefono=request.getParameter("telefono");
 		
 		cuenta.setTelefono(telefono);
 		cuenta.setUsuario(usuario);
-		List<Dispositivo> dispositivos=cuenta.getDispositivos();
-		Dispositivo dispositivo=null;
-		if(dispositivos!=null)//El dispositivo ya se encuentra en session
-			dispositivo=dispositivos.get(0);
-		else{
-			dispositivos=new ArrayList<Dispositivo>();
-			dispositivo=new Dispositivo();
-			dispositivos.add(dispositivo);
-		}
-		dispositivo.setPlataforma(plataforma);
-		dispositivo.setGcmid(gcmid);
-		dispositivo.setImei(imei);
-		dispositivo.setModelo(modelo);
-		dispositivo.setTipoDispositivo(tipo);
-		cuenta.setDispositivos(dispositivos);
 		return cuenta;
 	}
 	

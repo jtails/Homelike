@@ -54,7 +54,6 @@ public class PanelCServlet extends HttpServlet{
 		Cuenta pcuenta=cuentaM.getCuentaByUser(cuenta);
 		if(pcuenta!=null){
 			HttpSession session=request.getSession();
-			session.setAttribute("dispositivo",pcuenta.getDispositivos().get(0));
 			session.setAttribute("cuenta",pcuenta);//Para facilitar uso de Datos en JSP
 			session.setAttribute("direccion",pcuenta.getDirecciones().get(0));//Para facilitar uso de Datos en JSP
 			session.setAttribute("isLoginC",true);

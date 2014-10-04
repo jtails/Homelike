@@ -49,14 +49,8 @@
  
  <form class="form-horizontal" action="cliente" method="POST" onsubmit="return false;" id="form">
 	<input type="hidden" id="idCuenta" name="idCuenta" value="${sessionScope.cuenta.idCuenta}">
-	<input type="hidden" id="telefono" name="telefono" value="${sessionScope.cuenta.telefono}">
-	<input type="hidden" id="idDispositivo" name="idDispositivo" value="${sessionScope.dispositivo.idDispositivo}">
-	<input type="hidden" id="plataforma" name="plataforma" value="${sessionScope.dispositivo.plataforma}">
-	<input type="hidden" id="gcmid" name="gcmid" value="${sessionScope.dispositivo.gcmid}">
-	<input type="hidden" id="imei" name="imei" value="${sessionScope.dispositivo.imei}">
-	<input type="hidden" id="modelo" name="modelo" value="${sessionScope.dispositivo.modelo}">
-	<input type="hidden" id="tipo" name="tipo" value="${sessionScope.dispositivo.tipoDispositivo}">
 	<input type="hidden" id="usuario" name="usuario" value="${sessionScope.cuenta.usuario}">
+	<input type="hidden" id="telefono" name="telefono" value="${sessionScope.cuenta.telefono}">
 
 	<input type="hidden" id="idDireccion" name="idDireccion" value="${sessionScope.direccion.idDireccion}">
 	<input type="hidden" id="calle" name="calle" value="${sessionScope.direccion.calle}">

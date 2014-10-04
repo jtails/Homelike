@@ -45,8 +45,8 @@ public class CuentaEndpoint {
 		
 			//Validamos que el nombre de Usuario no este registrado
 			//La primer clausula del if es la condicion que cubre el caso del update de la cuenta
-			if(cuenta.getDispositivos().get(0).getIdDispositivo()==0 && cuentaM.getCuentaByUser(cuenta)!=null){
-				cuenta.getDispositivos().get(0).setStatus(-1);//-1 Nombre de Usuario existente
+			if(cuenta.getDirecciones().get(0).getIdDireccion()==0 && cuentaM.getCuentaByUser(cuenta)!=null){
+				cuenta.setStatus(-1);//-1 Nombre de Usuario existente
 				logger.warning("Cuenta existente,regresando error : "+user);
 				return cuenta;
 			}

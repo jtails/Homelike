@@ -45,8 +45,7 @@
 				for(var i=0;i<output.items.length;i++){
 					var cuenta=output.items[i];
 					var direccion=cuenta.direcciones[0];
-					var dispositivo=cuenta.dispositivos[0];
-					setMarker(direccion.latitud,direccion.longitud,dispositivo.alias,cuenta.numPedidos);
+					setMarker(direccion.latitud,direccion.longitud,direccion.alias,cuenta.numPedidos);
 				}
 				$.unblockUI();
 			}else{
