@@ -47,8 +47,7 @@ public class Dispositivo implements Serializable {
 
 	
 
-	@Transient
-	private int status;
+
 
 	@Column(name="tipo_dispositivo")
 	private String tipoDispositivo;
@@ -130,14 +129,6 @@ public class Dispositivo implements Serializable {
 
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 
 }

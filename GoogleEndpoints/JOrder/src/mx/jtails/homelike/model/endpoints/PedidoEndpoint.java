@@ -127,9 +127,16 @@ public class PedidoEndpoint {
 	public List<Pedido> getComentariosPedidosByProveedor(@Named("idProveedor") int idProveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
-			List<Pedido> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(idProveedor,20);
+			List<Object[]> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(idProveedor,20);
+			List<Pedido> pedidosJ=new ArrayList<Pedido>();
 			logger.warning("Numero de Comentarios: "+pedidos.size()+", Proveedor: "+idProveedor+", User: "+user);
-			return pedidos;
+			for(Object[] pedido:pedidos){
+				Pedido p=new Pedido();
+				p.setComentarioEntregaCliente((String)pedido[0]);
+				p.setFechaHoraEntrega((java.util.Date) pedido[1]);
+				pedidosJ.add(p);
+			}
+			return pedidosJ;
 		//}
 		//return null;
 	}
@@ -310,7 +317,10 @@ public class PedidoEndpoint {
 				//Obtenemos referencia a los objetos persistidos
 				Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(pedido.getProveedor().getIdProveedor()));
 				Cuenta pcuenta=cuentaM.getCuenta(Long.valueOf(pedido.getCuenta().getIdCuenta()));
-				Dispositivo pdispositivo=dispositivoM.getDispositivo(Long.valueOf(pedido.getDispositivo().getIdDispositivo()));
+				Dispositivo pdispositivo=null;
+				//Para el Caso de la Version Web, se pueden levantar pedidos sin dispositivo asociado
+				if(pedido.getDispositivo()!=null)
+					pdispositivo=dispositivoM.getDispositivo(Long.valueOf(pedido.getDispositivo().getIdDispositivo()));
 				Direccion pdireccion=direccionM.getDireccion(Long.valueOf(pedido.getDireccion().getIdDireccion()));
 				CantidadPago pcantidad=cantidadM.getCantidadPago(Long.valueOf(pedido.getCantidadPago().getIdCantidadPago()));
 		

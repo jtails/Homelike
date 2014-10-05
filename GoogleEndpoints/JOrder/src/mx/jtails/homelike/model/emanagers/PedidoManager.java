@@ -85,7 +85,7 @@ public class PedidoManager {
 		List<Pedido> pedidos = null;
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from Pedido as Pedido where Pedido.cuenta.idCuenta=:idCuenta and Pedido.status=:status").setParameter("idCuenta",cuenta.getIdCuenta()).setParameter("status",2);
+			Query query = mgr.createQuery("select from Pedido as Pedido where YEAR(Pedido.fechaHoraPedido)=YEAR(:fechaHoraUltimoPedido) and MONTH(Pedido.fechaHoraPedido)=MONTH(:fechaHoraUltimoPedido) and DAY(Pedido.fechaHoraPedido)=DAY(:fechaHoraUltimoPedido) and Pedido.cuenta.idCuenta=:idCuenta and Pedido.status=:status").setParameter("fechaHoraUltimoPedido",cuenta.getFechaHoraUltimoPedido(),TemporalType.TIMESTAMP).setParameter("idCuenta",cuenta.getIdCuenta()).setParameter("status",2);
 			pedidos = (List<Pedido>) query.getResultList();
 		} finally {
 			mgr.close();
@@ -124,15 +124,15 @@ public class PedidoManager {
 	}
 	
 	@SuppressWarnings({ "unchecked", "unused" })
-	public List<Pedido> listHistoricoComentariosPedidosByProveedor(int idProveedor,int limit) {
+	public List<Object[]> listHistoricoComentariosPedidosByProveedor(int idProveedor,int limit) {
 		EntityManager mgr = null;
 		Cursor cursor = null;
-		List<Pedido> pedidos = null;
+		List pedidos = null;
 		try {
 			mgr = getEntityManager();
 			Query query = mgr.createQuery("select Pedido.comentarioEntregaCliente,Pedido.fechaHoraEntrega from Pedido as Pedido where Pedido.proveedor.idProveedor=:idProveedor and Pedido.status=:status and Pedido.comentarioEntregaCliente IS NOT NULL and Pedido.comentarioEntregaCliente<>''").setParameter("idProveedor",idProveedor).setParameter("status",2);
 			query.setMaxResults(limit);
-			pedidos = (List<Pedido>) query.getResultList();
+			pedidos = (List<Object[]>) query.getResultList();
 		} finally {
 			mgr.close();
 		}

@@ -45,7 +45,6 @@
 					document.querySelector('#idProveedor').value,
 					document.querySelector('#idDireccion').value,
 					document.querySelector('#idCuenta').value,
-					document.querySelector('#idDispositivo').value,
 					dpedidoJson,
 					document.querySelector('#comentarioCliente').value,
 					document.querySelector('#cantidadPago').value
@@ -78,8 +77,8 @@
 	
 	
 	google.appengine.homelike.pedidos.insert = function(
-			idProveedor,idDireccion,idCuenta,idDispositivo,dpedidoJson,comentarioCliente,cantidadPago){
-		gapi.client.pedidoendpoint.insertPedido({'proveedor': {'idProveedor': idProveedor},'direccion': {'idDireccion': idDireccion},'cuenta': {'idCuenta': idCuenta},'dispositivo': {'idDispositivo': idDispositivo},'detallePedido': dpedidoJson,'comentarioCliente': comentarioCliente,'cantidadPago': {'idCantidadPago': cantidadPago}}).execute(
+			idProveedor,idDireccion,idCuenta,dpedidoJson,comentarioCliente,cantidadPago){
+		gapi.client.pedidoendpoint.insertPedido({'proveedor': {'idProveedor': idProveedor},'direccion': {'idDireccion': idDireccion},'cuenta': {'idCuenta': idCuenta},'detallePedido': dpedidoJson,'comentarioCliente': comentarioCliente,'cantidadPago': {'idCantidadPago': cantidadPago}}).execute(
 		function(output) {
 			//if(output.status!=-1){
 			//	  $("#idProveedor").val(output.idProveedor);

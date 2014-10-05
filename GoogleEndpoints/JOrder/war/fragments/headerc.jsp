@@ -17,7 +17,7 @@
 		<!-- Logo. -->
 		<div class="logo">
 			<h1>
-				<a href="#">Home<span class="bold">like</span></a>
+				<a href="#">Home<span class="bold">Like</span></a>
 			</h1>
 			<p class="meta">Maxima comodidad</p>
 		</div>
@@ -30,8 +30,7 @@
 		<input type="hidden" id="idServicio" name="idServicio" value="0">
 		<input type="hidden" id="idProveedor" name="idProveedor" value="0">
 		<input type="hidden" id="idDireccion" name="idDireccion" value="${sessionScope.direccion.idDireccion}"> 
-		<input type="hidden" id="idCuenta" name="idCuenta" value="${sessionScope.cuenta.idCuenta}"> 
-		<input type="hidden" id="idDispositivo" name="idDispositivo" value="${sessionScope.dispositivo.idDispositivo}"> 
+		<input type="hidden" id="idCuenta" name="idCuenta" value="${sessionScope.cuenta.idCuenta}">  
 		<input type="hidden" id="latitud" name="latitud" value="${sessionScope.direccion.latitud}"> 
 		<input type="hidden" id="longitud" name="longitud" value="${sessionScope.direccion.longitud}">
 	</div>

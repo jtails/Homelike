@@ -113,9 +113,10 @@
             <div id="hoverdata">
                Latitud - Longitud  (<span id="lat">0</span>,<span id="lng">0</span>). <span id="clickdata"></span>
             </div>  
+            <a href='#modalBox' data-toggle='modal' style='cursor: pointer'>Aviso de Privacidad</a>
             <div class="checkbox">
             	<label>
-                	<input type="checkbox"> Accept Terms &amp; Conditions
+                	<input type="checkbox" id="contrato"> Acepto Terminos y Condiciones
                 </label>
 			</div>
             <div style="text-align:right;">
@@ -131,6 +132,25 @@
   </div>
 </div>
 </div>
+
+
+<div id="modalBox" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"
+				aria-hidden="true">x</button>
+			<h4 class="modal-title">Aviso de Privacidad</h4>
+		</div>
+		<div class="modal-body">
+			<embed src="http://homelike.com.mx/docs/AvisodePrivacidad.pdf" width="550" height="750"></embed>
+		</div>
+	</div>
+</div>
+</div>
+
+
    
   </body>
 </html>

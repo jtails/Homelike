@@ -41,6 +41,20 @@ public class Cuenta implements Serializable {
 
 	@Transient
 	private int numPedidos;
+	
+	@Transient
+	private int status;
+	
+	@Transient 
+	private Date fechaHoraUltimoPedido;
+
+	public Date getFechaHoraUltimoPedido() {
+		return fechaHoraUltimoPedido;
+	}
+
+	public void setFechaHoraUltimoPedido(Date fechaHoraUltimoPedido) {
+		this.fechaHoraUltimoPedido = fechaHoraUltimoPedido;
+	}
 
 	//bi-directional many-to-one association to Direccion
 	@OneToMany(mappedBy="cuenta",cascade = {CascadeType.PERSIST},fetch=FetchType.EAGER)
@@ -160,6 +174,14 @@ public class Cuenta implements Serializable {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

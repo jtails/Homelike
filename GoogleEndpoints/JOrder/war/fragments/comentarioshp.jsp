@@ -43,7 +43,7 @@
 													</li>
 													<li class="by-other">
 														<div class="avatar pull-right">
-															<img src="${sessionScope.proveedor.logo}" alt="" style="width:50px;height:50px">
+															<img src="${sessionScope.proveedor.logo}" alt="" style="width:50px;height:50px" id="comentarioep">
 														</div>
 														<div class="chat-content">
 															<div class="chat-meta">
@@ -67,7 +67,7 @@
 													</li>
 													<li class="by-other">
 														<div class="avatar pull-right">
-															<img src="${sessionScope.proveedor.logo}" alt="" style="width:50px;height:50px">
+															<img src="${sessionScope.proveedor.logo}" alt="" style="width:50px;height:50px" id="comentariop">
 														</div>
 														<div class="chat-content">
 															<div class="chat-meta">
