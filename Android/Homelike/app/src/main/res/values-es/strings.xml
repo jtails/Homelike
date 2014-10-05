@@ -2,7 +2,6 @@
 <resources>
 
     <!-- Application -->
-    <string name="app_name">Homelike</string>
     <string name="action_map">Mostrar Mapa</string>
     <string name="action_logout">Cerrar Sesión</string>
 
@@ -43,9 +42,12 @@
     <string name="register">Registrar</string>
     <string name="missing_email">Falta un correo</string>
     <string name="missing_mobile">Falta un número telefónico</string>
+    <string name="terms_not_accepted">Necesitas aceptar los términos y condiciones primero</string>
     <string name="wrong_field">Campo inválido</string>
     <string name="registering_account">Registrando nueva cuenta…</string>
     <string name="signing_in">Iniciando sesión…</string>
+    <string name="i_accept">Acepto los </string>
+    <string name="terms_and_conditions">términos y condiciones.</string>
 
     <!-- Order -->
     <string name="confirm_order">Confirmar Pedido</string>

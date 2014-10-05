@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Application -->
+    <!-- No translate required -->
     <string name="app_name">Homelike</string>
-    <string name="action_map">Show Map</string>
+    <string name="url_terms_and_conditions">http://homelike.com.mx/docs/AvisodePrivacidad.pdf</string>
+
+    <!-- Application -->
     <string name="action_logout">Logout</string>
 
     <!-- Home Menu -->
@@ -40,11 +42,14 @@
     <string name="register">Register</string>
     <string name="missing_email">Missing email</string>
     <string name="missing_mobile">Missing mobile</string>
+    <string name="terms_not_accepted">You need to accept the terms and conditions</string>
     <string name="wrong_field">Wrong Field</string>
     <string name="registering_account">Registering account…</string>
     <string name="signing_in">Signing in…</string>
     <string name="updating">Updating</string>
     <string name="send">Send</string>
+    <string name="i_accept">I accept the </string>
+    <string name="terms_and_conditions">terms and conditions.</string>
 
     <!-- Order -->
     <string name="confirm_order">Confirm Order</string>
@@ -69,6 +74,7 @@
 
     <!-- Address -->
     <string name="location">Location</string>
+    <string name="action_map">Show Map</string>
     <string name="retrieving_location">Retrieving location data…</string>
     <string name="saving_address">Saving address…</string>
     <string name="required_fields">Required Fields</string>
