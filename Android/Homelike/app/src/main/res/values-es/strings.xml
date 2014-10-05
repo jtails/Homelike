@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- No translate required -->
+    <string name="app_name">Homelike</string>
+    <string name="url_terms_and_conditions">http://homelike.com.mx/docs/AvisodePrivacidad.pdf</string>
+
     <!-- Application -->
     <string name="action_map">Mostrar Mapa</string>
     <string name="action_logout">Cerrar Sesión</string>
