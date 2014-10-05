@@ -7,6 +7,7 @@
 
     <!-- Application -->
     <string name="action_logout">Logout</string>
+    <string name="gratitue_message">Thanks for your help!</string>
 
     <!-- Home Menu -->
     <string name="home_services">Services</string>
@@ -36,6 +37,10 @@
     <string name="error_register_address">Failed to register address, try again later</string>
     <string name="error_registered_account">The account was already registered with other device</string>
     <string name="error_update_order">Failed to update order status. Try again later.</string>
+    <string name="error_empty_suggestion">Please write a comment or suggestion</string>
+    <string name="error_suggestion_type_not_selected">Please select an option</string>
+    <string name="error_loading_options">Failed to load options</string>
+    <string name="error_send_suggestion">Failed to send. Tray again later</string>
 
     <!-- Create Account -->
     <string name="register_account">Register Account</string>

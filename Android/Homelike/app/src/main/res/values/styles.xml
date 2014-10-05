@@ -40,6 +40,7 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <!-- Custom widgets -->
     <style name="Widget.Homelike.RatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/rating_bar_provider</item>
         <item name="android:maxHeight">40dp</item>

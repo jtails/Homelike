@@ -4,6 +4,7 @@
     <!-- Application -->
     <string name="action_map">Mostrar Mapa</string>
     <string name="action_logout">Cerrar Sesión</string>
+    <string name="gratitue_message">¡Gracias por tu ayuda!</string>
 
     <!-- Home Menu -->
     <string name="home_services">Servicios</string>
@@ -36,6 +37,10 @@
     <string name="error_register_address">Error al guardar tu dirección. Intentar de nuevo más tarde.</string>
     <string name="error_registered_account">La cuenta ya ha sido registrada con otro dispositivo</string>
     <string name="error_update_order">Error al actualizar el estado del pedido. Intenta de nuevo más tarde.</string>
+    <string name="error_empty_suggestion">Por favor escribe un comentario o sugerencia</string>
+    <string name="error_suggestion_type_not_selected">Por favor selecciona una de las opciones</string>
+    <string name="error_loading_options">Error al cargar las opciones</string>
+    <string name="error_send_suggestion">Error al enviar. Intenta de nuevo más tarde</string>
 
     <!-- Create Account -->
     <string name="register_account">Registrar Cuenta</string>
