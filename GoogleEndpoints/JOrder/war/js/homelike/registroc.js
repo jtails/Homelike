@@ -54,26 +54,31 @@
 		var btnenviar = document.querySelector('#btnenviar');
 		btnenviar.addEventListener('click', function(e) {
 			if(localizacion){
-				google.appengine.homelike.cuenta.insert(
-					document.querySelector('#idCuenta').value,
-					document.querySelector('#telefono').value,
-					document.querySelector('#usuario').value,
-					document.querySelector('#idDireccion').value,
-					document.querySelector('#latitud').value,
-					document.querySelector('#longitud').value,
-					document.querySelector('#calle1').value,
-					document.querySelector('#calle2').value,
-					document.querySelector('#referencia1').value,
-					document.querySelector('#referencia2').value,
-					document.querySelector('#calle').value,
-					document.querySelector('#numeroe').value,
-					document.querySelector('#numeroi').value,
-					document.querySelector('#colonia').value,
-					document.querySelector('#delegacion').value,
-					document.querySelector('#cp').value,
-					document.querySelector('#estado').value,
-					document.querySelector('#pais').value
-				);
+				if($("#contrato").is(':checked')){
+					google.appengine.homelike.cuenta.insert(
+						document.querySelector('#idCuenta').value,
+						document.querySelector('#telefono').value,
+						document.querySelector('#usuario').value,
+						document.querySelector('#idDireccion').value,
+						document.querySelector('#latitud').value,
+						document.querySelector('#longitud').value,
+						document.querySelector('#calle1').value,
+						document.querySelector('#calle2').value,
+						document.querySelector('#referencia1').value,
+						document.querySelector('#referencia2').value,
+						document.querySelector('#calle').value,
+						document.querySelector('#numeroe').value,
+						document.querySelector('#numeroi').value,
+						document.querySelector('#colonia').value,
+						document.querySelector('#delegacion').value,
+						document.querySelector('#cp').value,
+						document.querySelector('#estado').value,
+						document.querySelector('#pais').value
+					);
+				}else{
+					$("#message").addClass("alert alert-warning"); 
+	  				$("#message").text("Debe aceptar los terminos y condiciones");
+				}
 			}else{
 				$("#message").addClass("alert alert-warning"); 
   				$("#message").text("Ubicacion no encontrada, Por favor ingrese su direccion para poder continuar");

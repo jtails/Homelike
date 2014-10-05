@@ -127,9 +127,16 @@ public class PedidoEndpoint {
 	public List<Pedido> getComentariosPedidosByProveedor(@Named("idProveedor") int idProveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
-			List<Pedido> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(idProveedor,20);
+			List<Object[]> pedidos=pedidoM.listHistoricoComentariosPedidosByProveedor(idProveedor,20);
+			List<Pedido> pedidosJ=new ArrayList<Pedido>();
 			logger.warning("Numero de Comentarios: "+pedidos.size()+", Proveedor: "+idProveedor+", User: "+user);
-			return pedidos;
+			for(Object[] pedido:pedidos){
+				Pedido p=new Pedido();
+				p.setComentarioEntregaCliente((String)pedido[0]);
+				p.setFechaHoraEntrega((java.util.Date) pedido[1]);
+				pedidosJ.add(p);
+			}
+			return pedidosJ;
 		//}
 		//return null;
 	}

@@ -17,7 +17,7 @@
 		<!-- Logo. -->
 		<div class="logo">
 			<h1>
-				<a href="#">Home<span class="bold">like</span></a>
+				<a href="#">Home<span class="bold">Like</span></a>
 			</h1>
 			<p class="meta">Maxima comodidad</p>
 		</div>

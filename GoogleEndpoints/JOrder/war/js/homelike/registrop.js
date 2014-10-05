@@ -54,35 +54,40 @@
 		var btnenviar = document.querySelector('#btnenviar');
 		btnenviar.addEventListener('click', function(e) {
 			if(localizacion){
-				google.appengine.homelike.proveedores.insert(
-					document.querySelector('#idProveedor').value,	
-					document.querySelector('#nombre').value,
-					document.querySelector('#logo').value,
-					document.querySelector('#slogan').value,
-					document.querySelector('#rfc').value,
-					document.querySelector('#razon').value,
-					document.querySelector('#telefono').value,
-					document.querySelector('#servicio').value,
-					document.querySelector('#usuario').value,
-					document.querySelector('#calle').value,
-					document.querySelector('#numeroe').value,
-					document.querySelector('#numeroi').value,
-					document.querySelector('#colonia').value,
-					document.querySelector('#delegacion').value,
-					document.querySelector('#cp').value,
-					document.querySelector('#estado').value,
-					document.querySelector('#pais').value,
-					document.querySelector('#calle1').value,
-					document.querySelector('#calle2').value,
-					document.querySelector('#referencia1').value,
-					document.querySelector('#referencia2').value,
-					document.querySelector('#latitud').value,
-					document.querySelector('#longitud').value,
-					document.querySelector('#nelatitud').value,
-					document.querySelector('#nelongitud').value,
-					document.querySelector('#swlatitud').value,
-					document.querySelector('#swlongitud').value
-				);
+				if($("#contrato").is(':checked')){
+					google.appengine.homelike.proveedores.insert(
+						document.querySelector('#idProveedor').value,	
+						document.querySelector('#nombre').value,
+						document.querySelector('#logo').value,
+						document.querySelector('#slogan').value,
+						document.querySelector('#rfc').value,
+						document.querySelector('#razon').value,
+						document.querySelector('#telefono').value,
+						document.querySelector('#servicio').value,
+						document.querySelector('#usuario').value,
+						document.querySelector('#calle').value,
+						document.querySelector('#numeroe').value,
+						document.querySelector('#numeroi').value,
+						document.querySelector('#colonia').value,
+						document.querySelector('#delegacion').value,
+						document.querySelector('#cp').value,
+						document.querySelector('#estado').value,
+						document.querySelector('#pais').value,
+						document.querySelector('#calle1').value,
+						document.querySelector('#calle2').value,
+						document.querySelector('#referencia1').value,
+						document.querySelector('#referencia2').value,
+						document.querySelector('#latitud').value,
+						document.querySelector('#longitud').value,
+						document.querySelector('#nelatitud').value,
+						document.querySelector('#nelongitud').value,
+						document.querySelector('#swlatitud').value,
+						document.querySelector('#swlongitud').value
+					);
+				}else{
+					$("#message").addClass("alert alert-warning"); 
+	  				$("#message").text("Debe aceptar los terminos y condiciones");
+				}
 			}else{
 				$("#message").addClass("alert alert-warning"); 
   				$("#message").text("Ubicacion no encontrada, Por favor ingrese su direccion para poder continuar");

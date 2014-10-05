@@ -111,6 +111,8 @@ function addRow(style,pedido,detallePedido,direccion,proveedor){
 			$("#fechaHoraAceptacion").text(new Date(pedido.fechaHoraAceptacion).toLocaleDateString()+" "+new Date(pedido.fechaHoraAceptacion).toLocaleTimeString());
 		if(pedido.fechaHoraEntrega!=undefined && pedido.fechaHoraEntrega!='')
 			$("#fechaHoraEntrega").text(new Date(pedido.fechaHoraEntrega).toLocaleDateString()+" "+new Date(pedido.fechaHoraEntrega).toLocaleTimeString());
+		$("#comentarioep").attr('src',proveedor.logo);
+		$("#comentariop").attr('src',proveedor.logo);
 	});
 	
 }
