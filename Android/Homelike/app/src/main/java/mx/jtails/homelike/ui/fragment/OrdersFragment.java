@@ -56,7 +56,7 @@ public class OrdersFragment extends Fragment
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
         ab.setSubtitle(HomeMenuSection.ORDERS.getSubtitleRes());
         ((ActionBarActivity) this.getActivity())
-                .setSupportProgressBarIndeterminateVisibility(true);
+                .setSupportProgressBarIndeterminateVisibility(false);
     }
 
     @Override
