@@ -40,38 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@android:color/transparent"
-        android:background="#455a64"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#33ffffff"/>
-
-    <LinearLayout android:id="@+id/layout_suggestions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@null"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_menu_comments"
-            android:layout_gravity="center_vertical"/>
-
-        <mx.jtails.homelike.ui.widget.TypeFacedTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            homelike:typeface="fonts/Roboto-Regular.ttf"
-            android:textSize="18sp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@android:color/white"
-            android:text="@string/comments_and_suggestions"
-            android:layout_marginLeft="10dp"/>
-
-    </LinearLayout>
+        android:background="#607d8b"/>
 
 </LinearLayout>

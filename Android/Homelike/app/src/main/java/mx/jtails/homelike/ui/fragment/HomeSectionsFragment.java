@@ -17,7 +17,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import mx.jtails.homelike.R;
-import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.HomeMenuAdapter;
 import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
@@ -84,13 +83,6 @@ public class HomeSectionsFragment extends Fragment
                         HomelikePreferences.loadString(HomelikePreferences.USER_IMG, "")),
                 displayImage, this.mLoaderOptions);
 
-        view.findViewById(R.id.layout_suggestions).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCommentsAndSuggestionsClicked();
-            }
-        });
-
         this.mListSections = (ListView) view.findViewById(R.id.list_home_menu);
         this.mListSections.setOnItemClickListener(this);
         this.mListSections.setAdapter(new HomeMenuAdapter(this.getActivity()));
@@ -109,10 +101,6 @@ public class HomeSectionsFragment extends Fragment
         if(this.mListener != null){
             this.mListener.onHomeMenuOptionSelected(HomeMenuSection.values()[section]);
         }
-    }
-
-    private void onCommentsAndSuggestionsClicked(){
-        ((HomeActivity) this.getActivity()).onSuggestionsOptionSelected();
     }
 
     @Override

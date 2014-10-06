@@ -13,8 +13,9 @@
     <string name="home_services">Services</string>
     <string name="home_orders">Orders</string>
     <string name="home_my_addresses">My Addresses</string>
+    <string name="home_suggestions">Suggestions</string>
     <string name="no_username">No user name</string>
-    <string name="comments_and_suggestions">Comments and Suggestions</string>
+    <string name="comments_and_suggestions">Suggestions</string>
 
     <!-- Dialogs -->
     <string name="ok">OK</string>
@@ -113,5 +114,8 @@
     <string name="rating">Rating</string>
     <string name="rate_provider_message">Rate the provider service quality</string>
     <string name="comments_to_provider_hint">Comments to the provider\'s service</string>
+
+    <!-- Suggestions -->
+    <string name="write_suggestion_hint">Write here your comment or suggestion</string>
 
 </resources>

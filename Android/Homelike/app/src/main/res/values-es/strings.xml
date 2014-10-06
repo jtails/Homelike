@@ -14,8 +14,9 @@
     <string name="home_services">Servicios</string>
     <string name="home_orders">Pedidos</string>
     <string name="home_my_addresses">Mis Direcciones</string>
+    <string name="home_suggestions">Suggestions</string>
     <string name="no_username">Sin Nombre</string>
-    <string name="comments_and_suggestions">Comentarios y Sugerencias</string>
+    <string name="comments_and_suggestions">Sugerencias</string>
 
     <!-- Dialogs -->
     <string name="ok">OK</string>
@@ -113,5 +114,8 @@
     <string name="rating">Calificación</string>
     <string name="rate_provider_message">Califica el desempeño del proveedor</string>
     <string name="comments_to_provider_hint">Comentarios al proveedor</string>
+
+    <!-- Suggestions -->
+    <string name="write_suggestion_hint">Write here your comment or suggestion</string>
 
 </resources>
