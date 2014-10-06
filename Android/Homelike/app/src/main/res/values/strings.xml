@@ -117,5 +117,6 @@
 
     <!-- Suggestions -->
     <string name="write_suggestion_hint">Write here your comment or suggestion</string>
+    <string name="improve_experience">Thanks to your suggestions we can improve your experience!</string>
 
 </resources>

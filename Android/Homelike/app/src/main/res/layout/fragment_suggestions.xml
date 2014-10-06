@@ -4,15 +4,25 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout android:id="@+id/layout_content"
+    <TextView android:id="@+id/lbl_thanks_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/improve_experience"
+        android:layout_margin="15dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"/>
+
+    <LinearLayout android:id="@+id/layout_content"
+        android:layout_above="@+id/btn_send"
+        android:layout_below="@+id/lbl_thanks_message"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="10dp">
 
             <ProgressBar android:id="@+id/progress_suggestions"

@@ -46,6 +46,8 @@ public class SuggestionsFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
         ab.setSubtitle(HomeMenuSection.SUGGESTIONS.getSubtitleRes());
+        ((ActionBarActivity) this.getActivity())
+                .setSupportProgressBarIndeterminateVisibility(false);
     }
 
     @Override

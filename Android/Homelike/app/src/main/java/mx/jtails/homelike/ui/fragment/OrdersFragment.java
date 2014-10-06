@@ -55,6 +55,8 @@ public class OrdersFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
         ab.setSubtitle(HomeMenuSection.ORDERS.getSubtitleRes());
+        ((ActionBarActivity) this.getActivity())
+                .setSupportProgressBarIndeterminateVisibility(true);
     }
 
     @Override
@@ -130,8 +132,6 @@ public class OrdersFragment extends Fragment
             case CONTENT: {
                 this.mProgressMain.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
-                ((ActionBarActivity) this.getActivity())
-                        .setSupportProgressBarIndeterminateVisibility(false);
 
                 if( invalidate ) { this.mAdapter.updateContent(this.mOrders); }
                 break;

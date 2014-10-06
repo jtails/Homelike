@@ -14,7 +14,7 @@
     <string name="home_services">Servicios</string>
     <string name="home_orders">Pedidos</string>
     <string name="home_my_addresses">Mis Direcciones</string>
-    <string name="home_suggestions">Suggestions</string>
+    <string name="home_suggestions">Sugerencias</string>
     <string name="no_username">Sin Nombre</string>
     <string name="comments_and_suggestions">Sugerencias</string>
 
@@ -117,5 +117,6 @@
 
     <!-- Suggestions -->
     <string name="write_suggestion_hint">Write here your comment or suggestion</string>
+    <string name="improve_experience">¡Gracias a tus sugerencias podemos mejorar tu experiencia!</string>
 
 </resources>
