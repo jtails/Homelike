@@ -21,7 +21,7 @@ import mx.jtails.homelike.util.HomeMenuSection;
 /**
  * Created by GrzegorzFeathers on 9/30/14.
  */
-public class CommentsAndSuggestionsFragment extends Fragment
+public class CommentsFragment extends Fragment
     implements UpdateOrderRequest.OnUpdateOrderResponseHandler {
 
     private Pedido mOrder;
@@ -31,15 +31,15 @@ public class CommentsAndSuggestionsFragment extends Fragment
 
     private ProgressDialog mProgressSendingComment;
 
-    public static CommentsAndSuggestionsFragment getInstance(Pedido order){
-        CommentsAndSuggestionsFragment fragment = new CommentsAndSuggestionsFragment();
+    public static CommentsFragment getInstance(Pedido order){
+        CommentsFragment fragment = new CommentsFragment();
         fragment.mOrder = order;
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_comments_and_suggestions, container, false);
+        return inflater.inflate(R.layout.fragment_comments, container, false);
     }
 
     @Override

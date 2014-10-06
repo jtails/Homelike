@@ -179,7 +179,7 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
             FragmentManager fm = this.getFragmentManager();
             fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             ((HomeActivity) this.getActivity()).addToStack(
-                    CommentsAndSuggestionsFragment.getInstance(this.mOrder));
+                    CommentsFragment.getInstance(this.mOrder));
         }
     }
 }

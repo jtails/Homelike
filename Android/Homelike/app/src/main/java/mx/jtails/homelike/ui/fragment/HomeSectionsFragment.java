@@ -17,8 +17,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.HomeMenuAdapter;
-import mx.jtails.homelike.ui.fragment.dialog.CommentsAndSuggestionsDialog;
 import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 import mx.jtails.homelike.util.HomelikeUtils;
@@ -112,7 +112,7 @@ public class HomeSectionsFragment extends Fragment
     }
 
     private void onCommentsAndSuggestionsClicked(){
-        new CommentsAndSuggestionsDialog().show(this.getFragmentManager(), null);
+        ((HomeActivity) this.getActivity()).onSuggestionsOptionSelected();
     }
 
     @Override

@@ -17,6 +17,7 @@ import android.view.Window;
 import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.ui.fragment.HomeSectionsFragment;
+import mx.jtails.homelike.ui.fragment.SuggestionsFragment;
 import mx.jtails.homelike.util.HomeMenuSection;
 import mx.jtails.homelike.util.HomelikePreferences;
 
@@ -134,6 +135,18 @@ public class HomeActivity extends ActionBarActivity
 
         fm.beginTransaction()
                 .replace(R.id.layout_home_content, option.getFragmentInstance())
+                .commit();
+        this.supportInvalidateOptionsMenu();
+    }
+
+    public void onSuggestionsOptionSelected(){
+        this.mDrawerLayout.closeDrawer(GravityCompat.START);
+        FragmentManager fm = this.getSupportFragmentManager();
+
+        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        fm.beginTransaction()
+                .replace(R.id.layout_home_content, new SuggestionsFragment())
                 .commit();
         this.supportInvalidateOptionsMenu();
     }

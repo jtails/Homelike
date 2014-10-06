@@ -1,8 +1,9 @@
-package mx.jtails.homelike.ui.fragment.dialog;
+package mx.jtails.homelike.ui.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +21,13 @@ import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Tsugerencia;
 import mx.jtails.homelike.request.InsertSuggestionRequest;
 import mx.jtails.homelike.request.ListSuggestionTypesRequest;
+import mx.jtails.homelike.ui.HomeActivity;
+import mx.jtails.homelike.util.HomeMenuSection;
 
 /**
  * Created by GrzegorzFeathers on 10/5/14.
  */
-public class CommentsAndSuggestionsDialog extends DialogFragment
+public class SuggestionsFragment extends Fragment
     implements ListSuggestionTypesRequest.OnListSuggestionTypesResponseHandler,
         InsertSuggestionRequest.OnInsertSuggestionResponseHandler {
 
@@ -37,20 +40,13 @@ public class CommentsAndSuggestionsDialog extends DialogFragment
     private List<Tsugerencia> mSuggestionTypes = new ArrayList<Tsugerencia>();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dialog_comments_and_suggestions, container, false);
+        return inflater.inflate(R.layout.fragment_suggestions, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         this.mEditComments = (EditText) view.findViewById(R.id.edit_suggestion);
         this.mGroupSuggestions = (RadioGroup) view.findViewById(R.id.group_suggestions);
         this.mProgressLoading = (ProgressBar) view.findViewById(R.id.progress_suggestions);
@@ -101,7 +97,7 @@ public class CommentsAndSuggestionsDialog extends DialogFragment
         this.mGroupSuggestions.setVisibility(View.VISIBLE);
         if(suggestionTypes.isEmpty()){
             Toast.makeText(this.getActivity(), R.string.error_loading_options, Toast.LENGTH_SHORT).show();
-            this.dismiss();
+            ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
         } else {
             this.mSuggestionTypes = suggestionTypes;
             this.mRadioSuggestions = new RadioButton[this.mSuggestionTypes.size()];
@@ -110,6 +106,7 @@ public class CommentsAndSuggestionsDialog extends DialogFragment
                 Tsugerencia suggestion = this.mSuggestionTypes.get(i);
                 this.mRadioSuggestions[i] = radio;
                 radio.setText(suggestion.getTipoSugerencia());
+                radio.setTextColor(Color.WHITE);
                 radio.setId(i + 100);
                 this.mGroupSuggestions.addView(radio);
             }
@@ -125,6 +122,6 @@ public class CommentsAndSuggestionsDialog extends DialogFragment
             Toast.makeText(this.getActivity(), R.string.error_send_suggestion,
                     Toast.LENGTH_SHORT).show();
         }
-        this.dismiss();
+        ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
     }
 }
