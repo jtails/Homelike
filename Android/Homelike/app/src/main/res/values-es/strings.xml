@@ -116,7 +116,7 @@
     <string name="comments_to_provider_hint">Comentarios al proveedor</string>
 
     <!-- Suggestions -->
-    <string name="write_suggestion_hint">Write here your comment or suggestion</string>
+    <string name="write_suggestion_hint">Comentarios</string>
     <string name="improve_experience">¡Gracias a tus sugerencias podemos mejorar tu experiencia!</string>
 
 </resources>
