@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -173,7 +172,7 @@ public class AddressDetailsFragment extends Fragment
         }
     }
 
-    private void notifyErrors(int title, int validation, List<String> errors){
+    private void notifyErrors(int title, int validationRes, List<String> errors){
         String errorFields = "\n";
 
         for(int i = 0 ; i < errors.size() ; i++) {
@@ -188,7 +187,7 @@ public class AddressDetailsFragment extends Fragment
         new AlertDialog.Builder(this.getActivity())
                 .setCancelable(false)
                 .setTitle(title)
-                .setMessage(validation + errorFields)
+                .setMessage(this.getString(validationRes) + errorFields)
                 .setPositiveButton(R.string.ok, null)
                 .show();
     }
@@ -223,7 +222,7 @@ public class AddressDetailsFragment extends Fragment
         if(this.mInsertingDialog != null){ this.mInsertingDialog.dismiss(); }
         if(addresses != null){
             HomelikeDBManager.getDBManager().saveAddresses(addresses);
-            Toast.makeText(this.getActivity(), R.string.address_saved, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(), R.string.address_saved, Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         } else {
             new AlertDialog.Builder(this.getActivity())

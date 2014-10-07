@@ -25,26 +25,34 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
 
-            <ProgressBar android:id="@+id/progress_suggestions"
+            <LinearLayout android:id="@+id/layout_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_centerInParent="true"
-                android:visibility="gone"/>
+                android:gravity="center_horizontal"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wait"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
 
             <RadioGroup android:id="@+id/group_suggestions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:visibility="gone"/>
-
-            <TextView android:id="@+id/lbl_error"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#ffff4444"
-                android:layout_below="@+id/group_suggestions"
-                android:layout_alignLeft="@+id/group_suggestions"
-                android:visibility="gone"
-                android:layout_margin="5dp"/>
 
         </RelativeLayout>
 
@@ -54,7 +62,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@android:color/white"
+            android:background="#99ffffff"
             android:hint="@string/write_suggestion_hint"
             android:gravity="center_horizontal|top"
             android:textColorHint="#999"/>

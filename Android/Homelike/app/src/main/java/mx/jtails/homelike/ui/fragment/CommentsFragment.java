@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
@@ -75,7 +74,7 @@ public class CommentsFragment extends Fragment
     @Override
     public void onUpdateOrderResponse(Pedido order) {
         this.mProgressSendingComment.dismiss();
-        Toast.makeText(this.getActivity(), R.string.comment_sent, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.getActivity(), R.string.comment_sent, Toast.LENGTH_SHORT).show();
         this.backToHome();
     }
 }

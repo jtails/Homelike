@@ -195,7 +195,8 @@ public class AddressActivity extends ActionBarActivity
     @Override
     public void onBackPressed() {
         if(this.mAddressMode == MODE_REGISTER_ADDRESS) {
-            this.confirmDiscard();
+            //this.confirmDiscard();
+            super.onBackPressed();
         } else {
             super.onBackPressed();
         }

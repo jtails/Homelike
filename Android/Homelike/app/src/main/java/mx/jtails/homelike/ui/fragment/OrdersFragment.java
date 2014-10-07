@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class OrdersFragment extends Fragment
 
     private AbsListView mListView;
     private View mLayoutContent;
-    private ProgressBar mProgressMain;
+    private View mLayoutLoading;
 
     private enum ContentDisplayMode {
         LOAD, CONTENT;
@@ -85,7 +84,7 @@ public class OrdersFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         this.mListView = (AbsListView) view.findViewById(R.id.list_orders);
         this.mLayoutContent = view.findViewById(R.id.layout_orders_content);
-        this.mProgressMain = (ProgressBar) view.findViewById(R.id.progress_main);
+        this.mLayoutLoading = view.findViewById(R.id.layout_loading);
         this.mAdapter = new OrdersAdapter(this.getActivity(), this.mOrders);
 
         this.mListView.setOnItemClickListener(this);
@@ -126,11 +125,11 @@ public class OrdersFragment extends Fragment
         switch (displayMode) {
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.GONE);
-                this.mProgressMain.setVisibility(View.VISIBLE);
+                this.mLayoutLoading.setVisibility(View.VISIBLE);
                 break;
             }
             case CONTENT: {
-                this.mProgressMain.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
 
                 if( invalidate ) { this.mAdapter.updateContent(this.mOrders); }

@@ -1,5 +1,6 @@
 package mx.jtails.homelike.ui.fragment;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,11 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +34,7 @@ public class SuggestionsFragment extends Fragment
     private EditText mEditComments;
     private RadioGroup mGroupSuggestions;
     private RadioButton[] mRadioSuggestions;
-    private ProgressBar mProgressLoading;
-    private TextView mLblError;
+    private View mLayoutLoading;
 
     private List<Tsugerencia> mSuggestionTypes = new ArrayList<Tsugerencia>();
 
@@ -60,9 +57,8 @@ public class SuggestionsFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         this.mEditComments = (EditText) view.findViewById(R.id.edit_suggestion);
         this.mGroupSuggestions = (RadioGroup) view.findViewById(R.id.group_suggestions);
-        this.mProgressLoading = (ProgressBar) view.findViewById(R.id.progress_suggestions);
-        this.mLblError = (TextView) view.findViewById(R.id.lbl_error);
-        this.mProgressLoading.setVisibility(View.VISIBLE);
+        this.mLayoutLoading = view.findViewById(R.id.layout_loading);
+        this.mLayoutLoading.setVisibility(View.VISIBLE);
         view.findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,41 +69,27 @@ public class SuggestionsFragment extends Fragment
     }
 
     private void onSendCommentClicked(){
-        if(this.mProgressLoading.getVisibility() == View.VISIBLE){
-            return;
-        }
-
-        if(this.mEditComments.getText().toString().isEmpty()){
-            this.mLblError.setVisibility(View.VISIBLE);
-            this.mLblError.setText(R.string.error_empty_suggestion);
-            return;
-        }
+        if(this.mLayoutLoading.getVisibility() == View.VISIBLE){ return; }
+        if(!this.validateFields()){ return; }
 
         int id = this.mGroupSuggestions.getCheckedRadioButtonId();
-        if(id < 0){
-            this.mLblError.setVisibility(View.VISIBLE);
-            this.mLblError.setText(R.string.error_suggestion_type_not_selected);
-            return;
-        }
-
         View selected = this.mGroupSuggestions.findViewById(id);
         int index = this.mGroupSuggestions.indexOfChild(selected);
         Tsugerencia suggestionType = this.mSuggestionTypes.get(index);
         String suggestion = this.mEditComments.getText().toString();
 
-        this.mProgressLoading.setVisibility(View.VISIBLE);
+        this.mLayoutLoading.setVisibility(View.VISIBLE);
         this.mGroupSuggestions.setVisibility(View.GONE);
-        this.mLblError.setVisibility(View.GONE);
 
         new InsertSuggestionRequest(this, suggestionType, suggestion).executeAsync();
     }
 
     @Override
     public void onListSuggestionTypesResponse(List<Tsugerencia> suggestionTypes) {
-        this.mProgressLoading.setVisibility(View.GONE);
+        this.mLayoutLoading.setVisibility(View.GONE);
         this.mGroupSuggestions.setVisibility(View.VISIBLE);
         if(suggestionTypes.isEmpty()){
-            Toast.makeText(this.getActivity(), R.string.error_loading_options, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(), R.string.error_loading_options, Toast.LENGTH_SHORT).show();
             ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
         } else {
             this.mSuggestionTypes = suggestionTypes;
@@ -124,14 +106,63 @@ public class SuggestionsFragment extends Fragment
         }
     }
 
+    private boolean validateFields() {
+        List<String> empties = this.validateEmpties();
+        if(!empties.isEmpty()){
+            this.notifyErrors(R.string.missing_fields,
+                    R.string.error_suggestion_validation, empties);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void notifyErrors(int title, int validationRes, List<String> errors){
+        String errorFields = "\n";
+
+        for(int i = 0 ; i < errors.size() ; i++) {
+            errorFields += errors.get(i);
+            errorFields += "\n";
+            /*
+            if(i == errors.size() - 1){
+                errorFields += ".\n";
+            } else {
+                errorFields += ", ";
+            }
+            */
+        }
+
+        new AlertDialog.Builder(this.getActivity())
+                .setCancelable(false)
+                .setTitle(title)
+                .setMessage(this.getString(validationRes) + errorFields)
+                .setPositiveButton(R.string.ok, null)
+                .show();
+    }
+
+    private List<String> validateEmpties(){
+        List<String> errors = new ArrayList<String>();
+
+        if(this.mEditComments.getText().toString().isEmpty()){
+            errors.add(this.getString(R.string.error_empty_suggestion));
+        }
+
+        int id = this.mGroupSuggestions.getCheckedRadioButtonId();
+        if(id < 0){
+            errors.add(this.getString(R.string.error_suggestion_type_not_selected));
+        }
+
+        return errors;
+    }
+
     @Override
     public void onInsertSuggestionResponse(boolean inserted) {
         if(inserted){
-            Toast.makeText(this.getActivity(), R.string.gratitue_message,
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(), R.string.gratitue_message,
+              //      Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this.getActivity(), R.string.error_send_suggestion,
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(), R.string.error_send_suggestion,
+              //      Toast.LENGTH_SHORT).show();
         }
         ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
     }

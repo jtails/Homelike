@@ -34,10 +34,27 @@
 
     </FrameLayout>
 
-    <ProgressBar android:id="@+id/progress_main"
+    <LinearLayout android:id="@+id/layout_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:visibility="gone">
+
+        <ProgressBar android:id="@+id/progress_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wait"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

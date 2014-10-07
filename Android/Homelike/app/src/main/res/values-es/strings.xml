@@ -34,16 +34,18 @@
 
     <!-- Errors -->
     <string name="error">Error</string>
+    <string name="missing_fields">Campos faltantes</string>
     <string name="error_load_address">Error al recuperar la dirección con id: %d</string>
     <string name="error_create_order">Error al crear tu orden, intenta de nuevo más tarde.</string>
     <string name="error_play_services">Error al cargar Google Play Services…</string>
     <string name="error_retrieving_location">No se encontraron datos de la ubicación que seleccionaste. ¿Deseas continuar?</string>
     <string name="error_field_validation">Los siguientes campos son necesarios para continuar con el registro de la dirección: \n</string>
+    <string name="error_suggestion_validation">Necesitas agregar: \n</string>
     <string name="error_register_address">Error al guardar tu dirección. Intentar de nuevo más tarde.</string>
     <string name="error_registered_account">La cuenta ya ha sido registrada con otro dispositivo</string>
     <string name="error_update_order">Error al actualizar el estado del pedido. Intenta de nuevo más tarde.</string>
-    <string name="error_empty_suggestion">Por favor escribe un comentario o sugerencia</string>
-    <string name="error_suggestion_type_not_selected">Por favor selecciona una de las opciones</string>
+    <string name="error_empty_suggestion">Una sugerencia</string>
+    <string name="error_suggestion_type_not_selected">Un tipo de sugerencia</string>
     <string name="error_loading_options">Error al cargar las opciones</string>
     <string name="error_send_suggestion">Error al enviar. Intenta de nuevo más tarde</string>
 
@@ -54,7 +56,7 @@
     <string name="missing_mobile">Falta un número telefónico</string>
     <string name="terms_not_accepted">Necesitas aceptar los términos y condiciones primero</string>
     <string name="wrong_field">Campo inválido</string>
-    <string name="registering_account">Registrando nueva cuenta…</string>
+    <string name="registering_account">Registrando…</string>
     <string name="signing_in">Iniciando sesión…</string>
     <string name="i_accept">Acepto los </string>
     <string name="terms_and_conditions">términos y condiciones.</string>
@@ -72,21 +74,25 @@
     <string name="providers">Proveedores</string>
     <string name="leave_orders">Salir de pedidos</string>
     <string name="leave_orders_message">¿Estás seguro que quieres abandonar esta sección?</string>
-    <string name="finish_order">Terminar</string>
+    <string name="next">Siguiente</string>
     <string name="your_orders">Tus pedidos</string>
     <string name="preparing_order">Preparando nuevo pedido…</string>
     <string name="payment_quantity">Cantidad de pago</string>
     <string name="comments">Comentarios</string>
-    <string name="comments_hint">Comentarios al proveedor como la denominación de su pago</string>
+    <string name="comments_hint">Comentarios al proveedor, como la denominación de su pago</string>
+    <string name="no_active_orders">Usted no tiene pedidos activos</string>
+    <string name="no_providers_found">No se encontró ningún proveedor en el área</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>
+    <string name="select">Seleccionar</string>
     <string name="retrieving_location">Recuperando información de ubicación…</string>
-    <string name="saving_address">Guardando la dirección…</string>
+    <string name="saving_address">Guardando…</string>
     <string name="required_fields">Campos requeridos</string>
     <string name="field_alias">Alias</string>
     <string name="field_street">Calle</string>
     <string name="field_street_number">Exterior</string>
+    <string name="field_interior">Interior</string>
     <string name="field_colony">Colonia</string>
     <string name="field_zip_code">Código Postal</string>
     <string name="field_city">Delegación</string>
@@ -103,7 +109,7 @@
         ¿Quieres usar tu dirección favorita para el nuevo pedido?\n\n%s.
     </string>
     <string name="change_address">Cambiar Dirección</string>
-    <string name="kind_of_service">¿Qué tipo de servicio deseas pedir?</string>
+    <string name="kind_of_service">¿Qué servicio está buscando?</string>
 
     <!-- Order Status -->
     <string name="status_new">Nuevo Pedido</string>
@@ -118,5 +124,18 @@
     <!-- Suggestions -->
     <string name="write_suggestion_hint">Comentarios</string>
     <string name="improve_experience">¡Gracias a tus sugerencias podemos mejorar tu experiencia!</string>
+
+    <!--Address-->
+    <string name="alias_hint">Casa,Trabajo,etc.</string>
+    <string name="street_hint">Av. Insurgentes</string>
+    <string name="street_number_hint">Número exterior</string>
+    <string name="interior_hint">(Opcional)</string>
+    <string name="colony_hint">Roma Sur</string>
+    <string name="zip_code_hint">55555</string>
+    <string name="city_hint">Cuauhtémoc</string>
+    <string name="state_hint">Distrito Federal</string>
+    <string name="country_hint">Mexico</string>
+    <string name="reference_hint">Fachada,calles,etc.</string>
+    <string name="finish">Terminar</string>
 
 </resources>

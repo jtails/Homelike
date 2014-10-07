@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -85,8 +84,8 @@ public class AddressMapFragment extends Fragment
     }
 
     private void retrieveLocationData() {
-        this.mLocationDialog = ProgressDialog.show(this.getActivity(), this.getString(R.string.location),
-                this.getString(R.string.retrieving_location), false, false);
+        this.mLocationDialog = ProgressDialog.show(this.getActivity(), null,
+                this.getString(R.string.wait), false, false);
         new RetrieveLocationTask(this.getActivity(), this).execute(this.mSelectedLatLng);
     }
 
@@ -185,7 +184,7 @@ public class AddressMapFragment extends Fragment
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(this.getActivity(), String.valueOf(connectionResult.getErrorCode()), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.getActivity(), String.valueOf(connectionResult.getErrorCode()), Toast.LENGTH_SHORT).show();
         if(connectionResult.hasResolution()) {
             try {
                 connectionResult.startResolutionForResult(this.getActivity(), 300);
@@ -193,8 +192,8 @@ public class AddressMapFragment extends Fragment
                 e.printStackTrace();
             }
         } else {
-            Toast.makeText(this.getActivity(), R.string.error_play_services,
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(), R.string.error_play_services,
+              //      Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         }
     }

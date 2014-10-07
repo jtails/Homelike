@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
 
     private AbsListView mListView;
     private View mLayoutContent;
-    private ProgressBar mProgressMain;
+    private View mLayoutLoading;
 
     private List<Servicio> mServices = new ArrayList<Servicio>();
 
@@ -74,7 +73,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
         super.onViewCreated(view, savedInstanceState);
         this.mListView = (AbsListView) view.findViewById(R.id.list_services);
         this.mLayoutContent = view.findViewById(R.id.layout_services_content);
-        this.mProgressMain = (ProgressBar) view.findViewById(R.id.progress_main);
+        this.mLayoutLoading = view.findViewById(R.id.layout_loading);
         this.mAdapter = new ServicesAdapter(this.getActivity(), this.mServices);
 
         this.mListView.setOnItemClickListener(this);
@@ -151,11 +150,11 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
         switch (displayMode) {
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.INVISIBLE);
-                this.mProgressMain.setVisibility(View.VISIBLE);
+                this.mLayoutLoading.setVisibility(View.VISIBLE);
                 break;
             }
             case PARTIAL_LOAD: {
-                this.mProgressMain.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 ((ActionBarActivity) this.getActivity())
                         .setSupportProgressBarIndeterminateVisibility(true);
@@ -164,7 +163,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
                 break;
             }
             case CONTENT: {
-                this.mProgressMain.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 ((ActionBarActivity) this.getActivity())
                         .setSupportProgressBarIndeterminateVisibility(false);

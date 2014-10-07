@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -59,9 +57,8 @@ public class CreateOrderFragment extends Fragment
     private ImageView mProviderLogo;
     private TextView mProviderName;
     private TextView mProviderSlogan;
-    //private TextView mProviderRating;
     private View mLayoutContent;
-    private ProgressBar mProgress;
+    private View mLayoutLoading;
     private TextView mLblEmpty;
     private TextView mLblTotal;
     private RatingBar mRatingProvider;
@@ -118,9 +115,9 @@ public class CreateOrderFragment extends Fragment
 
         this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
         if(this.mAddress == null){
-            Toast.makeText(this.getActivity(),
-                    String.format(this.getString(R.string.error_load_address), this.mAddressId),
-                    Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(),
+              //      String.format(this.getString(R.string.error_load_address), this.mAddressId),
+                //    Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         }
     }
@@ -133,7 +130,7 @@ public class CreateOrderFragment extends Fragment
         //this.mProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
         this.mLayoutContent = view.findViewById(R.id.layout_products_content);
         this.mListView = (ListView) view.findViewById(R.id.list_products);
-        this.mProgress = (ProgressBar) view.findViewById(R.id.progress_products);
+        this.mLayoutLoading = view.findViewById(R.id.layout_loading);
         this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
         this.mLblTotal = (TextView) view.findViewById(R.id.lbl_total);
         this.mRatingProvider = (RatingBar) view.findViewById(R.id.rating_provider);
@@ -251,11 +248,11 @@ public class CreateOrderFragment extends Fragment
         switch (displayMode) {
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.GONE);
-                this.mProgress.setVisibility(View.VISIBLE);
+                this.mLayoutLoading.setVisibility(View.VISIBLE);
                 break;
             }
             case CONTENT: {
-                this.mProgress.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 this.mLblEmpty.setVisibility(View.GONE);
                 this.mListView.setVisibility(View.VISIBLE);
@@ -265,7 +262,7 @@ public class CreateOrderFragment extends Fragment
                 break;
             }
             case CONTENT_EMPTY: {
-                this.mProgress.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 this.mLblEmpty.setVisibility(View.VISIBLE);
                 this.mListView.setVisibility(View.GONE);

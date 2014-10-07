@@ -105,6 +105,13 @@ public class MyAddressesFragment extends Fragment
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        this.mAddresses = HomelikeDBManager.getDBManager().loadAddresses();
+        this.mAdapter.updateContent(this.mAddresses);
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(position == this.mAddresses.size()) {
             this.startRegister();
@@ -161,6 +168,8 @@ public class MyAddressesFragment extends Fragment
         dbManager.saveAddresses(addresses);
         this.mAddresses = dbManager.loadAddresses();
         this.mAdapter.updateContent(this.mAddresses);
-        ((ActionBarActivity) this.getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+        if(this.getActivity() != null){
+            ((ActionBarActivity) this.getActivity()).setSupportProgressBarIndeterminateVisibility(false);
+        }
     }
 }

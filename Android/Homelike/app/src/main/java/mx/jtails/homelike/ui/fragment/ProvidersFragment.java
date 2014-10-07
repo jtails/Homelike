@@ -9,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +53,7 @@ public class ProvidersFragment extends Fragment
 
     private View mLayoutContent;
     private AbsListView mListView;
-    private ProgressBar mProgress;
+    private View mLayoutLoading;
     private TextView mLblEmpty;
 
     public static ProvidersFragment getInstance(int addressId, int serviceId){
@@ -85,7 +83,7 @@ public class ProvidersFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.mLayoutContent = view.findViewById(R.id.layout_providers_content);
         this.mListView = (AbsListView) view.findViewById(R.id.list_providers);
-        this.mProgress = (ProgressBar) view.findViewById(R.id.progress_providers);
+        this.mLayoutLoading = view.findViewById(R.id.layout_loading);
         this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
         this.mProvidersAdapter = new ProvidersAdapter(this.getActivity(), this, this.mProviders);
 
@@ -116,9 +114,9 @@ public class ProvidersFragment extends Fragment
 
         this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
         if(this.mAddress == null){
-            Toast.makeText(this.getActivity(),
-                String.format(this.getString(R.string.error_load_address), this.mAddressId),
-                Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this.getActivity(),
+              //  String.format(this.getString(R.string.error_load_address), this.mAddressId),
+                //Toast.LENGTH_SHORT).show();
             this.getActivity().finish();
         }
     }
@@ -134,11 +132,11 @@ public class ProvidersFragment extends Fragment
         switch (displayMode) {
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.GONE);
-                this.mProgress.setVisibility(View.VISIBLE);
+                this.mLayoutLoading.setVisibility(View.VISIBLE);
                 break;
             }
             case CONTENT: {
-                this.mProgress.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 this.mLblEmpty.setVisibility(View.GONE);
                 this.mListView.setVisibility(View.VISIBLE);
@@ -147,7 +145,7 @@ public class ProvidersFragment extends Fragment
                 break;
             }
             case CONTENT_EMPTY: {
-                this.mProgress.setVisibility(View.GONE);
+                this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 this.mLblEmpty.setVisibility(View.VISIBLE);
                 this.mListView.setVisibility(View.GONE);

@@ -30,16 +30,18 @@
 
     <!-- Errors -->
     <string name="error">Error</string>
+    <string name="missing_fields">Missing fields</string>
     <string name="error_load_address">Failed to recover address with id: %d</string>
     <string name="error_create_order">Failed to create your order, try again later</string>
     <string name="error_play_services">Failed to load Google Play Services…</string>
     <string name="error_retrieving_location">No location data could be found at the point you selected. Would you like to continue?</string>
     <string name="error_field_validation">The following fields are required to continue with registration: \n</string>
+    <string name="error_suggestion_validation">You need to add: \n</string>
     <string name="error_register_address">Failed to register address, try again later</string>
     <string name="error_registered_account">The account was already registered with other device</string>
     <string name="error_update_order">Failed to update order status. Try again later.</string>
-    <string name="error_empty_suggestion">Please write a comment or suggestion</string>
-    <string name="error_suggestion_type_not_selected">Please select an option</string>
+    <string name="error_empty_suggestion">A suggestion</string>
+    <string name="error_suggestion_type_not_selected">A suggestion type</string>
     <string name="error_loading_options">Failed to load options</string>
     <string name="error_send_suggestion">Failed to send. Tray again later</string>
 
@@ -50,7 +52,7 @@
     <string name="missing_mobile">Missing mobile</string>
     <string name="terms_not_accepted">You need to accept the terms and conditions</string>
     <string name="wrong_field">Wrong Field</string>
-    <string name="registering_account">Registering account…</string>
+    <string name="registering_account">Registering…</string>
     <string name="signing_in">Signing in…</string>
     <string name="updating">Updating</string>
     <string name="send">Send</string>
@@ -71,22 +73,26 @@
     <string name="providers">Providers</string>
     <string name="leave_orders">Leave Orders</string>
     <string name="leave_orders_message">Are your sure you want to leave this section?</string>
-    <string name="finish_order">Finish</string>
+    <string name="next">Next</string>
     <string name="your_orders">Your orders</string>
     <string name="preparing_order">Preparing new order…</string>
     <string name="payment_quantity">Payment Quantity</string>
     <string name="comments">Comments</string>
-    <string name="comments_hint">Comments to the provider like payment quantity</string>
+    <string name="comments_hint">Comments to the provider, like payment quantity</string>
+    <string name="no_active_orders">You don\'t have any active orders</string>
+    <string name="no_providers_found">No providers found in this area</string>
 
     <!-- Address -->
     <string name="location">Location</string>
+    <string name="select">Select</string>
     <string name="action_map">Show Map</string>
     <string name="retrieving_location">Retrieving location data…</string>
-    <string name="saving_address">Saving address…</string>
+    <string name="saving_address">Saving…</string>
     <string name="required_fields">Required Fields</string>
     <string name="field_alias">Alias</string>
     <string name="field_street">Street</string>
     <string name="field_street_number">Exterior</string>
+    <string name="field_interior">Interior</string>
     <string name="field_colony">Colony</string>
     <string name="field_zip_code">Zip Code</string>
     <string name="field_city">City</string>
@@ -103,7 +109,7 @@
         Do you want to use your favourite address for the new order:\n\n%s.
     </string>
     <string name="change_address">Change Address</string>
-    <string name="kind_of_service">What kind of service do you want?</string>
+    <string name="kind_of_service">What service are you looking for?</string>
 
     <!-- Order Status -->
     <string name="status_new">New Order</string>
@@ -118,5 +124,18 @@
     <!-- Suggestions -->
     <string name="write_suggestion_hint">Comments</string>
     <string name="improve_experience">Thanks to your suggestions we can improve your experience!</string>
+
+    <!--Address-->
+    <string name="alias_hint">Home,Work,etc.</string>
+    <string name="street_hint">Av. Insurgentes</string>
+    <string name="street_number_hint">Street Number</string>
+    <string name="interior_hint">(Optional)</string>
+    <string name="colony_hint">Roma Sur</string>
+    <string name="zip_code_hint">55555</string>
+    <string name="city_hint">Cuauhtémoc</string>
+    <string name="state_hint">Distrito Federal</string>
+    <string name="country_hint">Mexico</string>
+    <string name="reference_hint">Color,streets,etc.</string>
+    <string name="finish">Finish</string>
 
 </resources>
