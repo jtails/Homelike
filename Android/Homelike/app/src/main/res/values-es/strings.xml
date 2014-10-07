@@ -8,7 +8,7 @@
     <!-- Application -->
     <string name="action_map">Mostrar Mapa</string>
     <string name="action_logout">Cerrar Sesión</string>
-    <string name="gratitue_message">¡Gracias por tu ayuda!</string>
+    <string name="gratitue_message">¡Gracias por su ayuda!</string>
 
     <!-- Home Menu -->
     <string name="home_services">Servicios</string>
@@ -36,25 +36,25 @@
     <string name="error">Error</string>
     <string name="missing_fields">Campos faltantes</string>
     <string name="error_load_address">Error al recuperar la dirección con id: %d</string>
-    <string name="error_create_order">Error al crear tu orden, intenta de nuevo más tarde.</string>
+    <string name="error_create_order">Error al crear su orden, intente de nuevo más tarde.</string>
     <string name="error_play_services">Error al cargar Google Play Services…</string>
-    <string name="error_retrieving_location">No se encontraron datos de la ubicación que seleccionaste. ¿Deseas continuar?</string>
+    <string name="error_retrieving_location">No se encontraron datos de la ubicación que selecciono. ¿Desea continuar?</string>
     <string name="error_field_validation">Los siguientes campos son necesarios para continuar con el registro de la dirección: \n</string>
-    <string name="error_suggestion_validation">Necesitas agregar: \n</string>
-    <string name="error_register_address">Error al guardar tu dirección. Intentar de nuevo más tarde.</string>
+    <string name="error_suggestion_validation">Necesita agregar: \n</string>
+    <string name="error_register_address">Error al guardar su dirección. Intente de nuevo más tarde.</string>
     <string name="error_registered_account">La cuenta ya ha sido registrada con otro dispositivo</string>
-    <string name="error_update_order">Error al actualizar el estado del pedido. Intenta de nuevo más tarde.</string>
-    <string name="error_empty_suggestion">Una sugerencia</string>
+    <string name="error_update_order">Error al actualizar el estado del pedido. Intente de nuevo más tarde.</string>
+    <string name="error_empty_suggestion">Ingrese una sugerencia</string>
     <string name="error_suggestion_type_not_selected">Un tipo de sugerencia</string>
     <string name="error_loading_options">Error al cargar las opciones</string>
-    <string name="error_send_suggestion">Error al enviar. Intenta de nuevo más tarde</string>
+    <string name="error_send_suggestion">Error al enviar. Intente de nuevo más tarde</string>
 
     <!-- Create Account -->
     <string name="register_account">Registrar Cuenta</string>
     <string name="register">Registrar</string>
     <string name="missing_email">Falta un correo</string>
     <string name="missing_mobile">Falta un número telefónico</string>
-    <string name="terms_not_accepted">Necesitas aceptar los términos y condiciones primero</string>
+    <string name="terms_not_accepted">Necesita aceptar los términos y condiciones primero</string>
     <string name="wrong_field">Campo inválido</string>
     <string name="registering_account">Registrando…</string>
     <string name="signing_in">Iniciando sesión…</string>
@@ -63,17 +63,17 @@
 
     <!-- Order -->
     <string name="confirm_order">Confirmar Pedido</string>
-    <string name="confirm_order_message">¿Estás seguro que quieres cancelar la orden?</string>
+    <string name="confirm_order_message">¿Está seguro que quiere cancelar la orden?</string>
     <string name="cancel_order">Cancelar Pedido</string>
     <string name="empty_order">Pedido Vacío</string>
-    <string name="empty_order_message">El pedido está vacío, por favor selecciona tus productos.</string>
+    <string name="empty_order_message">El pedido está vacío, por favor seleccione tus productos.</string>
     <string name="new_order">Nuevo pedido</string>
     <string name="no_comments">Sin Comentarios</string>
     <string name="client_comment">Comentarios del cliente</string>
     <string name="provider_comment">Comentarios del proveedor</string>
     <string name="providers">Proveedores</string>
     <string name="leave_orders">Salir de pedidos</string>
-    <string name="leave_orders_message">¿Estás seguro que quieres abandonar esta sección?</string>
+    <string name="leave_orders_message">¿Está seguro que desea abandonar esta sección?</string>
     <string name="next">Siguiente</string>
     <string name="your_orders">Tus pedidos</string>
     <string name="preparing_order">Preparando nuevo pedido…</string>
@@ -101,12 +101,12 @@
     <string name="field_reference">Referencia</string>
     <string name="address_saved">Dirección Guardada</string>
     <string name="add_new_address">Agregar nueva dirección</string>
-    <string name="discard_address_message">¿Estás seguro que quieres deshacer tu selección?</string>
+    <string name="discard_address_message">¿Está seguro que desea deshacer su selección?</string>
 
     <!-- Services -->
     <string name="favourite_address">Dirección Favorita</string>
     <string name="use_favourite_address">
-        ¿Quieres usar tu dirección favorita para el nuevo pedido?\n\n%s.
+        ¿Desea usar su dirección favorita para el nuevo pedido?\n\n%s.
     </string>
     <string name="change_address">Cambiar Dirección</string>
     <string name="kind_of_service">¿Qué servicio está buscando?</string>
@@ -118,12 +118,12 @@
     <string name="status_unknown">Desconocido</string>
     <string name="comment_sent">¡Comentario enviado!</string>
     <string name="rating">Calificación</string>
-    <string name="rate_provider_message">Califica el desempeño del proveedor</string>
+    <string name="rate_provider_message">Califique el desempeño del proveedor</string>
     <string name="comments_to_provider_hint">Comentarios al proveedor</string>
 
     <!-- Suggestions -->
     <string name="write_suggestion_hint">Comentarios</string>
-    <string name="improve_experience">¡Gracias a tus sugerencias podemos mejorar tu experiencia!</string>
+    <string name="improve_experience">¡Gracias a sus sugerencias podemos mejorar su experiencia!</string>
 
     <!--Address-->
     <string name="alias_hint">Casa,Trabajo,etc.</string>

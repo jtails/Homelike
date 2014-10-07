@@ -44,6 +44,7 @@ public class OrdersFragment extends Fragment
     private AbsListView mListView;
     private View mLayoutContent;
     private View mLayoutLoading;
+    private View mLblEmpty;
 
     private enum ContentDisplayMode {
         LOAD, CONTENT;
@@ -85,6 +86,7 @@ public class OrdersFragment extends Fragment
         this.mListView = (AbsListView) view.findViewById(R.id.list_orders);
         this.mLayoutContent = view.findViewById(R.id.layout_orders_content);
         this.mLayoutLoading = view.findViewById(R.id.layout_loading);
+        this.mLblEmpty = view.findViewById(R.id.lbl_empty);
         this.mAdapter = new OrdersAdapter(this.getActivity(), this.mOrders);
 
         this.mListView.setOnItemClickListener(this);
@@ -133,6 +135,13 @@ public class OrdersFragment extends Fragment
                 this.mLayoutContent.setVisibility(View.VISIBLE);
 
                 if( invalidate ) { this.mAdapter.updateContent(this.mOrders); }
+                if(this.mOrders.isEmpty()){
+                    this.mLblEmpty.setVisibility(View.VISIBLE);
+                    this.mListView.setVisibility(View.GONE);
+                } else {
+                    this.mLblEmpty.setVisibility(View.GONE);
+                    this.mListView.setVisibility(View.VISIBLE);
+                }
                 break;
             }
         }

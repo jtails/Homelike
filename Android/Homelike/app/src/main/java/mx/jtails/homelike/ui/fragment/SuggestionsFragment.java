@@ -107,52 +107,35 @@ public class SuggestionsFragment extends Fragment
     }
 
     private boolean validateFields() {
-        List<String> empties = this.validateEmpties();
-        if(!empties.isEmpty()){
-            this.notifyErrors(R.string.missing_fields,
-                    R.string.error_suggestion_validation, empties);
+        if(!this.validateEmpties()){
+            this.notifyErrors(R.string.missing_fields);
             return false;
         } else {
             return true;
         }
     }
 
-    private void notifyErrors(int title, int validationRes, List<String> errors){
-        String errorFields = "\n";
-
-        for(int i = 0 ; i < errors.size() ; i++) {
-            errorFields += errors.get(i);
-            errorFields += "\n";
-            /*
-            if(i == errors.size() - 1){
-                errorFields += ".\n";
-            } else {
-                errorFields += ", ";
-            }
-            */
-        }
+    private void notifyErrors(int title){
 
         new AlertDialog.Builder(this.getActivity())
                 .setCancelable(false)
                 .setTitle(title)
-                .setMessage(this.getString(validationRes) + errorFields)
+                .setMessage(R.string.error_empty_suggestion)
                 .setPositiveButton(R.string.ok, null)
                 .show();
     }
 
-    private List<String> validateEmpties(){
-        List<String> errors = new ArrayList<String>();
-
+    private boolean validateEmpties(){
         if(this.mEditComments.getText().toString().isEmpty()){
-            errors.add(this.getString(R.string.error_empty_suggestion));
+            return false;
         }
 
         int id = this.mGroupSuggestions.getCheckedRadioButtonId();
         if(id < 0){
-            errors.add(this.getString(R.string.error_suggestion_type_not_selected));
+            return false;
         }
 
-        return errors;
+        return true;
     }
 
     @Override

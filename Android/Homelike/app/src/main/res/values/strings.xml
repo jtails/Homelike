@@ -40,7 +40,7 @@
     <string name="error_register_address">Failed to register address, try again later</string>
     <string name="error_registered_account">The account was already registered with other device</string>
     <string name="error_update_order">Failed to update order status. Try again later.</string>
-    <string name="error_empty_suggestion">A suggestion</string>
+    <string name="error_empty_suggestion">Add a suggestion</string>
     <string name="error_suggestion_type_not_selected">A suggestion type</string>
     <string name="error_loading_options">Failed to load options</string>
     <string name="error_send_suggestion">Failed to send. Tray again later</string>

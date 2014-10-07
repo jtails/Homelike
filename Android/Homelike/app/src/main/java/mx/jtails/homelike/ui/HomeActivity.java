@@ -145,4 +145,13 @@ public class HomeActivity extends ActionBarActivity
                 .addToBackStack("")
                 .commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(this.mDrawerLayout.isDrawerOpen(this.findViewById(R.id.drawer_menu))){
+            this.mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

@@ -20,7 +20,7 @@
             android:padding="3dp"/>
 
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
-            android:id="@android:id/empty"
+            android:id="@+id/lbl_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_active_orders"
