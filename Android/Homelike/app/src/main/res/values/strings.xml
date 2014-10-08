@@ -58,6 +58,8 @@
     <string name="send">Send</string>
     <string name="i_accept">I accept the </string>
     <string name="terms_and_conditions">terms and conditions.</string>
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
 
     <!-- Order -->
     <string name="confirm_order">Confirm Order</string>
@@ -81,6 +83,8 @@
     <string name="comments_hint">Comments to the provider, like payment quantity</string>
     <string name="no_active_orders">You don\'t have any active orders</string>
     <string name="no_providers_found">No providers found in this area</string>
+    <string name="phone_short">Phone</string>
+    <string name="no_products">This provider doesn\'t have products</string>
 
     <!-- Address -->
     <string name="location">Location</string>
@@ -112,7 +116,7 @@
     <string name="kind_of_service">What service are you looking for?</string>
 
     <!-- Order Status -->
-    <string name="status_new">New Order</string>
+    <string name="status_new">New</string>
     <string name="status_confirmed">Confirmed</string>
     <string name="status_delivered">Delivered</string>
     <string name="status_unknown">Status Unknown</string>

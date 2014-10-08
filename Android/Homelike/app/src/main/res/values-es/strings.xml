@@ -60,6 +60,8 @@
     <string name="signing_in">Iniciando sesión…</string>
     <string name="i_accept">Acepto los </string>
     <string name="terms_and_conditions">términos y condiciones.</string>
+    <string name="mobile">Teléfono</string>
+    <string name="email">Email</string>
 
     <!-- Order -->
     <string name="confirm_order">Confirmar Pedido</string>
@@ -82,6 +84,8 @@
     <string name="comments_hint">Comentarios al proveedor, como la denominación de su pago</string>
     <string name="no_active_orders">Usted no tiene pedidos activos</string>
     <string name="no_providers_found">No se encontró ningún proveedor en el área</string>
+    <string name="phone_short">Tel.</string>
+    <string name="no_products">El proveedor no cuenta con productos</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>
@@ -112,7 +116,7 @@
     <string name="kind_of_service">¿Qué servicio está buscando?</string>
 
     <!-- Order Status -->
-    <string name="status_new">Nuevo Pedido</string>
+    <string name="status_new">Nuevo</string>
     <string name="status_confirmed">Confirmado</string>
     <string name="status_delivered">Entregado</string>
     <string name="status_unknown">Desconocido</string>

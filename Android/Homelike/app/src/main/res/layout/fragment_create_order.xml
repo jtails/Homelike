@@ -47,6 +47,17 @@
                 android:layout_marginLeft="3dp"/>
 
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_provider_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                homelike:typeface="fonts/RobotoCondensed-LightItalic.ttf"
+                android:textSize="16sp"
+                android:layout_marginLeft="3dp"
+                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"/>
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_provider_slogan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,12 +126,17 @@
                 android:divider="#ddd"
                 android:dividerHeight="1dp"/>
 
-            <TextView
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_empty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="No products found"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_products"
+                android:layout_margin="17dp"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                homelike:typeface="fonts/Roboto-Light.ttf"
+                android:layout_gravity="center"
+                android:gravity="center"/>
 
         </FrameLayout>
 

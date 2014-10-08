@@ -62,6 +62,7 @@ public class CreateOrderFragment extends Fragment
     private TextView mLblEmpty;
     private TextView mLblTotal;
     private RatingBar mRatingProvider;
+    private TextView mLblPhone;
 
     private AbsListView mListView;
     private ProductsAdapter mProductsAdapter;
@@ -127,7 +128,7 @@ public class CreateOrderFragment extends Fragment
         this.mProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
         this.mProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
         this.mProviderSlogan = (TextView) view.findViewById(R.id.lbl_provider_slogan);
-        //this.mProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
+        this.mLblPhone = (TextView) view.findViewById(R.id.lbl_provider_phone);
         this.mLayoutContent = view.findViewById(R.id.layout_products_content);
         this.mListView = (ListView) view.findViewById(R.id.list_products);
         this.mLayoutLoading = view.findViewById(R.id.layout_loading);
@@ -167,6 +168,7 @@ public class CreateOrderFragment extends Fragment
         ImageLoader.getInstance().displayImage(
             this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
         this.mProviderName.setText(this.mProvider.getNombre());
+        this.mLblPhone.setText(this.getString(R.string.phone_short) + ": " + this.mProvider.getTelefono());
         this.mProviderSlogan.setText(this.mProvider.getSlogan());
         this.mRatingProvider.setRating((float) this.mProvider.getCalificacion());
 

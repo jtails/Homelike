@@ -144,7 +144,8 @@ public class ConfirmOrderFragment extends Fragment
 
     private void onConfirmClicked(){
         int position = this.mSpinnerPayment.getSelectedItemPosition();
-        CantidadPago paymentQuantity = this.mPaymentQuantities.get(position);
+        CantidadPago paymentQuantity = this.mPaymentQuantities.isEmpty() ?
+                null : this.mPaymentQuantities.get(position);
         this.mCreatingDialog = ProgressDialog.show(this.getActivity(),
                 this.getString(R.string.new_order), this.getString(R.string.wait), false, false);
         new InsertOrderRequest(this, this.getActivity(),
