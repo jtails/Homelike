@@ -130,11 +130,18 @@ public class HomeActivity extends ActionBarActivity
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
         FragmentManager fm = this.getSupportFragmentManager();
 
-        fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if(option == HomeMenuSection.SERVICES) {
+            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fm.beginTransaction()
+                    .replace(R.id.layout_home_content, option.getFragmentInstance())
+                    .commit();
+        } else {
+            fm.beginTransaction()
+                    .replace(R.id.layout_home_content, option.getFragmentInstance())
+                    .addToBackStack("")
+                    .commit();
+        }
 
-        fm.beginTransaction()
-                .replace(R.id.layout_home_content, option.getFragmentInstance())
-                .commit();
         this.supportInvalidateOptionsMenu();
     }
 
