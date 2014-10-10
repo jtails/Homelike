@@ -46,6 +46,7 @@ public class ProveedorEndpoint {
 			ProveedorManager proveedorM=new ProveedorManager();
 			List<Proveedor> proveedores=proveedorM.getProveedoresinRagne(latitud, longitud,idServicio);
 			logger.warning("Proveedores encontrados: "+proveedores.size());
+			//Generamos la calificacion
 			for(Proveedor proveedor:proveedores){
 				for(Pedido pedido:proveedor.getPedidos()){
 					if(pedido.getStatus()==2){//Pedido terminado

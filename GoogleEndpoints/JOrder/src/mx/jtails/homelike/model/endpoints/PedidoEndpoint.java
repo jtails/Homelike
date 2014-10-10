@@ -134,6 +134,7 @@ public class PedidoEndpoint {
 				Pedido p=new Pedido();
 				p.setComentarioEntregaCliente((String)pedido[0]);
 				p.setFechaHoraEntrega((java.util.Date) pedido[1]);
+				p.setCalificacion((int)pedido[2]);
 				pedidosJ.add(p);
 			}
 			return pedidosJ;
