@@ -13,7 +13,7 @@
 <!-- Page heading -->
 <div class="page-head">
 	<h2 class="pull-left">
-		<i class="fa fa-home"></i> Consulta de Pedidos
+		<i class="fa fa-shopping-cart"></i> Consulta de Pedidos
 	</h2>
 
 	<!-- Breadcrumb -->

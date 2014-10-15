@@ -19,10 +19,11 @@
 		    }
 		};
 		
-		apisToLoad = 2; // must match number of calls to gapi.client.load()
+		apisToLoad = 3; // must match number of calls to gapi.client.load()
 		//var ROOT = 'http://localhost:8888/_ah/api';
 		var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
-		gapi.client.load('sugerenciaspendpoint', 'v1',loadCallback, ROOT);
+		gapi.client.load('sugerenciascendpoint', 'v1',loadCallback, ROOT);
+		gapi.client.load('tsugerenciaendpoint', 'v1',loadCallback, ROOT);
 		gapi.client.load('oauth2', 'v2', loadCallback);
 	}
 	
@@ -31,16 +32,17 @@
 		var btnenviar = document.querySelector('#btnenviar');
 		btnenviar.addEventListener('click', function(e) {
 			google.appengine.homelike.soporte.insert(
-	    		document.querySelector('#idProveedor').value,
-	    		document.querySelector('#sugerencia').value
+	    		document.querySelector('#idCuenta').value,
+	    		document.querySelector('#sugerencia').value,
+	    		document.querySelector('#tsugerencia').value
 	    	);
 		});
 	}
 	
 	
-	google.appengine.homelike.soporte.insert = function(idProveedor,sugerencia){
+	google.appengine.homelike.soporte.insert = function(idCuenta,sugerencia,idTsugerencia){
 		if(sugerencia!=null && sugerencia!=''){
-			gapi.client.sugerenciaspendpoint.insertSugerenciasp({'proveedor':{'idProveedor': idProveedor},'sugerencia': sugerencia}).execute(
+			gapi.client.sugerenciascendpoint.insertSugerenciasc({'cuenta':{'idCuenta': idCuenta},'tsugerencia':{'idTsugerencia':idTsugerencia},'sugerencia': sugerencia}).execute(
 			function(output){
 				if(output!=undefined && output.idSugerencia!=0){
 					$("#sugerencia").val('');
@@ -52,6 +54,28 @@
 			$("#message").addClass("alert alert-warning"); 
 			$("#message").text("Debe ingresar un comentario");
 		}
+	}
+	
+	google.appengine.homelike.soporte.list = function(){
+		$.blockUI({ css: { 
+	        border: 'none', 
+	        padding: '15px', 
+	        backgroundColor: '#000', 
+	        '-webkit-border-radius': '10px', 
+	        '-moz-border-radius': '10px', 
+	        opacity: .5, 
+	        color: '#fff' 
+	    } , message: 'Espere un momento... cargando tipos de sugerencias' });
+		
+		gapi.client.tsugerenciaendpoint.listTsugerencia().execute(
+			function(output){
+				//$("#tsugerencia").empty();
+				for(var i=0;i<output.items.length;i++){
+					var tsugerencia=output.items[i];
+					$('#tsugerencia').append("<option value='"+tsugerencia.idTsugerencia+"'>"+tsugerencia.tipoSugerencia+"</option>");
+				}
+				$.unblockUI();
+		});
 	}
 	
 	//---------------------OAuth 2.0-----------------------------
@@ -68,6 +92,7 @@
 			gapi.client.oauth2.userinfo.get().execute(function(output) {
 		    if(output!=undefined && output.verified_email!=undefined){
 		    	if(output.verified_email){
+		    		google.appengine.homelike.soporte.list();
 		    		addEvents();
 		    	}
 		    }else{

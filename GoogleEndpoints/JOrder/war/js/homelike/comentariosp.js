@@ -48,7 +48,6 @@ google.appengine.homelike.comentarios.list = function(idProveedor,fechaHoraUltim
 		}else{
 			for(var i=0;i<output.items.length;i++){
 				var pedido=output.items[i];
-				console.log(pedido);
 				if(pedido[0]!=null && pedido[0]!='')
 					addComment(pedido);
 			}

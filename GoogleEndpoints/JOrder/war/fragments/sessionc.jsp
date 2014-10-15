@@ -35,6 +35,11 @@
 
 			<!-- Links -->
 			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown dropdown-big pull-left"><a href="soportec.jsp">
+					<i class="fa fa-briefcase"></i>
+						Soporte</a> <!-- Dropdown -->
+				</li>
+				
 				<li class="dropdown pull-right"><a data-toggle="dropdown"
 					class="dropdown-toggle" href="#">
 						<img id="profile" class="img-circle" style="width:20px;height:20px"/>
@@ -43,7 +48,8 @@
 					<ul class="dropdown-menu">
 						<li><a href="/cliente?opcion=logout"><i class="fa fa-sign-out"></i>
 								Salir</a></li>
-					</ul></li>
+					</ul>
+				</li>
 
 			</ul>
 		</nav>

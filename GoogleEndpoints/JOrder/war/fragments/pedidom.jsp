@@ -35,19 +35,10 @@
 
 										<form class="form-horizontal" role="form">
 											<div class="form-group">
-												<label class="control-label col-lg-4">Cantidad de
-													Pago</label>
-												<div class="col-lg-8">
-													<select class="form-control" name="cantidadPago"
-														id="cantidadPago">
-													</select>
-												</div>
-											</div>
-											<div class="form-group">
-												<label class="col-lg-4 control-label">Comentarios</label>
-												<div class="col-lg-8">
+												<label class="col-lg-3 control-label">Comentarios</label>
+												<div class="col-lg-9">
 													<textarea id="comentarioCliente" class="form-control"
-														rows="5" placeholder="Algun comentario al proveedor!!"></textarea>
+														rows="5" placeholder="Algun comentario al proveedor, como la denominacion de su pago!!"></textarea>
 												</div>
 											</div>
 										</form>

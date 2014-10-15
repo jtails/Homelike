@@ -7,6 +7,8 @@
   ga('create', 'UA-54276262-1', 'auto');
   ga('send', 'pageview');
   </script>
+  <script src="js/homelike/sessionrc.js"></script>
+  <script src="https://apis.google.com/js/client.js?onload=init"></script>
   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
@@ -31,7 +33,8 @@
 			<!-- Links -->
 			<ul class="nav navbar-nav pull-right">
 				<li class="dropdown pull-right"><a data-toggle="dropdown"
-					class="dropdown-toggle" href="#"> <i class="fa fa-user"></i>
+					class="dropdown-toggle" href="#">
+						<img id="profile" class="img-circle" style="width:20px;height:20px"/>
 						<c:out value="${sessionScope.cuenta.usuario}"/> <b class="caret"></b>
 				</a> <!-- Dropdown menu -->
 					<ul class="dropdown-menu">
