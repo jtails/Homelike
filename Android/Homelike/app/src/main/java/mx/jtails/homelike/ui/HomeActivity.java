@@ -123,13 +123,14 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onHomeMenuOptionSelected(HomeMenuSection option) {
-        this.mCurrentSection = option;
-        if(option != HomeMenuSection.ORDERS){
-            //HomelikePreferences.saveInt(HomelikePreferences.CURRENT_HOME_SECTION, option.ordinal());
-        }
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
-        FragmentManager fm = this.getSupportFragmentManager();
 
+        if(this.mCurrentSection == option){
+            return;
+        }
+        this.mCurrentSection = option;
+
+        FragmentManager fm = this.getSupportFragmentManager();
         if(option == HomeMenuSection.SERVICES) {
             fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fm.beginTransaction()
