@@ -134,10 +134,12 @@ public class SplashActivity extends ActionBarActivity
 
     private void goToHome(Cuenta account){
         Person person = Plus.PeopleApi.getCurrentPerson(this.mGoogleApiClient);
-        HomelikePreferences.saveString(HomelikePreferences.USER_NAME,
-                person.getDisplayName());
-        HomelikePreferences.saveString(HomelikePreferences.USER_IMG,
-                person.getImage().getUrl());
+        if(person != null){
+            HomelikePreferences.saveString(HomelikePreferences.USER_NAME,
+                    person.getDisplayName());
+            HomelikePreferences.saveString(HomelikePreferences.USER_IMG,
+                    person.getImage().getUrl());
+        }
         HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
                 account.getIdCuenta());
         HomelikePreferences.saveInt(HomelikePreferences.DEVICE_ID,

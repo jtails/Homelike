@@ -74,14 +74,18 @@ public class HomeSectionsFragment extends Fragment
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        ((TextView) view.findViewById(R.id.lbl_user_name)).setText(
-                HomelikePreferences.loadString(HomelikePreferences.USER_NAME,
-                        this.getString(R.string.no_username)));
-        ImageView displayImage = (ImageView) view.findViewById(R.id.img_display_img);
-        ImageLoader.getInstance().displayImage(
-                HomelikeUtils.getImageUrlInSize(displayImage.getLayoutParams().height,
-                        HomelikePreferences.loadString(HomelikePreferences.USER_IMG, "")),
-                displayImage, this.mLoaderOptions);
+        if(HomelikePreferences.loadString(HomelikePreferences.USER_NAME, null) != null){
+            ((TextView) view.findViewById(R.id.lbl_user_name)).setText(
+                    HomelikePreferences.loadString(HomelikePreferences.USER_NAME,
+                            this.getString(R.string.no_username)));
+            ImageView displayImage = (ImageView) view.findViewById(R.id.img_display_img);
+            ImageLoader.getInstance().displayImage(
+                    HomelikeUtils.getImageUrlInSize(displayImage.getLayoutParams().height,
+                            HomelikePreferences.loadString(HomelikePreferences.USER_IMG, "")),
+                    displayImage, this.mLoaderOptions);
+        } else {
+            view.findViewById(R.id.layout_me).setVisibility(View.GONE);
+        }
 
         this.mListSections = (ListView) view.findViewById(R.id.list_home_menu);
         this.mListSections.setOnItemClickListener(this);

@@ -65,8 +65,6 @@ public class OrdersFragment extends Fragment
         this.setHasOptionsMenu(true);
         this.mApiRequest = new ListOrdersRequest(this,
                 HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
-        this.mIsLoading = true;
-        this.mApiRequest.executeAsync();
     }
 
     @Override
@@ -91,6 +89,9 @@ public class OrdersFragment extends Fragment
 
         this.mListView.setOnItemClickListener(this);
         this.mListView.setAdapter(this.mAdapter);
+
+        this.mIsLoading = true;
+        this.mApiRequest.executeAsync();
     }
 
     @Override

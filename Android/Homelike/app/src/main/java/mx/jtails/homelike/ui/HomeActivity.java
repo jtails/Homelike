@@ -160,6 +160,9 @@ public class HomeActivity extends ActionBarActivity
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            if(this.getSupportFragmentManager().getBackStackEntryCount() <= 0) {
+                this.mCurrentSection = HomeMenuSection.SERVICES;
+            }
         }
     }
 }
