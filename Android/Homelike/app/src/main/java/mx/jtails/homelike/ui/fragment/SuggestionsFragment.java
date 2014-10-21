@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,11 +142,11 @@ public class SuggestionsFragment extends Fragment
     @Override
     public void onInsertSuggestionResponse(boolean inserted) {
         if(inserted){
-            //Toast.makeText(this.getActivity(), R.string.gratitue_message,
-              //      Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), R.string.gratitue_message,
+                          Toast.LENGTH_SHORT).show();
         } else {
-            //Toast.makeText(this.getActivity(), R.string.error_send_suggestion,
-              //      Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), R.string.error_send_suggestion,
+                    Toast.LENGTH_SHORT).show();
         }
         ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
     }
