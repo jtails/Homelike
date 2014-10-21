@@ -217,6 +217,11 @@ function addRow(pedido,detallePedido,direccion,proveedor){
 				"<strong>"+proveedor.nombre+" : </strong>"+
 				proveedor.slogan+
 		 	"</li>"+
+		 	"<li>"+
+		 		"<i class='fa fa-phone'></i>"+
+		 		"<strong>Telefono : </strong>"+
+		 		proveedor.telefono+
+		 	"</li>"+
 			"<li>"+
 				"<i class='fa fa-sign-in'></i>"+
 				"<strong>Direccion : </strong>"+

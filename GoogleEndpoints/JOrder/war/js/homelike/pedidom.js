@@ -47,7 +47,8 @@
 					document.querySelector('#idCuenta').value,
 					dpedidoJson,
 					document.querySelector('#comentarioCliente').value,
-					document.querySelector('#cantidadPago').value
+					1
+					//document.querySelector('#cantidadPago').value
 			);
 			}else{
 				$("#message").addClass("alert alert-warning"); 
@@ -59,7 +60,7 @@
 	}
 	
 	
-	google.appengine.homelike.cantidadpago.list = function(){
+	/*google.appengine.homelike.cantidadpago.list = function(){
 		gapi.client.cantidadpagoendpoint.listCantidadPago().execute(
 		
 		function(output){
@@ -73,7 +74,7 @@
 	
 	function addCantidad(idCantidadPago,cantidadTexto){
 		 $('#cantidadPago').append("<option value='"+idCantidadPago+"'>"+cantidadTexto +"</option>");
-	}
+	}*/
 	
 	
 	google.appengine.homelike.pedidos.insert = function(
@@ -105,7 +106,7 @@
 			gapi.client.oauth2.userinfo.get().execute(function(output) {
 		    if(output!=undefined && output.verified_email!=undefined){
 		    	if(output.verified_email){
-		    		google.appengine.homelike.cantidadpago.list();
+		    		//google.appengine.homelike.cantidadpago.list();
 		    		makePedido();
 		    	}
 		    }else{

@@ -18,9 +18,10 @@
   <link href="css/style.css" rel="stylesheet">
   
   <script src="js/jquery.js"></script>
+  <script src="js/jQuery/jquery.blockUI.js"></script>
   <script src="js/respond.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/homelike/soportep.js"></script>
+  <script src="js/homelike/soportec.js"></script>
   <script src="https://apis.google.com/js/client.js?onload=init"></script>
   
   <script>
@@ -43,7 +44,7 @@
 
 <body>
 
- <jsp:include page="fragments/sessionrp.jsp"/>
+ <jsp:include page="fragments/sessionrc.jsp"/>
  
 <!-- Form area -->
 <div class="admin-form">
@@ -64,7 +65,7 @@
         			</div>
 				 	<div class="support-contact">
 				 		<form class="form-horizontal" method="POST" onsubmit="return false;">
-				 			<input type="hidden" id="idProveedor" name="idProveedor" value="${sessionScope.proveedor.idProveedor}">
+				 			<input type="hidden" id="idCuenta" name="idCuenta" value="${sessionScope.cuenta.idCuenta}">
 							<hr />
                         	<p><i class="fa fa-phone"></i>&nbsp; Telefono<strong>:</strong> +52-55-21-06-70-45</p>
                         	<hr />
@@ -73,6 +74,12 @@
                         	<p><i class="fa fa-home"></i>&nbsp; Direccion<strong>:</strong> Chicago 74,Napoles Benito Juarez,Mexico D.F </p>
 							<hr />
 							<p style="text-align:justify;">Si usted experimento algun tipo de problema en este sitio web, le agradecemos nos comente su experiencia y con gusto daremos atencion a su solicitud.</p>
+							<div class="form-group">
+								<div class="col-lg-5">
+									<select class="form-control" id="tsugerencia">
+                           			</select>
+                           		</div>
+                           	</div>
 							<textarea class="form-control" id="sugerencia" name="sugerencia" rows="5" placeholder="Comentarios - Sugerencias - Mejoras - Nuevas funcionalidades"></textarea>
                         	<!-- Button -->
                         </form>

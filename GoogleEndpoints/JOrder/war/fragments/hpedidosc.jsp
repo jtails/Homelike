@@ -14,7 +14,7 @@
 <!-- Page heading -->
 <div class="page-head">
 	<h2 class="pull-left">
-		<i class="fa fa-home"></i> Historico de Pedidos
+		<i class="fa fa-search"></i> Historico de Pedidos
 	</h2>
 
 	<!-- Breadcrumb -->

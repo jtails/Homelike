@@ -12,7 +12,6 @@
 	
 	//Inside your callback function, load your Endpoint:
 	function init() {
-		//Debido a que los headers siempre estan presentes se les cambia el nombre a las funciones de OAuth
 		var apisToLoad;
 		var loadCallback_ = function() {
 		    if (--apisToLoad == 0) {
@@ -20,44 +19,10 @@
 		    }
 		};
 		
-		$.blockUI({ css: { 
-            border: 'none', 
-            padding: '15px', 
-            backgroundColor: '#000', 
-            '-webkit-border-radius': '10px', 
-            '-moz-border-radius': '10px', 
-            opacity: .5, 
-            color: '#fff' 
-        } , message: 'Espere un momento... cargando estadisticas de pedidos' });
-		
-		apisToLoad = 2; // must match number of calls to gapi.client.load()
+		apisToLoad = 1; // must match number of calls to gapi.client.load()
 		//var ROOT = 'http://localhost:8888/_ah/api';
 		var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
-		gapi.client.load('tpedidoendpoint', 'v1',loadCallback_, ROOT);
 		gapi.client.load('oauth2', 'v2', loadCallback_);
-	}
-	
-	
-	google.appengine.homelike.tpedido.listTpedido = function(idCuenta){
-		gapi.client.tpedidoendpoint.listTpedidosByCuenta({'idCuenta': idCuenta}).execute(
-		function(output){
-			output.items = output.items || [];
-			for(var i=0;i<output.items.length;i++){
-				var tpedido=output.items[i];
-				addTpedidosh(tpedido);
-			}
-			$.unblockUI();
-		});
-	}
-	
-	function addTpedidosh(tpedido){
-		$("#tpedidosh").append(
-			"<li class='dropdown dropdown-big'><a class='dropdown-toggle' "+
-					"href='#' data-toggle='dropdown'> <i class='fa fa-truck'></i>"+
-					tpedido.key.servicio.nombre+" <span class='label label-primary'>"+tpedido.total+"</span>"+
-				"</a>"+
-			"</li>"
-		);
 	}
 	
 	//---------------------OAuth 2.0-----------------------------
@@ -74,9 +39,6 @@
 			gapi.client.oauth2.userinfo.get().execute(function(output) {
 		    if(output!=undefined && output.verified_email!=undefined){
 		    	if(output.verified_email){
-		    		google.appengine.homelike.tpedido.listTpedido(
-		    			document.querySelector('#idCuenta').value
-		    		);
 		    		$("#profile").attr('src',output.picture);
 		    	}
 		    }else{

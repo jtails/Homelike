@@ -11,6 +11,7 @@ import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 
 @Api(name = "tsugerenciaendpoint", 
@@ -20,6 +21,7 @@ clientIds = {Constants.WEB_CLIENT_ID,Constants.ANDROID_CLIENT_ID}
 ,audiences = {Constants.ANDROID_AUDIENCE}
 )
 public class TsugerenciaEndpoint {
+	private static final Logger logger = Logger.getLogger(TsugerenciaEndpoint.class.getName());
 
 	
 	/**
@@ -33,6 +35,7 @@ public class TsugerenciaEndpoint {
 	public CollectionResponse<Tsugerencia> listTsugerencia(User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			TsugerenciaManager tsugerenciaM=new TsugerenciaManager();
+			logger.warning("listTsugerencia : "+user);
 			return tsugerenciaM.listTsugerencia(null,null);
 		//}
 		//return null;
