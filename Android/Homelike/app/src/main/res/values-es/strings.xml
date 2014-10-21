@@ -68,7 +68,7 @@
     <string name="confirm_order_message">¿Está seguro que quiere cancelar la orden?</string>
     <string name="cancel_order">Cancelar Pedido</string>
     <string name="empty_order">Pedido Vacío</string>
-    <string name="empty_order_message">El pedido está vacío, por favor seleccione tus productos.</string>
+    <string name="empty_order_message">El pedido está vacío, por favor seleccione algún producto.</string>
     <string name="new_order">Nuevo pedido</string>
     <string name="no_comments">Sin Comentarios</string>
     <string name="client_comment">Comentarios del cliente</string>

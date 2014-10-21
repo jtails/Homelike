@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:textColor="#e0f2f1"
-            android:text="jtails"
+            android:text="Jtails"
             homelike:typeface="fonts/RobotoCondensed-Bold.ttf"/>
 
     </LinearLayout>
