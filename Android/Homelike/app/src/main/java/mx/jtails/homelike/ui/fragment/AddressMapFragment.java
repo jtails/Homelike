@@ -17,6 +17,8 @@ import android.widget.Button;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -38,7 +40,7 @@ import mx.jtails.homelike.request.single.RetrieveLocationTask.OnLocationDataRetr
 public class AddressMapFragment extends Fragment
     implements GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener,
-        OnLocationDataRetrievedListener {
+        OnLocationDataRetrievedListener, LocationListener {
 
     private MapView mAddressMap = null;
     private ProgressDialog mLocationDialog;
@@ -156,11 +158,15 @@ public class AddressMapFragment extends Fragment
     @Override
     public void onConnected(Bundle bundle) {
         Location currentLocation = this.mLocationClient.getLastLocation();
+        if(currentLocation != null){
+            this.mLocationDialog = ProgressDialog.show(this.getActivity(), null,
+                    this.getString(R.string.wait), false, false);
+            this.mLocationClient.requestLocationUpdates(
+                    new LocationRequest().setNumUpdates(1), this);
+            return;
+        }
         LatLng currentLocationLatLng = new LatLng(currentLocation.getLatitude(),
                 currentLocation.getLongitude());
-
-        //this.mSelectedLatLng = currentLocationLatLng;
-        //this.moveMapCameraToSelected();
         this.moveMapCameraTo(currentLocationLatLng);
     }
 
@@ -232,6 +238,20 @@ public class AddressMapFragment extends Fragment
                 this.mAddressSelectedListener.onAddressLocationSelectedListener(address);
             }
         }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if(this.mLocationClient != null){
+            this.mLocationClient.removeLocationUpdates(this);
+        }
+        if(this.mLocationDialog != null){
+            this.mLocationDialog.dismiss();
+            this.mLocationDialog = null;
+        }
+        LatLng currentLocationLatLng = new LatLng(location.getLatitude(),
+                location.getLongitude());
+        this.moveMapCameraTo(currentLocationLatLng);
     }
 
     public interface OnAddressLocationSelectedListener {
