@@ -3,6 +3,7 @@ package mx.jtails.homelike.util;
 import android.support.v4.app.Fragment;
 
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.ui.fragment.ContactFragment;
 import mx.jtails.homelike.ui.fragment.MyAddressesFragment;
 import mx.jtails.homelike.ui.fragment.OrdersFragment;
 import mx.jtails.homelike.ui.fragment.ServicesFragment;
@@ -16,7 +17,8 @@ public enum HomeMenuSection {
     SERVICES(ServicesFragment.class, R.string.home_services, R.drawable.ic_menu_services),
     ADDRESSES(MyAddressesFragment.class, R.string.home_my_addresses, R.drawable.ic_menu_addresses),
     ORDERS(OrdersFragment.class, R.string.home_orders, R.drawable.ic_menu_orders),
-    SUGGESTIONS(SuggestionsFragment.class, R.string.home_suggestions, R.drawable.ic_menu_comments);
+    SUGGESTIONS(SuggestionsFragment.class, R.string.home_suggestions, R.drawable.ic_menu_suggestions),
+    CONTACT(ContactFragment.class, R.string.home_contact, R.drawable.ic_menu_contact);
 
     private Class<? extends Fragment> fragmentClass;
     private int subtitleRes;
