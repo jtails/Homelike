@@ -86,6 +86,7 @@
     <string name="no_providers_found">No providers found in this area</string>
     <string name="phone_short">Phone</string>
     <string name="no_products">This provider doesn\'t have products</string>
+    <string name="request_provider">Request Provider</string>
 
     <!-- Address -->
     <string name="location">Location</string>

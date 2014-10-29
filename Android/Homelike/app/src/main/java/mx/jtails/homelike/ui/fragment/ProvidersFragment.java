@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,9 @@ import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.ListProvidersRequest;
 import mx.jtails.homelike.ui.CommentsActivity;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProvidersAdapter;
+import mx.jtails.homelike.util.HomeMenuSection;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
@@ -54,7 +55,7 @@ public class ProvidersFragment extends Fragment
     private View mLayoutContent;
     private AbsListView mListView;
     private View mLayoutLoading;
-    private TextView mLblEmpty;
+    private View mLayoutEmpty;
 
     public static ProvidersFragment getInstance(int addressId, int serviceId){
         Bundle extras = new Bundle();
@@ -84,12 +85,29 @@ public class ProvidersFragment extends Fragment
         this.mLayoutContent = view.findViewById(R.id.layout_providers_content);
         this.mListView = (AbsListView) view.findViewById(R.id.list_providers);
         this.mLayoutLoading = view.findViewById(R.id.layout_loading);
-        this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
+        this.mLayoutEmpty = view.findViewById(R.id.layout_empty);
         this.mProvidersAdapter = new ProvidersAdapter(this.getActivity(), this, this.mProviders);
 
         this.mListView.setAdapter(this.mProvidersAdapter);
         this.mListView.setOnItemClickListener(this);
         this.displayContentMode(ContentDisplayMode.LOAD);
+
+        view.findViewById(R.id.btn_request_provider).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestProvider();
+            }
+        });
+    }
+
+    private void requestProvider(){
+        Intent intent = new Intent(this.getActivity(), HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Bundle args = new Bundle();
+        args.putInt(HomeActivity.ARG_HOME_CONTENT_ORD, HomeMenuSection.SUGGESTIONS.ordinal());
+        args.putString(SuggestionsFragment.EXTRA_DEFAULT_OPTION, "Solicitud de Proveedor");
+        intent.putExtras(args);
+        this.getActivity().startActivity(intent);
     }
 
     @Override
@@ -138,7 +156,7 @@ public class ProvidersFragment extends Fragment
             case CONTENT: {
                 this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
-                this.mLblEmpty.setVisibility(View.GONE);
+                this.mLayoutEmpty.setVisibility(View.GONE);
                 this.mListView.setVisibility(View.VISIBLE);
 
                 this.mProvidersAdapter.updateContent(this.mProviders);
@@ -147,7 +165,7 @@ public class ProvidersFragment extends Fragment
             case CONTENT_EMPTY: {
                 this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
-                this.mLblEmpty.setVisibility(View.VISIBLE);
+                this.mLayoutEmpty.setVisibility(View.VISIBLE);
                 this.mListView.setVisibility(View.GONE);
                 break;
             }

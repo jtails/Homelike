@@ -20,17 +20,34 @@
             android:divider="#ddd"
             android:dividerHeight="1dp"/>
 
-        <mx.jtails.homelike.ui.widget.TypeFacedTextView
-            android:id="@+id/lbl_empty"
+        <LinearLayout android:id="@+id/layout_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_providers_found"
-            android:layout_margin="20dp"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            homelike:typeface="fonts/Roboto-Light.ttf"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="center">
+
+            <mx.jtails.homelike.ui.widget.TypeFacedTextView
+                android:id="@+id/lbl_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_providers_found"
+                android:layout_margin="20dp"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                homelike:typeface="fonts/Roboto-Light.ttf"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+            <Button android:id="@+id/btn_request_provider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn"
+                android:text="@string/request_provider"
+                android:padding="10dp"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 

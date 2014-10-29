@@ -29,6 +29,7 @@ public class HomeActivity extends ActionBarActivity
     private ActionBarDrawerToggle mDrawerToggle;
 
     private int mTempHomeSection = -1;
+    private Bundle mTempHomeExtraData = null;
     private HomeMenuSection mCurrentSection;
 
     @Override
@@ -39,7 +40,15 @@ public class HomeActivity extends ActionBarActivity
 
         this.requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_home);
+
         this.setupActivity();
+
+        this.onHomeMenuOptionSelected(HomeSectionsFragment.DEFAULT_HOME_CONTENT);
+        if(this.mTempHomeSection != -1){
+            this.onHomeMenuOptionSelected(HomeMenuSection.values()[this.mTempHomeSection]);
+            this.mTempHomeSection = -1;
+            this.mTempHomeExtraData = null;
+        }
     }
 
     private void loadArguments(Bundle args){
@@ -48,6 +57,10 @@ public class HomeActivity extends ActionBarActivity
         }
 
         this.mTempHomeSection = args.getInt(ARG_HOME_CONTENT_ORD, -1);
+        if(this.mTempHomeSection != -1){
+            args.remove(ARG_HOME_CONTENT_ORD);
+            this.mTempHomeExtraData = args;
+        }
     }
 
     private void validateUserSignedIn(){
@@ -74,17 +87,6 @@ public class HomeActivity extends ActionBarActivity
         ab.setDisplayShowTitleEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setHomeButtonEnabled(true);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(this.mTempHomeSection < 0){
-            return;
-        }
-
-        this.onHomeMenuOptionSelected(HomeMenuSection.values()[this.mTempHomeSection]);
-        this.mTempHomeSection = -1;
     }
 
     private void setupNavigationDrawer(){
@@ -131,14 +133,19 @@ public class HomeActivity extends ActionBarActivity
         this.mCurrentSection = option;
 
         FragmentManager fm = this.getSupportFragmentManager();
+        Fragment newContent = option.getFragmentInstance();
+        if(this.mTempHomeExtraData != null){
+            newContent.setArguments(this.mTempHomeExtraData);
+        }
+
         if(option == HomeMenuSection.SERVICES) {
             fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             fm.beginTransaction()
-                    .replace(R.id.layout_home_content, option.getFragmentInstance())
+                    .replace(R.id.layout_home_content, newContent)
                     .commit();
         } else {
             fm.beginTransaction()
-                    .replace(R.id.layout_home_content, option.getFragmentInstance())
+                    .replace(R.id.layout_home_content, newContent)
                     .addToBackStack("")
                     .commit();
         }

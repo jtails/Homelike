@@ -158,7 +158,7 @@ public class AddressMapFragment extends Fragment
     @Override
     public void onConnected(Bundle bundle) {
         Location currentLocation = this.mLocationClient.getLastLocation();
-        if(currentLocation != null){
+        if(currentLocation == null){
             this.mLocationDialog = ProgressDialog.show(this.getActivity(), null,
                     this.getString(R.string.wait), false, false);
             this.mLocationClient.requestLocationUpdates(

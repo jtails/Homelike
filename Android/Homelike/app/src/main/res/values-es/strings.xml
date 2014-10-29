@@ -87,6 +87,7 @@
     <string name="no_providers_found">No se encontró ningún proveedor en el área</string>
     <string name="phone_short">Tel.</string>
     <string name="no_products">El proveedor no cuenta con productos</string>
+    <string name="request_provider">Solicitar Proveedor</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>

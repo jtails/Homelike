@@ -32,12 +32,25 @@ public class SuggestionsFragment extends Fragment
     implements ListSuggestionTypesRequest.OnListSuggestionTypesResponseHandler,
         InsertSuggestionRequest.OnInsertSuggestionResponseHandler {
 
+    public static final String EXTRA_DEFAULT_OPTION = "extra_default_option";
+
     private EditText mEditComments;
     private RadioGroup mGroupSuggestions;
     private RadioButton[] mRadioSuggestions;
     private View mLayoutLoading;
 
+    private String mDefaultOption = null;
+
     private List<Tsugerencia> mSuggestionTypes = new ArrayList<Tsugerencia>();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = this.getArguments();
+        if(args != null && args.containsKey(EXTRA_DEFAULT_OPTION)){
+            this.mDefaultOption = args.getString(EXTRA_DEFAULT_OPTION);
+        }
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -90,21 +103,36 @@ public class SuggestionsFragment extends Fragment
         this.mLayoutLoading.setVisibility(View.GONE);
         this.mGroupSuggestions.setVisibility(View.VISIBLE);
         if(suggestionTypes.isEmpty()){
-            //Toast.makeText(this.getActivity(), R.string.error_loading_options, Toast.LENGTH_SHORT).show();
             ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
         } else {
-            this.mSuggestionTypes = suggestionTypes;
-            this.mRadioSuggestions = new RadioButton[this.mSuggestionTypes.size()];
-            for(int i = 0 ; i < this.mSuggestionTypes.size() ; i++){
-                RadioButton radio = new RadioButton(this.getActivity());
-                Tsugerencia suggestion = this.mSuggestionTypes.get(i);
-                this.mRadioSuggestions[i] = radio;
-                radio.setText(suggestion.getTipoSugerencia());
-                radio.setTextColor(Color.WHITE);
-                radio.setId(i + 100);
-                this.mGroupSuggestions.addView(radio);
+            setupSuggestionsRadioGroup(suggestionTypes);
+        }
+    }
+
+    private void setupSuggestionsRadioGroup(List<Tsugerencia> suggestionTypes) {
+        this.mSuggestionTypes = suggestionTypes;
+        this.mRadioSuggestions = new RadioButton[this.mSuggestionTypes.size()];
+
+        int checkDefault = -1;
+        for(int i = 0 ; i < this.mSuggestionTypes.size() ; i++){
+            RadioButton radio = new RadioButton(this.getActivity());
+            Tsugerencia suggestion = this.mSuggestionTypes.get(i);
+            this.mRadioSuggestions[i] = radio;
+            radio.setText(suggestion.getTipoSugerencia());
+            radio.setTextColor(Color.WHITE);
+            radio.setId(i + 100);
+            this.mGroupSuggestions.addView(radio);
+
+            if(this.mDefaultOption != null &&
+                    this.mDefaultOption.equalsIgnoreCase(suggestion.getTipoSugerencia())){
+                checkDefault = radio.getId();
             }
         }
+
+        if(checkDefault > 0){
+            this.mGroupSuggestions.check(checkDefault);
+        }
+        
     }
 
     private boolean validateFields() {

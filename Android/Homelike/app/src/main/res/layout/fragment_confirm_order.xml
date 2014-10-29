@@ -169,7 +169,6 @@
             android:padding="10dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"
             android:text="@string/confirm"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_btn"/>
