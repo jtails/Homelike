@@ -70,15 +70,29 @@
 														<form class="form-horizontal" action="proveedor"
 															method="POST" onsubmit="return false;">
 															<div class="form-group">
-																<label class="control-label col-lg-2" for="name">Producto</label>
+																<label class="control-label col-lg-4" for="name">Producto</label>
 																<div class="col-lg-8">
 																	<select name="cproducto" id="cproducto"
 																		class="form-control">
 																	</select>
 																</div>
 															</div>
+															<div class="form-group" id="ddescripcion" style="display:none">
+																<label class="control-label col-lg-4" for="name">Descripcion</label>
+																<div class="col-lg-8">
+																	<input type="text" name="descripcion" id="descripcion"
+																		class="form-control"/>
+																</div>
+															</div>
+															<div class="form-group" id="dpresentacion" style="display:none">
+																<label class="control-label col-lg-4" for="name">Presentacion</label>
+																<div class="col-lg-8">
+																	<input type="text" name="presentacion" id="presentacion"
+																		class="form-control"/>
+																</div>
+															</div>
 															<div class="form-group">
-																<label class="control-label col-lg-2" for="name">Precio</label>
+																<label class="control-label col-lg-4" for="name">Precio</label>
 																<div class="col-lg-8">
 																	<input type="text" name="precio" id="precio"
 																		class="form-control" />
@@ -98,7 +112,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-8">
 											<!-- Widget starts -->
 											<div class="widget">
 												<div class="widget-head">
@@ -113,12 +127,15 @@
 												<div class="widget-content referrer">
 													<table
 														class="table table-striped table-bordered table-hover">
-														<tbody id="tblProductos">
+														<thead>
 															<tr>
 																<th>Descripcion</th>
+																<th>Presentacion</th>
 																<th>Precio Unitario</th>
-																<th>Eliminar</th>
+																<th>Controles</th>
 															</tr>
+														</thead>
+														<tbody id="tblProductos">
 														</tbody>
 													</table>
 													<div class="widget-foot"></div>

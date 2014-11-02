@@ -126,7 +126,9 @@ public class CuentaEndpoint {
 	public Cuenta getCuenta(@Named("id") Long id,User user)throws OAuthRequestException, IOException {
 	//	if(user!=null){
 		CuentaManager cuentaM=new CuentaManager();
-		return cuentaM.getCuenta(id);
+		Cuenta cuenta=cuentaM.getCuenta(id);
+		logger.warning("Direcciones en la cuenta : "+cuenta.getDirecciones().size()+" User :"+user);
+		return cuenta;
 		//}
 		//return null;
 	}
@@ -193,7 +195,9 @@ public class CuentaEndpoint {
 	public Cuenta getCuentaByUser(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			CuentaManager cuentaM=new CuentaManager();
-			return cuentaM.getCuentaByUser(cuenta);
+			cuenta=cuentaM.getCuentaByUser(cuenta);
+			logger.warning("Direcciones en la cuenta : "+cuenta.getDirecciones().size()+" User :"+user);
+			return cuenta;
 		//}
 		//return null;
 	}

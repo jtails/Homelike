@@ -91,10 +91,19 @@
 			output.items = output.items || [];
 			dpedido=new Array(output.items.length);
 			for(var i=0;i<output.items.length;i++){
-				addProducto(i,output.items[i].idProducto,
-							output.items[i].cproducto.descripcion,
-							output.items[i].cproducto.presentacion,
-							output.items[i].costoUnitario);
+				if(output.items[i].cproducto!=undefined){
+					addProducto(i,output.items[i].idProducto,
+						output.items[i].cproducto.descripcion,
+						output.items[i].cproducto.presentacion,
+						output.items[i].costoUnitario
+					);
+				}else{
+					addProducto(i,output.items[i].idProducto,
+						output.items[i].descripcion,
+						output.items[i].presentacion,
+						output.items[i].costoUnitario
+					);
+				}
 			}
 			$.unblockUI();
 		});

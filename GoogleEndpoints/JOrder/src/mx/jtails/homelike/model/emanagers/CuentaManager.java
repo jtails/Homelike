@@ -2,6 +2,7 @@ package mx.jtails.homelike.model.emanagers;
 
 import mx.jtails.homelike.model.beans.Cuenta;
 import mx.jtails.homelike.model.beans.Proveedor;
+
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JPACursorHelper;
@@ -59,6 +60,18 @@ public class CuentaManager {
 				.setNextPageToken(cursorString).build();
 	}
 	
+	public int countCuentas() {
+		EntityManager mgr = null;
+		Long numCuentas = null;
+		try {
+			mgr = getEntityManager();
+			Query query = mgr.createQuery("select count(Cuenta) from Cuenta as Cuenta");
+			numCuentas = (Long)query.getSingleResult();
+		} finally {
+			mgr.close();
+		}
+		return numCuentas.intValue();
+	}
 	
 	
 	@SuppressWarnings({ "unchecked"})

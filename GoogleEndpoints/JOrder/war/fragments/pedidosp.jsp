@@ -18,9 +18,7 @@
 
 	<!-- Breadcrumb -->
 	<div class="bread-crumb pull-right">
-		<a href="#"><i class="fa fa-home"></i> Home</a>
-		<!-- Divider -->
-		<span class="divider">/</span> <a href="#" class="bread-current">Dashboard</a>
+		<a href="#" id="vsimple"><i class="fa fa-home"></i>Cambiar a Vista Simplificada</a>
 	</div>
 
 	<div class="clearfix"></div>

@@ -29,6 +29,10 @@ public class Producto implements Serializable {
 	private String descripcion;
 
 	private String presentacion;
+	
+	
+	//-3 Borrado logico
+	private int status;
 
 	//bi-directional many-to-one association to CProducto
 	@JoinColumn(name="id_c_producto")	
@@ -89,6 +93,14 @@ public class Producto implements Serializable {
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

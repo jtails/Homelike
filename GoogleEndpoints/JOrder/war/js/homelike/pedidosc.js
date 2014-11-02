@@ -393,15 +393,27 @@ function setgPedido(pedido,detallePedido){
 		);
 		var total=0;
 		for(var i=0;i<detallePedido.length;i++){
-			$("#tblProductos-"+pedido.idPedido).append(
-				"<tr>"+
-					"<td>"+detallePedido[i].producto.idProducto+"</td>"+
-					"<td>"+detallePedido[i].producto.cproducto.descripcion+"</td>"+
-					"<td>"+detallePedido[i].producto.cproducto.presentacion+"</td>"+
-					"<td>"+detallePedido[i].producto.costoUnitario+"</td>"+
-					"<td>"+detallePedido[i].cantidad+"</td>"+
-				"</tr>"
-			);
+			if(detallePedido[i].producto.cproducto!=undefined){
+				$("#tblProductos-"+pedido.idPedido).append(
+					"<tr>"+
+						"<td>"+detallePedido[i].producto.idProducto+"</td>"+
+						"<td>"+detallePedido[i].producto.cproducto.descripcion+"</td>"+
+						"<td>"+detallePedido[i].producto.cproducto.presentacion+"</td>"+
+						"<td>"+detallePedido[i].producto.costoUnitario+"</td>"+
+						"<td>"+detallePedido[i].cantidad+"</td>"+
+					"</tr>"
+				);
+			}else{
+				$("#tblProductos-"+pedido.idPedido).append(
+					"<tr>"+
+						"<td>"+detallePedido[i].producto.idProducto+"</td>"+
+						"<td>"+detallePedido[i].producto.descripcion+"</td>"+
+						"<td>"+detallePedido[i].producto.presentacion+"</td>"+
+						"<td>"+detallePedido[i].producto.costoUnitario+"</td>"+
+						"<td>"+detallePedido[i].cantidad+"</td>"+
+					"</tr>"
+				);
+			}
 			total+=detallePedido[i].producto.costoUnitario*detallePedido[i].cantidad;
 			$("#total-"+pedido.idPedido).text(total);
 		}

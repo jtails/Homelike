@@ -69,6 +69,17 @@ public class ProductoManager {
 		Cursor cursor = null;
 		List<Producto> productos = null;
 		mgr = getEntityManager();
+		Query query = mgr.createQuery("select from Producto as Producto where Producto.proveedor.idProveedor=:idProveedor and Producto.status=:status").setParameter("idProveedor",proveedor.getIdProveedor()).setParameter("status",0);
+		productos = (List<Producto>) query.getResultList();
+		return productos;
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<Producto> listAllProductosByProveedor(Proveedor proveedor) {
+		EntityManager mgr = null;
+		Cursor cursor = null;
+		List<Producto> productos = null;
+		mgr = getEntityManager();
 		Query query = mgr.createQuery("select from Producto as Producto where Producto.proveedor.idProveedor=:idProveedor").setParameter("idProveedor",proveedor.getIdProveedor());
 		productos = (List<Producto>) query.getResultList();
 		return productos;

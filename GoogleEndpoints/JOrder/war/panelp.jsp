@@ -135,6 +135,9 @@
 		<div id="modalBox" class="modal fade" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
 		</div>
+		<div id="modalBox2" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+		</div>
 
 		<!-- Mainbar ends -->
 		<div class="clearfix"></div>

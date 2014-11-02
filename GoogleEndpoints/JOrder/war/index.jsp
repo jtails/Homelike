@@ -40,6 +40,8 @@
   ga('create', 'UA-54276262-1', 'auto');
   ga('send', 'pageview');
   </script>
+  <script src="js/homelike/index.js"></script>
+  <script src="https://apis.google.com/js/client.js?onload=init"></script>
   
 	</head>
 	
@@ -137,6 +139,13 @@
 				<h4><a href="#"><b>HomeLike es Gratis</b></a></h4>
 				<p class="meta" style="text-align:justify">HomeLike cuenta con un esquema de negocio que permite darle a nuestros usuarios finales un costo nulo por el uso de la aplicaci&oacute;n,tanto solo requieres disponer de una cuenta de Google(Correo electr&oacute;nico), y listo</p>
 				<p class="meta" style="text-align:justify">HomeLike evoluciona, pronto incluiremos nuevos servicios de uso com&uacute;n para facilitar cada vez mas la vida de nuestros usuarios</p>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6">				      
+				<h4><a href="#"><b>Nuestra comunidad</b></a></h4>
+				<p class="meta" style="text-align:justify" id="numCuentas"></p>
+				<p class="meta" style="text-align:justify" id="numProveedores"></p>
 			  </div>
 			</div>
 		  </div>

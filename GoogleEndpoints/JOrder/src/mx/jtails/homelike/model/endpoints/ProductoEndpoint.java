@@ -60,6 +60,17 @@ public class ProductoEndpoint {
 		//return null;
 	}
 	
+	@ApiMethod(name = "listAllProductosByProveedor",path="listAllProductosByProveedor")
+	public List<Producto> listAllProductosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			ProductoManager productoM=new ProductoManager();
+			List<Producto> productos=productoM.listAllProductosByProveedor(proveedor);
+			logger.warning("Productos encontrados "+productos.size()+" :"+user);
+			return productos;
+		//}
+		//return null;
+	}
+	
 	/**
 	 * Inserta un nuevo producto para un proveedor, Si el producto ya esta persistido realiza una operacion Update
 	 * @param producto
@@ -75,14 +86,21 @@ public class ProductoEndpoint {
 			ProductoManager productoM=new ProductoManager();
 			CProductoManager cproductoM=new CProductoManager();
 			ProveedorManager proveedorM=new ProveedorManager();
-			//Obtenemos Referencia a los Objetos CProducto y Proveedor, ya que estos se encuentran persistidos		
+			//Obtenemos Referencia a los Objetos CProducto y Proveedor, ya que estos se encuentran persistidos
+			//En caso de ser un producto nuevo se asigna al proveedor sin CProducto
 			Proveedor proveedor=proveedorM.getProveedor(Long.valueOf(producto.getProveedor().getIdProveedor()));
-			CProducto cproducto=cproductoM.getCProducto(Long.valueOf(producto.getCproducto().getIdCProducto()));
-			producto.setCproducto(cproducto);
 			producto.setProveedor(proveedor);
+			Producto pproducto=productoM.getProducto(Long.valueOf(producto.getIdProducto()));
 			
-			//Verificamos si el producto ya se encontra persistido (CProducto y Proveedor)
-			Producto pproducto=productoM.getProductoByCatalogoProveedor(cproducto,proveedor);
+			//Producto con catalogo
+			if(producto.getCproducto()!=null){
+				CProducto cproducto=cproductoM.getCProducto(Long.valueOf(producto.getCproducto().getIdCProducto()));
+				producto.setCproducto(cproducto);
+			}else{
+				pproducto.setDescripcion(producto.getDescripcion());
+				pproducto.setPresentacion(producto.getPresentacion());
+			}
+			
 			if(pproducto==null || pproducto.getIdProducto()==0){
 				logger.warning("Producto nuevo : "+user);
 				return productoM.insertProducto(producto);
@@ -97,11 +115,33 @@ public class ProductoEndpoint {
 		//return null;
 	}
 
-	@ApiMethod(name = "removeProducto")
-	public void removeProducto(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
+	//@ApiMethod(name = "removeProducto")
+	//public void removeProducto(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+		//	ProductoManager productoM=new ProductoManager();
+		//	productoM.removeProducto(id);
+		//}
+	//}
+	
+	@ApiMethod(name = "deshabilitarProducto")
+	public void deshabilitarProducto(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();
-			productoM.removeProducto(id);
+			Producto pproducto=productoM.getProducto(id);
+			//-3 Borrado logico
+			pproducto.setStatus(-3);
+			productoM.updateProducto(pproducto);
+		//}
+	}
+	
+	@ApiMethod(name = "habilitarProducto")
+	public void habilitarProducto(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			ProductoManager productoM=new ProductoManager();
+			Producto pproducto=productoM.getProducto(id);
+			//0 Activo
+			pproducto.setStatus(0);
+			productoM.updateProducto(pproducto);
 		//}
 	}
 

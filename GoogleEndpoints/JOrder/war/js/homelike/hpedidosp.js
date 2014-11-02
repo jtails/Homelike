@@ -84,7 +84,10 @@ function addRow(style,pedido,detallePedido,direccion){
 	var dpedido="";
 	for(var i=0;i<detallePedido.length;i++){
 		total+=detallePedido[i].producto.costoUnitario*detallePedido[i].cantidad;
-		dpedido+="<strong>"+detallePedido[i].cantidad+"</strong> "+detallePedido[i].producto.cproducto.descripcion+" "+detallePedido[i].producto.cproducto.presentacion+",";
+		if(detallePedido[i].producto.cproducto!=undefined)
+			dpedido+="<strong>"+detallePedido[i].cantidad+"</strong> "+detallePedido[i].producto.cproducto.descripcion+" "+detallePedido[i].producto.cproducto.presentacion+",";
+		else
+			dpedido+="<strong>"+detallePedido[i].cantidad+"</strong> "+detallePedido[i].producto.descripcion+" "+detallePedido[i].producto.presentacion+",";
 	}
 	$("#tblPedidos").append(
 		"<tr class='"+style+"'>"+

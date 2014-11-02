@@ -68,7 +68,7 @@
 							<hr />
                         	<p><i class="fa fa-phone"></i>&nbsp; Telefono<strong>:</strong> +52-55-21-06-70-45</p>
                         	<hr />
-                        	<p><i class="fa fa-envelope"></i>&nbsp; Email<strong>:</strong> soportehomelike@jtails.mx</p>
+                        	<p><i class="fa fa-envelope"></i>&nbsp; Email<strong>:</strong> soporte.homelike@jtails.mx</p>
                         	<hr />
                         	<p><i class="fa fa-home"></i>&nbsp; Direccion<strong>:</strong> Chicago 74,Napoles Benito Juarez,Mexico D.F </p>
 							<hr />

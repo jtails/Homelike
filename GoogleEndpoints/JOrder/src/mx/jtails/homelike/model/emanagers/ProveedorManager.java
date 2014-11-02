@@ -61,6 +61,19 @@ public class ProveedorManager {
 				.setNextPageToken(cursorString).build();
 	}
 	
+	public int countProveedores() {
+		EntityManager mgr = null;
+		Long numProveedores = null;
+		try {
+			mgr = getEntityManager();
+			Query query = mgr.createQuery("select count(Proveedor) from Proveedor as Proveedor");
+			numProveedores = (Long)query.getSingleResult();
+		} finally {
+			mgr.close();
+		}
+		return numProveedores.intValue();
+	}
+	
 	
 	@SuppressWarnings({ "unchecked"})
 	public List<Proveedor> getProveedoresinRagne(String latitud,String longitud, int idServicio) {
