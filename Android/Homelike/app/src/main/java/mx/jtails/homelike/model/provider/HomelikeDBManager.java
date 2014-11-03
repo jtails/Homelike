@@ -315,4 +315,13 @@ public class HomelikeDBManager {
         return address;
     }
 
+    public void clearDatabase(){
+        this.prepareDB(true);
+
+        db.delete(HomelikeDatabase.Tables.SERVICES, null, null);
+        db.delete(HomelikeDatabase.Tables.ADDRESSES, null, null);
+
+        this.releaseDB();
+    }
+
 }
