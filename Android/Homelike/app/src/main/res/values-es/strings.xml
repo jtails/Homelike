@@ -2,7 +2,7 @@
 <resources>
 
     <!-- No translate required -->
-    <string name="app_name">Homelike</string>
+    <string name="app_name">HomeLike</string>
     <string name="url_terms_and_conditions">http://homelike.com.mx/docs/AvisodePrivacidad.pdf</string>
 
     <!-- Application -->

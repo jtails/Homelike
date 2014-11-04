@@ -262,6 +262,7 @@ public class CreateOrderFragment extends Fragment
 
                 this.loadTempOrder();
                 this.mProductsAdapter.updateContent(this.mProducts, this.mSubtotals);
+                this.updateTotal();
                 break;
             }
             case CONTENT_EMPTY: {
