@@ -12,7 +12,7 @@ public class HomelikeDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "homelike.db";
 
-    private static final int VER_2014_RELEASE_A = 103;
+    private static final int VER_2014_RELEASE_A = 106;
     private static final int CUR_DATABASE_VERSION = VER_2014_RELEASE_A;
 
     private final Context mContext;

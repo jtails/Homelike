@@ -208,6 +208,7 @@ public class CreateOrderFragment extends Fragment
         int quantities = 0;
 
         for(Integer position : this.mSubtotals.keySet()) {
+            if(this.mSubtotals.get(position) <= 0) { continue; }
             quantities += this.mSubtotals.get(position);
             this.mOrder.put(this.mProducts.get(position), this.mSubtotals.get(position));
         }
@@ -261,6 +262,7 @@ public class CreateOrderFragment extends Fragment
 
                 this.loadTempOrder();
                 this.mProductsAdapter.updateContent(this.mProducts, this.mSubtotals);
+                this.updateTotal();
                 break;
             }
             case CONTENT_EMPTY: {

@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -35,9 +35,8 @@ public class ServicesAdapter extends ArrayAdapter<Servicio> {
                 .showImageForEmptyUri(R.drawable.ic_homelike_splash_logo)
                 .showImageOnFail(R.drawable.ic_homelike_splash_logo)
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                .cacheInMemory(false)
+                .cacheInMemory(true)
                 .cacheOnDisk(true)
-                .displayer(new FadeInBitmapDisplayer(500))
                 .build();
     }
 
@@ -67,11 +66,16 @@ public class ServicesAdapter extends ArrayAdapter<Servicio> {
 
         Servicio service = this.getItem(position);
         holder.lblServiceName.get().setText(service.getNombre());
-        holder.imgServiceIcon.get().setImageResource(
-                service.getNombre().equalsIgnoreCase("agua") ?
-                    R.drawable.ic_service_water : R.drawable.ic_service_gas);
         holder.frameRightDivider.get().setVisibility(position % 2 == 0 ?
             View.VISIBLE : View.GONE);
+        if(service.getImage() == null){
+            holder.imgServiceIcon.get().setImageResource(
+                    service.getNombre().equalsIgnoreCase("agua") ?
+                            R.drawable.ic_service_water : R.drawable.ic_service_gas);
+        } else {
+            ImageLoader.getInstance().displayImage(service.getImage(), holder.imgServiceIcon.get(),
+                    this.loaderOptions);
+        }
 
         return view;
     }

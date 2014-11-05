@@ -14,8 +14,8 @@
 
 
         <ImageView android:id="@+id/img_provider_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_homelike_splash_logo"/>
@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
-                android:textSize="23sp"
+                android:textSize="20sp"
                 android:singleLine="true"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -41,10 +41,10 @@
             <RatingBar android:id="@+id/rating_provider"
                 style="@style/Widget.Homelike.RatingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="16dp"
                 android:layout_gravity="center_vertical"
                 android:isIndicator="true"
-                android:layout_marginLeft="3dp"/>
+                android:layout_marginLeft="1dp"/>
 
             <mx.jtails.homelike.ui.widget.TypeFacedTextView
                 android:id="@+id/lbl_provider_phone"
@@ -170,7 +170,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="15dp">
+        android:padding="5dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -192,10 +192,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
+            android:textSize="25sp"
             homelike:typeface="fonts/Roboto-Light.ttf"
             android:background="@drawable/bg_order_total"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"/>
 

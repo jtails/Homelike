@@ -14,8 +14,8 @@
         android:layout_gravity="center">
 
         <ImageView android:id="@+id/img_service_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_service_water"
             android:adjustViewBounds="true"/>
@@ -27,7 +27,7 @@
             android:layout_marginTop="13dp"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:textColor="@android:color/white"
             android:textAllCaps="true"
             homelike:typeface="fonts/RobotoCondensed-Light.ttf"/>

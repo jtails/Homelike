@@ -129,11 +129,17 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());
 
         for(DetallePedido p : this.mOrder.getDetallePedido()){
+            String description = p.getProducto().getCproducto() == null
+                    ? p.getProducto().getDescripcion()
+                    : p.getProducto().getCproducto().getDescripcion();
+            String presentation = p.getProducto().getCproducto() == null
+                    ? p.getProducto().getPresentacion()
+                    : p.getProducto().getCproducto().getPresentacion();
+
             View rowView = inflater.inflate(
                     R.layout.list_item_order_detail, this.mLayoutOrderDetails, false);
             ((TextView) rowView.findViewById(R.id.lbl_product_name)).setText(
-                    p.getProducto().getCproducto().getDescripcion() + " - "
-                            + p.getProducto().getCproducto().getPresentacion());
+                    description + " - " + presentation);
             ((TextView) rowView.findViewById(R.id.lbl_quantity)).setText(
                     p.getCantidad() + " x " + p.getProducto().getCostoUnitario());
             this.mLayoutOrderDetails.addView(rowView);

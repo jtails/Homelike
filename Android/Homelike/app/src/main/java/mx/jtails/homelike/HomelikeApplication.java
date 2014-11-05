@@ -35,6 +35,7 @@ public class HomelikeApplication extends Application {
 
     public void logout(){
         HomelikePreferences.clearPreferences();
+        HomelikeDBManager.getDBManager().clearDatabase();
     }
 
 }

@@ -3,7 +3,6 @@ package mx.jtails.homelike.ui.fragment;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -46,6 +45,7 @@ public class SuggestionsFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Bundle args = this.getArguments();
         if(args != null && args.containsKey(EXTRA_DEFAULT_OPTION)){
             this.mDefaultOption = args.getString(EXTRA_DEFAULT_OPTION);
@@ -53,7 +53,7 @@ public class SuggestionsFragment extends Fragment
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
         ab.setSubtitle(HomeMenuSection.SUGGESTIONS.getSubtitleRes());
@@ -62,12 +62,12 @@ public class SuggestionsFragment extends Fragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_suggestions, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.mEditComments = (EditText) view.findViewById(R.id.edit_suggestion);
         this.mGroupSuggestions = (RadioGroup) view.findViewById(R.id.group_suggestions);
@@ -79,6 +79,14 @@ public class SuggestionsFragment extends Fragment
                 onSendCommentClicked();
             }
         });
+
+        List<Tsugerencia> dummySuggestions = new ArrayList<Tsugerencia>();
+        dummySuggestions.add(new Tsugerencia().setTipoSugerencia("dummy"));
+        dummySuggestions.add(new Tsugerencia().setTipoSugerencia("dummy"));
+        dummySuggestions.add(new Tsugerencia().setTipoSugerencia("dummy"));
+        dummySuggestions.add(new Tsugerencia().setTipoSugerencia("dummy"));
+        this.setupSuggestionsRadioGroup(dummySuggestions);
+
         new ListSuggestionTypesRequest(this).executeAsync();
     }
 
@@ -93,23 +101,24 @@ public class SuggestionsFragment extends Fragment
         String suggestion = this.mEditComments.getText().toString();
 
         this.mLayoutLoading.setVisibility(View.VISIBLE);
-        this.mGroupSuggestions.setVisibility(View.GONE);
+        this.mGroupSuggestions.setVisibility(View.INVISIBLE);
 
         new InsertSuggestionRequest(this, suggestionType, suggestion).executeAsync();
     }
 
     @Override
     public void onListSuggestionTypesResponse(List<Tsugerencia> suggestionTypes) {
-        this.mLayoutLoading.setVisibility(View.GONE);
-        this.mGroupSuggestions.setVisibility(View.VISIBLE);
         if(suggestionTypes.isEmpty()){
             ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
         } else {
             setupSuggestionsRadioGroup(suggestionTypes);
+            this.mLayoutLoading.setVisibility(View.INVISIBLE);
+            this.mGroupSuggestions.setVisibility(View.VISIBLE);
         }
     }
 
     private void setupSuggestionsRadioGroup(List<Tsugerencia> suggestionTypes) {
+        this.mGroupSuggestions.removeAllViews();
         this.mSuggestionTypes = suggestionTypes;
         this.mRadioSuggestions = new RadioButton[this.mSuggestionTypes.size()];
 

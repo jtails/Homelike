@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:padding="15dp">
+                android:padding="5dp">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -55,10 +55,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/white"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     homelike:typeface="fonts/Roboto-Light.ttf"
                     android:background="@drawable/bg_order_total"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"/>
 

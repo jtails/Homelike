@@ -71,8 +71,12 @@ public class OrderProductView extends LinearLayout {
         this.mPosition = position;
         this.mHolder = holder;
 
-        this.mLblProductName.setText(this.mProduct.getCproducto().getDescripcion()
-            + " - " + this.mProduct.getCproducto().getPresentacion());
+        String description = this.mProduct.getCproducto() == null ? this.mProduct.getDescripcion()
+                : this.mProduct.getCproducto().getDescripcion();
+        String presentation = this.mProduct.getCproducto() == null ? this.mProduct.getPresentacion()
+                : this.mProduct.getCproducto().getPresentacion();
+
+        this.mLblProductName.setText(description + " - " + presentation);
         this.mLblUnitPrice.setText("$" + String.valueOf(this.mProduct.getCostoUnitario()));
         this.mLblQuantity.setText(String.valueOf(this.mHolder.getProductQuantity(this.mPosition)));
     }

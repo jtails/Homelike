@@ -67,7 +67,7 @@ public class HomelikeDBManager {
             ContentValues cv = new ContentValues();
             cv.put(HomelikeContract.ServicesColumns.SERVICE_ID, service.getIdServicio());
             cv.put(HomelikeContract.ServicesColumns.SERVICE_NAME, service.getNombre());
-            cv.put(HomelikeContract.ServicesColumns.SERVICE_ICON_URL, "");
+            cv.put(HomelikeContract.ServicesColumns.SERVICE_ICON_URL, service.getImage());
 
             try {
                 long res = this.db.insertOrThrow(HomelikeDatabase.Tables.SERVICES, null, cv);
@@ -89,7 +89,8 @@ public class HomelikeDBManager {
 
         String [] projection = {
                 HomelikeContract.ServicesColumns.SERVICE_ID,
-                HomelikeContract.ServicesColumns.SERVICE_NAME };
+                HomelikeContract.ServicesColumns.SERVICE_NAME,
+                HomelikeContract.ServicesColumns.SERVICE_ICON_URL};
         String [] selection = { String.valueOf(serviceId) };
 
         Cursor c = this.db.query(HomelikeDatabase.Tables.SERVICES,
@@ -100,6 +101,7 @@ public class HomelikeDBManager {
         Servicio service = new Servicio();
         service.setIdServicio(c.getInt(c.getColumnIndex(HomelikeContract.ServicesColumns.SERVICE_ID)));
         service.setNombre(c.getString(c.getColumnIndex(HomelikeContract.ServicesColumns.SERVICE_NAME)));
+        service.setImage(c.getString(c.getColumnIndex(HomelikeContract.ServicesColumns.SERVICE_ICON_URL)));
 
         c.close();
         this.releaseDB();
@@ -112,7 +114,8 @@ public class HomelikeDBManager {
 
         String [] projection = {
                 HomelikeContract.ServicesColumns.SERVICE_ID,
-                HomelikeContract.ServicesColumns.SERVICE_NAME };
+                HomelikeContract.ServicesColumns.SERVICE_NAME,
+                HomelikeContract.ServicesColumns.SERVICE_ICON_URL};
 
         Cursor c = db.query(HomelikeDatabase.Tables.SERVICES,
                 projection, null, null, null, null, null);
@@ -122,6 +125,7 @@ public class HomelikeDBManager {
             Servicio s = new Servicio();
             s.setIdServicio(c.getInt(c.getColumnIndex(HomelikeContract.ServicesColumns.SERVICE_ID)));
             s.setNombre(c.getString(c.getColumnIndex(HomelikeContract.ServicesColumns.SERVICE_NAME)));
+            s.setImage(c.getString(c.getColumnIndex(HomelikeContract.ServicesColumns.SERVICE_ICON_URL)));
             services.add(s);
         } while(c.moveToNext());
 
@@ -309,6 +313,15 @@ public class HomelikeDBManager {
         this.releaseDB();
 
         return address;
+    }
+
+    public void clearDatabase(){
+        this.prepareDB(true);
+
+        db.delete(HomelikeDatabase.Tables.SERVICES, null, null);
+        db.delete(HomelikeDatabase.Tables.ADDRESSES, null, null);
+
+        this.releaseDB();
     }
 
 }

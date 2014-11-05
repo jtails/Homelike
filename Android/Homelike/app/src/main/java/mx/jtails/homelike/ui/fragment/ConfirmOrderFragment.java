@@ -129,11 +129,15 @@ public class ConfirmOrderFragment extends Fragment
         for(Producto p : this.mOrder.keySet()){
             total += this.mOrder.get(p) * (float) p.getCostoUnitario();
 
+            String description = p.getCproducto() == null ? p.getDescripcion()
+                    : p.getCproducto().getDescripcion();
+            String presentation = p.getCproducto() == null ? p.getPresentacion()
+                    : p.getCproducto().getPresentacion();
+
             View rowView = inflater.inflate(
                     R.layout.list_item_product_confirm, this.mRootView, false);
             ((TextView) rowView.findViewById(R.id.lbl_product_name)).setText(
-                    p.getCproducto().getDescripcion() + " - "
-                            + p.getCproducto().getPresentacion());
+                    description + " - " + presentation);
             ((TextView) rowView.findViewById(R.id.lbl_quantity)).setText(
                     this.mOrder.get(p) + " x " + p.getCostoUnitario());
             this.mRootView.addView(rowView);

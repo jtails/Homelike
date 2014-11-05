@@ -6,20 +6,19 @@
 
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
         android:id="@+id/lbl_product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_vertical"
         homelike:typeface="fonts/Roboto-Medium.ttf"
-        android:textSize="20sp"
-        android:singleLine="true"
+        android:textSize="18sp"
         android:layout_margin="5dp"
         android:textColor="@android:color/white"/>
 
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
         android:id="@+id/lbl_unit_price"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:gravity="center_vertical"
         homelike:typeface="fonts/Roboto-Light.ttf"
@@ -35,7 +34,7 @@
     <mx.jtails.homelike.ui.widget.TypeFacedTextView
         android:id="@+id/lbl_quantity"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         homelike:typeface="fonts/Roboto-Light.ttf"
         android:textSize="20sp"
