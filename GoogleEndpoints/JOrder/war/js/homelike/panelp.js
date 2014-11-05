@@ -5,6 +5,9 @@ $(document).ready(function(){
 	$("#menuproductos").click(function(){
 		$("#contenido").load("fragments/productosp.jsp");
 	});
+	$("#menuhorarios").click(function(){
+		$("#contenido").load("fragments/horariosp.jsp");
+	});
 	$("#menuhpedidos").click(function(){
 		$("#contenido").load("fragments/hpedidosp.jsp");
 	});

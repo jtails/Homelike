@@ -74,7 +74,7 @@
     <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
     <init-param>
       <param-name>services</param-name>
-      <param-value>mx.jtails.homelike.model.endpoints.CProductoEndpoint,mx.jtails.homelike.model.endpoints.CantidadPagoEndpoint,mx.jtails.homelike.model.endpoints.CuentaEndpoint,mx.jtails.homelike.model.endpoints.EstadisticasEndpoint,mx.jtails.homelike.model.endpoints.PedidoEndpoint,mx.jtails.homelike.model.endpoints.ProductoEndpoint,mx.jtails.homelike.model.endpoints.ProveedorEndpoint,mx.jtails.homelike.model.endpoints.ServicioEndpoint,mx.jtails.homelike.model.endpoints.SugerenciascEndpoint,mx.jtails.homelike.model.endpoints.SugerenciaspEndpoint,mx.jtails.homelike.model.endpoints.TpedidoEndpoint,mx.jtails.homelike.model.endpoints.TsugerenciaEndpoint</param-value>
+      <param-value>mx.jtails.homelike.model.endpoints.CProductoEndpoint,mx.jtails.homelike.model.endpoints.CantidadPagoEndpoint,mx.jtails.homelike.model.endpoints.CuentaEndpoint,mx.jtails.homelike.model.endpoints.EstadisticasEndpoint,mx.jtails.homelike.model.endpoints.HorariosProveedorEndpoint,mx.jtails.homelike.model.endpoints.PedidoEndpoint,mx.jtails.homelike.model.endpoints.ProductoEndpoint,mx.jtails.homelike.model.endpoints.ProveedorEndpoint,mx.jtails.homelike.model.endpoints.ServicioEndpoint,mx.jtails.homelike.model.endpoints.SugerenciascEndpoint,mx.jtails.homelike.model.endpoints.SugerenciaspEndpoint,mx.jtails.homelike.model.endpoints.TpedidoEndpoint,mx.jtails.homelike.model.endpoints.TsugerenciaEndpoint</param-value>
     </init-param>
   </servlet>
 

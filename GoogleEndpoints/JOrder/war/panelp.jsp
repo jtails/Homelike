@@ -108,6 +108,9 @@
 				<li class="has_sub"><a href="#" id="menuproductos"><i
 						class="fa fa-tags"></i> Mis productos</a>
 				</li>
+				<li class="has_sub"><a href="#" id="menuhorarios"><i
+						class="fa fa-clock-o"></i> Mis horarios</a>
+				</li>
 				<li class="has_sub"><a href="#"><i class="fa fa-truck"></i>
 						Repartidores<span class="pull-right"><i
 							class="fa fa-chevron-right"></i></span></a>

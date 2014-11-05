@@ -52,6 +52,8 @@ public class PanelPServlet extends HttpServlet{
 		Proveedor pproveedor=proveedorM.getProveedorByUser(proveedor);
 		if(pproveedor!=null){
 			HttpSession session=request.getSession();
+			//Actualizamos el Logotipo del proveedor en cada ingreso
+			pproveedor.setLogo(logotipo);
 			session.setAttribute("proveedor",pproveedor);
 			session.setAttribute("isLoginP",true);
 			session.removeAttribute("isLoginI");
