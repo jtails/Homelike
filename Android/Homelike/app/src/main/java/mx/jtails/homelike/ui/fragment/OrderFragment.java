@@ -3,9 +3,7 @@ package mx.jtails.homelike.ui.fragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,12 +71,11 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         this.mLayoutOrderDetails = (ViewGroup) view.findViewById(R.id.layout_order_details);
         this.mImgProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
         this.mLblProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
         this.mLblOrderId = (TextView) view.findViewById(R.id.lbl_order_id);
-        //this.mLblProviderRating = (TextView) view.findViewById(R.id.lbl_rating);
         this.mRatingProvider = (RatingBar) view.findViewById(R.id.rating_provider);
         this.mLblStatus = (TextView) view.findViewById(R.id.lbl_status);
         this.mFinishButton = view.findViewById(R.id.btn_finish_order);
@@ -182,10 +179,10 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
                     .setPositiveButton(R.string.ok, null)
                     .show();
         } else {
-            FragmentManager fm = this.getFragmentManager();
-            fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            ((HomeActivity) this.getActivity()).addToStack(
-                    CommentsFragment.getInstance(this.mOrder));
+            ((HomeActivity) this.getActivity()).singlePop();
+            ((HomeActivity) this.getActivity()).pushToStack(
+                    CommentsFragment.newInstance(this.mOrder),
+                    CommentsFragment.class.getName());
         }
     }
 }

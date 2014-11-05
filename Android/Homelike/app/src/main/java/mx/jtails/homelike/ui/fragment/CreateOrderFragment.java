@@ -1,7 +1,6 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -30,7 +30,7 @@ import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.ListProductsRequest;
-import mx.jtails.homelike.ui.CheckOrderActivity;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProductsAdapter;
 import mx.jtails.homelike.ui.widget.OrderProductView;
 import mx.jtails.homelike.util.HomelikePreferences;
@@ -54,35 +54,32 @@ public class CreateOrderFragment extends Fragment
     private Map<Integer, Integer> mSubtotals = new HashMap<Integer, Integer>();
     private Map<Producto, Integer> mOrder = new LinkedHashMap<Producto, Integer>();
 
-    private ImageView mProviderLogo;
-    private TextView mProviderName;
-    private TextView mProviderSlogan;
+    private View mRootView;
+    private ImageView mImgProviderLogo;
+    private TextView mLblProviderName;
+    private TextView mLblProviderSlogan;
     private View mLayoutContent;
     private View mLayoutLoading;
     private TextView mLblEmpty;
     private TextView mLblTotal;
     private RatingBar mRatingProvider;
-    private TextView mLblPhone;
+    private TextView mLblProviderPhone;
 
     private AbsListView mListView;
     private ProductsAdapter mProductsAdapter;
 
     private DisplayImageOptions mLoaderOptions;
 
+    private Direccion mAddress;
     private int mAddressId;
     private int mServiceId;
-    private Direccion mAddress;
 
-    private static final String ARG_ADDRESS_ID = "arg_address_id";
-    private static final String ARG_SERVICE_ID = "arg_service_id";
-
-    public static CreateOrderFragment getInstance(int addressId, int serviceId){
-        Bundle extras = new Bundle();
-        extras.putInt(ARG_ADDRESS_ID, addressId);
-        extras.putInt(ARG_SERVICE_ID, serviceId);
-
+    public static CreateOrderFragment newInstance(int addressId, int serviceId, Proveedor provider){
         CreateOrderFragment fragment = new CreateOrderFragment();
-        fragment.setArguments(extras);
+
+        fragment.mAddressId = addressId;
+        fragment.mServiceId = serviceId;
+        fragment.mProvider = provider;
 
         return fragment;
     }
@@ -102,51 +99,49 @@ public class CreateOrderFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.loadAddress(savedInstanceState == null ? this.getArguments() : savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_order, container, false);
-    }
-
-    private void loadAddress(Bundle args){
-        this.mAddressId = args.getInt(ARG_ADDRESS_ID);
-        this.mServiceId = args.getInt(ARG_SERVICE_ID);
-
         this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
         if(this.mAddress == null){
-            //Toast.makeText(this.getActivity(),
-              //      String.format(this.getString(R.string.error_load_address), this.mAddressId),
-                //    Toast.LENGTH_SHORT).show();
-            this.getActivity().finish();
+            Toast.makeText(this.getActivity(),
+                    String.format(this.getString(R.string.error_load_address), this.mAddressId),
+                    Toast.LENGTH_SHORT).show();
+            ((HomeActivity) this.getActivity()).clearStack();
         }
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.mRootView = inflater.inflate(R.layout.fragment_create_order, container, false);
+
+        this.mImgProviderLogo = (ImageView) this.mRootView.findViewById(R.id.img_provider_logo);
+        this.mLblProviderName = (TextView) this.mRootView.findViewById(R.id.lbl_provider_name);
+        this.mLblProviderSlogan = (TextView) this.mRootView.findViewById(R.id.lbl_provider_slogan);
+        this.mLblProviderPhone = (TextView) this.mRootView.findViewById(R.id.lbl_provider_phone);
+        this.mLayoutContent = this.mRootView.findViewById(R.id.layout_products_content);
+        this.mListView = (ListView) this.mRootView.findViewById(R.id.list_products);
+        this.mLayoutLoading = this.mRootView.findViewById(R.id.layout_loading);
+        this.mLblEmpty = (TextView) this.mRootView.findViewById(R.id.lbl_empty);
+        this.mLblTotal = (TextView) this.mRootView.findViewById(R.id.lbl_total);
+        this.mRatingProvider = (RatingBar) this.mRootView.findViewById(R.id.rating_provider);
+
+        return this.mRootView;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.mProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
-        this.mProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
-        this.mProviderSlogan = (TextView) view.findViewById(R.id.lbl_provider_slogan);
-        this.mLblPhone = (TextView) view.findViewById(R.id.lbl_provider_phone);
-        this.mLayoutContent = view.findViewById(R.id.layout_products_content);
-        this.mListView = (ListView) view.findViewById(R.id.list_products);
-        this.mLayoutLoading = view.findViewById(R.id.layout_loading);
-        this.mLblEmpty = (TextView) view.findViewById(R.id.lbl_empty);
-        this.mLblTotal = (TextView) view.findViewById(R.id.lbl_total);
-        this.mRatingProvider = (RatingBar) view.findViewById(R.id.rating_provider);
+        ImageLoader.getInstance().displayImage(
+                this.mProvider.getLogo(), this.mImgProviderLogo, this.mLoaderOptions);
+        this.mLblProviderName.setText(this.mProvider.getNombre());
+        this.mLblProviderPhone.setText(this.getString(R.string.phone_short) + ": "
+                + this.mProvider.getTelefono());
+        this.mLblProviderSlogan.setText(this.mProvider.getSlogan());
+        this.mRatingProvider.setRating((float) this.mProvider.getCalificacion());
+
         this.updateTotal();
 
         this.mProductsAdapter = new ProductsAdapter(this.getActivity(),
                 this.mProducts, this.mSubtotals, this);
         this.mListView.setAdapter(this.mProductsAdapter);
 
-        view.findViewById(R.id.btn_cancel_order).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmCancelation();
-            }
-        });
         view.findViewById(R.id.btn_check_order).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,37 +153,13 @@ public class CreateOrderFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        this.refreshProviderView(null);
-    }
-
-    public void refreshProviderView(Proveedor provider){
-        if(provider == null){ return; }
-        this.mProvider = provider;
-
-        ImageLoader.getInstance().displayImage(
-            this.mProvider.getLogo(), this.mProviderLogo, this.mLoaderOptions);
-        this.mProviderName.setText(this.mProvider.getNombre());
-        this.mLblPhone.setText(this.getString(R.string.phone_short) + ": " + this.mProvider.getTelefono());
-        this.mProviderSlogan.setText(this.mProvider.getSlogan());
-        this.mRatingProvider.setRating((float) this.mProvider.getCalificacion());
-
-        this.displayContentMode(ContentDisplayMode.LOAD);
-        this.mProductsRequest = new ListProductsRequest(this, this.mProvider.getIdProveedor());
-        this.mProductsRequest.executeAsync();
-    }
-
-    public void confirmCancelation(){
-        new AlertDialog.Builder(this.getActivity())
-                .setTitle(R.string.cancel)
-                .setMessage(R.string.confirm_order_message)
-                .setPositiveButton(R.string.cancel_order, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ((CheckOrderActivity) getActivity()).cancelOrder();
-                    }
-                })
-                .setNegativeButton(R.string.continue_process, null)
-                .show();
+        if(this.mProducts.isEmpty()){
+            this.displayContentMode(ContentDisplayMode.LOAD);
+            this.mProductsRequest = new ListProductsRequest(this, this.mProvider.getIdProveedor());
+            this.mProductsRequest.executeAsync();
+        } else {
+            this.displayContentMode(ContentDisplayMode.CONTENT);
+        }
     }
 
     public void confirmOrder(){
@@ -200,7 +171,9 @@ public class CreateOrderFragment extends Fragment
             return;
         }
 
-        ((CheckOrderActivity) this.getActivity()).confirmOrder(this.mOrder, this.mProvider);
+        ((HomeActivity) this.getActivity()).pushToStack(
+                ConfirmOrderFragment.newInstance(this.mAddressId, this.mProvider, this.mOrder),
+                ConfirmOrderFragment.class.getName());
     }
 
     private boolean buildOrderMap(){
@@ -275,6 +248,12 @@ public class CreateOrderFragment extends Fragment
         }
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        this.saveTempOrder();
+    }
+
     public void saveTempOrder(){
         if(!this.buildOrderMap()){
             return;
@@ -311,10 +290,4 @@ public class CreateOrderFragment extends Fragment
                 .loadStringSet(HomelikePreferences.TEMP_ORDER_SUBTOTAL_SET, null));
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(ARG_ADDRESS_ID, this.mAddressId);
-        outState.putInt(ARG_SERVICE_ID, this.mServiceId);
-        super.onSaveInstanceState(outState);
-    }
 }

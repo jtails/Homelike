@@ -1,6 +1,5 @@
 package mx.jtails.homelike.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -22,8 +21,7 @@ import mx.jtails.homelike.api.model.Servicio;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListServicesRequest;
-import mx.jtails.homelike.ui.CheckOrderActivity;
-import mx.jtails.homelike.ui.MyAddressesActivity;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ServicesAdapter;
 import mx.jtails.homelike.util.HomeMenuSection;
 
@@ -89,52 +87,14 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final int serviceId = this.mAdapter.getItem(position).getIdServicio();
-        /*
-        if(HomelikeDBManager.getDBManager().hasFavoriteAddress()) {
-            final Direccion a = HomelikeDBManager.getDBManager().getFavouriteAddress();
-
-            String addressString = a.getAlias() + ":\n\n" + a.getCalle() + " #" + a.getNexterior()
-                    + ", " + a.getColonia() + ", " + a.getDelegacion();
-            new AlertDialog.Builder(this.getActivity())
-                    .setTitle(R.string.favourite_address)
-                    .setMessage(String.format(this.getString(R.string.use_favourite_address),
-                            addressString))
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            goToNewOrder(a.getIdDireccion(), serviceId);
-                        }
-                    })
-                    .setNegativeButton(R.string.change_address, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            goToAddressSelection(serviceId);
-                        }
-                    })
-                    .show();
-        } else {
-        */
-            this.goToAddressSelection(serviceId);
-        //}
-    }
-
-    private void goToNewOrder(int addressId, int serviceId){
-        Bundle args = new Bundle();
-        Intent intent = new Intent(this.getActivity(), CheckOrderActivity.class);
-        args.putInt(CheckOrderActivity.ARG_ADDRESS_ID, addressId);
-        args.putInt(CheckOrderActivity.ARG_SERVICE_ID, serviceId);
-        intent.putExtras(args);
-        this.startActivity(intent);
+        int serviceId = this.mAdapter.getItem(position).getIdServicio();
+        this.goToAddressSelection(serviceId);
     }
 
     private void goToAddressSelection(int serviceId){
         Bundle args = new Bundle();
-        args.putInt(MyAddressesActivity.ARG_REQUESTED_SERVICE_ID, serviceId);
-
-        Intent intent = new Intent(this.getActivity(), MyAddressesActivity.class);
-        intent.putExtras(args);
-        this.getActivity().startActivity(intent);
+        args.putInt(MyAddressesFragment.ARG_REQUESTED_SERVICE_ID, serviceId);
+        ((HomeActivity) this.getActivity()).pushToStack(MyAddressesFragment.class, args);
     }
 
     private void loadServices(boolean fullLoad){

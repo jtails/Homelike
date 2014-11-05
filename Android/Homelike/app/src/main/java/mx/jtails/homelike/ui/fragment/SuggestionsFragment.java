@@ -109,7 +109,8 @@ public class SuggestionsFragment extends Fragment
     @Override
     public void onListSuggestionTypesResponse(List<Tsugerencia> suggestionTypes) {
         if(suggestionTypes.isEmpty()){
-            ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
+            ((HomeActivity) this.getActivity()).replaceStack(
+                    HomeActivity.DEFAULT_HOME_CONTENT.getFragmentClass(), null);
         } else {
             setupSuggestionsRadioGroup(suggestionTypes);
             this.mLayoutLoading.setVisibility(View.INVISIBLE);
@@ -185,6 +186,7 @@ public class SuggestionsFragment extends Fragment
             Toast.makeText(this.getActivity(), R.string.error_send_suggestion,
                     Toast.LENGTH_SHORT).show();
         }
-        ((HomeActivity) this.getActivity()).onHomeMenuOptionSelected(HomeMenuSection.SERVICES);
+        ((HomeActivity) this.getActivity()).replaceStack(
+                HomeActivity.DEFAULT_HOME_CONTENT.getFragmentClass(), null);
     }
 }

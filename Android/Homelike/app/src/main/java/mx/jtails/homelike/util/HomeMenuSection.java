@@ -30,6 +30,10 @@ public enum HomeMenuSection {
         this.iconRes = iconRes;
     }
 
+    public Class<? extends Fragment> getFragmentClass(){
+        return this.fragmentClass;
+    }
+
     public Fragment getFragmentInstance(){
         try {
             return fragmentClass.newInstance();

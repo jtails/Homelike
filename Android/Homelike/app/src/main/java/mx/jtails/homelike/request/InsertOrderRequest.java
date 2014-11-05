@@ -1,7 +1,5 @@
 package mx.jtails.homelike.request;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +21,9 @@ public class InsertOrderRequest extends HomelikeApiRequest {
     private Pedido mOrder;
     private int mAccountId;
 
-    public InsertOrderRequest(HomelikeResponseHandler handler, Context context,
+    public InsertOrderRequest(HomelikeResponseHandler handler,
         int accountId, Map<Producto, Integer> rawOrder, Proveedor provider,
-        CantidadPago paymentQuantity, int addressId, String comments) {
+        int addressId, String comments) {
         super(handler);
         this.mEndpoint = new Pedidoendpoint.Builder(HTTP_TRANSPORT,
                 JSON_FACTORY, null).build();
@@ -33,7 +31,7 @@ public class InsertOrderRequest extends HomelikeApiRequest {
         this.mAccountId = accountId;
 
         this.mOrder = new Pedido();
-        this.mOrder.setCantidadPago(paymentQuantity);
+        this.mOrder.setCantidadPago(new CantidadPago().setIdCantidadPago(1));
         this.mOrder.setDetallePedido(this.generateOrderDetail(rawOrder));
         this.mOrder.setDireccion(HomelikeDBManager.getDBManager().getAddress(addressId));
         this.mOrder.setProveedor(provider);

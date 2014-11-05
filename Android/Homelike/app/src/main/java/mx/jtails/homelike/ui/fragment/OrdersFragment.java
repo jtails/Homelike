@@ -1,7 +1,6 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -39,19 +38,17 @@ public class OrdersFragment extends Fragment
 
     private HomelikeApiRequest mApiRequest;
 
-    private boolean mIsLoading = false;
-
     private AbsListView mListView;
     private View mLayoutContent;
     private View mLayoutLoading;
     private View mLblEmpty;
 
     private enum ContentDisplayMode {
-        LOAD, CONTENT;
+        LOAD, PARTIAL_LOAD, CONTENT;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
         ab.setSubtitle(HomeMenuSection.ORDERS.getSubtitleRes());
@@ -63,8 +60,7 @@ public class OrdersFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setHasOptionsMenu(true);
-        this.mApiRequest = new ListOrdersRequest(this,
-                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
+
     }
 
     @Override
@@ -89,24 +85,26 @@ public class OrdersFragment extends Fragment
 
         this.mListView.setOnItemClickListener(this);
         this.mListView.setAdapter(this.mAdapter);
-
-        this.mIsLoading = true;
-        this.mApiRequest.executeAsync();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(this.mIsLoading){
-            this.displayContentMode(ContentDisplayMode.LOAD, true);
+        this.mApiRequest = new ListOrdersRequest(this,
+                HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
+        this.mApiRequest.executeAsync();
+        if(this.mOrders.isEmpty()){
+            this.displayContentMode(ContentDisplayMode.LOAD);
         } else {
-            this.displayContentMode(ContentDisplayMode.CONTENT, true);
+            this.displayContentMode(ContentDisplayMode.PARTIAL_LOAD);
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        ((ActionBarActivity) this.getActivity())
+                .setSupportProgressBarIndeterminateVisibility(false);
         if(this.mApiRequest != null){
             this.mApiRequest.cancelRequest();
         }
@@ -116,7 +114,7 @@ public class OrdersFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                this.displayContentMode(ContentDisplayMode.LOAD, true);
+                this.displayContentMode(ContentDisplayMode.LOAD);
                 this.mApiRequest.executeAsync();
                 return true;
             default:
@@ -124,18 +122,34 @@ public class OrdersFragment extends Fragment
         }
     }
 
-    private void displayContentMode(ContentDisplayMode displayMode, boolean invalidate){
+    private void displayContentMode(ContentDisplayMode displayMode){
         switch (displayMode) {
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.GONE);
                 this.mLayoutLoading.setVisibility(View.VISIBLE);
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(false);
+                break;
+            }
+            case PARTIAL_LOAD: {
+                this.mLayoutLoading.setVisibility(View.GONE);
+                this.mLayoutContent.setVisibility(View.VISIBLE);
+
+                this.mLblEmpty.setVisibility(View.GONE);
+                this.mListView.setVisibility(View.VISIBLE);
+
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(true);
                 break;
             }
             case CONTENT: {
                 this.mLayoutLoading.setVisibility(View.GONE);
                 this.mLayoutContent.setVisibility(View.VISIBLE);
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(false);
 
-                if( invalidate ) { this.mAdapter.updateContent(this.mOrders); }
+                this.mAdapter.updateContent(this.mOrders);
+
                 if(this.mOrders.isEmpty()){
                     this.mLblEmpty.setVisibility(View.VISIBLE);
                     this.mListView.setVisibility(View.GONE);
@@ -150,15 +164,16 @@ public class OrdersFragment extends Fragment
 
     @Override
     public void onListOrdersResponse(List<Pedido> orders) {
-        this.mIsLoading = false;
         this.mOrders = orders;
-        this.displayContentMode(ContentDisplayMode.CONTENT, true);
+        this.displayContentMode(ContentDisplayMode.CONTENT);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Pedido order = this.mAdapter.getItem(position);
-        ((HomeActivity) this.getActivity()).addToStack(OrderFragment.getInstance(order));
+        ((HomeActivity) this.getActivity()).pushToStack(
+                OrderFragment.getInstance(order),
+                OrderFragment.class.getName());
     }
 
 }

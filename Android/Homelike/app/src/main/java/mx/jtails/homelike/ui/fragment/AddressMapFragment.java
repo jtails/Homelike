@@ -1,9 +1,7 @@
 package mx.jtails.homelike.ui.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -33,6 +31,7 @@ import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.request.single.RetrieveLocationTask;
 import mx.jtails.homelike.request.single.RetrieveLocationTask.OnLocationDataRetrievedListener;
+import mx.jtails.homelike.ui.HomeActivity;
 
 /**
  * Created by GrzegorzFeathers on 9/4/14.
@@ -45,7 +44,6 @@ public class AddressMapFragment extends Fragment
     private MapView mAddressMap = null;
     private ProgressDialog mLocationDialog;
 
-    private OnAddressLocationSelectedListener mAddressSelectedListener;
     private LocationClient mLocationClient;
     private LatLng mSelectedLatLng;
 
@@ -55,12 +53,6 @@ public class AddressMapFragment extends Fragment
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         MapsInitializer.initialize(activity);
-        try {
-            this.mAddressSelectedListener = (OnAddressLocationSelectedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Activity must implement AddressMapFragment.OnAddressLocationSelectedListener");
-        }
-
         this.mLocationClient = new LocationClient(activity, this, this);
     }
 
@@ -97,8 +89,6 @@ public class AddressMapFragment extends Fragment
         map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                //mSelectedLatLng = latLng;
-                //moveMapCameraToSelected();
                 moveMapCameraTo(latLng);
             }
         });
@@ -112,8 +102,6 @@ public class AddressMapFragment extends Fragment
 
             @Override
             public void onMarkerDragEnd(Marker marker) {
-                //mSelectedLatLng = marker.getPosition();
-                //moveMapCameraToSelected();
                 moveMapCameraTo(marker.getPosition());
             }
         });
@@ -190,7 +178,6 @@ public class AddressMapFragment extends Fragment
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        //Toast.makeText(this.getActivity(), String.valueOf(connectionResult.getErrorCode()), Toast.LENGTH_SHORT).show();
         if(connectionResult.hasResolution()) {
             try {
                 connectionResult.startResolutionForResult(this.getActivity(), 300);
@@ -198,9 +185,7 @@ public class AddressMapFragment extends Fragment
                 e.printStackTrace();
             }
         } else {
-            //Toast.makeText(this.getActivity(), R.string.error_play_services,
-              //      Toast.LENGTH_SHORT).show();
-            this.getActivity().finish();
+            ((HomeActivity) this.getActivity()).singlePop();
         }
     }
 
@@ -213,31 +198,12 @@ public class AddressMapFragment extends Fragment
     }
 
     @Override
-    public void onLocationDataRetrieved(Direccion address) {
+    public void onLocationDataRetrieved(final Direccion address) {
         this.mLocationDialog.dismiss();
         this.mLocationDialog = null;
-        if(address == null){
-            final Direccion emptyAddress = new Direccion();
-            emptyAddress.setLatitud(String.valueOf(this.mSelectedLatLng.latitude));
-            emptyAddress.setLongitud(String.valueOf(this.mSelectedLatLng.longitude));
-            new AlertDialog.Builder(this.getActivity())
-                    .setCancelable(true)
-                    .setTitle(R.string.location)
-                    .setMessage(R.string.error_retrieving_location)
-                    .setNegativeButton(R.string.reselect, null)
-                    .setPositiveButton(R.string.continue_process, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (mAddressSelectedListener != null) {
-                                mAddressSelectedListener.onAddressLocationSelectedListener(emptyAddress);
-                            }
-                        }
-                    }).show();
-        } else {
-            if(this.mAddressSelectedListener != null){
-                this.mAddressSelectedListener.onAddressLocationSelectedListener(address);
-            }
-        }
+        ((HomeActivity) this.getActivity()).pushToStack(
+                AddressDetailsFragment.newInstance(address, false),
+                AddressMapFragment.class.getName());
     }
 
     @Override

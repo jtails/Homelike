@@ -1,14 +1,14 @@
 package mx.jtails.homelike.ui.fragment;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.ListProvidersRequest;
-import mx.jtails.homelike.ui.CommentsActivity;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProvidersAdapter;
 import mx.jtails.homelike.util.HomeMenuSection;
@@ -31,19 +30,14 @@ public class ProvidersFragment extends Fragment
         ListProvidersRequest.ListProvidersResponseHandler,
         ProvidersAdapter.OnShowCommentsClickedListener {
 
-    public interface OnProviderSelectedListener {
-        public void onProviderSelected(Proveedor proveedor);
-    }
-
     private enum ContentDisplayMode {
-        LOAD, CONTENT, CONTENT_EMPTY;
+        LOAD, PARTIAL_LOAD, CONTENT, CONTENT_EMPTY;
     }
 
     private ListProvidersRequest mProvidersRequest;
-    private OnProviderSelectedListener mProviderListener;
 
-    private static final String ARG_ADDRESS_ID = "arg_address_id";
-    private static final String ARG_SERVICE_ID = "arg_service_id";
+    public static final String ARG_ADDRESS_ID = "arg_address_id";
+    public static final String ARG_SERVICE_ID = "arg_service_id";
 
     private int mAddressId;
     private int mServiceId;
@@ -75,12 +69,6 @@ public class ProvidersFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.mProviderListener = (OnProviderSelectedListener) activity;
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.mLayoutContent = view.findViewById(R.id.layout_providers_content);
         this.mListView = (AbsListView) view.findViewById(R.id.list_providers);
@@ -90,7 +78,6 @@ public class ProvidersFragment extends Fragment
 
         this.mListView.setAdapter(this.mProvidersAdapter);
         this.mListView.setOnItemClickListener(this);
-        this.displayContentMode(ContentDisplayMode.LOAD);
 
         view.findViewById(R.id.btn_request_provider).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,13 +88,10 @@ public class ProvidersFragment extends Fragment
     }
 
     private void requestProvider(){
-        Intent intent = new Intent(this.getActivity(), HomeActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Bundle args = new Bundle();
-        args.putInt(HomeActivity.ARG_HOME_CONTENT_ORD, HomeMenuSection.SUGGESTIONS.ordinal());
         args.putString(SuggestionsFragment.EXTRA_DEFAULT_OPTION, "Solicitud de Proveedor");
-        intent.putExtras(args);
-        this.getActivity().startActivity(intent);
+        ((HomeActivity) this.getActivity()).replaceStack(
+                HomeMenuSection.SUGGESTIONS.getFragmentClass(), args);
     }
 
     @Override
@@ -116,6 +100,12 @@ public class ProvidersFragment extends Fragment
         this.mProvidersRequest = new ListProvidersRequest(this,
                 this.mServiceId, this.mAddress);
         this.mProvidersRequest.executeAsync();
+
+        if(this.mProviders.isEmpty()){
+            this.displayContentMode(ContentDisplayMode.LOAD);
+        } else {
+            this.displayContentMode(ContentDisplayMode.PARTIAL_LOAD);
+        }
     }
 
     @Override
@@ -132,10 +122,10 @@ public class ProvidersFragment extends Fragment
 
         this.mAddress = HomelikeDBManager.getDBManager().getAddress(this.mAddressId);
         if(this.mAddress == null){
-            //Toast.makeText(this.getActivity(),
-              //  String.format(this.getString(R.string.error_load_address), this.mAddressId),
-                //Toast.LENGTH_SHORT).show();
-            this.getActivity().finish();
+            Toast.makeText(this.getActivity(),
+                String.format(this.getString(R.string.error_load_address), this.mAddressId),
+                Toast.LENGTH_SHORT).show();
+            ((HomeActivity) this.getActivity()).clearStack();
         }
     }
 
@@ -151,6 +141,18 @@ public class ProvidersFragment extends Fragment
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.GONE);
                 this.mLayoutLoading.setVisibility(View.VISIBLE);
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(false);
+                break;
+            }
+            case PARTIAL_LOAD: {
+                this.mLayoutEmpty.setVisibility(View.GONE);
+                this.mListView.setVisibility(View.VISIBLE);
+                this.mLayoutContent.setVisibility(View.VISIBLE);
+                this.mLayoutLoading.setVisibility(View.GONE);
+
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(true);
                 break;
             }
             case CONTENT: {
@@ -158,8 +160,12 @@ public class ProvidersFragment extends Fragment
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 this.mLayoutEmpty.setVisibility(View.GONE);
                 this.mListView.setVisibility(View.VISIBLE);
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(false);
 
-                this.mProvidersAdapter.updateContent(this.mProviders);
+                if(this.mProvidersAdapter.getCount() != this.mProviders.size()){
+                    this.mProvidersAdapter.updateContent(this.mProviders);
+                }
                 break;
             }
             case CONTENT_EMPTY: {
@@ -167,6 +173,8 @@ public class ProvidersFragment extends Fragment
                 this.mLayoutContent.setVisibility(View.VISIBLE);
                 this.mLayoutEmpty.setVisibility(View.VISIBLE);
                 this.mListView.setVisibility(View.GONE);
+                ((ActionBarActivity) this.getActivity())
+                        .setSupportProgressBarIndeterminateVisibility(false);
                 break;
             }
         }
@@ -179,9 +187,11 @@ public class ProvidersFragment extends Fragment
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(this.mProviderListener != null){
-            this.mProviderListener.onProviderSelected(this.mProvidersAdapter.getItem(position));
-        }
+        Proveedor provider = this.mProvidersAdapter.getItem(position);
+
+        ((HomeActivity) this.getActivity()).pushToStack(
+                CreateOrderFragment.newInstance(this.mAddressId, this.mServiceId, provider),
+                CreateOrderFragment.class.getName());
     }
 
     @Override
@@ -198,11 +208,9 @@ public class ProvidersFragment extends Fragment
     @Override
     public void onShowCommentsClicked(int position) {
         Proveedor provider = this.mProvidersAdapter.getItem(position);
-        Intent intent = new Intent(this.getActivity(), CommentsActivity.class);
-        Bundle args = new Bundle();
-        args.putInt(CommentsActivity.ARG_PROVIDER_ID, provider.getIdProveedor());
-        intent.putExtras(args);
-        this.getActivity().startActivity(intent);
+        ((HomeActivity) this.getActivity()).pushToStack(
+                CommentsToProviderFragment.newInstance(provider.getIdProveedor()),
+                CommentsToProviderFragment.class.getName());
     }
 
 }
