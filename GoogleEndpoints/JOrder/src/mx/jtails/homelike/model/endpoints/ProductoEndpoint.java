@@ -91,23 +91,25 @@ public class ProductoEndpoint {
 			Proveedor proveedor=proveedorM.getProveedor(Long.valueOf(producto.getProveedor().getIdProveedor()));
 			producto.setProveedor(proveedor);
 			Producto pproducto=productoM.getProducto(Long.valueOf(producto.getIdProducto()));
-			
-			//Producto con catalogo
-			if(producto.getCproducto()!=null){
-				CProducto cproducto=cproductoM.getCProducto(Long.valueOf(producto.getCproducto().getIdCProducto()));
-				producto.setCproducto(cproducto);
-			}else{
-				pproducto.setDescripcion(producto.getDescripcion());
-				pproducto.setPresentacion(producto.getPresentacion());
-			}
-			
+						
+			//Producto nuevo
 			if(pproducto==null || pproducto.getIdProducto()==0){
+				//Producto con catalogo
+				if(producto.getCproducto()!=null){
+					CProducto cproducto=cproductoM.getCProducto(Long.valueOf(producto.getCproducto().getIdCProducto()));
+					producto.setCproducto(cproducto);
+				}
 				logger.warning("Producto nuevo : "+user);
 				return productoM.insertProducto(producto);
 			}
-			else{
-				//Si el producto existe lo actualizamos
+			else{//Producto existente
+				//Producto sin catalogo
+				if(pproducto.getCproducto()==null){
+					pproducto.setDescripcion(producto.getDescripcion());
+					pproducto.setPresentacion(producto.getPresentacion());
+				}
 				pproducto.setCostoUnitario(producto.getCostoUnitario());
+				
 				logger.warning("Producto existente : "+user);
 				return productoM.updateProducto(pproducto);
 			}

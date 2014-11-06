@@ -116,11 +116,13 @@ public class Proveedor implements Serializable {
 	//@OneToMany(mappedBy="proveedor",fetch=FetchType.LAZY)
 	@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
 	private List<Pedido> pedidos;
+	
+	@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
+	private List<HorariosProveedor> horarios;
 
 	//bi-directional many-to-one association to Producto
-	//@JsonIgnore/*Agregado para Interacción con Producto*/
-	//@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
-	//private List<Producto> productos;
+	@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
+	private List<Producto> productos;
 
 	//bi-directional many-to-one association to Servicio
 	//El default para Referencias a Objetos(No Collections) es FetchType.EAGER (Recupera Dependencias por Default)
@@ -128,6 +130,14 @@ public class Proveedor implements Serializable {
 	@JoinColumn(name="id_servicio")
 	private Servicio servicio;
 
+	
+	public List<HorariosProveedor> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(List<HorariosProveedor> horarios) {
+		this.horarios = horarios;
+	}
 
 	public int getIdProveedor() {
 		return this.idProveedor;
@@ -359,27 +369,13 @@ public class Proveedor implements Serializable {
 		return pedido;
 	}
 
-	/*public List<Producto> getProductos() {
+	public List<Producto> getProductos() {
 		return this.productos;
 	}
 
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
-
-	public Producto addProducto(Producto producto) {
-		getProductos().add(producto);
-		producto.setProveedor(this);
-
-		return producto;
-	}
-
-	public Producto removeProducto(Producto producto) {
-		getProductos().remove(producto);
-		producto.setProveedor(null);
-
-		return producto;
-	}*/
 
 	public Servicio getServicio() {
 		return this.servicio;
