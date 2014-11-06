@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonBackReference;
 import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class Producto implements Serializable {
 	private CProducto cproducto;
 
 	//bi-directional many-to-one association to Proveedor
+	@JsonBackReference
 	@JoinColumn(name="id_proveedor")
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Proveedor proveedor;

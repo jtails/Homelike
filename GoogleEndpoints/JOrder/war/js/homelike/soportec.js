@@ -6,8 +6,8 @@
 	google.appengine.homelike = google.appengine.homelike || {};
 	google.appengine.homelike.soporte = google.appengine.homelike.soporte || {};
 	
-	google.appengine.homelike.WEB_CLIENT_ID='429890560769-odthisg69be4tj9q9k4jb3ordfjpj4kp.apps.googleusercontent.com';
-	//google.appengine.homelike.WEB_CLIENT_ID='429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com';
+	//google.appengine.homelike.WEB_CLIENT_ID='429890560769-odthisg69be4tj9q9k4jb3ordfjpj4kp.apps.googleusercontent.com';
+	google.appengine.homelike.WEB_CLIENT_ID='429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com';
 	google.appengine.homelike.EMAIL_SCOPE='https://www.googleapis.com/auth/userinfo.email';
 	
 	//Inside your callback function, load your Endpoint:
@@ -20,8 +20,8 @@
 		};
 		
 		apisToLoad = 3; // must match number of calls to gapi.client.load()
-		var ROOT = 'http://localhost:8888/_ah/api';
-		//var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
+		//var ROOT = 'http://localhost:8888/_ah/api';
+		var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
 		gapi.client.load('sugerenciascendpoint', 'v1',loadCallback, ROOT);
 		gapi.client.load('tsugerenciaendpoint', 'v1',loadCallback, ROOT);
 		gapi.client.load('oauth2', 'v2', loadCallback);

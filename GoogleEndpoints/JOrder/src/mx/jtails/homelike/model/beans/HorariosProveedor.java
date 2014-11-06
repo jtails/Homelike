@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonBackReference;
+import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -29,10 +32,15 @@ public class HorariosProveedor implements Serializable {
 	private Date cerramos;
 
 	//bi-directional many-to-one association to Proveedor
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="id_proveedor")
 	private Proveedor proveedor;
 
+	
+	//1- Lunes-Viernes
+	//2- Sabado
+	//3- Domingo
 	@Column(name="tipo_horario")
 	private int tipoHorario;
 

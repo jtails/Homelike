@@ -69,7 +69,7 @@
 																<th>Dia</th>
 																<th>Abrimos</th>
 																<th>Cerramos</th>
-																<th>Guardar</th>
+																<th>Controles</th>
 															</tr>
 														</thead>
 														<tbody id="tblHorarios">
@@ -93,7 +93,7 @@
 																		</span>
 																	</div>
 																</td>
-																<td>
+																<td id="controles1">
 																	<button type="submit" class="btn btn-sm btn-info" name="btnLunes" id="btnLunes" disabled>Guardar</button>
 																</td>
 															</tr>
@@ -117,7 +117,7 @@
 																		</span>
 																	</div>
 																</td>
-																<td>
+																<td id="controles2">
 																	<button type="submit" class="btn btn-sm btn-info" name="btnSabado" id="btnSabado" disabled>Guardar</button>
 																</td>
 															</tr>
@@ -141,7 +141,7 @@
 																		</span>
 																	</div>
 																</td>
-																<td>
+																<td id="controles3">
 																	<button type="submit" class="btn btn-sm btn-info" name="btnDomingo" id="btnDomingo" disabled>Guardar</button>
 																</td>
 															</tr>

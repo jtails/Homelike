@@ -35,70 +35,37 @@ public class HorariosProveedorEndpoint {
 	private static final Logger logger = Logger.getLogger(HorariosProveedorEndpoint.class.getName());
 
 	/**
-	 * This method lists all the entities inserted in datastore.
-	 * It uses HTTP GET method and paging support.
-	 *
-	 * @return A CollectionResponse class containing the list of all entities
-	 * persisted and a cursor to the next page.
+	 * Lista los horarios de servicio de un proveedor en especifico
+	 * @param horariosproveedor
+	 * El Horario del proveedor, contiene referencia al proveedor
+	 * @param user
+	 * El usuario autenticado con Google
+	 * @return
+	 * Retorna la lista de HorariosProveedor de un proveedor en especifico
 	 */
-	@SuppressWarnings({ "unchecked", "unused" })
-	@ApiMethod(name = "listHorariosProveedor")
-	public CollectionResponse<HorariosProveedor> listHorariosProveedor(
-			@Nullable @Named("cursor") String cursorString,
-			@Nullable @Named("limit") Integer limit,User user) {
-
-		EntityManager mgr = null;
-		Cursor cursor = null;
-		List<HorariosProveedor> execute = null;
-
-		try {
-			mgr = getEntityManager();
-			Query query = mgr
-					.createQuery("select from HorariosProveedor as HorariosProveedor");
-			if (cursorString != null && cursorString != "") {
-				cursor = Cursor.fromWebSafeString(cursorString);
-				query.setHint(JPACursorHelper.CURSOR_HINT, cursor);
-			}
-
-			if (limit != null) {
-				query.setFirstResult(0);
-				query.setMaxResults(limit);
-			}
-
-			execute = (List<HorariosProveedor>) query.getResultList();
-			cursor = JPACursorHelper.getCursor(execute);
-			if (cursor != null)
-				cursorString = cursor.toWebSafeString();
-
-			// Tight loop for fetching all entities from datastore and accomodate
-			// for lazy fetch.
-			for (HorariosProveedor obj : execute)
-				;
-		} finally {
-			mgr.close();
-		}
-
-		return CollectionResponse.<HorariosProveedor> builder()
-				.setItems(execute).setNextPageToken(cursorString).build();
+	@ApiMethod(name = "getHorariosProveedor",path="getHorariosProveedor")
+	public List<HorariosProveedor> getHorariosProveedor(HorariosProveedor horariosproveedor,User user)throws OAuthRequestException, IOException {
+		//if(user!=null){
+			HorariosProveedorManager horariosM=new HorariosProveedorManager();
+			List<HorariosProveedor> horarios=horariosM.getHorariosProveedor(horariosproveedor);
+			logger.warning("\"Horarios proveedor\" Proveedor: "+horariosproveedor.getProveedor().getIdProveedor()+", No.horarios: "+horarios.size()+", User: "+user);
+			return horarios;
+		//}
+		//return null;	
 	}
-
-	/**
-	 * This method gets the entity having primary key id. It uses HTTP GET method.
-	 *
-	 * @param id the primary key of the java bean.
-	 * @return The entity with primary key id.
-	 */
-	@ApiMethod(name = "getHorariosProveedor")
-	public HorariosProveedor getHorariosProveedor(@Named("id") Long id,User user) {
-		EntityManager mgr = getEntityManager();
-		HorariosProveedor horariosproveedor = null;
-		try {
-			horariosproveedor = mgr.find(HorariosProveedor.class, id);
-		} finally {
-			mgr.close();
-		}
-		return horariosproveedor;
+	
+	
+	@ApiMethod(name = "deleteHorariosProveedor",path="deleteHorariosProveedor")
+	public void deleteHorariosProveedor(HorariosProveedor horariosproveedor,User user)throws OAuthRequestException, IOException {
+		//if(user!=null){
+			HorariosProveedorManager horariosM=new HorariosProveedorManager();
+			horariosproveedor=horariosM.getHorariosProveedorByTipo(horariosproveedor);
+			logger.warning("\"Eliminacion Horarios proveedor\" Proveedor: "+horariosproveedor.getProveedor().getIdProveedor()+", Horario: "+horariosproveedor.getTipoHorario()+", User: "+user);
+			horariosM.removeHorariosProveedor(Long.valueOf(horariosproveedor.getIdHorario()));			
+		//}
+		//return null;	
 	}
+	
 
 	/**
 	 * Persiste el objeto HorariosProveedor, si el horario ya esta persistido realiza una operacion update
@@ -133,67 +100,6 @@ public class HorariosProveedorEndpoint {
 			return horariosproveedor;
 		//}
 		//return null;	
-	}
-
-	/**
-	 * This method is used for updating an existing entity. If the entity does not
-	 * exist in the datastore, an exception is thrown.
-	 * It uses HTTP PUT method.
-	 *
-	 * @param horariosproveedor the entity to be updated.
-	 * @return The updated entity.
-	 */
-	@ApiMethod(name = "updateHorariosProveedor")
-	public HorariosProveedor updateHorariosProveedor(
-			HorariosProveedor horariosproveedor,User user) {
-		EntityManager mgr = getEntityManager();
-		try {
-			if (!containsHorariosProveedor(horariosproveedor)) {
-				throw new EntityNotFoundException("Object does not exist");
-			}
-			mgr.persist(horariosproveedor);
-		} finally {
-			mgr.close();
-		}
-		return horariosproveedor;
-	}
-
-	/**
-	 * This method removes the entity with primary key id.
-	 * It uses HTTP DELETE method.
-	 *
-	 * @param id the primary key of the entity to be deleted.
-	 */
-	@ApiMethod(name = "removeHorariosProveedor")
-	public void removeHorariosProveedor(@Named("id") Long id,User user) {
-		EntityManager mgr = getEntityManager();
-		try {
-			HorariosProveedor horariosproveedor = mgr.find(
-					HorariosProveedor.class, id);
-			mgr.remove(horariosproveedor);
-		} finally {
-			mgr.close();
-		}
-	}
-
-	private boolean containsHorariosProveedor(
-			HorariosProveedor horariosproveedor) {
-		EntityManager mgr = getEntityManager();
-		boolean contains = true;
-		try {
-			HorariosProveedor item = mgr.find(HorariosProveedor.class,
-					horariosproveedor.getIdHorario());
-			if (item == null) {
-				contains = false;
-			}
-		} finally {
-			mgr.close();
-		}
-		return contains;
-	}
-
-	private static EntityManager getEntityManager() {
-		return EMF.get().createEntityManager();
 	}
 
 }
