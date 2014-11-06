@@ -30,8 +30,6 @@ public class HomeActivity extends ActionBarActivity
     public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.SERVICES;
     public static final int DEFAULT_FRAGMENT_TRANSITION = FragmentTransaction.TRANSIT_FRAGMENT_FADE;
 
-    public static final String ARG_HOME_CONTENT_ORD = "arg_home_content";
-
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -119,8 +117,8 @@ public class HomeActivity extends ActionBarActivity
         if(option.equals(DEFAULT_HOME_CONTENT)){
             this.clearStack();
         } else {
+            this.replaceStack(option.getFragmentClass(), null);
             this.mCurrentSection = option;
-            this.replaceStack(this.mCurrentSection.getFragmentClass(), null);
         }
 
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
