@@ -19,7 +19,7 @@
 package mx.jtails.homelike.api.model;
 
 /**
- * Model definition for Servicio.
+ * Model definition for HorariosProveedorCollection.
  *
  * <p> This is the Java data model class that specifies how to parse/serialize into the JSON that is
  * transmitted over HTTP when working with the horariosproveedorendpoint. For a detailed explanation
@@ -30,79 +30,43 @@ package mx.jtails.homelike.api.model;
  * @author Google, Inc.
  */
 @SuppressWarnings("javadoc")
-public final class Servicio extends com.google.api.client.json.GenericJson {
+public final class HorariosProveedorCollection extends com.google.api.client.json.GenericJson {
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.Integer idServicio;
+  private java.util.List<HorariosProveedor> items;
 
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String image;
-
-  /**
-   * The value may be {@code null}.
-   */
-  @com.google.api.client.util.Key
-  private java.lang.String nombre;
-
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.Integer getIdServicio() {
-    return idServicio;
-  }
-
-  /**
-   * @param idServicio idServicio or {@code null} for none
-   */
-  public Servicio setIdServicio(java.lang.Integer idServicio) {
-    this.idServicio = idServicio;
-    return this;
+  static {
+    // hack to force ProGuard to consider HorariosProveedor used, since otherwise it would be stripped out
+    // see http://code.google.com/p/google-api-java-client/issues/detail?id=528
+    com.google.api.client.util.Data.nullOf(HorariosProveedor.class);
   }
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getImage() {
-    return image;
+  public java.util.List<HorariosProveedor> getItems() {
+    return items;
   }
 
   /**
-   * @param image image or {@code null} for none
+   * @param items items or {@code null} for none
    */
-  public Servicio setImage(java.lang.String image) {
-    this.image = image;
-    return this;
-  }
-
-  /**
-   * @return value or {@code null} for none
-   */
-  public java.lang.String getNombre() {
-    return nombre;
-  }
-
-  /**
-   * @param nombre nombre or {@code null} for none
-   */
-  public Servicio setNombre(java.lang.String nombre) {
-    this.nombre = nombre;
+  public HorariosProveedorCollection setItems(java.util.List<HorariosProveedor> items) {
+    this.items = items;
     return this;
   }
 
   @Override
-  public Servicio set(String fieldName, Object value) {
-    return (Servicio) super.set(fieldName, value);
+  public HorariosProveedorCollection set(String fieldName, Object value) {
+    return (HorariosProveedorCollection) super.set(fieldName, value);
   }
 
   @Override
-  public Servicio clone() {
-    return (Servicio) super.clone();
+  public HorariosProveedorCollection clone() {
+    return (HorariosProveedorCollection) super.clone();
   }
 
 }

@@ -7,12 +7,30 @@
     android:padding="5dp">
 
 
-    <ImageView android:id="@+id/img_provider_logo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_homelike_splash_logo"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+        <ImageView android:id="@+id/img_provider_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_homelike_splash_logo"
+            android:layout_marginBottom="5dp"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="12dp"
+            android:textColor="@android:color/white"
+            android:text="L-V 9:00 a 12:00"
+            homelike:typeface="fonts/RobotoCondensed-Light.ttf"/>
+
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="1dp"
@@ -101,15 +119,5 @@
             </LinearLayout>
 
     </LinearLayout>
-
-    <!--
-    <mx.jtails.homelike.ui.widget.TypeFacedTextView
-        android:id="@+id/lbl_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        homelike:typeface="fonts/Roboto-Thin.ttf"
-        android:textSize="45sp"
-        android:textColor="@android:color/white" />
-    -->
 
 </LinearLayout>
