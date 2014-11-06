@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.InsertAddressRequest;
-import mx.jtails.homelike.ui.AddressActivity;
+import mx.jtails.homelike.ui.HomeActivity;
 
 /**
  * Created by GrzegorzFeathers on 9/4/14.
@@ -48,6 +46,13 @@ public class AddressDetailsFragment extends Fragment
     private ProgressDialog mInsertingDialog;
 
     private boolean mEditMode = false;
+
+    public static AddressDetailsFragment newInstance(Direccion address, boolean editMode){
+        AddressDetailsFragment fragment = new AddressDetailsFragment();
+        fragment.mAddress = address;
+        fragment.mEditMode = editMode;
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,21 +87,17 @@ public class AddressDetailsFragment extends Fragment
                 onFinishClicked();
             }
         });
-    }
 
-    public void reloadFormContent(Direccion address) {
-        this.mAddress = address;
-
-        this.mEditAlias.setText(address.getAlias());
-        this.mEditStreet.setText(address.getCalle());
-        this.mEditStreetNumber.setText(address.getNexterior());
-        this.mEditInterior.setText(address.getNinterior());
-        this.mEditColony.setText(address.getColonia());
-        this.mEditZipCode.setText(address.getCp());
-        this.mEditCity.setText(address.getDelegacion());
-        this.mEditState.setText(address.getEstado());
-        this.mEditCountry.setText(address.getPais());
-        this.mEditReference.setText(address.getReferencia1());
+        this.mEditAlias.setText(this.mAddress.getAlias());
+        this.mEditStreet.setText(this.mAddress.getCalle());
+        this.mEditStreetNumber.setText(this.mAddress.getNexterior());
+        this.mEditInterior.setText(this.mAddress.getNinterior());
+        this.mEditColony.setText(this.mAddress.getColonia());
+        this.mEditZipCode.setText(this.mAddress.getCp());
+        this.mEditCity.setText(this.mAddress.getDelegacion());
+        this.mEditState.setText(this.mAddress.getEstado());
+        this.mEditCountry.setText(this.mAddress.getPais());
+        this.mEditReference.setText(this.mAddress.getReferencia1());
     }
 
     private void onFinishClicked() {
@@ -140,24 +141,10 @@ public class AddressDetailsFragment extends Fragment
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_map:
-                LatLng location = new LatLng(Double.valueOf(this.mAddress.getLatitud()),
-                        Double.valueOf(this.mAddress.getLongitud()));
-                ((AddressActivity) this.getActivity()).backToMap(location);
+                ((HomeActivity) this.getActivity()).singlePop();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void updateAddress(Direccion address){
-        this.mAddress = address;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(this.mAddress != null){
-            this.reloadFormContent(this.mAddress);
         }
     }
 
@@ -222,8 +209,10 @@ public class AddressDetailsFragment extends Fragment
         if(this.mInsertingDialog != null){ this.mInsertingDialog.dismiss(); }
         if(addresses != null){
             HomelikeDBManager.getDBManager().saveAddresses(addresses);
-            //Toast.makeText(this.getActivity(), R.string.address_saved, Toast.LENGTH_SHORT).show();
-            this.getActivity().finish();
+            ((HomeActivity) this.getActivity()).singlePop();
+            if(!this.mEditMode){
+                ((HomeActivity) this.getActivity()).singlePop();
+            }
         } else {
             new AlertDialog.Builder(this.getActivity())
                     .setCancelable(false)

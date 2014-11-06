@@ -22,7 +22,9 @@ public class ContactFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
+        ActionBarActivity activity = (ActionBarActivity) this.getActivity();
+        activity.setSupportProgressBarIndeterminateVisibility(false);
+        ActionBar ab = activity.getSupportActionBar();
         ab.setSubtitle(HomeMenuSection.CONTACT.getSubtitleRes());
     }
 

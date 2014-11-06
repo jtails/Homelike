@@ -28,8 +28,6 @@ import mx.jtails.homelike.util.HomelikeUtils;
 public class HomeSectionsFragment extends Fragment
     implements AdapterView.OnItemClickListener {
 
-    public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.SERVICES;
-
     private ListView mListSections;
 
     private DisplayImageOptions mLoaderOptions;
@@ -57,16 +55,6 @@ public class HomeSectionsFragment extends Fragment
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
-    /*
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        this.notifyNewContent(HomelikePreferences.loadInt(
-                HomelikePreferences.CURRENT_HOME_SECTION,
-                DEFAULT_HOME_CONTENT.ordinal()));
-    }
-    */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,10 +86,6 @@ public class HomeSectionsFragment extends Fragment
         this.notifyNewContent(position);
     }
 
-    public interface OnHomeMenuOptionSelectedListener {
-        public void onHomeMenuOptionSelected(HomeMenuSection option);
-    }
-
     private void notifyNewContent(int section){
         if(this.mListener != null){
             this.mListener.onHomeMenuOptionSelected(HomeMenuSection.values()[section]);
@@ -112,6 +96,10 @@ public class HomeSectionsFragment extends Fragment
     public void onDetach() {
         super.onDetach();
         this.mListener = null;
+    }
+
+    public interface OnHomeMenuOptionSelectedListener {
+        public void onHomeMenuOptionSelected(HomeMenuSection option);
     }
 
 }

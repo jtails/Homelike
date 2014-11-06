@@ -31,7 +31,7 @@ public class CommentsToProviderFragment extends ListFragment
         LOAD, CONTENT;
     }
 
-    public static CommentsToProviderFragment getInstance(int providerId){
+    public static CommentsToProviderFragment newInstance(int providerId){
         CommentsToProviderFragment fragment = new CommentsToProviderFragment();
         fragment.mProviderId = providerId;
         return fragment;

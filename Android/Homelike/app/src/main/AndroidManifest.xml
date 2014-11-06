@@ -45,26 +45,6 @@
             android:icon="@drawable/ic_ab_navigation"
             android:theme="@style/Theme.Homelike.Splash"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.MyAddressesActivity"
-            android:label="@string/app_name"
-            android:icon="@drawable/ic_ab_navigation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.CheckOrderActivity"
-            android:label="@string/app_name"
-            android:icon="@drawable/ic_ab_navigation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.AddressActivity"
-            android:label="@string/app_name"
-            android:icon="@drawable/ic_ab_navigation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.CommentsActivity"
-            android:label="@string/app_name"
-            android:icon="@drawable/ic_ab_navigation"
-            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

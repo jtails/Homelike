@@ -1,6 +1,5 @@
 package mx.jtails.homelike.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -15,12 +14,10 @@ import java.util.List;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
-import mx.jtails.homelike.api.model.Servicio;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListAddressesRequest;
-import mx.jtails.homelike.ui.AddressActivity;
-import mx.jtails.homelike.ui.CheckOrderActivity;
+import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.MyAddressesAdapter;
 import mx.jtails.homelike.util.HomeMenuSection;
 
@@ -34,7 +31,6 @@ public class MyAddressesFragment extends Fragment
 
     private AddressMode mAddressMode;
     private int mServiceId;
-    private Servicio mService;
 
     private HomelikeApiRequest mListAddressesRequest;
 
@@ -87,7 +83,6 @@ public class MyAddressesFragment extends Fragment
             this.mAddressMode = AddressMode.EDIT;
         } else {
             this.mAddressMode = AddressMode.ORDER;
-            this.mService = HomelikeDBManager.getDBManager().getService(this.mServiceId);
         }
     }
 
@@ -124,36 +119,28 @@ public class MyAddressesFragment extends Fragment
                 break;
             }
             case EDIT: {
-                this.startEdit(this.mAddresses.get(position).getIdDireccion());
+                this.startEdit(this.mAddresses.get(position));
                 break;
             }
         }
     }
 
     private void startRegister(){
-        Bundle args = new Bundle();
-        Intent intent = new Intent(this.getActivity(), AddressActivity.class);
-        args.putString(AddressActivity.ARG_ADDRESS_MODE, AddressActivity.MODE_REGISTER_ADDRESS);
-        intent.putExtras(args);
-        this.startActivity(intent);
+        ((HomeActivity) this.getActivity()).pushToStack(AddressMapFragment.class, null);
     }
 
-    private void startEdit(int addressId){
-        Bundle args = new Bundle();
-        Intent intent = new Intent(this.getActivity(), AddressActivity.class);
-        args.putString(AddressActivity.ARG_ADDRESS_MODE, AddressActivity.MODE_OPEN_ADDRESS);
-        args.putInt(AddressActivity.ARG_ADDRESS_ID, addressId);
-        intent.putExtras(args);
-        this.startActivity(intent);
+    private void startEdit(Direccion address){
+        ((HomeActivity) this.getActivity()).pushToStack(
+                AddressDetailsFragment.newInstance(address, true),
+                AddressDetailsFragment.class.getName());
     }
 
     private void startOrder(Direccion address){
         Bundle args = new Bundle();
-        Intent intent = new Intent(this.getActivity(), CheckOrderActivity.class);
-        args.putInt(CheckOrderActivity.ARG_ADDRESS_ID, address.getIdDireccion());
-        args.putInt(CheckOrderActivity.ARG_SERVICE_ID, this.mServiceId);
-        intent.putExtras(args);
-        this.startActivity(intent);
+        args.putInt(ProvidersFragment.ARG_ADDRESS_ID, address.getIdDireccion());
+        args.putInt(ProvidersFragment.ARG_SERVICE_ID, this.mServiceId);
+        ((HomeActivity) this.getActivity()).pushToStack(
+                ProvidersFragment.class, args);
     }
 
     @Override
