@@ -114,13 +114,12 @@ public class HomeActivity extends ActionBarActivity
         if(this.mCurrentSection == option){
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
             return;
-        } else {
-            this.mCurrentSection = option;
         }
 
-        if(this.mCurrentSection.equals(DEFAULT_HOME_CONTENT)){
+        if(option.equals(DEFAULT_HOME_CONTENT)){
             this.clearStack();
         } else {
+            this.mCurrentSection = option;
             this.replaceStack(this.mCurrentSection.getFragmentClass(), null);
         }
 
@@ -129,6 +128,7 @@ public class HomeActivity extends ActionBarActivity
     }
 
     public void clearStack(){
+        this.mCurrentSection = DEFAULT_HOME_CONTENT;
         FragmentManager fm = this.getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
@@ -140,12 +140,10 @@ public class HomeActivity extends ActionBarActivity
 
     public void pushToStack(Fragment fragment, String tag){
         this.pushToStack(fragment, tag, DEFAULT_FRAGMENT_TRANSITION);
-        FragmentManager fm = this.getSupportFragmentManager();
     }
 
     public void pushToStack(Fragment fragment, String tag, int transition){
         this.pushToStack(fragment, tag, transition, true);
-        FragmentManager fm = this.getSupportFragmentManager();
     }
 
     private void pushToStack(Fragment fragment, String tag, int transition, boolean addToBackStack){

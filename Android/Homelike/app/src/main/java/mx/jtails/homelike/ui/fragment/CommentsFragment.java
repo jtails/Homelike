@@ -51,8 +51,7 @@ public class CommentsFragment extends Fragment
     }
 
     private void backToHome(){
-        ((HomeActivity) this.getActivity()).replaceStack(
-                HomeActivity.DEFAULT_HOME_CONTENT.getFragmentClass(), null);
+        ((HomeActivity) this.getActivity()).clearStack();
     }
 
     public void onSendCommentsClicked(){
