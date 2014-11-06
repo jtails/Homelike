@@ -50,7 +50,7 @@ public class CreateOrderFragment extends Fragment
     private ListProductsRequest mProductsRequest;
 
     private Proveedor mProvider;
-    private List<Producto> mProducts = new ArrayList<Producto>();
+    private List<Producto> mProducts;
     private Map<Integer, Integer> mSubtotals = new HashMap<Integer, Integer>();
     private Map<Producto, Integer> mOrder = new LinkedHashMap<Producto, Integer>();
 
@@ -80,6 +80,8 @@ public class CreateOrderFragment extends Fragment
         fragment.mAddressId = addressId;
         fragment.mServiceId = serviceId;
         fragment.mProvider = provider;
+        fragment.mProducts = provider.getProductos() == null ?
+                new ArrayList<Producto>() : provider.getProductos();
 
         return fragment;
     }

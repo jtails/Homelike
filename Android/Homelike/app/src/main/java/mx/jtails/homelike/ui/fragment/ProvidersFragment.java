@@ -114,6 +114,7 @@ public class ProvidersFragment extends Fragment
         if(this.mProvidersRequest != null){
             this.mProvidersRequest.cancelRequest();
         }
+        ((ActionBarActivity) this.getActivity()).setSupportProgressBarIndeterminateVisibility(false);
     }
 
     private void loadAddress(Bundle args){
