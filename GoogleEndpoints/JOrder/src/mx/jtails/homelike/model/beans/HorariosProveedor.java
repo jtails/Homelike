@@ -33,6 +33,10 @@ public class HorariosProveedor implements Serializable {
 	@JoinColumn(name="id_proveedor")
 	private Proveedor proveedor;
 
+	
+	//1- Lunes-Viernes
+	//2- Sabado
+	//3- Domingo
 	@Column(name="tipo_horario")
 	private int tipoHorario;
 

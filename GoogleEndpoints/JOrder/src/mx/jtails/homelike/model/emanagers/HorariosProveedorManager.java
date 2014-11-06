@@ -44,6 +44,21 @@ public class HorariosProveedorManager {
 		}
 		return horariosproveedor;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<HorariosProveedor> getHorariosProveedor(HorariosProveedor horariosproveedor) {
+		EntityManager mgr = null;
+		List<HorariosProveedor> phorariosproveedor=null;
+		try {
+			mgr = getEntityManager();
+			Query query = mgr.createQuery("select from HorariosProveedor as HorariosProveedor where HorariosProveedor.proveedor.idProveedor=:idProveedor").setParameter("idProveedor",horariosproveedor.getProveedor().getIdProveedor());
+			phorariosproveedor = (List<HorariosProveedor>) query.getResultList();
+		} finally {
+			mgr.close();
+		}
+		return phorariosproveedor;
+	}
 
 	/**
 	 * This method gets the entity having primary key id. It uses HTTP GET method.
