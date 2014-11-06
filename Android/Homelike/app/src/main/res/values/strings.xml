@@ -87,6 +87,10 @@
     <string name="phone_short">Phone</string>
     <string name="no_products">This provider doesn\'t have products</string>
     <string name="request_provider">Request Provider</string>
+    <string name="schedule_mon_fri">M - F</string>
+    <string name="schedule_sat">Sat</string>
+    <string name="schedule_sun">Sun</string>
+    <string name="schedule_connector">to</string>
 
     <!-- Address -->
     <string name="location">Location</string>

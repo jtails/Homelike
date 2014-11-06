@@ -8,7 +8,7 @@
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_vertical">
@@ -21,14 +21,10 @@
             android:src="@drawable/ic_homelike_splash_logo"
             android:layout_marginBottom="5dp"/>
 
-        <mx.jtails.homelike.ui.widget.TypeFacedTextView
-            android:layout_width="wrap_content"
+        <LinearLayout android:id="@+id/layout_schedules"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="12dp"
-            android:textColor="@android:color/white"
-            android:text="L-V 9:00 a 12:00"
-            homelike:typeface="fonts/RobotoCondensed-Light.ttf"/>
+            android:orientation="vertical"/>
 
     </LinearLayout>
 

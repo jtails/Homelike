@@ -14,6 +14,8 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -144,7 +146,7 @@ public class HomelikeUtils {
         return newImageUrl;
     }
 
-    public static int getOrderStatusString(int status){
+    public static int getOrderStatusStringRes(int status){
         int statusRes;
         switch (status){
             case 0:
@@ -157,6 +159,29 @@ public class HomelikeUtils {
                 statusRes = R.string.status_unknown; break;
         }
         return statusRes;
+    }
+
+    public static int getScheduleDaysStringRes(int scheduleId){
+        int daysRes;
+        switch (scheduleId) {
+            case 1: daysRes = R.string.schedule_mon_fri; break;
+            case 2: daysRes = R.string.schedule_sat; break;
+            case 3: daysRes = R.string.schedule_sun; break;
+            default: daysRes = -1; break;
+        }
+        return daysRes;
+    }
+
+    public static String getScheduleString(Context ctx, Date scheduleOpening, Date scheduleClosing){
+        SimpleDateFormat timeFormat = new SimpleDateFormat("H:mm");
+
+        String scheduleOpeningString = timeFormat.format(scheduleOpening);
+        String scheduleClosingString = timeFormat.format(scheduleClosing);
+        String scheduleConnector = ctx.getString(R.string.schedule_connector);
+
+        return new StringBuilder().append(scheduleOpeningString)
+            .append(" ").append(scheduleConnector).append(" ")
+            .append(scheduleClosingString).toString();
     }
 
     public static Set<String> getSerializedSubtotal(Map<Integer, Integer> subtotal){
