@@ -42,6 +42,7 @@ public class HomeActivity extends ActionBarActivity
         setContentView(R.layout.activity_home);
 
         this.setupActivity();
+        this.clearStack();
         this.pushToStack(this.DEFAULT_HOME_CONTENT.getFragmentClass(), null, -1, false);
     }
 
@@ -115,7 +116,6 @@ public class HomeActivity extends ActionBarActivity
             this.replaceStack(option.getFragmentClass(), null);
         }
 
-        this.mDrawerLayout.closeDrawer(GravityCompat.START);
         this.supportInvalidateOptionsMenu();
     }
 
