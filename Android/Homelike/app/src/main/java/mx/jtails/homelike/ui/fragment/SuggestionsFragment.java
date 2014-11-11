@@ -19,6 +19,7 @@ import java.util.List;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Tsugerencia;
+import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.InsertSuggestionRequest;
 import mx.jtails.homelike.request.ListSuggestionTypesRequest;
 import mx.jtails.homelike.ui.HomeActivity;
@@ -37,6 +38,7 @@ public class SuggestionsFragment extends Fragment
     private RadioGroup mGroupSuggestions;
     private RadioButton[] mRadioSuggestions;
     private View mLayoutLoading;
+    private HomelikeApiRequest mRequest;
 
     private String mDefaultOption = null;
 
@@ -50,6 +52,8 @@ public class SuggestionsFragment extends Fragment
         if(args != null && args.containsKey(EXTRA_DEFAULT_OPTION)){
             this.mDefaultOption = args.getString(EXTRA_DEFAULT_OPTION);
         }
+
+        this.mRequest = new ListSuggestionTypesRequest(this);
     }
 
     @Override
@@ -86,8 +90,6 @@ public class SuggestionsFragment extends Fragment
         dummySuggestions.add(new Tsugerencia().setTipoSugerencia("dummy"));
         dummySuggestions.add(new Tsugerencia().setTipoSugerencia("dummy"));
         this.setupSuggestionsRadioGroup(dummySuggestions);
-
-        new ListSuggestionTypesRequest(this).executeAsync();
     }
 
     private void onSendCommentClicked(){
@@ -104,6 +106,20 @@ public class SuggestionsFragment extends Fragment
         this.mGroupSuggestions.setVisibility(View.INVISIBLE);
 
         new InsertSuggestionRequest(this, suggestionType, suggestion).executeAsync();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.mRequest.executeAsync();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(this.mRequest != null){
+            this.mRequest.cancelRequest();
+        }
     }
 
     @Override

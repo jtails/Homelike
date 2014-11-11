@@ -30,12 +30,8 @@ public class HomeActivity extends ActionBarActivity
     public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.SERVICES;
     public static final int DEFAULT_FRAGMENT_TRANSITION = FragmentTransaction.TRANSIT_FRAGMENT_FADE;
 
-    public static final String ARG_HOME_CONTENT_ORD = "arg_home_content";
-
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-
-    private HomeMenuSection mCurrentSection = DEFAULT_HOME_CONTENT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +42,8 @@ public class HomeActivity extends ActionBarActivity
         setContentView(R.layout.activity_home);
 
         this.setupActivity();
-        this.pushToStack(this.mCurrentSection.getFragmentClass(), null, -1, false);
+        this.clearStack();
+        this.pushToStack(this.DEFAULT_HOME_CONTENT.getFragmentClass(), null, -1, false);
     }
 
     private void validateUserSignedIn(){
@@ -111,24 +108,18 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onHomeMenuOptionSelected(HomeMenuSection option) {
-        if(this.mCurrentSection == option){
-            this.mDrawerLayout.closeDrawer(GravityCompat.START);
-            return;
-        }
+        this.mDrawerLayout.closeDrawer(GravityCompat.START);
 
         if(option.equals(DEFAULT_HOME_CONTENT)){
             this.clearStack();
         } else {
-            this.mCurrentSection = option;
-            this.replaceStack(this.mCurrentSection.getFragmentClass(), null);
+            this.replaceStack(option.getFragmentClass(), null);
         }
 
-        this.mDrawerLayout.closeDrawer(GravityCompat.START);
         this.supportInvalidateOptionsMenu();
     }
 
     public void clearStack(){
-        this.mCurrentSection = DEFAULT_HOME_CONTENT;
         FragmentManager fm = this.getSupportFragmentManager();
         fm.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
@@ -210,9 +201,6 @@ public class HomeActivity extends ActionBarActivity
             this.mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-            if(this.getSupportFragmentManager().getBackStackEntryCount() <= 0) {
-                this.mCurrentSection = HomeMenuSection.SERVICES;
-            }
         }
     }
 }

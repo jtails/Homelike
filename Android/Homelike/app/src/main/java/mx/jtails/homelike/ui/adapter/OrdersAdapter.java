@@ -81,7 +81,7 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
                 new Date(order.getFechaHoraPedido().getValue())) + " hrs");
         holder.lblOrderProvider.get().setText(order.getProveedor().getNombre());
         holder.lblOrderId.get().setText("ID." + order.getIdPedido());
-        holder.lblOrderStatus.get().setText(HomelikeUtils.getOrderStatusString(order.getStatus()));
+        holder.lblOrderStatus.get().setText(HomelikeUtils.getOrderStatusStringRes(order.getStatus()));
         ImageLoader.getInstance().displayImage(order.getProveedor().getLogo(),
                 holder.imgProviderLogo.get(), this.mLoaderOptions);
 

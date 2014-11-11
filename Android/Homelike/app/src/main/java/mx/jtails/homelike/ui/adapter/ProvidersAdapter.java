@@ -15,10 +15,13 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.lang.ref.WeakReference;
+import java.util.Date;
 import java.util.List;
 
 import mx.jtails.homelike.R;
+import mx.jtails.homelike.api.model.HorariosProveedor;
 import mx.jtails.homelike.api.model.Proveedor;
+import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/8/14.
@@ -79,7 +82,34 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
             }
         });
 
+        holder.layoutSchedules.get().removeAllViews();
+        if(provider.getHorarios() != null && !provider.getHorarios().isEmpty()){
+            this.addSchedules(holder.layoutSchedules.get(), provider.getHorarios());
+        }
+
         return view;
+    }
+
+    private void addSchedules(ViewGroup container, List<HorariosProveedor> schedules){
+        Context ctx = this.getContext();
+        for(HorariosProveedor schedule : schedules){
+            int scheduleDaysRes = HomelikeUtils.getScheduleDaysStringRes(schedule.getIdHorario());
+            if(scheduleDaysRes < 0){
+                continue;
+            }
+
+            String scheduleDays = ctx.getString(scheduleDaysRes);
+            String scheduleTime = HomelikeUtils.getScheduleString(ctx,
+                    new Date(schedule.getAbrimos().getValue()),
+                    new Date(schedule.getCerramos().getValue()));
+
+            TextView lblSchedule = (TextView) LayoutInflater.from(ctx)
+                    .inflate(R.layout.list_item_schedule, container, false);
+            lblSchedule.setText(new StringBuilder()
+                    .append(scheduleDays).append(" ")
+                    .append(scheduleTime).toString());
+            container.addView(lblSchedule);
+        }
     }
 
     @Override
@@ -100,6 +130,7 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
         private WeakReference<TextView> lblProviderAddress;
         private WeakReference<RatingBar> ratingProvider;
         private WeakReference<View> layoutComments;
+        private WeakReference<ViewGroup> layoutSchedules;
 
         public ViewHolder(View view) {
             this.lblProviderName = new WeakReference<TextView>(
@@ -112,7 +143,10 @@ public class ProvidersAdapter extends ArrayAdapter<Proveedor> {
                     (ImageView) view.findViewById(R.id.img_provider_logo));
             this.ratingProvider = new WeakReference<RatingBar>(
                     (RatingBar) view.findViewById(R.id.rating_provider));
-            this.layoutComments = new WeakReference<View>(view.findViewById(R.id.layout_comments));
+            this.layoutComments = new WeakReference<View>(
+                    view.findViewById(R.id.layout_comments));
+            this.layoutSchedules = new WeakReference<ViewGroup>(
+                    (ViewGroup) view.findViewById(R.id.layout_schedules));
         }
     }
 

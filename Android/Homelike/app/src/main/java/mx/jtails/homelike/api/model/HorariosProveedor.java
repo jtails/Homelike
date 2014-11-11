@@ -19,7 +19,7 @@
 package mx.jtails.homelike.api.model;
 
 /**
- * Model definition for CProducto.
+ * Model definition for HorariosProveedor.
  *
  * <p> This is the Java data model class that specifies how to parse/serialize into the JSON that is
  * transmitted over HTTP when working with the horariosproveedorendpoint. For a detailed explanation
@@ -30,100 +30,121 @@ package mx.jtails.homelike.api.model;
  * @author Google, Inc.
  */
 @SuppressWarnings("javadoc")
-public final class CProducto extends com.google.api.client.json.GenericJson {
+public final class HorariosProveedor extends com.google.api.client.json.GenericJson {
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String descripcion;
+  private com.google.api.client.util.DateTime abrimos;
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.Integer idCProducto;
+  private com.google.api.client.util.DateTime cerramos;
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String presentacion;
+  private java.lang.Integer idHorario;
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private Servicio servicio;
+  private Proveedor proveedor;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
+  private java.lang.Integer tipoHorario;
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getDescripcion() {
-    return descripcion;
+  public com.google.api.client.util.DateTime getAbrimos() {
+    return abrimos;
   }
 
   /**
-   * @param descripcion descripcion or {@code null} for none
+   * @param abrimos abrimos or {@code null} for none
    */
-  public CProducto setDescripcion(java.lang.String descripcion) {
-    this.descripcion = descripcion;
+  public HorariosProveedor setAbrimos(com.google.api.client.util.DateTime abrimos) {
+    this.abrimos = abrimos;
     return this;
   }
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.Integer getIdCProducto() {
-    return idCProducto;
+  public com.google.api.client.util.DateTime getCerramos() {
+    return cerramos;
   }
 
   /**
-   * @param idCProducto idCProducto or {@code null} for none
+   * @param cerramos cerramos or {@code null} for none
    */
-  public CProducto setIdCProducto(java.lang.Integer idCProducto) {
-    this.idCProducto = idCProducto;
+  public HorariosProveedor setCerramos(com.google.api.client.util.DateTime cerramos) {
+    this.cerramos = cerramos;
     return this;
   }
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getPresentacion() {
-    return presentacion;
+  public java.lang.Integer getIdHorario() {
+    return idHorario;
   }
 
   /**
-   * @param presentacion presentacion or {@code null} for none
+   * @param idHorario idHorario or {@code null} for none
    */
-  public CProducto setPresentacion(java.lang.String presentacion) {
-    this.presentacion = presentacion;
+  public HorariosProveedor setIdHorario(java.lang.Integer idHorario) {
+    this.idHorario = idHorario;
     return this;
   }
 
   /**
    * @return value or {@code null} for none
    */
-  public Servicio getServicio() {
-    return servicio;
+  public Proveedor getProveedor() {
+    return proveedor;
   }
 
   /**
-   * @param servicio servicio or {@code null} for none
+   * @param proveedor proveedor or {@code null} for none
    */
-  public CProducto setServicio(Servicio servicio) {
-    this.servicio = servicio;
+  public HorariosProveedor setProveedor(Proveedor proveedor) {
+    this.proveedor = proveedor;
+    return this;
+  }
+
+  /**
+   * @return value or {@code null} for none
+   */
+  public java.lang.Integer getTipoHorario() {
+    return tipoHorario;
+  }
+
+  /**
+   * @param tipoHorario tipoHorario or {@code null} for none
+   */
+  public HorariosProveedor setTipoHorario(java.lang.Integer tipoHorario) {
+    this.tipoHorario = tipoHorario;
     return this;
   }
 
   @Override
-  public CProducto set(String fieldName, Object value) {
-    return (CProducto) super.set(fieldName, value);
+  public HorariosProveedor set(String fieldName, Object value) {
+    return (HorariosProveedor) super.set(fieldName, value);
   }
 
   @Override
-  public CProducto clone() {
-    return (CProducto) super.clone();
+  public HorariosProveedor clone() {
+    return (HorariosProveedor) super.clone();
   }
 
 }

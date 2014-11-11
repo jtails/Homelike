@@ -109,7 +109,7 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
         this.mLblProviderName.setText(this.mOrder.getProveedor().getNombre());
         this.mLblOrderId.setText("ID. " + this.mOrder.getIdPedido());
         this.mRatingProvider.setRating((float) this.mOrder.getProveedor().getCalificacion());
-        this.mLblStatus.setText(HomelikeUtils.getOrderStatusString(this.mOrder.getStatus()));
+        this.mLblStatus.setText(HomelikeUtils.getOrderStatusStringRes(this.mOrder.getStatus()));
 
         this.addOrderContent();
         this.addClientComments();
