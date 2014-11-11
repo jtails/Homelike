@@ -38,9 +38,11 @@ public class DeleteAddressRequest extends HomelikeApiRequest {
         //account.setDispositivos(new ArrayList<Dispositivo>(Arrays.asList(device)));
 
         Cuentaendpoint.DeleteDireccion request =
-                ((Cuentaendpoint) this.mEndpoint).deleteDireccion(account);
-        String jsonString = request.getJsonContent().toString();
-        System.out.println(jsonString);
+                ((Cuentaendpoint) this.mEndpoint).deleteDireccion(this.mAddress.getIdDireccion());
+        //String jsonString = request.getJsonContent().toString();
+        System.out.println(request.toString());
+        //System.out.println(jsonString);
+        System.out.println(request.buildHttpRequestUrl());
 
         return request.execute();
     }

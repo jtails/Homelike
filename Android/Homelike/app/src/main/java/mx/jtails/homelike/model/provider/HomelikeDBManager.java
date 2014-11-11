@@ -222,6 +222,25 @@ public class HomelikeDBManager {
         return addresses;
     }
 
+    public int removeAddress(int addressId){
+        this.prepareDB(true);
+
+        String [] args = { String.valueOf(addressId) };
+
+        int deleted = this.db.delete(HomelikeDatabase.Tables.ADDRESSES,
+                HomelikeContract.AddressesColumns.ADDRESS_ID + " = ?", args);
+
+        if(deleted > 0){
+            System.out.println("Address deleted: Affected rows - " + deleted);
+        } else {
+            System.out.println("Failed to delete the address");
+        }
+
+        this.releaseDB();
+
+        return deleted;
+    }
+
     public Direccion getAddress(int addressId){
         this.prepareDB(false);
 
