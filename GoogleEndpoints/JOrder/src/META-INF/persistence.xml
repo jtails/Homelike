@@ -23,6 +23,8 @@
         	<property name="datanucleus.storeManagerType" value="rdbms"/>
         	<property name="datanucleus.identifier.case" value="LowerCase"/>
         	<property name="datanucleus.DetachAllOnCommit" value="true"/>
+        	<property name="datanucleus.cache.level2.type" value="none"/>
+        	
             
             
             <!-- Estas 4 Propiedades son necesarias para conectarse a Google Cloud -->

@@ -24,6 +24,7 @@
 <input type="hidden" name="nelongitud" id="nelongitud" value="${sessionScope.proveedor.nelongitud}"/>
 <input type="hidden" name="swlatitud" id="swlatitud" value="${sessionScope.proveedor.swlatitud}"/>
 <input type="hidden" name="swlongitud" id="swlongitud" value="${sessionScope.proveedor.swlongitud}"/>
+<input type="hidden" name="status" id="status" value="${sessionScope.proveedor.status}"/>
 
 <div class="navbar navbar-fixed-top bs-docs-nav" role="banner">
 

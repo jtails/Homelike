@@ -4,15 +4,18 @@ import mx.jtails.homelike.model.beans.Cuenta;
 import mx.jtails.homelike.model.beans.Direccion;
 import mx.jtails.homelike.model.beans.Proveedor;
 import mx.jtails.homelike.model.emanagers.CuentaManager;
+import mx.jtails.homelike.model.emanagers.DireccionManager;
 import mx.jtails.homelike.model.emanagers.PedidoManager;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
+import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -113,6 +116,20 @@ public class CuentaEndpoint {
 		//return null;
 	}
 	
+	
+	@ApiMethod(name = "deleteDireccion", path="deleteDireccion", httpMethod = HttpMethod.POST)
+	public void deleteDireccion(@Named("idDireccion") int idDireccion,User user)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			DireccionManager direccionM=new DireccionManager();
+			//Obtenemos referencia al objeto direccion persistido
+			Direccion pdireccion=direccionM.getDireccion(Long.valueOf(idDireccion));
+			pdireccion.setStatus(0);//Borrado logico
+			direccionM.updateDireccion(pdireccion);
+			logger.warning("Eliminando Direccion : "+idDireccion+", User : "+user);
+		//}
+		//return null;
+	}
+	
 	/**
 	 * Permite obtener una cuenta persistida con su referencia al dispositivo y a la direccion a partir de un objeto cuenta con su ID
 	 * @param cuenta
@@ -126,8 +143,20 @@ public class CuentaEndpoint {
 	public Cuenta getCuenta(@Named("id") Long id,User user)throws OAuthRequestException, IOException {
 	//	if(user!=null){
 		CuentaManager cuentaM=new CuentaManager();
-		Cuenta cuenta=cuentaM.getCuenta(id);
-		logger.warning("Direcciones en la cuenta : "+cuenta.getDirecciones().size()+" User :"+user);
+		Cuenta cuenta=cuentaM.getCuenta(id);	
+		//Excluimos las direcciones inactivas
+		List<Direccion> direccionese=new ArrayList<Direccion>();//Implementado por ConcurrentModificationException, al iterar y eliminar
+		
+		logger.warning("Direcciones en la cuenta antes de excluir: "+(cuenta.getDirecciones()!=null?cuenta.getDirecciones().size():"null ,")+" User :"+user);
+		for(Direccion direccion:cuenta.getDirecciones()){
+			logger.warning("Direccion Id: "+direccion.getIdDireccion()+" ,status: "+direccion.getStatus()+" User :"+user);
+			if(direccion.getStatus()==1){//Copiar direccion a la nueva lista
+				logger.warning("Direccion copiada Id: "+direccion.getIdDireccion()+" User :"+user);
+				direccionese.add(direccion);
+			}
+		}
+		cuenta.setDirecciones(direccionese);
+		logger.warning("Direcciones en la cuenta despues de excluir : "+(direccionese!=null?direccionese.size():"null ,")+" User :"+user);
 		return cuenta;
 		//}
 		//return null;
@@ -196,7 +225,19 @@ public class CuentaEndpoint {
 		//if(user!=null){
 			CuentaManager cuentaM=new CuentaManager();
 			cuenta=cuentaM.getCuentaByUser(cuenta);
-			logger.warning("Direcciones en la cuenta : "+cuenta.getDirecciones().size()+" User :"+user);
+			//Excluimos las direcciones inactivas
+			List<Direccion> direccionese=new ArrayList<Direccion>();//Implementado por ConcurrentModificationException, al iterar y eliminar
+			
+			logger.warning("Direcciones en la cuenta antes de excluir: "+(cuenta.getDirecciones()!=null?cuenta.getDirecciones().size():"null ,")+" User :"+user);
+			for(Direccion direccion:cuenta.getDirecciones()){
+				logger.warning("Direccion Id: "+direccion.getIdDireccion()+" ,status: "+direccion.getStatus()+" User :"+user);
+				if(direccion.getStatus()==1){//Copiar direccion a la nueva lista
+					logger.warning("Direccion copiada Id: "+direccion.getIdDireccion()+" User :"+user);
+					direccionese.add(direccion);
+				}
+			}
+			cuenta.setDirecciones(direccionese);
+			logger.warning("Direcciones en la cuenta despues de excluir : "+(direccionese!=null?direccionese.size():"null ,")+" User :"+user);
 			return cuenta;
 		//}
 		//return null;

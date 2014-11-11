@@ -111,7 +111,7 @@ public class DireccionManager {
 			if (!containsDireccion(direccion)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.persist(direccion);
+			mgr.merge(direccion);
 		} finally {
 			mgr.close();
 		}

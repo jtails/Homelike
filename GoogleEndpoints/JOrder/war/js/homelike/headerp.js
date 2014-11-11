@@ -67,6 +67,12 @@
 		$("#pedidosth").click(function(){
 			$("#contenido").load("fragments/hpedidosp.jsp");
 		});
+		
+		var status=$("#status").val();
+		if(status==0){
+			$("#messageg").addClass("alert alert-warning"); 
+			$("#messageg").text("Usted debe ponerse en contacto con nuestro equipo de administracion para que su cuenta sea activada!!");
+		}
 	}
 	
 	//---------------------OAuth 2.0-----------------------------

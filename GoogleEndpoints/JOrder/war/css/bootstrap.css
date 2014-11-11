@@ -3860,6 +3860,11 @@ a.thumbnail.active {
   border-color: #faebcc;
   color: #8a6d3b;
 }
+.alert-error {
+  background-color: #CC0000;
+  border-color: #990000;
+  color: #8a6d3b;
+}
 .alert-warning hr {
   border-top-color: #f7e1b5;
 }

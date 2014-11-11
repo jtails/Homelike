@@ -24,9 +24,11 @@
 		<!-- Logo ends -->
 	</div>
 
+	<div class="col-md-4">
+		<div id="messageg"></div>
+	</div>
 	<!-- Button section -->
-	<div class="col-md-8">
-
+	<div class="col-md-4">
 		<!-- Buttons -->
 		<ul class="nav nav-pills pull-right" id="detailsp">
 

@@ -82,7 +82,7 @@ public class ProveedorManager {
 
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from Proveedor as Proveedor where nelatitud>:latitud and swlatitud<:latitud and swlongitud>:longitud and nelongitud<:longitud and servicio.idServicio=:idServicio").setParameter("latitud",latitud).setParameter("longitud",longitud).setParameter("idServicio", idServicio);
+			Query query = mgr.createQuery("select from Proveedor as Proveedor where nelatitud>:latitud and swlatitud<:latitud and swlongitud>:longitud and nelongitud<:longitud and servicio.idServicio=:idServicio and status=:status").setParameter("latitud",latitud).setParameter("longitud",longitud).setParameter("idServicio", idServicio).setParameter("status",1);
 			proveedores = (List<Proveedor>) query.getResultList();
 		} finally {
 			mgr.close();

@@ -120,6 +120,7 @@ public class ProveedorEndpoint {
 			proveedor.setServicio(servicio);
 			if(proveedor.getIdProveedor()==0){
 				logger.warning("Nueva proveedor : "+user);
+				proveedor.setStatus(0);//Proveedor Deshabilitado, hasta su confirmación
 				return proveedorM.insertProveedor(proveedor);
 			}
 			else{

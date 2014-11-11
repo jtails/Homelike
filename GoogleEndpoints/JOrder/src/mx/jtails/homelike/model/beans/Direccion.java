@@ -23,6 +23,7 @@ public class Direccion implements Serializable {
 	public Direccion(){
 		Calendar calendar=Calendar.getInstance();
 		fechaHoraCreacion=calendar.getTime();
+		status=1;
 	}
 	
 	@Id
@@ -66,6 +67,10 @@ public class Direccion implements Serializable {
 	private String referencia2;
 	
 	private String alias;
+	
+	//0 Borrado logico
+	//1 Activa
+	private int status;
 
 	//bi-directional many-to-one association to Cuenta
 	//@JsonBackReference para evitar recursividad durante la lectura del JSON
@@ -224,6 +229,14 @@ public class Direccion implements Serializable {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

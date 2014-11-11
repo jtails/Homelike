@@ -89,7 +89,9 @@ public class Proveedor implements Serializable {
 	
 	//-1 Nombre de Usuario existente
 	//-2 Usuario invalido
-	@Transient
+	//0  Usuario Deshabiliado
+	//1  Usuario Habilitado
+	//@Transient
 	private int status;
 	@Transient
 	private int numPedidos;
