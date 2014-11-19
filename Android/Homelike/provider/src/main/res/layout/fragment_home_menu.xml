@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#607d8b"
+    android:clickable="true">
+
+    <LinearLayout android:id="@+id/layout_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#33ffffff"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView android:id="@+id/img_display_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@null"
+            android:adjustViewBounds="true"/>
+
+        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+            android:id="@+id/lbl_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:textSize="22sp"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            homelike:typeface="fonts/Roboto-LightItalic.ttf"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+
+    <!-- android:background="#455a64" -->
+    <ListView
+        android:id="@+id/list_home_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        android:background="#607d8b"/>
+
+</LinearLayout>
