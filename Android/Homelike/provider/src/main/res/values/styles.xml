@@ -1,0 +1,56 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="Theme.Homelike" parent="@style/Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/Widget.Homelike.Actionbar</item>
+        <item name="android:windowBackground">@drawable/bg_homelike</item>
+    </style>
+
+    <style name="Widget.Homelike.Actionbar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/TextAppearance.Homelike.Widget.ActionBar.Title</item>
+        <item name="android:subtitleTextStyle">@style/TextAppearance.Homelike.Widget.ActionBar.Subtitle</item>
+    </style>
+
+    <style name="TextAppearance.Homelike.Widget.ActionBar.Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="TextAppearance.Homelike.Widget.ActionBar.Subtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">#eee</item>
+    </style>
+
+    <!-- No Actionbar -->
+    <style name="Theme.Homelike.NoActionBar" parent="Theme.Homelike">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- Splash Theme -->
+    <style name="Theme.Homelike.Splash" parent="Theme.Homelike.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
+    <!-- Translucent Actionbar -->
+    <style name="Theme.Homelike.Translucent" parent="Theme.Homelike">
+        <item name="android:actionBarStyle">@style/Widget.Homelike.Actionbar.Translucent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="Widget.Homelike.Actionbar.Translucent" parent="Widget.AppCompat.ActionBar.Solid" >
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <!-- Custom widgets -->
+    <style name="Widget.Homelike.RatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_provider</item>
+        <item name="android:maxHeight">40dp</item>
+        <item name="android:maxWidth">40dp</item>
+    </style>
+
+    <style name="Widget.Homelike.RatingBarBig" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_provider_big</item>
+        <item name="android:maxHeight">40dp</item>
+        <item name="android:maxWidth">40dp</item>
+    </style>
+
+</resources>
