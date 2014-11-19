@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:homelike="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <FrameLayout
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_homelike_splash_logo"
+                android:adjustViewBounds="true"/>
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <LinearLayout android:id="@+id/frame_homelike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="28sp"
+                    android:textColor="#e0f2f1"
+                    android:text="Home"
+                    homelike:typeface="fonts/Roboto-Thin.ttf"/>
+                <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="28sp"
+                    android:textColor="#e0f2f1"
+                    android:text="Like"
+                    homelike:typeface="fonts/Roboto-Medium.ttf"/>
+
+            </LinearLayout>
+
+            <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#e0f2f1"
+                android:text="powered by Jtails"
+                homelike:typeface="fonts/RobotoCondensed-Light.ttf"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Usted tiene un negocio y desea convertirse en proveedor de servicios, comuníquese con nosotros y con gusto le atenderemos:"
+            android:textColor="#e0f2f1"
+            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+            android:gravity="center"/>
+
+        <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Telefonos"
+            android:textColor="#e0f2f1"
+            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+            android:layout_marginTop="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_office"/>
+
+                <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Reportes: +52 55-68-29-8778"
+                    android:textColor="#e0f2f1"
+                    homelike:typeface="fonts/RobotoCondensed-Light.ttf"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_mobile"/>
+
+                <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Línea Directa: +52 55-21-06-7045"
+                    android:textColor="#e0f2f1"
+                    homelike:typeface="fonts/RobotoCondensed-Light.ttf"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="E-mail: "
+            android:textColor="#e0f2f1"
+            homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+            android:layout_marginTop="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_email"/>
+
+                <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="soporte.homelike@jtails.mx"
+                    android:textColor="#e0f2f1"
+                    homelike:typeface="fonts/RobotoCondensed-Light.ttf"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

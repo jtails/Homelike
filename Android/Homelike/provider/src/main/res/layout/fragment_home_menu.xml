@@ -20,7 +20,7 @@
             android:contentDescription="@null"
             android:adjustViewBounds="true"/>
 
-        <mx.jtails.homelike.ui.widget.TypeFacedTextView
+        <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
             android:id="@+id/lbl_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
