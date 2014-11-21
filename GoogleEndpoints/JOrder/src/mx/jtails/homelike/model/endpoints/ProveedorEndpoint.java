@@ -9,6 +9,7 @@ import mx.jtails.homelike.model.emanagers.ProveedorManager;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.api.server.spi.config.ApiMethod.HttpMethod;
 import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
@@ -88,6 +89,31 @@ public class ProveedorEndpoint {
 			if(proveedor.getNumPedidos()>0)
 				proveedor.setCalificacion(proveedor.getCalificacion()/proveedor.getNumPedidos());
 			return proveedor;
+		//}
+		//return null;
+	}
+	
+	
+	
+	/**
+	 * Permite obtener referencia al objeto Proveedor persistido a partir de su Usuario - Cuenta de correo
+	 * @param proveedor
+	 * El proveedor con su usuario
+	 * @param user
+	 * El usuario autenticado con Google
+	 * @return
+	 * Retorna un objeto Proveedor persistido, si el proveedor no existe retornara null
+	 */
+	@ApiMethod(name = "getProveedorByUser" , path="getProveedorByUser" , httpMethod = HttpMethod.POST)
+	public Proveedor getProveedorByUser(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			ProveedorManager proveedorM=new ProveedorManager();
+			Proveedor pproveedor=proveedorM.getProveedorByUser(proveedor);
+			if(pproveedor!=null && pproveedor.getIdProveedor()!=0)
+				logger.warning("Proveedor ID: "+pproveedor.getIdProveedor()+",User : "+user);
+			else
+				logger.warning("Proveedor no existente: "+proveedor.getUsuario()+", User : "+user);
+			return pproveedor;
 		//}
 		//return null;
 	}
