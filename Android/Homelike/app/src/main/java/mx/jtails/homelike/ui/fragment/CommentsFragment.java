@@ -61,6 +61,7 @@ public class CommentsFragment extends Fragment
         comment = comment.trim();
         int rating = (int) this.mRatingOrder.getRating();
 
+        this.mOrder.setStatus(2);
         this.mOrder.setComentarioEntregaCliente(comment);
         this.mOrder.setCalificacion(rating);
         new UpdateOrderRequest(this, this.mOrder).executeAsync();

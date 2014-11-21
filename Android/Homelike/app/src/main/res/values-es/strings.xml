@@ -112,6 +112,8 @@
     <string name="address_saved">Dirección Guardada</string>
     <string name="add_new_address">Agregar nueva dirección</string>
     <string name="discard_address_message">¿Está seguro que desea deshacer su selección?</string>
+    <string name="deleting_address">Borrando…</string>
+    <string name="delete_address_message">¿Está seguro que desea eliminar la dirección?</string>
 
     <!-- Services -->
     <string name="favourite_address">Dirección Favorita</string>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- No translate required -->
+    <string name="app_name">Proveedor HomeLike</string>
+    <string name="url_terms_and_conditions">http://homelike.com.mx/docs/AvisodePrivacidad.pdf</string>
+
+    <!-- Application -->
+    <string name="action_map">Mostrar Mapa</string>
+    <string name="action_logout">Cerrar Sesión</string>
+    <string name="gratitue_message">¡Gracias por su ayuda!</string>
+
+    <!-- Home Menu -->
+    <string name="home_services">Servicios</string>
+    <string name="home_orders">Pedidos</string>
+    <string name="home_my_addresses">Mis Direcciones</string>
+    <string name="home_suggestions">Sugerencias</string>
+    <string name="home_contact">Contacto</string>
+    <string name="no_username">Sin Nombre</string>
+    <string name="comments_and_suggestions">Sugerencias</string>
+
+    <!-- Dialogs -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="continue_process">Continuar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="edit">Editar</string>
+    <string name="reselect">Reelegir</string>
+    <string name="leave">Salir</string>
+    <string name="discard">Descartar</string>
+    <string name="wait">Por favor espere…</string>
+    <string name="updating">Actualizando</string>
+    <string name="send">Enviar</string>
+    <string name="sending">Enviando</string>
+
+    <!-- Errors -->
+    <string name="error">Error</string>
+    <string name="missing_fields">Campos faltantes</string>
+    <string name="error_load_address">Error al recuperar la dirección con id: %d</string>
+    <string name="error_create_order">Error al crear su orden, intente de nuevo más tarde.</string>
+    <string name="error_play_services">Error al cargar Google Play Services…</string>
+    <string name="error_retrieving_location">No se encontraron datos de la ubicación que selecciono. ¿Desea continuar?</string>
+    <string name="error_field_validation">Los siguientes campos son necesarios para continuar con el registro de la dirección: \n</string>
+    <string name="error_suggestion_validation">Necesita agregar: \n</string>
+    <string name="error_register_address">Error al guardar su dirección. Intente de nuevo más tarde.</string>
+    <string name="error_registered_account">La cuenta ya ha sido registrada con otro dispositivo</string>
+    <string name="error_update_order">Error al actualizar el estado del pedido. Intente de nuevo más tarde.</string>
+    <string name="error_empty_suggestion">Ingrese una sugerencia</string>
+    <string name="error_suggestion_type_not_selected">Un tipo de sugerencia</string>
+    <string name="error_loading_options">Error al cargar las opciones</string>
+    <string name="error_send_suggestion">Error al enviar. Intente de nuevo más tarde</string>
+
+    <!-- Create Account -->
+    <string name="register_account">Registrar Cuenta</string>
+    <string name="register">Registrar</string>
+    <string name="missing_email">Falta un correo</string>
+    <string name="missing_mobile">Falta un número telefónico</string>
+    <string name="terms_not_accepted">Necesita aceptar los términos y condiciones primero</string>
+    <string name="wrong_field">Campo inválido</string>
+    <string name="registering_account">Registrando…</string>
+    <string name="signing_in">Iniciando sesión…</string>
+    <string name="i_accept">Acepto los </string>
+    <string name="terms_and_conditions">términos y condiciones.</string>
+    <string name="mobile">Teléfono</string>
+    <string name="email">Email</string>
+
+    <!-- Order -->
+    <string name="confirm_order">Confirmar Pedido</string>
+    <string name="confirm_order_message">¿Está seguro que quiere cancelar la orden?</string>
+    <string name="cancel_order">Cancelar Pedido</string>
+    <string name="empty_order">Pedido Vacío</string>
+    <string name="empty_order_message">El pedido está vacío, por favor seleccione algún producto.</string>
+    <string name="new_order">Nuevo pedido</string>
+    <string name="no_comments">Sin Comentarios</string>
+    <string name="client_comment">Comentarios del cliente</string>
+    <string name="provider_comment">Comentarios del proveedor</string>
+    <string name="providers">Proveedores</string>
+    <string name="leave_orders">Salir de pedidos</string>
+    <string name="leave_orders_message">¿Está seguro que desea abandonar esta sección?</string>
+    <string name="next">Siguiente</string>
+    <string name="your_orders">Tus pedidos</string>
+    <string name="preparing_order">Preparando nuevo pedido…</string>
+    <string name="payment_quantity">Cantidad de pago</string>
+    <string name="comments">Comentarios</string>
+    <string name="comments_hint">Comentarios al proveedor, como la denominación de su pago</string>
+    <string name="no_active_orders">Usted no tiene pedidos activos</string>
+    <string name="no_providers_found">No se encontró ningún proveedor en el área</string>
+    <string name="phone_short">Tel.</string>
+    <string name="no_products">El proveedor no cuenta con productos</string>
+    <string name="request_provider">Solicitar Proveedor</string>
+    <string name="schedule_mon_fri">L - V</string>
+    <string name="schedule_sat">S</string>
+    <string name="schedule_sun">D</string>
+    <string name="schedule_connector">a</string>
+
+    <!-- Address -->
+    <string name="location">Ubicación</string>
+    <string name="select">Seleccionar</string>
+    <string name="retrieving_location">Recuperando información de ubicación…</string>
+    <string name="saving_address">Guardando…</string>
+    <string name="required_fields">Campos requeridos</string>
+    <string name="field_alias">Alias</string>
+    <string name="field_street">Calle</string>
+    <string name="field_street_number">Exterior</string>
+    <string name="field_interior">Interior</string>
+    <string name="field_colony">Colonia</string>
+    <string name="field_zip_code">Código Postal</string>
+    <string name="field_city">Delegación</string>
+    <string name="field_state">Estado</string>
+    <string name="field_country">País</string>
+    <string name="field_reference">Referencia</string>
+    <string name="address_saved">Dirección Guardada</string>
+    <string name="add_new_address">Agregar nueva dirección</string>
+    <string name="discard_address_message">¿Está seguro que desea deshacer su selección?</string>
+    <string name="deleting_address">Borrando…</string>
+    <string name="delete_address_message">¿Está seguro que desea eliminar la dirección?</string>
+
+    <!-- Services -->
+    <string name="favourite_address">Dirección Favorita</string>
+    <string name="use_favourite_address">
+        ¿Desea usar su dirección favorita para el nuevo pedido?\n\n%s.
+    </string>
+    <string name="change_address">Cambiar Dirección</string>
+    <string name="kind_of_service">¿Qué servicio está buscando?</string>
+
+    <!-- Order Status -->
+    <string name="status_new">Nuevo</string>
+    <string name="status_confirmed">Confirmado</string>
+    <string name="status_delivered">Entregado</string>
+    <string name="status_unknown">Desconocido</string>
+    <string name="comment_sent">¡Comentario enviado!</string>
+    <string name="rating">Calificación</string>
+    <string name="rate_provider_message">Califique el desempeño del proveedor</string>
+    <string name="comments_to_provider_hint">Comentarios al proveedor</string>
+
+    <!-- Suggestions -->
+    <string name="write_suggestion_hint">Comentarios</string>
+    <string name="improve_experience">¡Gracias a sus sugerencias podemos mejorar su experiencia!</string>
+
+    <!--Address-->
+    <string name="alias_hint">Casa,Trabajo,etc.</string>
+    <string name="street_hint">Av. Insurgentes</string>
+    <string name="street_number_hint">Número exterior</string>
+    <string name="interior_hint">(Opcional)</string>
+    <string name="colony_hint">Roma Sur</string>
+    <string name="zip_code_hint">55555</string>
+    <string name="city_hint">Cuauhtémoc</string>
+    <string name="state_hint">Distrito Federal</string>
+    <string name="country_hint">México</string>
+    <string name="reference_hint">Fachada,calles,etc.</string>
+    <string name="finish">Terminar</string>
+
+</resources>

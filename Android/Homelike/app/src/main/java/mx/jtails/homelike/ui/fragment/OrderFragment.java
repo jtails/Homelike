@@ -1,7 +1,5 @@
 package mx.jtails.homelike.ui.fragment;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,14 +17,14 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.DetallePedido;
 import mx.jtails.homelike.api.model.Pedido;
-import mx.jtails.homelike.request.UpdateOrderRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 9/23/14.
  */
-public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpdateOrderResponseHandler {
+public class OrderFragment extends Fragment {
+// implements UpdateOrderRequest.OnUpdateOrderResponseHandler {
 
     private Pedido mOrder;
 
@@ -38,7 +36,7 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
     private TextView mLblStatus;
     private View mFinishButton;
 
-    private ProgressDialog mUpdatingOrder;
+    //private ProgressDialog mUpdatingOrder;
 
     private DisplayImageOptions mLoaderOptions;
 
@@ -88,10 +86,15 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
     }
 
     private void onFinishOrderClicked(){
+        /*
         this.mOrder.setStatus(2);
         this.mUpdatingOrder = ProgressDialog.show(this.getActivity(),
                 this.getString(R.string.updating), this.getString(R.string.wait), false, false);
         new UpdateOrderRequest(this, this.mOrder).executeAsync();
+        */
+        ((HomeActivity) this.getActivity()).pushToStack(
+                CommentsFragment.newInstance(this.mOrder),
+                CommentsFragment.class.getName());
     }
 
     @Override
@@ -169,6 +172,7 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
         this.mLayoutOrderDetails.addView(view);
     }
 
+    /*
     @Override
     public void onUpdateOrderResponse(Pedido order) {
         this.mUpdatingOrder.dismiss();
@@ -185,4 +189,5 @@ public class OrderFragment extends Fragment implements UpdateOrderRequest.OnUpda
                     CommentsFragment.class.getName());
         }
     }
+    */
 }

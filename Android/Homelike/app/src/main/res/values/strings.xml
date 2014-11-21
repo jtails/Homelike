@@ -112,6 +112,8 @@
     <string name="address_saved">Address Saved</string>
     <string name="add_new_address">Add new address</string>
     <string name="discard_address_message">Are your sure you want to discard your selection?</string>
+    <string name="deleting_address">Deleting address</string>
+    <string name="delete_address_message">Are you sure you want to delete your address?</string>
 
     <!-- Services -->
     <string name="favourite_address">Favourite Address</string>
