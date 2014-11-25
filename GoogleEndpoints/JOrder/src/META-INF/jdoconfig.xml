@@ -10,5 +10,6 @@
        <property name="datanucleus.appengine.autoCreateDatastoreTxns" value="true"/>
        <property name="datanucleus.appengine.singletonPMFForName" value="true"/>
        <property name="datanucleus.DetachAllOnCommit" value="true"/>
+       <property name="datanucleus.cache.level2.type" value="none"/>
    </persistence-manager-factory>
 </jdoconfig>
