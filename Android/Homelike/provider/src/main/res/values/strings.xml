@@ -15,6 +15,8 @@
     <string name="home_my_addresses">My Addresses</string>
     <string name="home_suggestions">Suggestions</string>
     <string name="home_contact">Contact</string>
+    <string name="home_new_orders">New Orders</string>
+    <string name="home_confirmed_orders">Confirm Orders</string>
     <string name="no_username">No user name</string>
     <string name="comments_and_suggestions">Suggestions</string>
 

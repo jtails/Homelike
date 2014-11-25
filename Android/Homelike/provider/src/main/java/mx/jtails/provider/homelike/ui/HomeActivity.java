@@ -50,9 +50,12 @@ public class HomeActivity extends ActionBarActivity
     }
 
     private void validateUserSignedIn(){
-        if(!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)
-                || !HomelikePreferences.containsPreference(HomelikePreferences.DEVICE_ID)){
+        if(!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)){
+            Log.d(TAG, "User not logged in");
             this.goToSplash();
+            return;
+        } else  {
+            Log.d(TAG, "User already logged in");
         }
     }
 

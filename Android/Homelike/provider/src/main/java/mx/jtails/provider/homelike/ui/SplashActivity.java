@@ -13,8 +13,9 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 import mx.jtails.provider.homelike.R;
-import mx.jtails.provider.homelike.api.model.Cuenta;
+import mx.jtails.provider.homelike.api.model.Proveedor;
 import mx.jtails.provider.homelike.request.GetAccountRequest;
+import mx.jtails.provider.homelike.request.HomelikeApiResponseHandler;
 import mx.jtails.provider.homelike.util.HomelikePreferences;
 
 /**
@@ -23,7 +24,7 @@ import mx.jtails.provider.homelike.util.HomelikePreferences;
 public class SplashActivity extends ActionBarActivity
         implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        GetAccountRequest.GetAccountResponseHandler {
+        HomelikeApiResponseHandler<Proveedor> {
 
     private static final int RC_SIGN_IN = 0;
 
@@ -93,7 +94,7 @@ public class SplashActivity extends ActionBarActivity
         }
     }
 
-    private void goToHome(Cuenta account){
+    private void goToHome(Proveedor account){
         Person person = Plus.PeopleApi.getCurrentPerson(this.mGoogleApiClient);
         if(person != null){
             HomelikePreferences.saveString(HomelikePreferences.USER_NAME,
@@ -102,20 +103,20 @@ public class SplashActivity extends ActionBarActivity
                     person.getImage().getUrl());
         }
         HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
-                account.getIdCuenta());
-        HomelikePreferences.saveInt(HomelikePreferences.DEVICE_ID,
-                account.getDispositivos().get(0).getIdDispositivo());
+                account.getIdProveedor());
         this.startActivity(new Intent(this, HomeActivity.class));
         this.finish();
     }
 
     @Override
-    public void onGetAccountResponse(Cuenta account) {
+    public void onResponse(Proveedor provider) {
         this.mSigningInDialog.dismiss();
-        if(account == null){
+        if(provider == null){
             // TODO: User is not registered
+        } else if(provider.getStatus().equals(0)) {
+            // TODO: User in process of registration
         } else {
-            this.goToHome(account);
+            this.goToHome(provider);
         }
     }
 }

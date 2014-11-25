@@ -12,8 +12,8 @@ import mx.jtails.provider.homelike.ui.fragment.NewOrdersFragment;
  */
 public enum HomeMenuSection {
 
-    NEW_ORDERS(NewOrdersFragment.class, R.string.home_services, R.drawable.ic_menu_orders),
-    CONFIRMED_ORDERS(ConfirmedOrdersFragment.class, R.string.home_my_addresses, R.drawable.ic_menu_orders),
+    NEW_ORDERS(NewOrdersFragment.class, R.string.home_new_orders, R.drawable.ic_menu_orders),
+    CONFIRMED_ORDERS(ConfirmedOrdersFragment.class, R.string.home_confirmed_orders, R.drawable.ic_menu_orders),
     CONTACT(ContactFragment.class, R.string.home_contact, R.drawable.ic_menu_contact);
 
     private Class<? extends Fragment> fragmentClass;
