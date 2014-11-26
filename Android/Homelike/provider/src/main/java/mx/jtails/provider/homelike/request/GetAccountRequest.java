@@ -15,18 +15,16 @@ public class GetAccountRequest extends HomelikeApiRequest<Proveedor> {
     private boolean mByEmail = false;
 
     public GetAccountRequest(HomelikeApiResponseHandler<Proveedor> handler, int accountId){
-        super(handler);
+        super(handler, new Proveedorendpoint.Builder(HTTP_TRANSPORT,
+                JSON_FACTORY, null).build());
         this.mAccountId = accountId;
-        this.mEndpoint = new Proveedorendpoint.Builder(HTTP_TRANSPORT,
-                JSON_FACTORY, null).build();
     }
 
     public GetAccountRequest(HomelikeApiResponseHandler<Proveedor> handler, String email){
-        super(handler);
+        super(handler, new Proveedorendpoint.Builder(HTTP_TRANSPORT,
+                JSON_FACTORY, null).build());
         this.mEmail = email;
         this.mByEmail = true;
-        this.mEndpoint = new Proveedorendpoint.Builder(HTTP_TRANSPORT,
-                JSON_FACTORY, null).build();
     }
 
     @Override

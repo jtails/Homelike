@@ -1,9 +1,14 @@
 package mx.jtails.provider.homelike.ui.fragment;
 
-import android.support.v4.app.Fragment;
-
 /**
- * Created by GrzegorzFeathers on 11/18/14.
+ * Created by GrzegorzFeathers on 11/25/14.
  */
-public class NewOrdersFragment extends Fragment {
+public class NewOrdersFragment extends OrdersFragment {
+
+    private static final int STATUS_FILTER = 0;
+
+    @Override
+    protected int getStatusFilter() {
+        return STATUS_FILTER;
+    }
 }

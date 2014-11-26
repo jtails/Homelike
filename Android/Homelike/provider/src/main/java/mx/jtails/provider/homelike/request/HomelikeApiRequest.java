@@ -23,15 +23,21 @@ public abstract class HomelikeApiRequest<T> {
 
     private HomelikeApiAsyncTask mAsyncTask;
 
-    public HomelikeApiRequest(HomelikeApiResponseHandler<T> handler){
+    public HomelikeApiRequest(HomelikeApiResponseHandler<T> handler,
+                              AbstractGoogleJsonClient endpoint){
         this.mResponseHandler = handler;
+        this.mEndpoint = endpoint;
     }
 
     abstract protected AbstractGoogleJsonClientRequest<T> getRequest() throws Exception;
 
-    private void notifyResponseHandler(T o) {
+    protected T preNotificationProcess(Object o){
+        return o == null ? null : (T) o;
+    }
+
+    protected void notifyResponseHandler(Object response) {
         if(this.mResponseHandler != null){
-            this.mResponseHandler.onResponse(o == null ? null : o);
+            this.mResponseHandler.onResponse(this.preNotificationProcess(response));
         }
     }
 
@@ -69,7 +75,8 @@ public abstract class HomelikeApiRequest<T> {
         try {
             Log.d(this.getTag(), "Requesting: ");
             String uriTemplate = request.getUriTemplate();
-            String jsonContent = request.getJsonContent().toString();
+            String jsonContent = request.getJsonContent() != null ?
+                    request.getJsonContent().toString() : "No JSON content";
             Log.d(this.getTag(), "URI: " + uriTemplate);
             Log.d(this.getTag(), "Content: " + jsonContent);
         } catch (Exception e) {
