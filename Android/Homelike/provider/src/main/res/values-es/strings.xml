@@ -84,7 +84,7 @@
     <string name="preparing_order">Preparando nuevo pedido…</string>
     <string name="payment_quantity">Cantidad de pago</string>
     <string name="comments">Comentarios</string>
-    <string name="comments_hint">Comentarios al proveedor, como la denominación de su pago</string>
+    <string name="comments_hint">Comentarios al cliente</string>
     <string name="no_active_orders">Usted no tiene pedidos activos</string>
     <string name="no_providers_found">No se encontró ningún proveedor en el área</string>
     <string name="phone_short">Tel.</string>

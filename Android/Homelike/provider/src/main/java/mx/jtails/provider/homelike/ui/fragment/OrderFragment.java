@@ -1,12 +1,15 @@
 package mx.jtails.provider.homelike.ui.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -17,12 +20,16 @@ import mx.jtails.provider.homelike.R;
 import mx.jtails.provider.homelike.api.model.DetallePedido;
 import mx.jtails.provider.homelike.api.model.Direccion;
 import mx.jtails.provider.homelike.api.model.Pedido;
+import mx.jtails.provider.homelike.ui.HomeActivity;
+import mx.jtails.provider.homelike.ui.fragment.dialog.ConfirmOrderDialog;
+import mx.jtails.provider.homelike.util.HomeMenuSection;
 import mx.jtails.provider.homelike.util.HomelikeUtils;
 
 /**
  * Created by GrzegorzFeathers on 11/26/14.
  */
-public class OrderFragment extends Fragment {
+public class OrderFragment extends Fragment
+        implements ConfirmOrderDialog.ConfirmDialogDialogCallbacks {
 
     private Pedido mOrder;
 
@@ -33,8 +40,6 @@ public class OrderFragment extends Fragment {
     private ImageView mImgProviderLogo;
     private TextView mLblStatus;
     private View mFinishButton;
-
-    //private ProgressDialog mUpdatingOrder;
 
     private DisplayImageOptions mLoaderOptions;
 
@@ -83,17 +88,7 @@ public class OrderFragment extends Fragment {
     }
 
     private void onFinishOrderClicked(){
-        /*
-        this.mOrder.setStatus(2);
-        this.mUpdatingOrder = ProgressDialog.show(this.getActivity(),
-                this.getString(R.string.updating), this.getString(R.string.wait), false, false);
-        new UpdateOrderRequest(this, this.mOrder).executeAsync();
-        */
-        /*
-        ((HomeActivity) this.getActivity()).pushToStack(
-                CommentsFragment.newInstance(this.mOrder),
-                CommentsFragment.class.getName());
-        */
+        ConfirmOrderDialog.newInstance(this.mOrder, this).show(this.getFragmentManager(), null);
     }
 
     @Override
@@ -159,23 +154,23 @@ public class OrderFragment extends Fragment {
         this.mLayoutOrderDetails.addView(view);
     }
 
-    /*
     @Override
-    public void onUpdateOrderResponse(Pedido order) {
-        this.mUpdatingOrder.dismiss();
-        if(order == null){
-            new AlertDialog.Builder(this.getActivity())
-                    .setTitle(R.string.error)
-                    .setMessage(R.string.error_update_order)
-                    .setPositiveButton(R.string.ok, null)
-                    .show();
-        } else {
-            ((HomeActivity) this.getActivity()).singlePop();
-            ((HomeActivity) this.getActivity()).pushToStack(
-                    CommentsFragment.newInstance(this.mOrder),
-                    CommentsFragment.class.getName());
-        }
+    public void onOrderConfirmed() {
+        Toast.makeText(this.getActivity(), R.string.comment_sent, Toast.LENGTH_SHORT).show();
+        ((HomeActivity) this.getActivity()).replaceStack(
+                HomeMenuSection.CONFIRMED_ORDERS.getFragmentClass(), null);
     }
-    */
+
+    @Override
+    public void onConfirmOrderFailed() {
+        ActionBarActivity a = (ActionBarActivity) this.getActivity();
+        new AlertDialog.Builder(a)
+                .setMessage(R.string.error_update_order)
+                .setPositiveButton(R.string.ok, null)
+                .show();
+    }
+
+    @Override
+    public void onCancelConfirmation() {}
 
 }

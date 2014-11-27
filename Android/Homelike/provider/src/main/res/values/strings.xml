@@ -83,7 +83,7 @@
     <string name="preparing_order">Preparing new order…</string>
     <string name="payment_quantity">Payment Quantity</string>
     <string name="comments">Comments</string>
-    <string name="comments_hint">Comments to the provider, like payment quantity</string>
+    <string name="comments_hint">Comments to the client</string>
     <string name="no_active_orders">You don\'t have any active orders</string>
     <string name="no_providers_found">No providers found in this area</string>
     <string name="phone_short">Phone</string>

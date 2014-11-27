@@ -52,7 +52,7 @@ public abstract class OrdersFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle(HomeMenuSection.NEW_ORDERS.getSubtitleRes());
+        ab.setSubtitle(this.getSubtitleRes());
         ((ActionBarActivity) this.getActivity())
                 .setSupportProgressBarIndeterminateVisibility(false);
     }
@@ -170,6 +170,7 @@ public abstract class OrdersFragment extends Fragment
     }
 
     protected abstract int getStatusFilter();
+    protected abstract int getSubtitleRes();
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

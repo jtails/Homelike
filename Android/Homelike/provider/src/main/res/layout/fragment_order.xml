@@ -125,7 +125,7 @@
         android:layout_margin="5dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:text="@string/finish"
+        android:text="@string/confirm"
         android:textColor="@android:color/white"
         android:background="@drawable/bg_btn"/>
 
