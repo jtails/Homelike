@@ -21,6 +21,7 @@ import mx.jtails.provider.homelike.api.model.Pedido;
 import mx.jtails.provider.homelike.request.HomelikeApiRequest;
 import mx.jtails.provider.homelike.request.HomelikeApiResponseHandler;
 import mx.jtails.provider.homelike.request.ListOrdersRequest;
+import mx.jtails.provider.homelike.ui.HomeActivity;
 import mx.jtails.provider.homelike.ui.adapter.OrdersAdapter;
 import mx.jtails.provider.homelike.util.HomeMenuSection;
 import mx.jtails.provider.homelike.util.HomelikePreferences;
@@ -172,12 +173,10 @@ public abstract class OrdersFragment extends Fragment
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        /*
         Pedido order = this.mAdapter.getItem(position);
         ((HomeActivity) this.getActivity()).pushToStack(
                 OrderFragment.getInstance(order),
                 OrderFragment.class.getName());
-                */
     }
 
 }

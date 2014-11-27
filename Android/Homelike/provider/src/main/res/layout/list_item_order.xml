@@ -109,30 +109,17 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+            android:id="@+id/lbl_order_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            homelike:typeface="fonts/RobotoCondensed-Light.ttf"
+            android:textSize="16sp"
+            android:maxLines="2"
             android:layout_weight="1"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_order_id"/>
-
-            <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
-                android:id="@+id/lbl_order_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textSize="16sp"
-                android:layout_marginLeft="5dp"
-                homelike:typeface="fonts/RobotoCondensed-Light.ttf"
-                android:textColor="@android:color/white"/>
-
-        </LinearLayout>
-
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 

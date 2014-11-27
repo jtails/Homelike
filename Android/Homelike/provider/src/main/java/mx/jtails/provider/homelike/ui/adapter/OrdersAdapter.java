@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import mx.jtails.provider.homelike.R;
+import mx.jtails.provider.homelike.api.model.Direccion;
 import mx.jtails.provider.homelike.api.model.Pedido;
 import mx.jtails.provider.homelike.util.HomelikeUtils;
 
@@ -80,8 +81,12 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
         holder.lblOrderTime.get().setText(this.mTimeFormat.format(
                 new Date(order.getFechaHoraPedido().getValue())) + " hrs");
         holder.lblOrderProvider.get().setText(order.getProveedor().getNombre());
-        holder.lblOrderId.get().setText("ID." + order.getIdPedido());
         holder.lblOrderStatus.get().setText(HomelikeUtils.getOrderStatusStringRes(order.getStatus()));
+
+        Direccion address = order.getDireccion();
+        holder.lblOrderAddress.get().setText(address.getCalle() + " #" + address.getNexterior() + ", "
+                + address.getColonia() + ", " + address.getDelegacion());
+
         ImageLoader.getInstance().displayImage(order.getProveedor().getLogo(),
                 holder.imgProviderLogo.get(), this.mLoaderOptions);
 
@@ -99,7 +104,7 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
         private WeakReference<TextView> lblOrderDate;
         private WeakReference<TextView> lblOrderTime;
         private WeakReference<TextView> lblOrderProvider;
-        private WeakReference<TextView> lblOrderId;
+        private WeakReference<TextView> lblOrderAddress;
         private WeakReference<TextView> lblOrderStatus;
 
         private ViewHolder(View view) {
@@ -113,8 +118,8 @@ public class OrdersAdapter extends ArrayAdapter<Pedido> {
                     (TextView) view.findViewById(R.id.lbl_order_time));
             this.lblOrderProvider = new WeakReference<TextView>(
                     (TextView) view.findViewById(R.id.lbl_order_provider));
-            this.lblOrderId = new WeakReference<TextView>(
-                    (TextView) view.findViewById(R.id.lbl_order_id));
+            this.lblOrderAddress = new WeakReference<TextView>(
+                    (TextView) view.findViewById(R.id.lbl_order_address));
         }
 
     }
