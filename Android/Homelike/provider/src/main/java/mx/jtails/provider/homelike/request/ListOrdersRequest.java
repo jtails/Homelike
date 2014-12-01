@@ -30,7 +30,7 @@ public class ListOrdersRequest extends HomelikeApiRequest<List<Pedido>> {
 
     @Override
     protected List<Pedido> preNotificationProcess(Object o) {
-        if(o == null){
+        if(o == null || ((PedidoCollection) o).getItems() == null){
             return new ArrayList<Pedido>();
         } else {
             return ((PedidoCollection) o).getItems();
