@@ -1,5 +1,6 @@
 package mx.jtails.provider.homelike.ui;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -112,9 +113,19 @@ public class SplashActivity extends ActionBarActivity
     public void onResponse(Proveedor provider) {
         this.mSigningInDialog.dismiss();
         if(provider == null){
-            // TODO: User is not registered
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.register_account)
+                    .setMessage(R.string.error_failed_sign_in_no_account)
+                    .setPositiveButton(R.string.ok, null)
+                    .setCancelable(true)
+                    .show();
         } else if(provider.getStatus().equals(0)) {
-            // TODO: User in process of registration
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.register_account)
+                    .setMessage(R.string.error_failed_sign_in_account_in_process)
+                    .setPositiveButton(R.string.ok, null)
+                    .setCancelable(true)
+                    .show();
         } else {
             this.goToHome(provider);
         }

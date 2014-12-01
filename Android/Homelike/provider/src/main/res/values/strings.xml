@@ -47,6 +47,8 @@
     <string name="error_suggestion_type_not_selected">A suggestion type</string>
     <string name="error_loading_options">Failed to load options</string>
     <string name="error_send_suggestion">Failed to send. Tray again later</string>
+    <string name="error_failed_sign_in_no_account">The account hasn\'t been registered yet. Please go to:\nhttp://homelike.com.mx</string>
+    <string name="error_failed_sign_in_account_in_process">The account is still in process of registration. Please go to:\nhttp://homelike.com.mx</string>
 
     <!-- Create Account -->
     <string name="register_account">Register Account</string>

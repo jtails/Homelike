@@ -51,6 +51,8 @@
     <string name="error_suggestion_type_not_selected">Un tipo de sugerencia</string>
     <string name="error_loading_options">Error al cargar las opciones</string>
     <string name="error_send_suggestion">Error al enviar. Intente de nuevo más tarde</string>
+    <string name="error_failed_sign_in_no_account">La cuenta aún no ha sido registrada. Por favor diríjase a:\nhttp://homelike.com.mx</string>
+    <string name="error_failed_sign_in_account_in_process">La cuenta aún se encuentra en proceso de registro. Por favor diríjase a:\nhttp://homelike.com.mx</string>
 
     <!-- Create Account -->
     <string name="register_account">Registrar Cuenta</string>
