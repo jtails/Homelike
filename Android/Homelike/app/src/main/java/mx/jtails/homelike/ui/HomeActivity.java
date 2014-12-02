@@ -52,6 +52,7 @@ public class HomeActivity extends ActionBarActivity
                         || !HomelikePreferences.containsPreference(HomelikePreferences.DEVICE_ID)){
                     this.goToSplash();
                 }
+                break;
             }
             case PROVIDER: {
                 if(!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)){
@@ -61,6 +62,7 @@ public class HomeActivity extends ActionBarActivity
                 } else  {
                     Log.d(TAG, "User already logged in");
                 }
+                break;
             }
         }
     }
