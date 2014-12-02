@@ -17,7 +17,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.ui.adapter.HomeMenuAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
 import mx.jtails.homelike.util.HomelikeUtils;
 
@@ -88,7 +88,7 @@ public class HomeSectionsFragment extends Fragment
 
     private void notifyNewContent(int section){
         if(this.mListener != null){
-            this.mListener.onHomeMenuOptionSelected(HomeMenuSection.values()[section]);
+            this.mListener.onHomeMenuOptionSelected(HomeLikeConfiguration.getMenuOptions()[section]);
         }
     }
 
@@ -99,7 +99,7 @@ public class HomeSectionsFragment extends Fragment
     }
 
     public interface OnHomeMenuOptionSelectedListener {
-        public void onHomeMenuOptionSelected(HomeMenuSection option);
+        public void onHomeMenuOptionSelected(HomeLikeConfiguration.HomeMenuOption option);
     }
 
 }

@@ -6,6 +6,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
+import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -36,6 +37,8 @@ public class HomelikeApplication extends Application {
     public void logout(){
         HomelikePreferences.clearPreferences();
         HomelikeDBManager.getDBManager().clearDatabase();
+        HomeLikeConfiguration.restoreConfiguration();
     }
+
 
 }

@@ -18,7 +18,7 @@ import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.request.InsertOrderRequest;
 import mx.jtails.homelike.ui.HomeActivity;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -116,7 +116,7 @@ public class ConfirmOrderFragment extends Fragment
         } else {
             HomelikePreferences.saveBoolean(HomelikePreferences.HAS_TEMP_ORDER, false);
             ((HomeActivity) this.getActivity()).replaceStack(
-                    HomeMenuSection.ORDERS.getFragmentClass(), null);
+                    HomeClientMenuOption.ORDERS.getFragmentClass(), null);
         }
     }
 

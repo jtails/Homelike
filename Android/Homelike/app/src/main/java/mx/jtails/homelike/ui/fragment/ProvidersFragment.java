@@ -20,7 +20,7 @@ import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.ListProvidersRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProvidersAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
@@ -91,7 +91,7 @@ public class ProvidersFragment extends Fragment
         Bundle args = new Bundle();
         args.putString(SuggestionsFragment.EXTRA_DEFAULT_OPTION, "Solicitud de Proveedor");
         ((HomeActivity) this.getActivity()).replaceStack(
-                HomeMenuSection.SUGGESTIONS.getFragmentClass(), args);
+                HomeClientMenuOption.SUGGESTIONS.getFragmentClass(), args);
     }
 
     @Override

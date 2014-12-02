@@ -18,25 +18,25 @@ import java.util.List;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
-import mx.jtails.homelike.request.HomelikeApiRequest;
-import mx.jtails.homelike.request.ListOrdersRequest;
+import mx.jtails.homelike.request.ApiRequest;
+import mx.jtails.homelike.request.ApiResponseHandler;
 import mx.jtails.homelike.ui.HomeActivity;
-import mx.jtails.homelike.ui.adapter.OrdersAdapter;
-import mx.jtails.homelike.util.HomeClientMenuOption;
+import mx.jtails.homelike.ui.adapter.ListProviderOrdersRequest;
+import mx.jtails.homelike.ui.adapter.ProviderOrdersAdapter;
 import mx.jtails.homelike.util.HomelikePreferences;
+import mx.jtails.homelike.util.HomelikeUtils;
 
 /**
- * Created by GrzegorzFeathers on 9/8/14.
+ * Created by GrzegorzFeathers on 11/18/14.
  */
-public class OrdersFragment extends Fragment
-    implements AdapterView.OnItemClickListener,
-        ListOrdersRequest.ListOrdersResponseHandler {
+public abstract class ProviderOrdersFragment extends Fragment
+        implements AdapterView.OnItemClickListener, ApiResponseHandler<List<Pedido>> {
 
     private List<Pedido> mOrders = new ArrayList<Pedido>();
 
-    private OrdersAdapter mAdapter;
+    private ProviderOrdersAdapter mAdapter;
 
-    private HomelikeApiRequest mApiRequest;
+    private ApiRequest mApiRequest;
 
     private AbsListView mListView;
     private View mLayoutContent;
@@ -51,7 +51,7 @@ public class OrdersFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle(HomeClientMenuOption.ORDERS.getSubtitleRes());
+        ab.setSubtitle(this.getSubtitleRes());
         ((ActionBarActivity) this.getActivity())
                 .setSupportProgressBarIndeterminateVisibility(false);
     }
@@ -65,13 +65,13 @@ public class OrdersFragment extends Fragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.services, menu);
+        inflater.inflate(R.menu.orders, menu);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_orders, container, false);
+        return inflater.inflate(R.layout.fragment_provider_orders, container, false);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class OrdersFragment extends Fragment
         this.mLayoutContent = view.findViewById(R.id.layout_orders_content);
         this.mLayoutLoading = view.findViewById(R.id.layout_loading);
         this.mLblEmpty = view.findViewById(R.id.lbl_empty);
-        this.mAdapter = new OrdersAdapter(this.getActivity(), this.mOrders);
+        this.mAdapter = new ProviderOrdersAdapter(this.getActivity(), this.mOrders);
 
         this.mListView.setOnItemClickListener(this);
         this.mListView.setAdapter(this.mAdapter);
@@ -90,7 +90,7 @@ public class OrdersFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        this.mApiRequest = new ListOrdersRequest(this,
+        this.mApiRequest = new ListProviderOrdersRequest(this,
                 HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
         this.mApiRequest.executeAsync();
         if(this.mOrders.isEmpty()){
@@ -163,10 +163,13 @@ public class OrdersFragment extends Fragment
     }
 
     @Override
-    public void onListOrdersResponse(List<Pedido> orders) {
-        this.mOrders = orders;
+    public void onResponse(List<Pedido> response) {
+        this.mOrders = HomelikeUtils.getStatusFilteredOrders(response, this.getStatusFilter());
         this.displayContentMode(ContentDisplayMode.CONTENT);
     }
+
+    protected abstract int getStatusFilter();
+    protected abstract int getSubtitleRes();
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

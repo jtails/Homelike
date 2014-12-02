@@ -23,7 +23,7 @@ import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListServicesRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ServicesAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 
 public class ServicesFragment extends Fragment implements AdapterView.OnItemClickListener,
         ListServicesRequest.ListServicesResponseHandler {
@@ -45,7 +45,7 @@ public class ServicesFragment extends Fragment implements AdapterView.OnItemClic
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle(HomeMenuSection.SERVICES.getSubtitleRes());
+        ab.setSubtitle(HomeClientMenuOption.SERVICES.getSubtitleRes());
     }
 
     @Override

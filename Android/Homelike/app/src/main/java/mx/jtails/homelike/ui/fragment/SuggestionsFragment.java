@@ -23,7 +23,7 @@ import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.InsertSuggestionRequest;
 import mx.jtails.homelike.request.ListSuggestionTypesRequest;
 import mx.jtails.homelike.ui.HomeActivity;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 
 /**
  * Created by GrzegorzFeathers on 10/5/14.
@@ -60,7 +60,7 @@ public class SuggestionsFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle(HomeMenuSection.SUGGESTIONS.getSubtitleRes());
+        ab.setSubtitle(HomeClientMenuOption.SUGGESTIONS.getSubtitleRes());
         ((ActionBarActivity) this.getActivity())
                 .setSupportProgressBarIndeterminateVisibility(false);
     }

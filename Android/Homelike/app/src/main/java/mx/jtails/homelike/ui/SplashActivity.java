@@ -16,9 +16,13 @@ import com.google.android.gms.plus.model.people.Person;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Cuenta;
+import mx.jtails.homelike.api.model.Proveedor;
+import mx.jtails.homelike.request.ApiResponseHandler;
 import mx.jtails.homelike.request.GetAccountRequest;
+import mx.jtails.homelike.request.GetProviderRequest;
 import mx.jtails.homelike.request.InsertAccountRequest;
 import mx.jtails.homelike.ui.fragment.dialog.CreateAccountDialog;
+import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -29,7 +33,8 @@ public class SplashActivity extends ActionBarActivity
         GoogleApiClient.OnConnectionFailedListener,
         InsertAccountRequest.OnInsertAccountResponseHandler,
         CreateAccountDialog.CreateAccountDialogCallbacks,
-        GetAccountRequest.GetAccountResponseHandler {
+        GetAccountRequest.GetAccountResponseHandler,
+        ApiResponseHandler<Proveedor> {
 
     private static final int RC_SIGN_IN = 0;
 
@@ -38,6 +43,8 @@ public class SplashActivity extends ActionBarActivity
     private boolean mIntentInProgress = false;
 
     private ProgressDialog mSigningInDialog;
+
+    private int mConfigurationProcess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,18 @@ public class SplashActivity extends ActionBarActivity
 
     @Override
     public void onClick(View v) {
-        this.mGoogleApiClient.connect();
+        new AlertDialog.Builder(this)
+                .setTitle("Select your kind of user")
+                .setItems(HomeLikeConfiguration.UIConfiguration.asCharSequences(this),
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mConfigurationProcess = which;
+                        mGoogleApiClient.connect();
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     @Override
@@ -65,8 +83,13 @@ public class SplashActivity extends ActionBarActivity
         this.mSigningInDialog = ProgressDialog.show(this, null,
                 this.getString(R.string.signing_in), false, false);
 
-        new GetAccountRequest(this,
-                Plus.AccountApi.getAccountName(this.mGoogleApiClient)).executeAsync();
+        if(this.mConfigurationProcess == HomeLikeConfiguration.UIConfiguration.CLIENT.ordinal()){
+            new GetAccountRequest(this,
+                    Plus.AccountApi.getAccountName(this.mGoogleApiClient)).executeAsync();
+        } else if(this.mConfigurationProcess == HomeLikeConfiguration.UIConfiguration.PROVIDER.ordinal()) {
+            new GetProviderRequest(this,
+                    Plus.AccountApi.getAccountName(this.mGoogleApiClient)).executeAsync();
+        }
     }
 
     @Override
@@ -128,11 +151,12 @@ public class SplashActivity extends ActionBarActivity
                         }
                     }).show();
         } else {
-            this.goToHome(account);
+            this.goToClientHome(account);
         }
     }
 
-    private void goToHome(Cuenta account){
+    private void goToClientHome(Cuenta account){
+        HomeLikeConfiguration.setConfiguration(HomeLikeConfiguration.UIConfiguration.CLIENT);
         Person person = Plus.PeopleApi.getCurrentPerson(this.mGoogleApiClient);
         if(person != null){
             HomelikePreferences.saveString(HomelikePreferences.USER_NAME,
@@ -148,13 +172,50 @@ public class SplashActivity extends ActionBarActivity
         this.finish();
     }
 
+    private void goToProviderHome(Proveedor provider){
+        HomeLikeConfiguration.setConfiguration(HomeLikeConfiguration.UIConfiguration.PROVIDER);
+        Person person = Plus.PeopleApi.getCurrentPerson(this.mGoogleApiClient);
+        if(person != null){
+            HomelikePreferences.saveString(HomelikePreferences.USER_NAME,
+                    person.getDisplayName());
+            HomelikePreferences.saveString(HomelikePreferences.USER_IMG,
+                    person.getImage().getUrl());
+        }
+        HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
+                provider.getIdProveedor());
+        this.startActivity(new Intent(this, HomeActivity.class));
+        this.finish();
+    }
+
     @Override
     public void onGetAccountResponse(Cuenta account) {
         this.mSigningInDialog.dismiss();
         if(account == null){
             new CreateAccountDialog().show(this.getSupportFragmentManager(), null);
         } else {
-            this.goToHome(account);
+            this.goToClientHome(account);
+        }
+    }
+
+    @Override
+    public void onResponse(Proveedor provider) {
+        this.mSigningInDialog.dismiss();
+        if(provider == null){
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.register_account)
+                    .setMessage(R.string.error_failed_sign_in_no_account)
+                    .setPositiveButton(R.string.ok, null)
+                    .setCancelable(true)
+                    .show();
+        } else if(provider.getStatus().equals(0)) {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.register_account)
+                    .setMessage(R.string.error_failed_sign_in_account_in_process)
+                    .setPositiveButton(R.string.ok, null)
+                    .setCancelable(true)
+                    .show();
+        } else {
+            this.goToProviderHome(provider);
         }
     }
 }

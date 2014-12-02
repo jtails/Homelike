@@ -10,9 +10,9 @@ import mx.jtails.homelike.ui.fragment.ServicesFragment;
 import mx.jtails.homelike.ui.fragment.SuggestionsFragment;
 
 /**
- * Created by GrzegorzFeathers on 9/19/14.
+ * Created by GrzegorzFeathers on 12/1/14.
  */
-public enum HomeMenuSection {
+public enum HomeClientMenuOption implements HomeLikeConfiguration.HomeMenuOption {
 
     SERVICES(ServicesFragment.class, R.string.home_services, R.drawable.ic_menu_services),
     ADDRESSES(MyAddressesFragment.class, R.string.home_my_addresses, R.drawable.ic_menu_addresses),
@@ -20,37 +20,31 @@ public enum HomeMenuSection {
     SUGGESTIONS(SuggestionsFragment.class, R.string.home_suggestions, R.drawable.ic_menu_suggestions),
     CONTACT(ContactFragment.class, R.string.home_contact, R.drawable.ic_menu_contact);
 
-    private Class<? extends Fragment> fragmentClass;
-    private int subtitleRes;
-    private int iconRes;
+    public static final HomeClientMenuOption defaultContent = HomeClientMenuOption.SERVICES;
 
-    private HomeMenuSection(Class<? extends Fragment> fragmentClass, int subtitleRes, int iconRes){
+    protected Class<? extends Fragment> fragmentClass;
+    protected int subtitleRes;
+    protected int iconRes;
+
+    private HomeClientMenuOption(Class<? extends Fragment> fragmentClass, int subtitleRes, int iconRes){
         this.fragmentClass = fragmentClass;
         this.subtitleRes = subtitleRes;
         this.iconRes = iconRes;
     }
 
+    @Override
     public Class<? extends Fragment> getFragmentClass(){
         return this.fragmentClass;
     }
 
-    public Fragment getFragmentInstance(){
-        try {
-            return fragmentClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
+    @Override
     public int getIconRes(){
         return this.iconRes;
     }
 
+    @Override
     public int getSubtitleRes(){
         return this.subtitleRes;
     }
+
 }
