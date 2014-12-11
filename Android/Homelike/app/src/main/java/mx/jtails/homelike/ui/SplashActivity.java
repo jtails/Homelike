@@ -16,11 +16,13 @@ import com.google.android.gms.plus.model.people.Person;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Cuenta;
+import mx.jtails.homelike.api.model.Dispositivop;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.request.ApiResponseHandler;
 import mx.jtails.homelike.request.GetAccountRequest;
 import mx.jtails.homelike.request.GetProviderRequest;
 import mx.jtails.homelike.request.InsertAccountRequest;
+import mx.jtails.homelike.request.InsertDeviceIdRequest;
 import mx.jtails.homelike.ui.fragment.dialog.CreateAccountDialog;
 import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
@@ -34,7 +36,7 @@ public class SplashActivity extends ActionBarActivity
         InsertAccountRequest.OnInsertAccountResponseHandler,
         CreateAccountDialog.CreateAccountDialogCallbacks,
         GetAccountRequest.GetAccountResponseHandler,
-        ApiResponseHandler<Proveedor> {
+        ApiResponseHandler<Proveedor>{
 
     private static final int RC_SIGN_IN = 0;
 
@@ -198,9 +200,9 @@ public class SplashActivity extends ActionBarActivity
     }
 
     @Override
-    public void onResponse(Proveedor provider) {
-        this.mSigningInDialog.dismiss();
+    public void onResponse(final Proveedor provider) {
         if(provider == null){
+            this.mSigningInDialog.dismiss();
             new AlertDialog.Builder(this)
                     .setTitle(R.string.register_account)
                     .setMessage(R.string.error_failed_sign_in_no_account)
@@ -208,6 +210,7 @@ public class SplashActivity extends ActionBarActivity
                     .setCancelable(true)
                     .show();
         } else if(provider.getStatus().equals(0)) {
+            this.mSigningInDialog.dismiss();
             new AlertDialog.Builder(this)
                     .setTitle(R.string.register_account)
                     .setMessage(R.string.error_failed_sign_in_account_in_process)
@@ -215,7 +218,13 @@ public class SplashActivity extends ActionBarActivity
                     .setCancelable(true)
                     .show();
         } else {
-            this.goToProviderHome(provider);
+            new InsertDeviceIdRequest(new ApiResponseHandler<Dispositivop>() {
+                @Override
+                public void onResponse(Dispositivop response) {
+                    mSigningInDialog.dismiss();
+                    goToProviderHome(provider);
+                }
+            }, provider, this).executeAsync();
         }
     }
 }
