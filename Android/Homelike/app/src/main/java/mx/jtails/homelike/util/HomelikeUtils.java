@@ -8,7 +8,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -26,7 +25,9 @@ import java.util.Set;
 
 import mx.jtails.homelike.R;
 import mx.jtails.homelike.api.model.Dispositivo;
+import mx.jtails.homelike.api.model.Dispositivop;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.api.model.Proveedor;
 
 /**
  * Created by GrzegorzFeathers on 9/5/14.
@@ -56,8 +57,23 @@ public class HomelikeUtils {
         device.setStatus(1);
         device.setTipoDispositivo(isTablet(context) ? "Tablet" : "Handset");
 
-        String imei = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE))
-                .getDeviceId();
+        String imei = getDeviceId(context);
+        device.setImei(imei == null ? "000000000000000" : imei);
+
+        return device;
+    }
+
+    public static Dispositivop newProviderApiDeviceInstance(Context context, Proveedor provider){
+        Dispositivop device = new Dispositivop();
+
+        device.setProveedor(provider);
+        device.setEsDefault(1);
+        device.setGcmid(getGCMId(context));
+        device.setModelo(getModel());
+        device.setPlataforma(PLATFORM);
+        device.setTipoDispositivo(isTablet(context) ? "Tablet" : "Handset");
+
+        String imei = getDeviceId(context);
         device.setImei(imei == null ? "000000000000000" : imei);
 
         return device;

@@ -28,7 +28,6 @@ public class InsertDeviceIdRequest extends ApiRequest<Dispositivop> {
     @Override
     protected AbstractGoogleJsonClientRequest<Dispositivop> getRequest() throws Exception {
         return ((Proveedorendpoint) this.mEndpoint).insertDispositivo(
-                new Dispositivop().setProveedor(this.mProvider)
-                        .setGcmid(HomelikeUtils.getGCMId(this.mContext)));
+                HomelikeUtils.newProviderApiDeviceInstance(this.mContext, this.mProvider));
     }
 }
