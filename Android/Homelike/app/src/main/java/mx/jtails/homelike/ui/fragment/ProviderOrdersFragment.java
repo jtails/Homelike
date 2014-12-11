@@ -175,8 +175,8 @@ public abstract class ProviderOrdersFragment extends Fragment
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Pedido order = this.mAdapter.getItem(position);
         ((HomeActivity) this.getActivity()).pushToStack(
-                OrderFragment.getInstance(order),
-                OrderFragment.class.getName());
+                ProviderOrderFragment.getInstance(order),
+                ProviderOrderFragment.class.getName());
     }
 
 }
