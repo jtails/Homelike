@@ -98,6 +98,7 @@
     <string name="schedule_sat">S</string>
     <string name="schedule_sun">D</string>
     <string name="schedule_connector">a</string>
+    <string name="back">Regresar</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>

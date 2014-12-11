@@ -97,6 +97,7 @@
     <string name="schedule_sat">Sat</string>
     <string name="schedule_sun">Sun</string>
     <string name="schedule_connector">to</string>
+    <string name="back">Back</string>
 
     <!-- Address -->
     <string name="location">Location</string>

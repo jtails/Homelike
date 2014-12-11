@@ -18,4 +18,9 @@ public class NewOrdersFragment extends ProviderOrdersFragment {
     protected int getSubtitleRes() {
         return HomeProviderMenuSection.NEW_ORDERS.getSubtitleRes();
     }
+
+    @Override
+    protected boolean getShowProviderComments() {
+        return false;
+    }
 }

@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class ProviderOrderFragment extends Fragment
         implements ConfirmOrderDialog.ConfirmDialogDialogCallbacks {
 
     private Pedido mOrder;
+    private boolean mShowProviderComments;
 
     private ViewGroup mLayoutOrderDetails;
     private TextView mLblProviderName;
@@ -39,14 +41,15 @@ public class ProviderOrderFragment extends Fragment
     private TextView mLblOrderAddress;
     private ImageView mImgProviderLogo;
     private TextView mLblStatus;
-    private View mFinishButton;
+    private Button mFinishButton;
 
     private DisplayImageOptions mLoaderOptions;
 
-    static public ProviderOrderFragment getInstance(Pedido order){
+    static public ProviderOrderFragment getInstance(Pedido order, boolean showProviderComments){
         ProviderOrderFragment fragment = new ProviderOrderFragment();
 
         fragment.mOrder = order;
+        fragment.mShowProviderComments = showProviderComments;
 
         return fragment;
     }
@@ -78,7 +81,7 @@ public class ProviderOrderFragment extends Fragment
         this.mLblOrderId = (TextView) view.findViewById(R.id.lbl_order_id);
         this.mLblOrderAddress = (TextView) view.findViewById(R.id.lbl_order_address);
         this.mLblStatus = (TextView) view.findViewById(R.id.lbl_status);
-        this.mFinishButton = view.findViewById(R.id.btn_finish_order);
+        this.mFinishButton = (Button) view.findViewById(R.id.btn_finish_order);
         this.mFinishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +91,11 @@ public class ProviderOrderFragment extends Fragment
     }
 
     private void onFinishOrderClicked(){
-        ConfirmOrderDialog.newInstance(this.mOrder, this).show(this.getFragmentManager(), null);
+        if(this.mShowProviderComments){
+            ((HomeActivity) this.getActivity()).singlePop();
+        } else {
+            ConfirmOrderDialog.newInstance(this.mOrder, this).show(this.getFragmentManager(), null);
+        }
     }
 
     @Override
@@ -113,10 +120,11 @@ public class ProviderOrderFragment extends Fragment
         this.addOrderContent();
         this.addClientComments();
 
-        if(this.mOrder.getStatus() == 0){
-            this.mFinishButton.setVisibility(View.VISIBLE);
+        if(this.mShowProviderComments){
+            this.addProviderComments();
+            this.mFinishButton.setText(R.string.back);
         } else {
-            this.mFinishButton.setVisibility(View.GONE);
+            this.mFinishButton.setText(R.string.confirm);
         }
     }
 
@@ -150,6 +158,19 @@ public class ProviderOrderFragment extends Fragment
         ((TextView) view.findViewById(R.id.lbl_comment)).setText(
                 this.mOrder.getComentarioCliente() == null || this.mOrder.getComentarioCliente().isEmpty() ?
                         this.getString(R.string.no_comments) : this.mOrder.getComentarioCliente());
+
+        this.mLayoutOrderDetails.addView(view);
+    }
+
+    private void addProviderComments(){
+        LayoutInflater inflater = LayoutInflater.from(this.getActivity());
+
+        View view = inflater.inflate(R.layout.view_comment,
+                this.mLayoutOrderDetails, false);
+        ((TextView) view.findViewById(R.id.lbl_comment_title)).setText(R.string.provider_comment);
+        ((TextView) view.findViewById(R.id.lbl_comment)).setText(
+                this.mOrder.getComentarioProveedor() == null || this.mOrder.getComentarioProveedor().isEmpty() ?
+                        this.getString(R.string.no_comments) : this.mOrder.getComentarioProveedor());
 
         this.mLayoutOrderDetails.addView(view);
     }

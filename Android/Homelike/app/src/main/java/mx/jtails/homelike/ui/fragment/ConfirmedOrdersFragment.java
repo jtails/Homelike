@@ -18,4 +18,9 @@ public class ConfirmedOrdersFragment extends ProviderOrdersFragment {
     protected int getSubtitleRes() {
         return HomeProviderMenuSection.CONFIRMED_ORDERS.getSubtitleRes();
     }
+
+    @Override
+    protected boolean getShowProviderComments() {
+        return true;
+    }
 }

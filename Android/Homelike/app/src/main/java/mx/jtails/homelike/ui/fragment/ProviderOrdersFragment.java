@@ -170,12 +170,13 @@ public abstract class ProviderOrdersFragment extends Fragment
 
     protected abstract int getStatusFilter();
     protected abstract int getSubtitleRes();
+    protected abstract boolean getShowProviderComments();
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Pedido order = this.mAdapter.getItem(position);
         ((HomeActivity) this.getActivity()).pushToStack(
-                ProviderOrderFragment.getInstance(order),
+                ProviderOrderFragment.getInstance(order, this.getShowProviderComments()),
                 ProviderOrderFragment.class.getName());
     }
 
