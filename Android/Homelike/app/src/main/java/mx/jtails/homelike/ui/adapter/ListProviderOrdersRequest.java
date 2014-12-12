@@ -8,6 +8,7 @@ import java.util.List;
 import mx.jtails.homelike.api.endpoint.pedidoendpoint.Pedidoendpoint;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.PedidoCollection;
+import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.request.ApiRequest;
 import mx.jtails.homelike.request.ApiResponseHandler;
 
@@ -26,8 +27,8 @@ public class ListProviderOrdersRequest extends ApiRequest<List<Pedido>> {
 
     @Override
     protected AbstractGoogleJsonClientRequest getRequest() throws Exception {
-        return ((Pedidoendpoint) this.mEndpoint).listPedidosByProveedor()
-                .set("idProveedor", this.mProviderId);
+        return ((Pedidoendpoint) this.mEndpoint).listPedidosByProveedor(
+                new Proveedor().setIdProveedor(this.mProviderId));
     }
 
     @Override
