@@ -77,7 +77,13 @@ public abstract class ApiRequest<T> {
             String uriTemplate = request.getUriTemplate();
             String jsonContent = request.getJsonContent() != null ?
                     request.getJsonContent().toString() : "No JSON content";
+            String headers = request.getRequestHeaders() != null ?
+                request.getRequestHeaders().toString() : "No Headers";
+            String method = request.getRequestMethod() != null ?
+                request.getRequestMethod() : "Undefined Method";
             Log.d(this.getTag(), "URI: " + uriTemplate);
+            Log.d(this.getTag(), "Headers: " + headers);
+            Log.d(this.getTag(), "Method: " + method);
             Log.d(this.getTag(), "Content: " + jsonContent);
         } catch (Exception e) {
             e.printStackTrace();
