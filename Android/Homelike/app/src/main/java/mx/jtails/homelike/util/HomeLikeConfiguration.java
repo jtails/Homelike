@@ -3,7 +3,7 @@ package mx.jtails.homelike.util;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 
 /**
  * Created by GrzegorzFeathers on 12/1/14.

@@ -20,7 +20,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.DeleteAddressRequest;

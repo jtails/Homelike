@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.util.HomeLikeConfiguration;
 
 /**

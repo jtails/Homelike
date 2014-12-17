@@ -13,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;

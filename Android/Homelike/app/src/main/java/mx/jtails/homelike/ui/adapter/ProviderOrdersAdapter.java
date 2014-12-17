@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.util.HomelikeUtils;

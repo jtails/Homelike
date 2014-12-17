@@ -14,7 +14,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Cuenta;
 import mx.jtails.homelike.api.model.Dispositivop;
 import mx.jtails.homelike.api.model.Proveedor;

@@ -2,7 +2,7 @@ package mx.jtails.homelike.util;
 
 import android.support.v4.app.Fragment;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.ui.fragment.ConfirmedOrdersFragment;
 import mx.jtails.homelike.ui.fragment.ContactFragment;
 import mx.jtails.homelike.ui.fragment.NewOrdersFragment;

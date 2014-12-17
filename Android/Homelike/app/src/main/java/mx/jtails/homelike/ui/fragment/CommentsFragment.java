@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.request.UpdateOrderRequest;
 import mx.jtails.homelike.ui.HomeActivity;

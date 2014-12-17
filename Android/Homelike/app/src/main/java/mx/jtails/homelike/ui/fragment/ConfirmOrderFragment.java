@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Map;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.Producto;
 import mx.jtails.homelike.api.model.Proveedor;

@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.request.ApiResponseHandler;
 import mx.jtails.homelike.request.UpdateProviderOrderRequest;

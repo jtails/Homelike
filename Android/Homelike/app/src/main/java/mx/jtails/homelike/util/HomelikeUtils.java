@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -23,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Dispositivo;
 import mx.jtails.homelike.api.model.Dispositivop;
 import mx.jtails.homelike.api.model.Pedido;
@@ -33,6 +34,8 @@ import mx.jtails.homelike.api.model.Proveedor;
  * Created by GrzegorzFeathers on 9/5/14.
  */
 public class HomelikeUtils {
+
+    private static final String TAG = HomelikeUtils.class.getSimpleName();
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 300;
 
@@ -109,6 +112,7 @@ public class HomelikeUtils {
                     e.printStackTrace();
                 }
             }
+            Log.d(TAG, "GCM Id: " + regid);
             return  regid;
         }
         return "";

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 
 /**

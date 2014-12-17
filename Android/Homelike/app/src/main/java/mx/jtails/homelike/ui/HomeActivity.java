@@ -16,8 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.HomelikeApplication;
-import mx.jtails.homelike.R;
 import mx.jtails.homelike.ui.fragment.HomeSectionsFragment;
 import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;

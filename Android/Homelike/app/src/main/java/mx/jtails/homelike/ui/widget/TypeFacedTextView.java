@@ -6,7 +6,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
+
 
 public class TypeFacedTextView extends TextView {
 

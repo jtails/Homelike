@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.request.ListOrderCommentsByProviderRequest;
 import mx.jtails.homelike.ui.adapter.CommentsAdapter;
