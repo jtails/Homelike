@@ -40,7 +40,7 @@ public class GCMIntentService extends IntentService {
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle("Notificación Recibida")
-                .setContentText("Type: " + messageType + ", Extras: " + intent.getExtras())
+                .setContentText("Extras: " + intent.getExtras())
                 .setAutoCancel(true)
                 .build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
