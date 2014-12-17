@@ -10,6 +10,8 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import mx.jtails.android.homelike.R;
+
 /**
  * Created by GrzegorzFeathers on 9/24/14.
  */
@@ -36,8 +38,10 @@ public class GCMIntentService extends IntentService {
         */
 
         Notification notification = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle("Notificación Recibida")
                 .setContentText("Type: " + messageType + ", Extras: " + intent.getExtras())
+                .setAutoCancel(true)
                 .build();
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         NotificationManager notificationManager = (NotificationManager)
