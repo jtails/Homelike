@@ -21,6 +21,8 @@ import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.DetallePedido;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.request.ApiResponseHandler;
+import mx.jtails.homelike.request.GetOrderRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.fragment.dialog.ConfirmOrderDialog;
 import mx.jtails.homelike.util.HomeProviderMenuSection;
@@ -32,9 +34,11 @@ import mx.jtails.homelike.util.HomelikeUtils;
 public class ProviderOrderFragment extends Fragment
         implements ConfirmOrderDialog.ConfirmDialogDialogCallbacks {
 
-    private Pedido mOrder;
+    private Pedido mOrder = null;
+    private String mOrderId = null;
     private boolean mShowProviderComments;
 
+    private View mRootView;
     private ViewGroup mLayoutOrderDetails;
     private TextView mLblProviderName;
     private TextView mLblOrderId;
@@ -50,6 +54,15 @@ public class ProviderOrderFragment extends Fragment
 
         fragment.mOrder = order;
         fragment.mShowProviderComments = showProviderComments;
+
+        return fragment;
+    }
+
+    static public ProviderOrderFragment getInstance(String orderId){
+        ProviderOrderFragment fragment = new ProviderOrderFragment();
+
+        fragment.mOrderId = orderId;
+        fragment.mShowProviderComments = false;
 
         return fragment;
     }
@@ -70,7 +83,8 @@ public class ProviderOrderFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_provider_order, container, false);
+        this.mRootView = inflater.inflate(R.layout.fragment_provider_order, container, false);
+        return this.mRootView;
     }
 
     @Override
@@ -101,10 +115,25 @@ public class ProviderOrderFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        this.updateContent(this.mOrder);
+        if(this.mOrderId != null){
+            this.mRootView.findViewById(R.id.layout_order).setVisibility(View.GONE);
+            this.mRootView.findViewById(R.id.progess).setVisibility(View.VISIBLE);
+            new GetOrderRequest(new ApiResponseHandler<Pedido>() {
+                @Override
+                public void onResponse(Pedido response) {
+                    mOrderId = null;
+                    updateContent(response);
+                }
+            }, Long.parseLong(this.mOrderId)).executeAsync();
+        } else {
+            this.updateContent(this.mOrder);
+        }
     }
 
     private void updateContent(Pedido order){
+        this.mRootView.findViewById(R.id.progess).setVisibility(View.GONE);
+        this.mRootView.findViewById(R.id.layout_order).setVisibility(View.VISIBLE);
+
         this.mOrder = order;
         this.mLayoutOrderDetails.removeAllViews();
 
@@ -124,7 +153,7 @@ public class ProviderOrderFragment extends Fragment
             this.addProviderComments();
             this.mFinishButton.setText(R.string.back);
         } else {
-            this.mFinishButton.setText(R.string.confirm);
+            this.mFinishButton.setText(R.string.confirm_delivery);
         }
     }
 

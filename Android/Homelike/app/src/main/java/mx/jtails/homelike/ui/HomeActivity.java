@@ -1,15 +1,11 @@
 package mx.jtails.homelike.ui;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -23,6 +19,7 @@ import android.view.Window;
 import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.ui.fragment.HomeSectionsFragment;
+import mx.jtails.homelike.ui.fragment.ProviderOrderFragment;
 import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
 
@@ -47,6 +44,27 @@ public class HomeActivity extends ActionBarActivity
         this.setupActivity();
         this.clearStack();
         this.pushToStack(HomeLikeConfiguration.getDefaultContent().getFragmentClass(), null, -1, false);
+        this.handleDeepLinking(this.getIntent(), false);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        this.handleDeepLinking(intent, true);
+    }
+
+    private void handleDeepLinking(Intent intent, boolean clearStack){
+        if( intent != null && intent.getAction() != null
+                && intent.getAction().equals(Intent.ACTION_VIEW)){
+            if(clearStack){
+                this.clearStack();
+            }
+            if(intent.getData() != null && intent.getData().getQueryParameter("orderId") != null){
+                this.pushToStack(ProviderOrderFragment.getInstance(
+                        intent.getData().getQueryParameter("orderId")),
+                        ProviderOrderFragment.class.getName());
+            }
+        }
     }
 
     private void validateUserSignedIn(){

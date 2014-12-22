@@ -14,6 +14,8 @@ import mx.jtails.homelike.util.HomelikePreferences;
  */
 public class HomelikeApplication extends Application {
 
+    private OnNewOrderReceivedListener mNewOrderListener = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,12 +28,6 @@ public class HomelikeApplication extends Application {
                 .writeDebugLogs()
                 .build();
         ImageLoader.getInstance().init(config);
-
-        this.startOrderUpdateService();
-    }
-
-    private void startOrderUpdateService(){
-
     }
 
     public void logout(){
@@ -40,5 +36,20 @@ public class HomelikeApplication extends Application {
         HomeLikeConfiguration.restoreConfiguration();
     }
 
+    public void setNewOrderListener(OnNewOrderReceivedListener listener){
+        this.mNewOrderListener = listener;
+    }
+
+    public void removeNewOrderListener(){
+        this.mNewOrderListener = null;
+    }
+
+    public OnNewOrderReceivedListener getNewOrderListener(){
+        return this.mNewOrderListener;
+    }
+
+    public static interface OnNewOrderReceivedListener {
+        public void onNewOrderReceived();
+    }
 
 }

@@ -7,7 +7,7 @@
     <EditText android:id="@+id/edit_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/comments_hint"
+        android:hint="@string/comments_to_client_hint"
         android:lines="5"/>
 
 </LinearLayout>

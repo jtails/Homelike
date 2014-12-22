@@ -36,14 +36,14 @@ public abstract class ProviderOrdersFragment extends Fragment
 
     private ProviderOrdersAdapter mAdapter;
 
-    private ApiRequest mApiRequest;
+    protected ApiRequest mApiRequest;
 
     private AbsListView mListView;
     private View mLayoutContent;
     private View mLayoutLoading;
     private View mLblEmpty;
 
-    private enum ContentDisplayMode {
+    protected enum ContentDisplayMode {
         LOAD, PARTIAL_LOAD, CONTENT;
     }
 
@@ -122,7 +122,7 @@ public abstract class ProviderOrdersFragment extends Fragment
         }
     }
 
-    private void displayContentMode(ContentDisplayMode displayMode){
+    protected void displayContentMode(ContentDisplayMode displayMode){
         switch (displayMode) {
             case LOAD: {
                 this.mLayoutContent.setVisibility(View.GONE);
@@ -178,6 +178,11 @@ public abstract class ProviderOrdersFragment extends Fragment
         ((HomeActivity) this.getActivity()).pushToStack(
                 ProviderOrderFragment.getInstance(order, this.getShowProviderComments()),
                 ProviderOrderFragment.class.getName());
+    }
+
+    public void openOrderWithId(String orderId){
+        ((HomeActivity) this.getActivity()).pushToStack(
+                ProviderOrderFragment.getInstance(orderId), ProviderOrderFragment.class.getName());
     }
 
 }

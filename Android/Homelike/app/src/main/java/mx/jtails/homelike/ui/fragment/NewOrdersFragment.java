@@ -1,5 +1,6 @@
 package mx.jtails.homelike.ui.fragment;
 
+import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.util.HomeProviderMenuSection;
 
 /**
@@ -8,6 +9,25 @@ import mx.jtails.homelike.util.HomeProviderMenuSection;
 public class NewOrdersFragment extends ProviderOrdersFragment {
 
     private static final int STATUS_FILTER = 0;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((HomelikeApplication) this.getActivity().getApplication()).setNewOrderListener(
+                new HomelikeApplication.OnNewOrderReceivedListener() {
+                    @Override
+                    public void onNewOrderReceived() {
+                        displayContentMode(ContentDisplayMode.LOAD);
+                        mApiRequest.executeAsync();
+                    }
+                });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((HomelikeApplication) this.getActivity().getApplication()).removeNewOrderListener();
+    }
 
     @Override
     protected int getStatusFilter() {

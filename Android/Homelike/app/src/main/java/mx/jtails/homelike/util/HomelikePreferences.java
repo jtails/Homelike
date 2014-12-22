@@ -17,6 +17,8 @@ public class HomelikePreferences {
 
     public static final String APP_CONFIG = "app_configuration";
 
+    public static final String IS_PROVIDER = "is_provider";
+
     //User data
     public static final String USER_NAME = "user_name";
     public static final String USER_IMG = "user_img";

@@ -67,7 +67,7 @@ public class SplashActivity extends ActionBarActivity
     @Override
     public void onClick(View v) {
         new AlertDialog.Builder(this)
-                .setTitle("Select your kind of user")
+                .setTitle(R.string.kind_of_user_message)
                 .setItems(HomeLikeConfiguration.UIConfiguration.asCharSequences(this),
                         new DialogInterface.OnClickListener() {
                     @Override
@@ -185,6 +185,7 @@ public class SplashActivity extends ActionBarActivity
         }
         HomelikePreferences.saveInt(HomelikePreferences.ACCOUNT_ID,
                 provider.getIdProveedor());
+        HomelikePreferences.saveBoolean(HomelikePreferences.IS_PROVIDER, true);
         this.startActivity(new Intent(this, HomeActivity.class));
         this.finish();
     }

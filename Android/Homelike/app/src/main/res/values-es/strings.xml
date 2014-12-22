@@ -11,6 +11,7 @@
     <string name="gratitue_message">¡Gracias por su ayuda!</string>
     <string name="client_config">Cliente</string>
     <string name="provider_config">Proveedor</string>
+    <string name="kind_of_user_message">Elija su tipo de usuario</string>
 
     <!-- Home Menu -->
     <string name="home_services">Servicios</string>
@@ -18,8 +19,8 @@
     <string name="home_my_addresses">Mis Direcciones</string>
     <string name="home_suggestions">Sugerencias</string>
     <string name="home_contact">Contacto</string>
-    <string name="home_new_orders">Órdenes Nuevas</string>
-    <string name="home_confirmed_orders">Órdenes Confirmadas</string>
+    <string name="home_new_orders">Pedidos Nuevos</string>
+    <string name="home_confirmed_orders">Pedidos Confirmados</string>
     <string name="no_username">Sin Nombre</string>
     <string name="comments_and_suggestions">Sugerencias</string>
 
@@ -41,7 +42,7 @@
     <string name="error">Error</string>
     <string name="missing_fields">Campos faltantes</string>
     <string name="error_load_address">Error al recuperar la dirección con id: %d</string>
-    <string name="error_create_order">Error al crear su orden, intente de nuevo más tarde.</string>
+    <string name="error_create_order">Error al crear su pedido, intente de nuevo más tarde.</string>
     <string name="error_play_services">Error al cargar Google Play Services…</string>
     <string name="error_retrieving_location">No se encontraron datos de la ubicación que selecciono. ¿Desea continuar?</string>
     <string name="error_field_validation">Los siguientes campos son necesarios para continuar con el registro de la dirección: \n</string>
@@ -72,7 +73,7 @@
 
     <!-- Order -->
     <string name="confirm_order">Confirmar Pedido</string>
-    <string name="confirm_order_message">¿Está seguro que quiere cancelar la orden?</string>
+    <string name="confirm_order_message">¿Está seguro que quiere cancelar el pedido?</string>
     <string name="cancel_order">Cancelar Pedido</string>
     <string name="empty_order">Pedido Vacío</string>
     <string name="empty_order_message">El pedido está vacío, por favor seleccione algún producto.</string>
@@ -89,6 +90,7 @@
     <string name="payment_quantity">Cantidad de pago</string>
     <string name="comments">Comentarios</string>
     <string name="comments_hint">Comentarios al proveedor, como la denominación de su pago</string>
+    <string name="comments_to_client_hint">Ingrese algún comentario, como el tiempo de entrega</string>
     <string name="no_active_orders">Usted no tiene pedidos activos</string>
     <string name="no_providers_found">No se encontró ningún proveedor en el área</string>
     <string name="phone_short">Tel.</string>
@@ -99,6 +101,7 @@
     <string name="schedule_sun">D</string>
     <string name="schedule_connector">a</string>
     <string name="back">Regresar</string>
+    <string name="confirm_delivery">Confirmar Entrega</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>
@@ -156,5 +159,9 @@
     <string name="country_hint">México</string>
     <string name="reference_hint">Fachada,calles,etc.</string>
     <string name="finish">Terminar</string>
+
+    <!--Notifications-->
+    <string name="new_order_received">Nuevo Pedido</string>
+    <string name="new_order_received_message">Ha recibido un nuevo pedido</string>
 
 </resources>

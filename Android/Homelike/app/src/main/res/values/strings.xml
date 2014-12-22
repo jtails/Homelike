@@ -10,6 +10,7 @@
     <string name="gratitue_message">Thanks for your help!</string>
     <string name="client_config">Client</string>
     <string name="provider_config">Provider</string>
+    <string name="kind_of_user_message">Select your kind of user</string>
 
     <!-- Home Menu -->
     <string name="home_services">Services</string>
@@ -88,6 +89,7 @@
     <string name="payment_quantity">Payment Quantity</string>
     <string name="comments">Comments</string>
     <string name="comments_hint">Comments to the provider, like payment quantity</string>
+    <string name="comments_to_client_hint">Enter a comment, like the delivery time</string>
     <string name="no_active_orders">You don\'t have any active orders</string>
     <string name="no_providers_found">No providers found in this area</string>
     <string name="phone_short">Phone</string>
@@ -98,6 +100,7 @@
     <string name="schedule_sun">Sun</string>
     <string name="schedule_connector">to</string>
     <string name="back">Back</string>
+    <string name="confirm_delivery">Confirm Delivery</string>
 
     <!-- Address -->
     <string name="location">Location</string>
@@ -156,5 +159,9 @@
     <string name="country_hint">Mexico</string>
     <string name="reference_hint">Color,streets,etc.</string>
     <string name="finish">Finish</string>
+
+    <!--Notifications-->
+    <string name="new_order_received">New Order</string>
+    <string name="new_order_received_message">You\'ve received a new order</string>
 
 </resources>
