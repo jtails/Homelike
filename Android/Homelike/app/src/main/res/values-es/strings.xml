@@ -9,9 +9,9 @@
     <string name="action_map">Mostrar Mapa</string>
     <string name="action_logout">Cerrar Sesión</string>
     <string name="gratitue_message">¡Gracias por su ayuda!</string>
-    <string name="client_config">Cliente</string>
-    <string name="provider_config">Proveedor</string>
-    <string name="kind_of_user_message">Elija su tipo de usuario</string>
+    <string name="client_config">Soy un Cliente</string>
+    <string name="provider_config">Soy un Proveedor</string>
+    <string name="kind_of_user_message">¿Qué usuario es usted?</string>
 
     <!-- Home Menu -->
     <string name="home_services">Servicios</string>
@@ -164,6 +164,6 @@
     <string name="new_order_received">Nuevo Pedido</string>
     <string name="new_order_received_message">Ha recibido un nuevo pedido</string>
     <string name="confirmed_order_received">Pedido Confirmado</string>
-    <string name="confirmed_order_received_message">Su orden ha sido confirmada</string>
+    <string name="confirmed_order_received_message">Su pedido ha sido confirmado</string>
 
 </resources>

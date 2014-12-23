@@ -8,8 +8,8 @@
     <!-- Application -->
     <string name="action_logout">Logout</string>
     <string name="gratitue_message">Thanks for your help!</string>
-    <string name="client_config">Client</string>
-    <string name="provider_config">Provider</string>
+    <string name="client_config">I\'m a Client</string>
+    <string name="provider_config">I\'m a Provider</string>
     <string name="kind_of_user_message">Select your kind of user</string>
 
     <!-- Home Menu -->
@@ -164,6 +164,6 @@
     <string name="new_order_received">New Order</string>
     <string name="new_order_received_message">You\'ve received a new order</string>
     <string name="confirmed_order_received">Order Confirmed</string>
-    <string name="confirmed_order_received_message">Your orden has been confirmed</string>
+    <string name="confirmed_order_received_message">Your order has been confirmed</string>
 
 </resources>

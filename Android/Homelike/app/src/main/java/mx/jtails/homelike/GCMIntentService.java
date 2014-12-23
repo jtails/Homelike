@@ -50,7 +50,7 @@ public class GCMIntentService extends IntentService {
         if(intent.getExtras().getString("Op").equals("1")
                 && HomelikePreferences.loadBoolean(HomelikePreferences.IS_PROVIDER, false)){
             Notification notification = new NotificationCompat.Builder(this)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_notification))
                     .setContentTitle(this.getString(R.string.new_order_received))
                     .setContentText(this.getString(R.string.new_order_received_message))
                     .setAutoCancel(true)
@@ -66,7 +66,7 @@ public class GCMIntentService extends IntentService {
         } else if(intent.getExtras().getString("Op").equals("2")
                 && !HomelikePreferences.loadBoolean(HomelikePreferences.IS_PROVIDER, false)){
             Notification notification = new NotificationCompat.Builder(this)
-                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_notification))
                     .setContentTitle(this.getString(R.string.confirmed_order_received))
                     .setContentText(this.getString(R.string.confirmed_order_received_message))
                     .setAutoCancel(true)
