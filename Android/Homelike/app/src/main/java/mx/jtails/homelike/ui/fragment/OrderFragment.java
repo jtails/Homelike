@@ -17,6 +17,8 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.DetallePedido;
 import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.request.ApiResponseHandler;
+import mx.jtails.homelike.request.GetOrderRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.util.HomelikeUtils;
 
@@ -24,10 +26,11 @@ import mx.jtails.homelike.util.HomelikeUtils;
  * Created by GrzegorzFeathers on 9/23/14.
  */
 public class OrderFragment extends Fragment {
-// implements UpdateOrderRequest.OnUpdateOrderResponseHandler {
 
-    private Pedido mOrder;
+    private Pedido mOrder = null;
+    private String mOrderId = null;
 
+    private View mRootView;
     private ViewGroup mLayoutOrderDetails;
     private TextView mLblProviderName;
     private RatingBar mRatingProvider;
@@ -48,6 +51,14 @@ public class OrderFragment extends Fragment {
         return fragment;
     }
 
+    static public OrderFragment getInstance(String orderId){
+        OrderFragment fragment = new OrderFragment();
+
+        fragment.mOrderId = orderId;
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +75,8 @@ public class OrderFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order, container, false);
-        return view;
+        this.mRootView = inflater.inflate(R.layout.fragment_order, container, false);
+        return this.mRootView;
     }
 
     @Override
@@ -86,12 +97,6 @@ public class OrderFragment extends Fragment {
     }
 
     private void onFinishOrderClicked(){
-        /*
-        this.mOrder.setStatus(2);
-        this.mUpdatingOrder = ProgressDialog.show(this.getActivity(),
-                this.getString(R.string.updating), this.getString(R.string.wait), false, false);
-        new UpdateOrderRequest(this, this.mOrder).executeAsync();
-        */
         ((HomeActivity) this.getActivity()).pushToStack(
                 CommentsFragment.newInstance(this.mOrder),
                 CommentsFragment.class.getName());
@@ -100,10 +105,25 @@ public class OrderFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        this.updateContent(this.mOrder);
+        if(this.mOrderId != null){
+            this.mRootView.findViewById(R.id.layout_order).setVisibility(View.GONE);
+            this.mRootView.findViewById(R.id.progress).setVisibility(View.VISIBLE);
+            new GetOrderRequest(new ApiResponseHandler<Pedido>() {
+                @Override
+                public void onResponse(Pedido response) {
+                    mOrderId = null;
+                    updateContent(response);
+                }
+            }, Long.parseLong(this.mOrderId)).executeAsync();
+        } else {
+            this.updateContent(this.mOrder);
+        }
     }
 
     private void updateContent(Pedido order){
+        this.mRootView.findViewById(R.id.progress).setVisibility(View.GONE);
+        this.mRootView.findViewById(R.id.layout_order).setVisibility(View.VISIBLE);
+
         this.mOrder = order;
         this.mLayoutOrderDetails.removeAllViews();
 

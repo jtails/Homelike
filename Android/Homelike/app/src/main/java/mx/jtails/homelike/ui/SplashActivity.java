@@ -16,12 +16,14 @@ import com.google.android.gms.plus.model.people.Person;
 
 import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Cuenta;
+import mx.jtails.homelike.api.model.Dispositivo;
 import mx.jtails.homelike.api.model.Dispositivop;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.request.ApiResponseHandler;
 import mx.jtails.homelike.request.GetAccountRequest;
 import mx.jtails.homelike.request.GetProviderRequest;
 import mx.jtails.homelike.request.InsertAccountRequest;
+import mx.jtails.homelike.request.InsertClientDeviceRequest;
 import mx.jtails.homelike.request.InsertDeviceIdRequest;
 import mx.jtails.homelike.ui.fragment.dialog.CreateAccountDialog;
 import mx.jtails.homelike.util.HomeLikeConfiguration;
@@ -66,13 +68,19 @@ public class SplashActivity extends ActionBarActivity
 
     @Override
     public void onClick(View v) {
+        this.mConfigurationProcess = 0;
         new AlertDialog.Builder(this)
                 .setTitle(R.string.kind_of_user_message)
-                .setItems(HomeLikeConfiguration.UIConfiguration.asCharSequences(this),
-                        new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(HomeLikeConfiguration.UIConfiguration.asCharSequences(this),
+                        0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                mConfigurationProcess = which;
+                            }
+                        })
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mConfigurationProcess = which;
                         mGoogleApiClient.connect();
                     }
                 })
@@ -191,12 +199,18 @@ public class SplashActivity extends ActionBarActivity
     }
 
     @Override
-    public void onGetAccountResponse(Cuenta account) {
-        this.mSigningInDialog.dismiss();
+    public void onGetAccountResponse(final Cuenta account) {
         if(account == null){
+            this.mSigningInDialog.dismiss();
             new CreateAccountDialog().show(this.getSupportFragmentManager(), null);
         } else {
-            this.goToClientHome(account);
+            new InsertClientDeviceRequest(new ApiResponseHandler<Dispositivo>() {
+                @Override
+                public void onResponse(Dispositivo response) {
+                    mSigningInDialog.dismiss();
+                    goToClientHome(account);
+                }
+            }, account, this).executeAsync();
         }
     }
 

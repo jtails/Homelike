@@ -40,7 +40,10 @@ public class GetAccountRequest extends HomelikeApiRequest {
         Cuentaendpoint.GetCuentaByUser request = ((Cuentaendpoint) this.mEndpoint)
                 .getCuentaByUser();
         request.put("usuario", this.mEmail);
-        return request.execute();
+
+        Cuenta response = request.execute();
+
+        return response;
     }
 
     private Cuenta doRequestByAccountId() throws Exception {

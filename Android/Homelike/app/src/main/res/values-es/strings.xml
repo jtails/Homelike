@@ -163,5 +163,7 @@
     <!--Notifications-->
     <string name="new_order_received">Nuevo Pedido</string>
     <string name="new_order_received_message">Ha recibido un nuevo pedido</string>
+    <string name="confirmed_order_received">Pedido Confirmado</string>
+    <string name="confirmed_order_received_message">Su orden ha sido confirmada</string>
 
 </resources>

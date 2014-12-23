@@ -117,7 +117,7 @@ public class ProviderOrderFragment extends Fragment
         super.onResume();
         if(this.mOrderId != null){
             this.mRootView.findViewById(R.id.layout_order).setVisibility(View.GONE);
-            this.mRootView.findViewById(R.id.progess).setVisibility(View.VISIBLE);
+            this.mRootView.findViewById(R.id.progress).setVisibility(View.VISIBLE);
             new GetOrderRequest(new ApiResponseHandler<Pedido>() {
                 @Override
                 public void onResponse(Pedido response) {
@@ -131,7 +131,7 @@ public class ProviderOrderFragment extends Fragment
     }
 
     private void updateContent(Pedido order){
-        this.mRootView.findViewById(R.id.progess).setVisibility(View.GONE);
+        this.mRootView.findViewById(R.id.progress).setVisibility(View.GONE);
         this.mRootView.findViewById(R.id.layout_order).setVisibility(View.VISIBLE);
 
         this.mOrder = order;

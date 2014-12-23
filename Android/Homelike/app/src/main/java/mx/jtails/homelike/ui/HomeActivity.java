@@ -19,6 +19,7 @@ import android.view.Window;
 import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.ui.fragment.HomeSectionsFragment;
+import mx.jtails.homelike.ui.fragment.OrderFragment;
 import mx.jtails.homelike.ui.fragment.ProviderOrderFragment;
 import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
@@ -60,9 +61,15 @@ public class HomeActivity extends ActionBarActivity
                 this.clearStack();
             }
             if(intent.getData() != null && intent.getData().getQueryParameter("orderId") != null){
-                this.pushToStack(ProviderOrderFragment.getInstance(
-                        intent.getData().getQueryParameter("orderId")),
-                        ProviderOrderFragment.class.getName());
+                if(intent.getData().getQueryParameter("op").equals("1")){
+                    this.pushToStack(ProviderOrderFragment.getInstance(
+                                    intent.getData().getQueryParameter("orderId")),
+                            ProviderOrderFragment.class.getName());
+                } else {
+                    this.pushToStack(OrderFragment.getInstance(
+                                    intent.getData().getQueryParameter("orderId")),
+                            OrderFragment.class.getName());
+                }
             }
         }
     }
