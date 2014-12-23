@@ -101,6 +101,8 @@
     <string name="schedule_connector">to</string>
     <string name="back">Back</string>
     <string name="confirm_delivery">Confirm Delivery</string>
+    <string name="loading_new_order">Loading new order…</string>
+    <string name="loading_order">Loading order…</string>
 
     <!-- Address -->
     <string name="location">Location</string>

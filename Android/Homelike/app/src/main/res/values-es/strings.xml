@@ -102,6 +102,8 @@
     <string name="schedule_connector">a</string>
     <string name="back">Regresar</string>
     <string name="confirm_delivery">Confirmar Entrega</string>
+    <string name="loading_new_order">Cargando pedido nuevo…</string>
+    <string name="loading_order">Cargando pedido…</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>
