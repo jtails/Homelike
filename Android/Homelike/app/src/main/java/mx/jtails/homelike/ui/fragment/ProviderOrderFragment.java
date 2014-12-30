@@ -40,7 +40,6 @@ public class ProviderOrderFragment extends Fragment
 
     private View mRootView;
     private ViewGroup mLayoutOrderDetails;
-    private TextView mLblProviderName;
     private TextView mLblOrderId;
     private TextView mLblOrderAddress;
     private ImageView mImgProviderLogo;
@@ -91,7 +90,6 @@ public class ProviderOrderFragment extends Fragment
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.mLayoutOrderDetails = (ViewGroup) view.findViewById(R.id.layout_order_details);
         this.mImgProviderLogo = (ImageView) view.findViewById(R.id.img_provider_logo);
-        this.mLblProviderName = (TextView) view.findViewById(R.id.lbl_provider_name);
         this.mLblOrderId = (TextView) view.findViewById(R.id.lbl_order_id);
         this.mLblOrderAddress = (TextView) view.findViewById(R.id.lbl_order_address);
         this.mLblStatus = (TextView) view.findViewById(R.id.lbl_status);
@@ -139,12 +137,13 @@ public class ProviderOrderFragment extends Fragment
 
         ImageLoader.getInstance().displayImage(this.mOrder.getProveedor().getLogo(),
                 this.mImgProviderLogo, this.mLoaderOptions);
-        this.mLblProviderName.setText(this.mOrder.getProveedor().getNombre());
         this.mLblOrderId.setText("ID. " + this.mOrder.getIdPedido());
         this.mLblStatus.setText(HomelikeUtils.getOrderStatusStringRes(this.mOrder.getStatus()));
         Direccion address = this.mOrder.getDireccion();
-        this.mLblOrderAddress.setText(address.getCalle() + " #" + address.getNexterior() + ", "
-                + address.getColonia() + ", " + address.getDelegacion());
+        this.mLblOrderAddress.setText(address.getCalle() + " #" + address.getNexterior()
+                + (address.getNinterior() == null || address.getNinterior().equals("") ?
+                    "" : (" int. " + address.getNinterior()))
+                + ", " + address.getColonia() + ", " + address.getDelegacion());
 
         this.addOrderContent();
         this.addClientComments();

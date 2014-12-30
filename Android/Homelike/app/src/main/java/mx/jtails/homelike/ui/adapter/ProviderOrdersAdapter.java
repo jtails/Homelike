@@ -84,8 +84,10 @@ public class ProviderOrdersAdapter extends ArrayAdapter<Pedido> {
         holder.lblOrderStatus.get().setText(HomelikeUtils.getOrderStatusStringRes(order.getStatus()));
 
         Direccion address = order.getDireccion();
-        holder.lblOrderAddress.get().setText(address.getCalle() + " #" + address.getNexterior() + ", "
-                + address.getColonia() + ", " + address.getDelegacion());
+        holder.lblOrderAddress.get().setText(address.getCalle() + " #" + address.getNexterior()
+                + (address.getNinterior() == null || address.getNinterior().equals("") ?
+                    "" : (" int. " + address.getNinterior()))
+                + ", " + address.getColonia() + ", " + address.getDelegacion());
 
         ImageLoader.getInstance().displayImage(order.getProveedor().getLogo(),
                 holder.imgProviderLogo.get(), this.mLoaderOptions);

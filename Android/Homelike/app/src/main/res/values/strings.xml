@@ -103,6 +103,7 @@
     <string name="confirm_delivery">Confirm Delivery</string>
     <string name="loading_new_order">Loading new order…</string>
     <string name="loading_order">Loading order…</string>
+    <string name="delivery_address">Delivery address:</string>
 
     <!-- Address -->
     <string name="location">Location</string>

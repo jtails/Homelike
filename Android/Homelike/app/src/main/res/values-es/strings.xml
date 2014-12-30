@@ -104,6 +104,7 @@
     <string name="confirm_delivery">Confirmar Entrega</string>
     <string name="loading_new_order">Cargando pedido nuevo…</string>
     <string name="loading_order">Cargando pedido…</string>
+    <string name="delivery_address">Dirección de envío:</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>
