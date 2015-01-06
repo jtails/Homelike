@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import mx.jtails.homelike.R;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.android.homelike.R;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 
 /**
  * Created by GrzegorzFeathers on 10/21/14.
@@ -25,7 +25,7 @@ public class ContactFragment extends Fragment {
         ActionBarActivity activity = (ActionBarActivity) this.getActivity();
         activity.setSupportProgressBarIndeterminateVisibility(false);
         ActionBar ab = activity.getSupportActionBar();
-        ab.setSubtitle(HomeMenuSection.CONTACT.getSubtitleRes());
+        ab.setSubtitle(HomeClientMenuOption.CONTACT.getSubtitleRes());
     }
 
     @Override

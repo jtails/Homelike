@@ -20,7 +20,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.DeleteAddressRequest;
@@ -28,7 +28,7 @@ import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListAddressesRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.MyAddressesAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 
 /**
  * Created by GrzegorzFeathers on 9/19/14.
@@ -80,7 +80,7 @@ public class MyAddressesFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle(HomeMenuSection.ADDRESSES.getSubtitleRes());
+        ab.setSubtitle(HomeClientMenuOption.ADDRESSES.getSubtitleRes());
 
         ((ActionBarActivity) this.getActivity()).setSupportProgressBarIndeterminateVisibility(true);
         this.mListAddressesRequest.executeAsync();

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:homelike="http://schemas.android.com/apk/res-auto"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical">
+
+                    <ImageView android:id="@+id/img_provider_logo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_homelike_splash_logo"/>
+
+                    <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                        android:id="@+id/lbl_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:background="#99ffffff"
+                        homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+                        android:textColor="#333"
+                        android:gravity="center"
+                        android:padding="2dp"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:padding="10dp">
+
+                    <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                        android:id="@+id/lbl_provider_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+                        android:textSize="23sp"
+                        android:singleLine="true"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@android:color/white"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_order_id"/>
+
+                        <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                            android:id="@+id/lbl_order_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textSize="16sp"
+                            android:layout_marginLeft="5dp"
+                            homelike:typeface="fonts/RobotoCondensed-Light.ttf"
+                            android:textColor="@android:color/white"/>
+
+                    </LinearLayout>
+
+                    <mx.jtails.provider.homelike.ui.widget.TypeFacedTextView
+                        android:id="@+id/lbl_order_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        homelike:typeface="fonts/RobotoCondensed-Regular.ttf"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ddd"/>
+
+            <LinearLayout android:id="@+id/layout_order_details"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button android:id="@+id/btn_finish_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:text="@string/confirm"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_btn"/>
+
+</LinearLayout>

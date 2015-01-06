@@ -15,14 +15,17 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import mx.jtails.provider.homelike.R;
 import mx.jtails.provider.homelike.api.model.Dispositivo;
+import mx.jtails.provider.homelike.api.model.Pedido;
 
 /**
  * Created by GrzegorzFeathers on 11/18/14.
@@ -205,6 +208,17 @@ public class HomelikeUtils {
         }
 
         return deserializedSubtotal;
+    }
+
+    public static List<Pedido> getStatusFilteredOrders(List<Pedido> orders, int status){
+        if(status < 0){ return orders; }
+        List<Pedido> filteredOrders = new ArrayList<Pedido>();
+        for(Pedido o : orders){
+            if(o.getStatus() == status){
+                filteredOrders.add(o);
+            }
+        }
+        return filteredOrders;
     }
 
 }

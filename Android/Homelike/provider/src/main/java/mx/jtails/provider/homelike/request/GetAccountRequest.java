@@ -1,63 +1,50 @@
 package mx.jtails.provider.homelike.request;
 
-import mx.jtails.provider.homelike.api.endpoint.cuentaendpoint.Cuentaendpoint;
-import mx.jtails.provider.homelike.api.model.Cuenta;
+import com.google.api.client.googleapis.services.json.AbstractGoogleJsonClientRequest;
+
+import mx.jtails.provider.homelike.api.endpoint.proveedorendpoint.Proveedorendpoint;
+import mx.jtails.provider.homelike.api.model.Proveedor;
 
 /**
  * Created by GrzegorzFeathers on 9/15/14.
  */
-public class GetAccountRequest extends HomelikeApiRequest {
+public class GetAccountRequest extends HomelikeApiRequest<Proveedor> {
 
     private int mAccountId;
     private String mEmail;
     private boolean mByEmail = false;
 
-    public GetAccountRequest(GetAccountResponseHandler handler, int accountId){
-        super(handler);
+    public GetAccountRequest(HomelikeApiResponseHandler<Proveedor> handler, int accountId){
+        super(handler, new Proveedorendpoint.Builder(HTTP_TRANSPORT,
+                JSON_FACTORY, null).build());
         this.mAccountId = accountId;
-        this.mEndpoint = new Cuentaendpoint.Builder(HTTP_TRANSPORT,
-                JSON_FACTORY, null).build();
     }
 
-    public GetAccountRequest(GetAccountResponseHandler handler, String mobile){
-        super(handler);
-        this.mEmail = mobile;
+    public GetAccountRequest(HomelikeApiResponseHandler<Proveedor> handler, String email){
+        super(handler, new Proveedorendpoint.Builder(HTTP_TRANSPORT,
+                JSON_FACTORY, null).build());
+        this.mEmail = email;
         this.mByEmail = true;
-        this.mEndpoint = new Cuentaendpoint.Builder(HTTP_TRANSPORT,
-                JSON_FACTORY, null).build();
     }
 
     @Override
-    protected Object doRequest() throws Exception {
+    protected AbstractGoogleJsonClientRequest<Proveedor> getRequest() throws Exception {
         if(this.mByEmail){
-            return this.doRequestByEmail();
+            return this.getRequestByEmail();
         } else {
-            return this.doRequestByAccountId();
+            return this.getRequestByAccountId();
         }
     }
 
-    private Cuenta doRequestByEmail() throws Exception {
-        Cuentaendpoint.GetCuentaByUser request = ((Cuentaendpoint) this.mEndpoint)
-                .getCuentaByUser();
-        request.put("usuario", this.mEmail);
-        return request.execute();
+    private AbstractGoogleJsonClientRequest<Proveedor> getRequestByEmail() throws Exception {
+        Proveedorendpoint.GetProveedorByUser request = ((Proveedorendpoint) this.mEndpoint)
+                .getProveedorByUser(new Proveedor().setUsuario(this.mEmail));
+        return request;
     }
 
-    private Cuenta doRequestByAccountId() throws Exception {
-        return ((Cuentaendpoint) this.mEndpoint)
-                .getCuenta((long) this.mAccountId).execute();
-    }
-
-    @Override
-    protected void notifyResponseHandler(Object o) {
-        if(this.mReponseHandler != null){
-            ((GetAccountResponseHandler) this.mReponseHandler).onGetAccountResponse(
-                    o == null ? null : (Cuenta) o);
-        }
-    }
-
-    public interface GetAccountResponseHandler extends HomelikeResponseHandler {
-        public void onGetAccountResponse(Cuenta account);
+    private AbstractGoogleJsonClientRequest<Proveedor> getRequestByAccountId() throws Exception {
+        return ((Proveedorendpoint) this.mEndpoint)
+                .getProveedor((long) this.mAccountId);
     }
 
 }

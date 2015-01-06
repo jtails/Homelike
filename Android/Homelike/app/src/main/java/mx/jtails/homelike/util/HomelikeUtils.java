@@ -7,7 +7,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -15,19 +16,26 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Dispositivo;
+import mx.jtails.homelike.api.model.Dispositivop;
+import mx.jtails.homelike.api.model.Pedido;
+import mx.jtails.homelike.api.model.Proveedor;
 
 /**
  * Created by GrzegorzFeathers on 9/5/14.
  */
 public class HomelikeUtils {
+
+    private static final String TAG = HomelikeUtils.class.getSimpleName();
 
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 300;
 
@@ -52,8 +60,23 @@ public class HomelikeUtils {
         device.setStatus(1);
         device.setTipoDispositivo(isTablet(context) ? "Tablet" : "Handset");
 
-        String imei = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE))
-                .getDeviceId();
+        String imei = getDeviceId(context);
+        device.setImei(imei == null ? "000000000000000" : imei);
+
+        return device;
+    }
+
+    public static Dispositivop newProviderApiDeviceInstance(Context context, Proveedor provider){
+        Dispositivop device = new Dispositivop();
+
+        device.setProveedor(provider);
+        device.setEsDefault(1);
+        device.setGcmid(getGCMId(context));
+        device.setModelo(getModel());
+        device.setPlataforma(PLATFORM);
+        device.setTipoDispositivo(isTablet(context) ? "Tablet" : "Handset");
+
+        String imei = getDeviceId(context);
         device.setImei(imei == null ? "000000000000000" : imei);
 
         return device;
@@ -89,6 +112,7 @@ public class HomelikeUtils {
                     e.printStackTrace();
                 }
             }
+            Log.d(TAG, "GCM Id: " + regid);
             return  regid;
         }
         return "";
@@ -205,6 +229,22 @@ public class HomelikeUtils {
         }
 
         return deserializedSubtotal;
+    }
+
+    public static List<Pedido> getStatusFilteredOrders(List<Pedido> orders, int status){
+        if(status < 0){ return orders; }
+        List<Pedido> filteredOrders = new ArrayList<Pedido>();
+        for(Pedido o : orders){
+            if(o.getStatus() == status){
+                filteredOrders.add(o);
+            }
+        }
+        return filteredOrders;
+    }
+
+    public static String getDeviceId(Context ctx){
+        return Settings.Secure.getString(ctx.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
     }
 
 }

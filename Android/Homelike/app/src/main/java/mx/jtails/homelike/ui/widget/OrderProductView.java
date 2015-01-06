@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Producto;
 
 /**

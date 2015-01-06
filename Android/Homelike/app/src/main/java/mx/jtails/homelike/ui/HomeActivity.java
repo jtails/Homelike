@@ -16,10 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.HomelikeApplication;
-import mx.jtails.homelike.R;
 import mx.jtails.homelike.ui.fragment.HomeSectionsFragment;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.ui.fragment.OrderFragment;
+import mx.jtails.homelike.ui.fragment.ProviderOrderFragment;
+import mx.jtails.homelike.util.HomeLikeConfiguration;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 public class HomeActivity extends ActionBarActivity
@@ -27,7 +29,6 @@ public class HomeActivity extends ActionBarActivity
 
     private static final String TAG = HomeActivity.class.getSimpleName();
 
-    public static final HomeMenuSection DEFAULT_HOME_CONTENT = HomeMenuSection.SERVICES;
     public static final int DEFAULT_FRAGMENT_TRANSITION = FragmentTransaction.TRANSIT_FRAGMENT_FADE;
 
     private DrawerLayout mDrawerLayout;
@@ -43,13 +44,55 @@ public class HomeActivity extends ActionBarActivity
 
         this.setupActivity();
         this.clearStack();
-        this.pushToStack(this.DEFAULT_HOME_CONTENT.getFragmentClass(), null, -1, false);
+        this.pushToStack(HomeLikeConfiguration.getDefaultContent().getFragmentClass(), null, -1, false);
+        this.handleDeepLinking(this.getIntent(), false);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        this.handleDeepLinking(intent, true);
+    }
+
+    private void handleDeepLinking(Intent intent, boolean clearStack){
+        if( intent != null && intent.getAction() != null
+                && intent.getAction().equals(Intent.ACTION_VIEW)){
+            if(clearStack){
+                this.clearStack();
+            }
+            if(intent.getData() != null && intent.getData().getQueryParameter("orderId") != null){
+                if(intent.getData().getQueryParameter("op").equals("1")){
+                    this.pushToStack(ProviderOrderFragment.getInstance(
+                                    intent.getData().getQueryParameter("orderId")),
+                            ProviderOrderFragment.class.getName());
+                } else {
+                    this.pushToStack(OrderFragment.getInstance(
+                                    intent.getData().getQueryParameter("orderId")),
+                            OrderFragment.class.getName());
+                }
+            }
+        }
     }
 
     private void validateUserSignedIn(){
-        if(!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)
-                || !HomelikePreferences.containsPreference(HomelikePreferences.DEVICE_ID)){
-            this.goToSplash();
+        switch (HomeLikeConfiguration.getCurrentConfiguraiton()) {
+            case CLIENT:{
+                if(!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)
+                        || !HomelikePreferences.containsPreference(HomelikePreferences.DEVICE_ID)){
+                    this.goToSplash();
+                }
+                break;
+            }
+            case PROVIDER: {
+                if(!HomelikePreferences.containsPreference(HomelikePreferences.ACCOUNT_ID)){
+                    Log.d(TAG, "User not logged in");
+                    this.goToSplash();
+                    return;
+                } else  {
+                    Log.d(TAG, "User already logged in");
+                }
+                break;
+            }
         }
     }
 
@@ -107,10 +150,10 @@ public class HomeActivity extends ActionBarActivity
     }
 
     @Override
-    public void onHomeMenuOptionSelected(HomeMenuSection option) {
+    public void onHomeMenuOptionSelected(HomeLikeConfiguration.HomeMenuOption option) {
         this.mDrawerLayout.closeDrawer(GravityCompat.START);
 
-        if(option.equals(DEFAULT_HOME_CONTENT)){
+        if(option.equals(HomeLikeConfiguration.getDefaultContent())){
             this.clearStack();
         } else {
             this.replaceStack(option.getFragmentClass(), null);

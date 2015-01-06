@@ -1,9 +1,21 @@
 package mx.jtails.provider.homelike.ui.fragment;
 
-import android.support.v4.app.Fragment;
+import mx.jtails.provider.homelike.util.HomeMenuSection;
 
 /**
- * Created by GrzegorzFeathers on 11/18/14.
+ * Created by GrzegorzFeathers on 11/25/14.
  */
-public class NewOrdersFragment extends Fragment {
+public class NewOrdersFragment extends OrdersFragment {
+
+    private static final int STATUS_FILTER = 0;
+
+    @Override
+    protected int getStatusFilter() {
+        return STATUS_FILTER;
+    }
+
+    @Override
+    protected int getSubtitleRes() {
+        return HomeMenuSection.NEW_ORDERS.getSubtitleRes();
+    }
 }

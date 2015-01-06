@@ -19,7 +19,7 @@
 package mx.jtails.homelike.api.model;
 
 /**
- * Model definition for CollectionResponseCantidadPago.
+ * Model definition for CantidadPago.
  *
  * <p> This is the Java data model class that specifies how to parse/serialize into the JSON that is
  * transmitted over HTTP when working with the cantidadpagoendpoint. For a detailed explanation see:
@@ -35,52 +35,73 @@ public final class CollectionResponseCantidadPago extends com.google.api.client.
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.util.List<CantidadPago> items;
+  private java.lang.Integer cantidadNumero;
 
   /**
    * The value may be {@code null}.
    */
   @com.google.api.client.util.Key
-  private java.lang.String nextPageToken;
+  private java.lang.String cantidadTexto;
+
+  /**
+   * The value may be {@code null}.
+   */
+  @com.google.api.client.util.Key
+  private java.lang.Integer idCantidadPago;
 
   /**
    * @return value or {@code null} for none
    */
-  public java.util.List<CantidadPago> getItems() {
-    return items;
+  public java.lang.Integer getCantidadNumero() {
+    return cantidadNumero;
   }
 
   /**
-   * @param items items or {@code null} for none
+   * @param cantidadNumero cantidadNumero or {@code null} for none
    */
-  public CollectionResponseCantidadPago setItems(java.util.List<CantidadPago> items) {
-    this.items = items;
+  public CollectionResponseCantidadPago setCantidadNumero(java.lang.Integer cantidadNumero) {
+    this.cantidadNumero = cantidadNumero;
     return this;
   }
 
   /**
    * @return value or {@code null} for none
    */
-  public java.lang.String getNextPageToken() {
-    return nextPageToken;
+  public java.lang.String getCantidadTexto() {
+    return cantidadTexto;
   }
 
   /**
-   * @param nextPageToken nextPageToken or {@code null} for none
+   * @param cantidadTexto cantidadTexto or {@code null} for none
    */
-  public CollectionResponseCantidadPago setNextPageToken(java.lang.String nextPageToken) {
-    this.nextPageToken = nextPageToken;
+  public CollectionResponseCantidadPago setCantidadTexto(java.lang.String cantidadTexto) {
+    this.cantidadTexto = cantidadTexto;
+    return this;
+  }
+
+  /**
+   * @return value or {@code null} for none
+   */
+  public java.lang.Integer getIdCantidadPago() {
+    return idCantidadPago;
+  }
+
+  /**
+   * @param idCantidadPago idCantidadPago or {@code null} for none
+   */
+  public CollectionResponseCantidadPago setIdCantidadPago(java.lang.Integer idCantidadPago) {
+    this.idCantidadPago = idCantidadPago;
     return this;
   }
 
   @Override
-  public CollectionResponseCantidadPago set(String fieldName, Object value) {
-    return (CollectionResponseCantidadPago) super.set(fieldName, value);
+  public CantidadPago set(String fieldName, Object value) {
+    return (CantidadPago) super.set(fieldName, value);
   }
 
   @Override
-  public CollectionResponseCantidadPago clone() {
-    return (CollectionResponseCantidadPago) super.clone();
+  public CantidadPago clone() {
+    return (CantidadPago) super.clone();
   }
 
 }

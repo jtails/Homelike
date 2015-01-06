@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.jtails.homelike.api.endpoint.pedidoendpoint.Pedidoendpoint;
+import mx.jtails.homelike.api.model.Cuenta;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.api.model.PedidoCollection;
 
@@ -23,8 +24,8 @@ public class ListOrdersRequest extends HomelikeApiRequest {
 
     protected Object doRequest() throws Exception {
         Pedidoendpoint.ListPedidosByCuenta request =
-                ((Pedidoendpoint) this.mEndpoint).listPedidosByCuenta();
-        request.put("idCuenta", this.mAccountId);
+                ((Pedidoendpoint) this.mEndpoint).listPedidosByCuenta(
+                        new Cuenta().setIdCuenta(this.mAccountId));
         PedidoCollection pedidoCollection = request.execute();
         return pedidoCollection.getItems();
     }

@@ -13,14 +13,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.Direccion;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.model.provider.HomelikeDBManager;
 import mx.jtails.homelike.request.ListProvidersRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.ProvidersAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 
 /**
  * Created by GrzegorzFeathers on 9/10/14.
@@ -91,7 +91,7 @@ public class ProvidersFragment extends Fragment
         Bundle args = new Bundle();
         args.putString(SuggestionsFragment.EXTRA_DEFAULT_OPTION, "Solicitud de Proveedor");
         ((HomeActivity) this.getActivity()).replaceStack(
-                HomeMenuSection.SUGGESTIONS.getFragmentClass(), args);
+                HomeClientMenuOption.SUGGESTIONS.getFragmentClass(), args);
     }
 
     @Override

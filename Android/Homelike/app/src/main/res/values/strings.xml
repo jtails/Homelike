@@ -8,6 +8,9 @@
     <!-- Application -->
     <string name="action_logout">Logout</string>
     <string name="gratitue_message">Thanks for your help!</string>
+    <string name="client_config">I\'m a Client</string>
+    <string name="provider_config">I\'m a Provider</string>
+    <string name="kind_of_user_message">Select your kind of user</string>
 
     <!-- Home Menu -->
     <string name="home_services">Services</string>
@@ -15,6 +18,8 @@
     <string name="home_my_addresses">My Addresses</string>
     <string name="home_suggestions">Suggestions</string>
     <string name="home_contact">Contact</string>
+    <string name="home_new_orders">New Orders</string>
+    <string name="home_confirmed_orders">Confirmed Orders</string>
     <string name="no_username">No user name</string>
     <string name="comments_and_suggestions">Suggestions</string>
 
@@ -45,6 +50,8 @@
     <string name="error_suggestion_type_not_selected">A suggestion type</string>
     <string name="error_loading_options">Failed to load options</string>
     <string name="error_send_suggestion">Failed to send. Tray again later</string>
+    <string name="error_failed_sign_in_no_account">The account hasn\'t been registered yet. Please go to:\nhttp://homelike.com.mx</string>
+    <string name="error_failed_sign_in_account_in_process">The account is still in process of registration. Please go to:\nhttp://homelike.com.mx</string>
 
     <!-- Create Account -->
     <string name="register_account">Register Account</string>
@@ -82,6 +89,7 @@
     <string name="payment_quantity">Payment Quantity</string>
     <string name="comments">Comments</string>
     <string name="comments_hint">Comments to the provider, like payment quantity</string>
+    <string name="comments_to_client_hint">Enter a comment, like the delivery time</string>
     <string name="no_active_orders">You don\'t have any active orders</string>
     <string name="no_providers_found">No providers found in this area</string>
     <string name="phone_short">Phone</string>
@@ -91,6 +99,11 @@
     <string name="schedule_sat">Sat</string>
     <string name="schedule_sun">Sun</string>
     <string name="schedule_connector">to</string>
+    <string name="back">Back</string>
+    <string name="confirm_delivery">Confirm Delivery</string>
+    <string name="loading_new_order">Loading new order…</string>
+    <string name="loading_order">Loading order…</string>
+    <string name="delivery_address">Delivery address:</string>
 
     <!-- Address -->
     <string name="location">Location</string>
@@ -149,5 +162,11 @@
     <string name="country_hint">Mexico</string>
     <string name="reference_hint">Color,streets,etc.</string>
     <string name="finish">Finish</string>
+
+    <!--Notifications-->
+    <string name="new_order_received">New Order</string>
+    <string name="new_order_received_message">You\'ve received a new order</string>
+    <string name="confirmed_order_received">Order Confirmed</string>
+    <string name="confirmed_order_received_message">Your order has been confirmed</string>
 
 </resources>

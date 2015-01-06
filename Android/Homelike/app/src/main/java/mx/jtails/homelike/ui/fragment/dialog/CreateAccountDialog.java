@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 
 /**
  * Created by GrzegorzFeathers on 9/16/14.

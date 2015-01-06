@@ -10,16 +10,16 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
-import mx.jtails.homelike.R;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.android.homelike.R;
+import mx.jtails.homelike.util.HomeLikeConfiguration;
 
 /**
  * Created by GrzegorzFeathers on 9/18/14.
  */
-public class HomeMenuAdapter extends ArrayAdapter<HomeMenuSection> {
+public class HomeMenuAdapter extends ArrayAdapter<HomeLikeConfiguration.HomeMenuOption> {
 
     public HomeMenuAdapter(Context context) {
-        super(context, R.layout.list_item_home_section, HomeMenuSection.values());
+        super(context, R.layout.list_item_home_section, HomeLikeConfiguration.getMenuOptions());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class HomeMenuAdapter extends ArrayAdapter<HomeMenuSection> {
             holder = (ViewHolder) view.getTag();
         }
 
-        HomeMenuSection section = this.getItem(position);
+        HomeLikeConfiguration.HomeMenuOption section = this.getItem(position);
         holder.imgIcon.get().setImageResource(section.getIconRes());
         holder.lblTitle.get().setText(section.getSubtitleRes());
 
@@ -45,12 +45,12 @@ public class HomeMenuAdapter extends ArrayAdapter<HomeMenuSection> {
 
     @Override
     public int getCount() {
-        return HomeMenuSection.values().length;
+        return HomeLikeConfiguration.getMenuOptions().length;
     }
 
     @Override
-    public HomeMenuSection getItem(int position) {
-        return HomeMenuSection.values()[position];
+    public HomeLikeConfiguration.HomeMenuOption getItem(int position) {
+        return HomeLikeConfiguration.getMenuOptions()[position];
     }
 
     private class ViewHolder {

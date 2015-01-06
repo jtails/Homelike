@@ -21,7 +21,6 @@ public class HomelikePreferences {
     public static final String USER_NAME = "user_name";
     public static final String USER_IMG = "user_img";
     public static final String ACCOUNT_ID = "account_id";
-    public static final String DEVICE_ID = "device_id";
 
     //Temporal Order
     public static final String HAS_TEMP_ORDER = "has_temp_order";

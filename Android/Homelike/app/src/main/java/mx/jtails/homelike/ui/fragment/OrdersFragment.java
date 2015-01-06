@@ -16,13 +16,14 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
+import mx.jtails.homelike.HomelikeApplication;
 import mx.jtails.homelike.api.model.Pedido;
 import mx.jtails.homelike.request.HomelikeApiRequest;
 import mx.jtails.homelike.request.ListOrdersRequest;
 import mx.jtails.homelike.ui.HomeActivity;
 import mx.jtails.homelike.ui.adapter.OrdersAdapter;
-import mx.jtails.homelike.util.HomeMenuSection;
+import mx.jtails.homelike.util.HomeClientMenuOption;
 import mx.jtails.homelike.util.HomelikePreferences;
 
 /**
@@ -51,7 +52,7 @@ public class OrdersFragment extends Fragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ActionBar ab = ((ActionBarActivity) this.getActivity()).getSupportActionBar();
-        ab.setSubtitle(HomeMenuSection.ORDERS.getSubtitleRes());
+        ab.setSubtitle(HomeClientMenuOption.ORDERS.getSubtitleRes());
         ((ActionBarActivity) this.getActivity())
                 .setSupportProgressBarIndeterminateVisibility(false);
     }
@@ -90,6 +91,14 @@ public class OrdersFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        ((HomelikeApplication) this.getActivity().getApplication()).setNewOrderListener(
+                new HomelikeApplication.OnNewOrderReceivedListener() {
+                    @Override
+                    public void onNewOrderReceived() {
+                        displayContentMode(ContentDisplayMode.LOAD);
+                        mApiRequest.executeAsync();
+                    }
+                });
         this.mApiRequest = new ListOrdersRequest(this,
                 HomelikePreferences.loadInt(HomelikePreferences.ACCOUNT_ID, -1));
         this.mApiRequest.executeAsync();
@@ -98,6 +107,12 @@ public class OrdersFragment extends Fragment
         } else {
             this.displayContentMode(ContentDisplayMode.PARTIAL_LOAD);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((HomelikeApplication) this.getActivity().getApplication()).removeNewOrderListener();
     }
 
     @Override

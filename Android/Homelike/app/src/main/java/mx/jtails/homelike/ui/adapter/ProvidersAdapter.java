@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.List;
 
-import mx.jtails.homelike.R;
+import mx.jtails.android.homelike.R;
 import mx.jtails.homelike.api.model.HorariosProveedor;
 import mx.jtails.homelike.api.model.Proveedor;
 import mx.jtails.homelike.util.HomelikeUtils;

@@ -15,7 +15,9 @@ public class HomelikePreferences {
     public static final String REGISTRATION_ID = "registration_id";
     public static final String APP_VERSION = "app_version";
 
-    public static final String CURRENT_HOME_SECTION = "current_home_section";
+    public static final String APP_CONFIG = "app_configuration";
+
+    public static final String IS_PROVIDER = "is_provider";
 
     //User data
     public static final String USER_NAME = "user_name";
