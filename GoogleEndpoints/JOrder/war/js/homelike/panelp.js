@@ -20,4 +20,7 @@ $(document).ready(function(){
 	$("#menucomentarios").click(function(){
 		$("#contenido").load("fragments/comentariosp.jsp");
 	});
+	$("#menurepartidores").click(function(){
+		$("#contenido").load("fragments/repartidoresp.jsp");
+	});
 });

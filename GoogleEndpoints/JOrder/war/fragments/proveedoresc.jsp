@@ -12,7 +12,7 @@
 
 <style>
 #map-canvas {
-	height: 250px;
+	height: 500px;
 	margin: 0px;
 	padding: 0px
 }
@@ -62,9 +62,9 @@
 
 													<!-- Below class "scroll-chat" will add nice scroll bar. It uses Slim Scroll jQuery plugin. Check custom.js for the code -->
 													<div
-														style="position: relative; overflow: hidden; width: auto; height: 250px;"
+														style="position: relative; overflow: hidden; width: auto; height: 500px;"
 														class="slimScrollDiv">
-														<div style="overflow: hidden; width: auto; height: 250px;"
+														<div style="overflow: hidden; width: auto; height: 500px;"
 															class="padd scroll-chat">
 															<ul class="chats" id="proveedores">
 

@@ -36,7 +36,7 @@ function init() {
 	gapi.client.load('oauth2', 'v2', loadCallback);
 }
 
-google.appengine.homelike.comentarios.list = function(idProveedor,fechaHoraUltimoPedido){
+google.appengine.homelike.comentarios.list = function(idProveedor){
 	gapi.client.pedidoendpoint.getComentariosPedidosByProveedor({'idProveedor': idProveedor}).execute(
 	function(output){
 		output.items = output.items || [];
@@ -48,7 +48,8 @@ google.appengine.homelike.comentarios.list = function(idProveedor,fechaHoraUltim
 		}else{
 			for(var i=0;i<output.items.length;i++){
 				var pedido=output.items[i];
-				if(pedido[0]!=null && pedido[0]!='')
+				console.log(pedido);
+				if(pedido.comentarioEntregaCliente!=null && pedido.comentarioEntregaCliente!='')
 					addComment(pedido);
 			}
 			$.unblockUI();
@@ -64,13 +65,15 @@ function addComment(pedido){
 			"</div>"+
 			"<div class='chat-content'>"+
 				"<div class='chat-meta'>"+
-					"<span class='pull-right'>"+new Date(pedido[1]).toLocaleDateString()+" "+new Date(pedido[1]).toLocaleTimeString()+"</span>"+
-					"<span class='pull-left'>"+pedido[0]+"</span>"+
+					"<span class='pull-right'>"+new Date(pedido.fechaHoraEntrega).toLocaleDateString()+" "+new Date(pedido.fechaHoraEntrega).toLocaleTimeString()+"</span>"+
+					"<span class='pull-left'>"+pedido.comentarioEntregaCliente+"</span>"+
 				"</div>"+
+				"<div class='rateit' data-rateit-value='"+pedido.calificacion+"' data-rateit-resetable='false' data-rateit-readonly='true' data-rateit-step='1'></div>"+
 				"<div class='clearfix'></div>"+
 			"</div>"+
 		"</li>"
 	);
+	$(".rateit").rateit();
 }
 
 

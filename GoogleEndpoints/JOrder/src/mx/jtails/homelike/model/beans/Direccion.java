@@ -8,7 +8,6 @@ import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonBackRef
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 
 /**

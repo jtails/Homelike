@@ -41,7 +41,7 @@ public class ProductoEndpoint {
 	}
 
 	/**
-	 * Permite obtener los productos que ofrece un proveedor
+	 * Permite obtener los productos que ofrece un proveedor, siempre y cuando estos esten habilitados
 	 * @param proveedor
 	 * El proveedor con el ID, para obtener los productos
 	 * @param user
@@ -49,7 +49,7 @@ public class ProductoEndpoint {
 	 * @return
 	 * Retorna una lista de Productos
 	 */
-	@ApiMethod(name = "listProductosByProveedor",path="listProductosByProveedor")
+	@ApiMethod(name = "listProductosByProveedor",path="listProductosByProveedor",httpMethod="POST")
 	public List<Producto> listProductosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();
@@ -60,7 +60,17 @@ public class ProductoEndpoint {
 		//return null;
 	}
 	
-	@ApiMethod(name = "listAllProductosByProveedor",path="listAllProductosByProveedor")
+	
+	/**
+	 * Permite obtener los productos que ofrece un proveedor
+	 * @param proveedor
+	 * El proveedor con el ID, para obtener los productos
+	 * @param user
+	 * El usuario autenticado con Google
+	 * @return
+	 * Retorna una lista de Productos
+	 */
+	@ApiMethod(name = "listAllProductosByProveedor",path="listAllProductosByProveedor",httpMethod="POST")
 	public List<Producto> listAllProductosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProductoManager productoM=new ProductoManager();

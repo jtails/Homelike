@@ -9,7 +9,6 @@ import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 
 /**
@@ -91,13 +90,12 @@ public class Proveedor implements Serializable {
 	//-2 Usuario invalido
 	//0  Usuario Deshabiliado
 	//1  Usuario Habilitado
-	//@Transient
 	private int status;
 	@Transient
 	private int numPedidos;
 	@Transient
 	private int numClientes;
-	@Transient
+	
 	private int calificacion;
 	@Temporal(TemporalType.DATE)
 	@Transient 
@@ -113,10 +111,16 @@ public class Proveedor implements Serializable {
 		this.fechaHoraUltimoPedido = fechaHoraUltimoPedido;
 	}
 
+	
+	//bi-directional many-to-one association to Dispositivo
+	@OneToMany(mappedBy="proveedor",cascade = {CascadeType.PERSIST},fetch=FetchType.EAGER)
+	private List<Dispositivop> dispositivos;
+	
 	//bi-directional many-to-one association to Pedido
 	@JsonIgnore
-	//@OneToMany(mappedBy="proveedor",fetch=FetchType.LAZY)
-	@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="proveedor",fetch=FetchType.LAZY)
+	//@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
+	//@Size(min=1, max=10)
 	private List<Pedido> pedidos;
 	
 	@OneToMany(mappedBy="proveedor",fetch=FetchType.EAGER)
@@ -425,6 +429,29 @@ public class Proveedor implements Serializable {
 
 	public void setNumClientes(int numClientes) {
 		this.numClientes = numClientes;
+	}
+	
+	
+	public List<Dispositivop> getDispositivos() {
+		return this.dispositivos;
+	}
+
+	public void setDispositivos(List<Dispositivop> dispositivos) {
+		this.dispositivos = dispositivos;
+	}
+
+	public Dispositivop addDispositivo(Dispositivop dispositivo) {
+		getDispositivos().add(dispositivo);
+		dispositivo.setProveedor(this);
+
+		return dispositivo;
+	}
+
+	public Dispositivop removeDispositivo(Dispositivop dispositivo) {
+		getDispositivos().remove(dispositivo);
+		dispositivo.setProveedor(null);
+
+		return dispositivo;
 	}
 
 }

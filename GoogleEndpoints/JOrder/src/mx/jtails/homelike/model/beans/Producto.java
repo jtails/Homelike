@@ -7,8 +7,6 @@ import javax.persistence.*;
 import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonBackReference;
 import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
 
-import java.util.List;
-
 
 /**
  * The persistent class for the producto database table.

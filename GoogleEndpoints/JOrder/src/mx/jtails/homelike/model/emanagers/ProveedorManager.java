@@ -120,16 +120,6 @@ public class ProveedorManager {
 			List<Proveedor> proveedores=(List<Proveedor>) query.getResultList();
 			if(proveedores!=null && proveedores.size()>0){
 				proveedor = proveedores.get(0);
-				if(proveedor!=null){
-					for(Pedido pedido:proveedor.getPedidos()){
-						if(pedido.getStatus()==2){//Pedido terminado
-							proveedor.setNumPedidos(proveedor.getNumPedidos()+1);
-							proveedor.setCalificacion(proveedor.getCalificacion()+pedido.getCalificacion());
-						}
-					}
-					if(proveedor.getNumPedidos()>0)
-						proveedor.setCalificacion(proveedor.getCalificacion()/proveedor.getNumPedidos());
-				}
 			}
 		} finally {
 			mgr.close();

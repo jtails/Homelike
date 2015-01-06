@@ -1,6 +1,8 @@
 package mx.jtails.homelike.model.endpoints;
 
+import mx.jtails.homelike.model.beans.Dispositivop;
 import mx.jtails.homelike.model.beans.Pedido;
+import mx.jtails.homelike.model.beans.Producto;
 import mx.jtails.homelike.model.beans.Proveedor;
 import mx.jtails.homelike.model.beans.Servicio;
 import mx.jtails.homelike.model.emanagers.ServicioManager;
@@ -14,6 +16,7 @@ import com.google.appengine.api.oauth.OAuthRequestException;
 import com.google.appengine.api.users.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -47,18 +50,25 @@ public class ProveedorEndpoint {
 			ProveedorManager proveedorM=new ProveedorManager();
 			List<Proveedor> proveedores=proveedorM.getProveedoresinRagne(latitud, longitud,idServicio);
 			logger.warning("Proveedores encontrados: "+proveedores.size());
-			//Generamos la calificacion
+			
 			for(Proveedor proveedor:proveedores){
-				for(Pedido pedido:proveedor.getPedidos()){
-					if(pedido.getStatus()==2){//Pedido terminado
-						proveedor.setNumPedidos(proveedor.getNumPedidos()+1);
-						proveedor.setCalificacion(proveedor.getCalificacion()+pedido.getCalificacion());
-					}
-				}
-				if(proveedor.getNumPedidos()>0)
-					proveedor.setCalificacion(proveedor.getCalificacion()/proveedor.getNumPedidos());
 				//Limpiamos los campos que no deben ser mostrados
 				proveedor.setUsuario("");
+				
+				logger.warning("Proveedor: "+proveedor.getIdProveedor()+" User :"+user);
+				
+				//Eliminamos los productos que no deben ser mostrados - Productos inactivos
+				List<Producto> productose=new ArrayList<Producto>();//Implementado por ConcurrentModificationException, al iterar y eliminar
+				logger.warning("Productos antes de excluir: "+(proveedor.getProductos()!=null?proveedor.getProductos().size():"null ,")+" User :"+user);
+				for(Producto producto:proveedor.getProductos()){
+					logger.warning("Producto Id: "+producto.getIdProducto()+" ,status: "+producto.getStatus()+" User :"+user);
+					if(producto.getStatus()==0){//Copiar producto a la nueva lista
+						logger.warning("Producto copiado Id: "+producto.getIdProducto()+" User :"+user);
+						productose.add(producto);
+					}
+				}
+				proveedor.setProductos(productose);
+				logger.warning("Productos despues de excluir : "+(productose!=null?productose.size():"null ,")+" User :"+user);
 			}
 			return proveedores;
 		//}
@@ -76,18 +86,10 @@ public class ProveedorEndpoint {
 	 * Retorna un objeto Proveedor persistido
 	 */
 	@ApiMethod(name = "getProveedor")
-	public Proveedor getProveedor(@Named("id") Long id,User user)throws OAuthRequestException, IOException  {
+	public Proveedor getProveedor(@Named("id") Long id/*,User user*/)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
 			Proveedor proveedor=proveedorM.getProveedor(id);
-			for(Pedido pedido:proveedor.getPedidos()){
-				if(pedido.getStatus()==2){//Pedido terminado
-					proveedor.setNumPedidos(proveedor.getNumPedidos()+1);
-					proveedor.setCalificacion(proveedor.getCalificacion()+pedido.getCalificacion());
-				}
-			}
-			if(proveedor.getNumPedidos()>0)
-				proveedor.setCalificacion(proveedor.getCalificacion()/proveedor.getNumPedidos());
 			return proveedor;
 		//}
 		//return null;
@@ -128,7 +130,7 @@ public class ProveedorEndpoint {
 	 * Retorna el objeto proveedor persistido,este contiene el ID del proveedor generado,en caso de un error regresara un Status -1
 	 */
 	@ApiMethod(name = "insertProveedor")
-	public Proveedor insertProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
+	public Proveedor insertProveedor(Proveedor proveedor/*,User user*/)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
 			ServicioManager servicioM=new ServicioManager();
@@ -137,7 +139,7 @@ public class ProveedorEndpoint {
 			//La primer clausula del if es la condicion que cubre el caso del update del proveedor
 			if(proveedor.getIdProveedor()==0 && proveedorM.getProveedorByUser(proveedor)!=null){
 				proveedor.setStatus(-1);//-1 Nombre de Usuario existente
-				logger.warning("Proveedor existente,regresando error : "+user);
+				logger.warning("Proveedor existente,regresando error : "/*+user*/);
 				return proveedor;
 			}
 		
@@ -145,7 +147,7 @@ public class ProveedorEndpoint {
 			Servicio servicio=servicioM.getServicio(Long.valueOf(proveedor.getServicio().getIdServicio()));
 			proveedor.setServicio(servicio);
 			if(proveedor.getIdProveedor()==0){
-				logger.warning("Nueva proveedor : "+user);
+				logger.warning("Nueva proveedor : "/*+user*/);
 				proveedor.setStatus(0);//Proveedor Deshabilitado, hasta su confirmación
 				return proveedorM.insertProveedor(proveedor);
 			}
@@ -181,12 +183,54 @@ public class ProveedorEndpoint {
 					pproveedor.setSwlongitud(proveedor.getSwlongitud());
 					pproveedor.setTelefono(proveedor.getTelefono());
 					pproveedor.setUsuario(proveedor.getUsuario());
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				logger.warning("Actualizacion de proveedor : "+user);
+				logger.warning("Actualizacion de proveedor : "/*+user*/);
 				return proveedorM.updateProveedor(pproveedor);
 			}
+		//}
+		//return null;
+	}
+	
+	
+	/**
+	 * Persiste el objeto dispositivo,si el dispositivo ya esta persistido realiza una operacion update,
+	 * es necesario que previo a la generación del dispositivo el proveedor exista
+	 * @param dispositivo
+	 * El dispositivo a ser agregado o actualizado
+	 * @param user
+	 * El usuario autenticado con Google
+	 * @return
+	 * Retorna el objeto dispositivo persistido,este contiene el ID del dispositivo generado
+	 */
+	@ApiMethod(name = "insertDispositivo")
+	public Dispositivop insertDispositivop(Dispositivop dispositivo /*,User user*/)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			//Obtenemos referencia al objeto proveedor persistido
+			ProveedorManager proveedorM=new ProveedorManager();
+			Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(dispositivo.getProveedor().getIdProveedor()));
+			if(pproveedor.getDispositivos()!=null && pproveedor.getDispositivos().size()>0){
+				//Actualizamos el dispositivo del proveedor
+				Dispositivop pdispositivo=pproveedor.getDispositivos().get(0);
+				pdispositivo.setEsDefault(dispositivo.getEsDefault());
+				pdispositivo.setGcmid(dispositivo.getGcmid());
+				pdispositivo.setImei(dispositivo.getImei());
+				pdispositivo.setModelo(dispositivo.getModelo());
+				pdispositivo.setPlataforma(dispositivo.getPlataforma());
+				pdispositivo.setTipoDispositivo(dispositivo.getTipoDispositivo());
+				logger.warning("Actualizacion de dispositivo : IdDispositivo "+pdispositivo.getIdDispositivo()+" : "/*+user*/);
+			}else{
+				//Generamos un dispositivo para el proveedor
+				List<Dispositivop> dispositivos=new ArrayList<Dispositivop>();
+				//Establecemos el proveedor persistido para el dispositivo
+				dispositivo.setProveedor(pproveedor);
+				dispositivos.add(dispositivo);
+				pproveedor.setDispositivos(dispositivos);
+				logger.warning("Nuevo dispositivo"/*+user*/);
+			}
+			return proveedorM.updateProveedor(pproveedor).getDispositivos().get(0);
 		//}
 		//return null;
 	}
