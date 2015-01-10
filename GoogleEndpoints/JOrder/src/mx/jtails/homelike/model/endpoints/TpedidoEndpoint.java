@@ -21,7 +21,7 @@ clientIds = {Constants.WEB_CLIENT_ID,Constants.ANDROID_CLIENT_ID}
 )
 public class TpedidoEndpoint {
 
-	@ApiMethod(name = "listTpedidosByCuenta",path="listTpedidosByCuenta")
+	@ApiMethod(name = "listTpedidosByCuenta",path="listTpedidosByCuenta",httpMethod="POST")
 	public List<Tpedido> listTpedidosByCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			TpedidoManager tpedidoM=new TpedidoManager();

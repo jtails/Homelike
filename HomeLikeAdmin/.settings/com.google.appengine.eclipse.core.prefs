@@ -2,3 +2,4 @@ eclipse.preferences.version=1
 gaeDoJarClasses=false
 gaeEnableJarSplitting=true
 gaeRetainStagingDirectory=false
+ormEnhancementInclusions=src/|src/mx/jtails/homelike/model/beans/Admin.java|src/mx/jtails/homelike/model/beans/CProducto.java|src/mx/jtails/homelike/model/beans/HorariosProveedor.java|src/mx/jtails/homelike/model/beans/Producto.java|src/mx/jtails/homelike/model/beans/Proveedor.java|src/mx/jtails/homelike/model/beans/Servicio.java|src/mx/jtails/homelike/model/beans/Cuenta.java|src/mx/jtails/homelike/model/beans/DetallePedido.java|src/mx/jtails/homelike/model/beans/Direccion.java|src/mx/jtails/homelike/model/beans/Pedido.java

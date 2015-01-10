@@ -3,6 +3,7 @@ package mx.jtails.homelike.model.beans;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -67,6 +68,7 @@ public class Cuenta implements Serializable {
 	//bi-directional many-to-one association to Pedido
 	@JsonIgnore
 	@OneToMany(mappedBy="cuenta",cascade = {CascadeType.PERSIST},fetch=FetchType.LAZY)
+	@Size(min=1, max=10)
 	private List<Pedido> pedidos;
 
 

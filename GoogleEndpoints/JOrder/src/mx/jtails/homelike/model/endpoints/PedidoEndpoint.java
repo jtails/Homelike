@@ -5,6 +5,7 @@ import mx.jtails.homelike.model.beans.Cuenta;
 import mx.jtails.homelike.model.beans.DetallePedido;
 import mx.jtails.homelike.model.beans.Direccion;
 import mx.jtails.homelike.model.beans.Dispositivo;
+import mx.jtails.homelike.model.beans.Dispositivop;
 import mx.jtails.homelike.model.beans.Grafico;
 import mx.jtails.homelike.model.beans.Pedido;
 import mx.jtails.homelike.model.beans.Producto;
@@ -16,6 +17,8 @@ import mx.jtails.homelike.model.emanagers.DispositivoManager;
 import mx.jtails.homelike.model.emanagers.PedidoManager;
 import mx.jtails.homelike.model.emanagers.ProductoManager;
 import mx.jtails.homelike.model.emanagers.ProveedorManager;
+import mx.jtails.homelike.model.gcm.SendMessage;
+import mx.jtails.homelike.model.gcm.Message;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -51,7 +54,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna una lista de Pedidos con Status diferente a 2
 	 */
-	@ApiMethod(name = "listPedidosByCuenta",path="listPedidosByCuenta")
+	@ApiMethod(name = "listPedidosByCuenta",path="listPedidosByCuenta",httpMethod="POST")
 	public List<Pedido> listPedidosByCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -69,7 +72,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna una lista de Pedidos con Status 2
 	 */
-	@ApiMethod(name = "listHistoricoPedidosByCuenta",path="listHistoricoPedidosByCuenta")
+	@ApiMethod(name = "listHistoricoPedidosByCuenta",path="listHistoricoPedidosByCuenta",httpMethod="POST")
 	public List<Pedido> listHistoricoPedidosByCuenta(Cuenta cuenta,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -87,7 +90,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna una lista de Pedidos con Status diferente a 2
 	 */
-	@ApiMethod(name = "listPedidosByProveedor",path="listPedidosByProveedor")
+	@ApiMethod(name = "listPedidosByProveedor",path="listPedidosByProveedor",httpMethod="POST")
 	public List<Pedido> listPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -105,7 +108,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna una lista de Pedidos con Status 2
 	 */
-	@ApiMethod(name = "listHistoricoPedidosByProveedor",path="listHistoricoPedidosByProveedor")
+	@ApiMethod(name = "listHistoricoPedidosByProveedor",path="listHistoricoPedidosByProveedor",httpMethod="POST")
 	public List<Pedido> listHistoricoPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -169,7 +172,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna un objeto Proveedor con el campo numPedidos conteniendo el total de pedidos de un proveedor
 	 */
-	@ApiMethod(name = "countTotalPedidosByProveedor",path="countTotalPedidosByProveedor")
+	@ApiMethod(name = "countTotalPedidosByProveedor",path="countTotalPedidosByProveedor",httpMethod="POST")
 	public Proveedor countTotalPedidosByProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -187,7 +190,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna un objeto List de Graficos con los valores del numero de pedidos con Status 2(Pedidos terminados) y fecha de los ultimos 10 dias
 	 */
-	@ApiMethod(name = "getHistoricoPedidosByDayProveedor",path="getHistoricoPedidosByDayProveedor")
+	@ApiMethod(name = "getHistoricoPedidosByDayProveedor",path="getHistoricoPedidosByDayProveedor",httpMethod="POST")
 	public List<Grafico> getHistoricoPedidosByDayProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -216,7 +219,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna un objeto List de Graficos con los valores del numero de pedidos con Status 2(Pedidos terminados) y fecha de los ultimos 10 meses
 	 */
-	@ApiMethod(name = "getHistoricoPedidosByMesProveedor",path="getHistoricoPedidosByMesProveedor")
+	@ApiMethod(name = "getHistoricoPedidosByMesProveedor",path="getHistoricoPedidosByMesProveedor",httpMethod="POST")
 	public List<Grafico> getHistoricoPedidosByMesProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -250,7 +253,7 @@ public class PedidoEndpoint {
 	 * @return
 	 * Retorna un objeto List de Graficos con los valores de las ganancias de pedidos con Status 2(Pedidos terminados) y fecha de los ultimos 10 meses
 	 */
-	@ApiMethod(name = "getHistoricoGananciaByMesProveedor",path="getHistoricoGananciaByMesProveedor")
+	@ApiMethod(name = "getHistoricoGananciaByMesProveedor",path="getHistoricoGananciaByMesProveedor",httpMethod="POST")
 	public List<Grafico> getHistoricoGananciaByMesProveedor(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			PedidoManager pedidoM=new PedidoManager();
@@ -324,7 +327,7 @@ public class PedidoEndpoint {
 					pdispositivo=dispositivoM.getDispositivo(Long.valueOf(pedido.getDispositivo().getIdDispositivo()));
 				Direccion pdireccion=direccionM.getDireccion(Long.valueOf(pedido.getDireccion().getIdDireccion()));
 				CantidadPago pcantidad=cantidadM.getCantidadPago(Long.valueOf(pedido.getCantidadPago().getIdCantidadPago()));
-		
+				
 				//Actualizamos el objeto pedido con los Objetos Persistidos
 				pedido.setProveedor(pproveedor);
 				pedido.setCuenta(pcuenta);
@@ -338,7 +341,35 @@ public class PedidoEndpoint {
 					dpedido.setProducto(pproducto);
 				}
 				logger.warning("Pedido nuevo : "+user+" "+pedido.getComentarioCliente());
-				return pedidoM.insertPedido(pedido);
+				Pedido ppedido=pedidoM.insertPedido(pedido);
+				
+				//Enviamos la notificacion al proveedor
+				SendMessage sendM=new SendMessage();
+				List<String> devices=new ArrayList<String>();
+				List<Dispositivop> dispositivos=ppedido.getProveedor().getDispositivos();
+				if(dispositivos!=null && dispositivos.size()>0){//Si el proveedor cuenta con dispositivo, enviamos la notificacion
+					String gcmId=dispositivos.get(0).getGcmid();
+					devices.add(gcmId);
+					//Mensaje Demo a Ramses Bernaldez
+					devices.add("APA91bFlShuxFLHbkIfx9EacZI4rk-XKxebYxb0fICALTf8_4yYsAszgP4_JxtrFnkde0RvmBXcrCngarKnE48G0ziiIN8eOOLqEGxg1CdfzR-a30_WlxJTaoxQhXNIpZtEh8QIPJtkf1s-gCfoR1_IgQmlRw1J7e0rMfIvLm9C3vAKw8VIYRu0");
+					logger.warning("Notificacion de pedido nuevo: gcmId["+gcmId+"] enviada hacie el proveedor,"+user);
+				
+					Message message = new Message.Builder()
+						.collapseKey("collapseKey")
+						.timeToLive(3600)
+						.delayWhileIdle(true)
+						.dryRun(false)
+						.restrictedPackageName("mx.jtails.android.homelike")
+						.addData("Action", "Np")//Nuevo Pedido
+						.addData("Op","1")//Notificacion a Proveedor
+						.addData("idPedido",String.valueOf(ppedido.getIdPedido()))
+						.build();
+					sendM.sendSingle(devices, message);
+				}else{
+					logger.warning("El proveedor no cuenta con un dispositivo asociado,"+user);
+				}
+				//
+				return ppedido;
 			}else{
 				Pedido ppedido=pedidoM.getPedido(Long.valueOf(pedido.getIdPedido()));
 				ppedido.setStatus(pedido.getStatus());
@@ -347,10 +378,45 @@ public class PedidoEndpoint {
 					ppedido.setComentarioProveedor(pedido.getComentarioProveedor());
 					ppedido.setFechaHoraAceptacion(calendar.getTime());
 					logger.warning("Pedido aceptado proveedor: "+user+" "+pedido.getComentarioEntregaProveedor());
+					
+					//Enviamos la notificacion al cliente
+					SendMessage sendM=new SendMessage();
+					List<String> devices=new ArrayList<String>();
+					List<Dispositivo> dispositivos=ppedido.getCuenta().getDispositivos();
+					if(dispositivos!=null && dispositivos.size()>0){//Si la cuenta tiene dispositivo, enviamos la notificacion
+						String gcmId=dispositivos.get(0).getGcmid();
+						devices.add(gcmId);
+						//Mensaje Demo a Ramses Bernaldez
+						devices.add("APA91bFlShuxFLHbkIfx9EacZI4rk-XKxebYxb0fICALTf8_4yYsAszgP4_JxtrFnkde0RvmBXcrCngarKnE48G0ziiIN8eOOLqEGxg1CdfzR-a30_WlxJTaoxQhXNIpZtEh8QIPJtkf1s-gCfoR1_IgQmlRw1J7e0rMfIvLm9C3vAKw8VIYRu0");
+						logger.warning("Notificacion de aceptacion de pedido: gcmId["+gcmId+"] enviada hacia el cliente,"+user);
+					
+						Message message = new Message.Builder()
+							.collapseKey("collapseKey")
+							.timeToLive(3600)
+							.delayWhileIdle(true)
+							.dryRun(false)
+							.restrictedPackageName("mx.jtails.android.homelike")
+							.addData("Action", "Ap")//Pedido Aceptado Proveedor
+							.addData("Op","2")//Notificacion a Cliente
+							.addData("idPedido",String.valueOf(ppedido.getIdPedido()))
+							.build();
+						sendM.sendSingle(devices, message);
+					}else{
+						logger.warning("La cuenta no tiene un dispositivo asociado,"+user);
+					}
+					//
 				}
 				if(pedido.getStatus()==2){
 					ppedido.setComentarioEntregaCliente(pedido.getComentarioEntregaCliente());
 					ppedido.setCalificacion(pedido.getCalificacion());
+					
+					//Actualizamos la calificacion del proveedor
+					int calificacionp=ppedido.getProveedor().getCalificacion();
+					logger.warning("Calificacion anterior Proveedor :"+calificacionp);
+					calificacionp=Math.round((calificacionp+ppedido.getCalificacion())/2);
+					logger.warning("Calificacion actual Proveedor :"+calificacionp);
+					ppedido.getProveedor().setCalificacion(calificacionp);
+					
 					ppedido.setFechaHoraEntrega(calendar.getTime());
 					logger.warning("Pedido entregado cliente: "+user+" "+pedido.getComentarioEntregaCliente());
 				}

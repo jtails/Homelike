@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.ibm.icu.util.TimeZone;
+//import com.ibm.icu.util.TimeZone;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,8 +21,8 @@ public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	public Pedido(){
-		java.util.TimeZone tz=java.util.TimeZone.getTimeZone("America/Mexico_City");
-		Calendar calendar=Calendar.getInstance(tz);
+		//java.util.TimeZone tz=java.util.TimeZone.getTimeZone("America/Mexico_City");
+		Calendar calendar=Calendar.getInstance();
 		fechaHoraPedido=calendar.getTime();
 	}
 

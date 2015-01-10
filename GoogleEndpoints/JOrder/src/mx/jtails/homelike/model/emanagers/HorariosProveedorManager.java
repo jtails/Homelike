@@ -3,7 +3,6 @@ package mx.jtails.homelike.model.emanagers;
 import mx.jtails.homelike.model.beans.HorariosProveedor;
 
 import java.util.List;
-
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.EntityManager;

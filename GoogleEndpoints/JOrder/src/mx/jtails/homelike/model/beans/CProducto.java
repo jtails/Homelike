@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonBackReference;
 
-import java.util.List;
-
 
 /**
  * The persistent class for the c_producto database table.

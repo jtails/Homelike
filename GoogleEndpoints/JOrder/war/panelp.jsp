@@ -111,13 +111,8 @@
 				<li class="has_sub"><a href="#" id="menuhorarios"><i
 						class="fa fa-clock-o"></i> Mis horarios</a>
 				</li>
-				<li class="has_sub"><a href="#"><i class="fa fa-truck"></i>
-						Repartidores<span class="pull-right"><i
-							class="fa fa-chevron-right"></i></span></a>
-					<ul>
-						<li><a id='menunrepartidos' href='#'>Nuevo repartidor</a></li>
-						<li><a id='menucrepartidos' href='#'>Consultar repartidores</a></li>
-					</ul>
+				<li class="has_sub"><a href="#" id="menurepartidores"><i
+						class="fa fa-truck"></i> Repartidores</a>
 				</li>
 				<li class="has_sub"><a href="#" id="menuestadisticas"><i 
 						class="fa fa-bar-chart-o"></i>Estadisticas</a>

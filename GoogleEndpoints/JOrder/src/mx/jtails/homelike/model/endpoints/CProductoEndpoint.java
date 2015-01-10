@@ -38,7 +38,7 @@ public class CProductoEndpoint {
 		//return null;
 	}
 	
-	@ApiMethod(name = "listCProductoByServicio",path="listCProductoByServicio")
+	@ApiMethod(name = "listCProductoByServicio",path="listCProductoByServicio",httpMethod="POST")
 	public List<CProducto> listCProductoByServicio(Servicio servicio,User user)throws OAuthRequestException, IOException  {
 		//if (user!=null){
 			CProductoManager cproductoM=new CProductoManager();
