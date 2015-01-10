@@ -90,8 +90,10 @@ public class AddressDetailsFragment extends Fragment
 
         this.mEditAlias.setText(this.mAddress.getAlias());
         this.mEditStreet.setText(this.mAddress.getCalle());
-        this.mEditStreetNumber.setText(this.mAddress.getNexterior());
-        this.mEditInterior.setText(this.mAddress.getNinterior());
+        if(mEditMode){
+            this.mEditStreetNumber.setText(this.mAddress.getNexterior());
+            this.mEditInterior.setText(this.mAddress.getNinterior());
+        }
         this.mEditColony.setText(this.mAddress.getColonia());
         this.mEditZipCode.setText(this.mAddress.getCp());
         this.mEditCity.setText(this.mAddress.getDelegacion());

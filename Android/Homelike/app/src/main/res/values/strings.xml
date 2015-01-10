@@ -104,6 +104,9 @@
     <string name="loading_new_order">Loading new order…</string>
     <string name="loading_order">Loading order…</string>
     <string name="delivery_address">Delivery address:</string>
+    <string name="loading_services">[ Loading services ]</string>
+    <string name="loading_orders">[ Cargando pedidos ]</string>
+    <string name="loading_suggestions">[ Loading suggestions ]</string>
 
     <!-- Address -->
     <string name="location">Location</string>
@@ -151,10 +154,10 @@
     <string name="improve_experience">Thanks to your suggestions we can improve your experience!</string>
 
     <!--Address-->
-    <string name="alias_hint">Home,Work,etc.</string>
+    <string name="alias_hint">Home, Work</string>
     <string name="street_hint">Av. Insurgentes</string>
     <string name="street_number_hint">Street Number</string>
-    <string name="interior_hint">(Optional)</string>
+    <string name="interior_hint">Building 5, Apt. 10</string>
     <string name="colony_hint">Roma Sur</string>
     <string name="zip_code_hint">55555</string>
     <string name="city_hint">Cuauhtémoc</string>

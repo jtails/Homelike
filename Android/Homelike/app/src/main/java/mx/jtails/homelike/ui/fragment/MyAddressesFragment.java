@@ -135,8 +135,9 @@ public class MyAddressesFragment extends Fragment
     }
 
     private void startEdit(Direccion address){
-        ((HomeActivity) this.getActivity()).pushToStack(
-                AddressDetailsFragment.newInstance(address, true),
+        AddressDetailsFragment fragment = AddressDetailsFragment.newInstance(address, true);
+        fragment.setEditMode();
+        ((HomeActivity) this.getActivity()).pushToStack(fragment,
                 AddressDetailsFragment.class.getName());
     }
 
