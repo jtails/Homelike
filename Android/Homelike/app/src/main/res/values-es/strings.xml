@@ -106,7 +106,7 @@
     <string name="loading_order">Cargando pedido…</string>
     <string name="delivery_address">Dirección de envío:</string>
     <string name="loading_services">[ Cargando servicios ]</string>
-    <string name="loading_orders">[ Loading orders ]</string>
+    <string name="loading_orders">[ Cargando pedidos ]</string>
     <string name="loading_suggestions">[ Cargando catálogo ]</string>
 
     <!-- Address -->
