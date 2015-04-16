@@ -13,6 +13,7 @@
     	<class>mx.jtails.homelike.model.beans.DetallePedido</class>
     	<class>mx.jtails.homelike.model.beans.Direccion</class>
 		<class>mx.jtails.homelike.model.beans.Pedido</class>
+		<class>mx.jtails.homelike.model.beans.Corte</class>
 		
 		<properties>
         	<property name="datanucleus.storeManagerType" value="rdbms"/>
