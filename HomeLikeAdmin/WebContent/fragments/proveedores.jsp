@@ -94,6 +94,12 @@
 														aria-label="CSS grade: activate to sort column ascending"
 														style="width: 110px;" colspan="1" rowspan="1"
 														aria-controls="data-table" tabindex="0"
+														role="columnheader" class="sorting">Pagos
+													</th>
+													<th
+														aria-label="CSS grade: activate to sort column ascending"
+														style="width: 110px;" colspan="1" rowspan="1"
+														aria-controls="data-table" tabindex="0"
 														role="columnheader" class="sorting">Status
 													</th>
 												</tr>

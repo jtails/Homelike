@@ -115,7 +115,7 @@ public class ProveedorManager {
 			if (!containsProveedor(proveedor)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.persist(proveedor);
+			mgr.merge(proveedor);
 		} finally {
 			mgr.close();
 		}

@@ -147,7 +147,7 @@ public class ProveedorEndpoint {
 			Servicio servicio=servicioM.getServicio(Long.valueOf(proveedor.getServicio().getIdServicio()));
 			proveedor.setServicio(servicio);
 			if(proveedor.getIdProveedor()==0){
-				logger.warning("Nueva proveedor : "/*+user*/);
+				logger.warning("Nuevo proveedor : "/*+user*/+"Calificacion:"+proveedor.getCalificacion());
 				proveedor.setStatus(0);//Proveedor Deshabilitado, hasta su confirmación
 				return proveedorM.insertProveedor(proveedor);
 			}
@@ -193,7 +193,6 @@ public class ProveedorEndpoint {
 		//}
 		//return null;
 	}
-	
 	
 	/**
 	 * Persiste el objeto dispositivo,si el dispositivo ya esta persistido realiza una operacion update,

@@ -95,7 +95,7 @@ public class Proveedor implements Serializable {
 	private int numPedidos;
 	@Transient
 	private int numClientes;
-	@Transient
+	
 	private int calificacion;
 	@Temporal(TemporalType.DATE)
 	@Transient 

@@ -40,7 +40,7 @@ public class ProveedorAdminEndpoint {
 			ProveedorManager proveedorM=new ProveedorManager();
 			CollectionResponse<Proveedor> proveedores=proveedorM.listProveedor(null,null);
 			logger.warning("Proveedores: "+proveedores.getItems().size()+" User :"+user);
-			for(Proveedor proveedor:proveedores.getItems()){
+			/*for(Proveedor proveedor:proveedores.getItems()){
 				//Generamos la calificacion
 				for(Pedido pedido:proveedor.getPedidos()){
 					if(pedido.getStatus()==2){//Pedido terminado
@@ -50,8 +50,35 @@ public class ProveedorAdminEndpoint {
 				}
 				if(proveedor.getNumPedidos()>0)
 					proveedor.setCalificacion(proveedor.getCalificacion()/proveedor.getNumPedidos());
-			}
+			}*/
 			return proveedores;
+		}else{
+			logger.warning("Usuario no autorizado");
+			return null;	
+		}
+	}
+	
+	
+	/**
+	 * Actualiza el objeto proveedor, modificando el status
+	 * @param proveedor
+	 * El proveedor a ser actualizado
+	 * @param user
+	 * El usuario autenticado con Google
+	 * @return
+	 * Retorna el objeto proveedor persistido
+	 */
+	//0  Usuario Deshabiliado
+	//1  Usuario Habilitado
+	@ApiMethod(name = "updateStatus",path="updateStatus",httpMethod="POST")
+	public Proveedor updateStatus(Proveedor proveedor,User user)throws OAuthRequestException, IOException  {
+		if(user!=null){
+			ProveedorManager proveedorM=new ProveedorManager();
+			//Obtenemos referencia al objeto persistido 
+			Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(proveedor.getIdProveedor()));
+			pproveedor.setStatus(proveedor.getStatus());
+			logger.warning("User :"+user+", status :"+pproveedor.getStatus());
+			return proveedorM.updateProveedor(pproveedor);
 		}else{
 			logger.warning("Usuario no autorizado");
 			return null;	

@@ -92,7 +92,7 @@
                                           <div class="form-group">
                                             <label class="control-label col-lg-3" for="name">Correo</label>
                                             <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="usuario" name="usuario" value="${sessionScope.proveedor.usuario}">
+                                              <input type="text" class="form-control" id="usuario" name="usuario" value="${sessionScope.proveedor.usuario}" readonly>
                                             </div>
                                           </div>
                                           <!-- Select box -->

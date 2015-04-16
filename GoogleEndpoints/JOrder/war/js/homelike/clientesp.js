@@ -83,8 +83,9 @@
 		if(numPedidos>0)
 			icono='http://google.com/mapfiles/ms/micons/man.png';
 		else
-			icono='http://google.com/mapfiles/ms/micons/man.shadow.png';
+			icono='http://maps.google.com/mapfiles/kml/pal3/icon45.png';
 		var myLatlng = new google.maps.LatLng(lat,lng);
+		alias=numPedidos+' Pedido[s]';
 		var marker = new google.maps.Marker({
     		position: myLatlng,
     		map: map,
