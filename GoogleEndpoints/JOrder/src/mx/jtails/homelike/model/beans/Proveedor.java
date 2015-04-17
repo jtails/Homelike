@@ -23,6 +23,7 @@ public class Proveedor implements Serializable {
 	public Proveedor(){
 		Calendar calendar=Calendar.getInstance();
 		fechaHoraCreacion=calendar.getTime();
+		calificacion=5;
 	}
 
 	@Id

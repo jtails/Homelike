@@ -280,7 +280,7 @@ function addRow(pedido,detallePedido,direccion,proveedor,cuenta){
 			                	"<div class='widget-content'>"+
 			                  		"<div class='pad'>"+
 										"<form class='form' action='pedido' method='POST' onsubmit='return false;'>"+
-											"<textarea class='form-control' id='comentarioe-"+pedido.idPedido+"' placeholder='Comentario entrega proveedor ...' rows='5'></textarea>"+
+											"<textarea class='form-control' id='comentarioe-"+pedido.idPedido+"' placeholder='Comentario de confirmación (Opcional)' rows='5'></textarea>"+
 											"<div class='clearfix'></div>"+
 											"<div class='buttons pull-right'>"+
 												"<button class='btn btn-sm btn-info' id='btnapedido-"+pedido.idPedido+"'>Confirmar pedido</button>"+

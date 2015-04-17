@@ -13,25 +13,25 @@
     	<class>mx.jtails.homelike.model.beans.DetallePedido</class>
     	<class>mx.jtails.homelike.model.beans.Direccion</class>
 		<class>mx.jtails.homelike.model.beans.Pedido</class>
+		<class>mx.jtails.homelike.model.beans.Corte</class>
 		
 		<properties>
         	<property name="datanucleus.storeManagerType" value="rdbms"/>
         	<property name="datanucleus.identifier.case" value="LowerCase"/>
         	<property name="datanucleus.DetachAllOnCommit" value="true"/>
-        	<property name="datanucleus.cache.level2.type" value="none"/>
             
             <!-- Estas 4 Propiedades son necesarias para conectarse a Google Cloud -->
             <!-- Se deben editar las opciones de Connection en JPA y en Google Cloud SQL Instancae -->
-            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.GoogleDriver"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.GoogleDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:google:mysql://valid-keep-552:website/homelike"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value=""/>-->
+            <property name="javax.persistence.jdbc.password" value=""/>
             
             
-            <property name="javax.persistence.jdbc.driver" value="com.google.appengine.api.rdbms.AppEngineDriver"/>
+            <!--  <property name="javax.persistence.jdbc.driver" value="com.google.appengine.api.rdbms.AppEngineDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:google:rdbms://valid-keep-552:website/homelike"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.password" value=""/>-->
             
             <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/homelike"/>

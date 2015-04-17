@@ -377,7 +377,7 @@ public class PedidoEndpoint {
 				if(pedido.getStatus()==1){
 					ppedido.setComentarioProveedor(pedido.getComentarioProveedor());
 					ppedido.setFechaHoraAceptacion(calendar.getTime());
-					logger.warning("Pedido aceptado proveedor: "+user+" "+pedido.getComentarioEntregaProveedor());
+					logger.warning("Pedido aceptado proveedor: "+user+" "+pedido.getComentarioProveedor());
 					
 					//Enviamos la notificacion al cliente
 					SendMessage sendM=new SendMessage();
