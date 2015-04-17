@@ -40,7 +40,7 @@
         <mx.jtails.homelike.ui.widget.TypeFacedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wait"
+            android:text="@string/loading_comments_provider"
             android:layout_margin="10dp"
             android:textColor="@android:color/white"
             homelike:typeface="fonts/Roboto-Regular.ttf"/>
