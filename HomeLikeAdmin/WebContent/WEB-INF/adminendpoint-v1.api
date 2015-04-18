@@ -1,0 +1,198 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://steam-form-673.appspot.com/_ah/api",
+  "name" : "adminendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://steam-form-673.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "jtails.mx",
+  "ownerName" : "jtails.mx",
+  "packagePath" : "homelike.model.beans",
+  "methods" : {
+    "adminendpoint.getAdmin" : {
+      "path" : "admin/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.AdminEndpoint.getAdmin",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "adminendpoint.updateAdmin" : {
+      "path" : "admin",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.AdminEndpoint.updateAdmin",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "adminendpoint.listAdmin" : {
+      "path" : "admin",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.AdminEndpoint.listAdmin",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "adminendpoint.insertAdmin" : {
+      "path" : "admin",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.AdminEndpoint.insertAdmin",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "adminendpoint.removeAdmin" : {
+      "path" : "admin/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-e15fqu56oc53v2cs1vfss4a4bla3vb7s.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.AdminEndpoint.removeAdmin",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Admin" : {
+        "id" : "Admin",
+        "type" : "object",
+        "properties" : {
+          "idAdmin" : {
+            "type" : "integer"
+          },
+          "fechaHoraCreacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "usuario" : {
+            "type" : "string"
+          },
+          "logo" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CollectionResponse_Admin" : {
+        "id" : "CollectionResponse_Admin",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Admin"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "mx.jtails.homelike.model.endpoints.AdminEndpoint.getAdmin" : {
+        "response" : {
+          "$ref" : "Admin"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.AdminEndpoint.updateAdmin" : {
+        "request" : {
+          "$ref" : "Admin"
+        },
+        "response" : {
+          "$ref" : "Admin"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.AdminEndpoint.listAdmin" : {
+        "response" : {
+          "$ref" : "CollectionResponse_Admin"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.AdminEndpoint.insertAdmin" : {
+        "request" : {
+          "$ref" : "Admin"
+        },
+        "response" : {
+          "$ref" : "Admin"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.AdminEndpoint.removeAdmin" : {
+      }
+    }
+  }
+}

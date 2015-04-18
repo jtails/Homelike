@@ -20,7 +20,7 @@
   <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
   <init-param>
    <param-name>services</param-name>
-   <param-value>mx.jtails.homelike.model.endpoints.AdminEndpoint,mx.jtails.homelike.model.endpoints.ProveedorAdminEndpoint</param-value>
+   <param-value>mx.jtails.homelike.model.endpoints.AdminEndpoint,mx.jtails.homelike.model.endpoints.ProveedorAdminEndpoint,mx.jtails.homelike.model.endpoints.CorteEndpoint,mx.jtails.homelike.model.endpoints.PagoEndpoint</param-value>
   </init-param>
  </servlet>
  <servlet-mapping>

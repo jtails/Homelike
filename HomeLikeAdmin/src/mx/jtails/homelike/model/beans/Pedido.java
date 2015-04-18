@@ -57,6 +57,9 @@ public class Pedido implements Serializable {
 	@Column(name="fecha_hora_pedido")
 	private Date fechaHoraPedido;
 
+	//0 nuevo
+	//1 aceptado proveedor
+	//2 finalizado
 	private int status;
 
 	//bi-directional many-to-one association to DetallePedido
