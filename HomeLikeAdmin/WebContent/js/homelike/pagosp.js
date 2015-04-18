@@ -81,11 +81,11 @@ google.appengine.homelike.pagos.listCortes = function(idProveedor){
 										"class='table table-striped table-bordered table-hover'>"+
 										"<thead>"+
 											"<tr>"+
-												"<th style='width:10px>#</th>"+
+												"<th style='width:10px'>#</th>"+
 												"<th style='width:200px'>Descripcion</th>"+
-												"<th style='width:50px>No.Pedidos</th>"+
-												"<th style='width:50px>Adeudo</th>"+
-												"<th style='width:80px>Status</th>"+
+												"<th style='width:50px'>No.Pedidos</th>"+
+												"<th style='width:50px'>Adeudo</th>"+
+												"<th style='width:80px'>Status</th>"+
 											"</tr>"+
 										"</thead>"+
 										"<tbody id='tblCortes"+corte.idCorte+"'>"+
@@ -95,11 +95,11 @@ google.appengine.homelike.pagos.listCortes = function(idProveedor){
 										"class='table table-striped table-bordered table-hover'>"+
 										"<thead>"+
 											"<tr>"+
-												"<th style='width:10px>#</th>"+
-												"<th style='width:200px>Fecha Pago</th>"+
-												"<th style='width:50px>Monto</th>"+
-												"<th style='width:50px>Adeudo</th>"+
-												"<th style='width:80px>Realizar un Pago</th>"+
+												"<th style='width:10px'>#</th>"+
+												"<th style='width:200px'>Fecha Pago</th>"+
+												"<th style='width:50px'>Monto</th>"+
+												"<th style='width:50px'>Adeudo</th>"+
+												"<th style='width:80px'>Realizar un Pago</th>"+
 											"</tr>"+
 										"</thead>"+
 										"<tbody id='tblPagos"+corte.idCorte+"'>"+

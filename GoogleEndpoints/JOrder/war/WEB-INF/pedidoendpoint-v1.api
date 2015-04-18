@@ -1,0 +1,850 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://steam-form-673.appspot.com/_ah/api",
+  "name" : "pedidoendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://steam-form-673.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "jtails.mx",
+  "ownerName" : "jtails.mx",
+  "packagePath" : "homelike.model.beans",
+  "methods" : {
+    "pedidoendpoint.insertPedido" : {
+      "path" : "pedido",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.insertPedido",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.listHistoricoPedidosByProveedor" : {
+      "path" : "listHistoricoPedidosByProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listHistoricoPedidosByProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.getPedido" : {
+      "path" : "pedido/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getPedido",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.listPedidosByProveedor" : {
+      "path" : "listPedidosByProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listPedidosByProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.countActivePedidosByProveedor" : {
+      "path" : "countActivePedidosByProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.countActivePedidosByProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.listHistoricoPedidosByCuenta" : {
+      "path" : "listHistoricoPedidosByCuenta",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listHistoricoPedidosByCuenta",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.getHistoricoPedidosByMesProveedor" : {
+      "path" : "getHistoricoPedidosByMesProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getHistoricoPedidosByMesProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.getHistoricoGananciaByMesProveedor" : {
+      "path" : "getHistoricoGananciaByMesProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getHistoricoGananciaByMesProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.getComentariosPedidosByProveedor" : {
+      "path" : "getComentariosPedidosByProveedor",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getComentariosPedidosByProveedor",
+      "request" : {
+        "parameters" : {
+          "idProveedor" : {
+            "type" : "int32",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.countTotalPedidosByProveedor" : {
+      "path" : "countTotalPedidosByProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.countTotalPedidosByProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.listPedidosByCuenta" : {
+      "path" : "listPedidosByCuenta",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listPedidosByCuenta",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "pedidoendpoint.getHistoricoPedidosByDayProveedor" : {
+      "path" : "getHistoricoPedidosByDayProveedor",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getHistoricoPedidosByDayProveedor",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Pedido" : {
+        "id" : "Pedido",
+        "type" : "object",
+        "properties" : {
+          "idPedido" : {
+            "type" : "integer"
+          },
+          "calificacion" : {
+            "type" : "integer"
+          },
+          "comentarioCliente" : {
+            "type" : "string"
+          },
+          "comentarioEntregaCliente" : {
+            "type" : "string"
+          },
+          "comentarioEntregaProveedor" : {
+            "type" : "string"
+          },
+          "comentarioProveedor" : {
+            "type" : "string"
+          },
+          "fechaHoraAceptacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "fechaHoraEntrega" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "fechaHoraPedido" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "cantidadPago" : {
+            "$ref" : "CantidadPago"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "detallePedido" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "DetallePedido"
+            }
+          },
+          "cuenta" : {
+            "$ref" : "Cuenta"
+          },
+          "direccion" : {
+            "$ref" : "Direccion"
+          },
+          "dispositivo" : {
+            "$ref" : "Dispositivo"
+          },
+          "proveedor" : {
+            "$ref" : "Proveedor"
+          },
+          "detallePedidos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "DetallePedido"
+            }
+          }
+        }
+      },
+      "CantidadPago" : {
+        "id" : "CantidadPago",
+        "type" : "object",
+        "properties" : {
+          "idCantidadPago" : {
+            "type" : "integer"
+          },
+          "cantidadNumero" : {
+            "type" : "integer"
+          },
+          "cantidadTexto" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DetallePedido" : {
+        "id" : "DetallePedido",
+        "type" : "object",
+        "properties" : {
+          "cantidad" : {
+            "type" : "integer"
+          },
+          "idDetallePedido" : {
+            "type" : "integer"
+          },
+          "pedido" : {
+            "$ref" : "Pedido"
+          },
+          "producto" : {
+            "$ref" : "Producto"
+          }
+        }
+      },
+      "Producto" : {
+        "id" : "Producto",
+        "type" : "object",
+        "properties" : {
+          "idProducto" : {
+            "type" : "integer"
+          },
+          "costoUnitario" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "descripcion" : {
+            "type" : "string"
+          },
+          "presentacion" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "cproducto" : {
+            "$ref" : "CProducto"
+          },
+          "proveedor" : {
+            "$ref" : "Proveedor"
+          }
+        }
+      },
+      "CProducto" : {
+        "id" : "CProducto",
+        "type" : "object",
+        "properties" : {
+          "idCProducto" : {
+            "type" : "integer"
+          },
+          "descripcion" : {
+            "type" : "string"
+          },
+          "presentacion" : {
+            "type" : "string"
+          },
+          "servicio" : {
+            "$ref" : "Servicio"
+          }
+        }
+      },
+      "Servicio" : {
+        "id" : "Servicio",
+        "type" : "object",
+        "properties" : {
+          "idServicio" : {
+            "type" : "integer"
+          },
+          "nombre" : {
+            "type" : "string"
+          },
+          "image" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Proveedor" : {
+        "id" : "Proveedor",
+        "type" : "object",
+        "properties" : {
+          "idProveedor" : {
+            "type" : "integer"
+          },
+          "calle" : {
+            "type" : "string"
+          },
+          "calle1" : {
+            "type" : "string"
+          },
+          "calle2" : {
+            "type" : "string"
+          },
+          "colonia" : {
+            "type" : "string"
+          },
+          "cp" : {
+            "type" : "string"
+          },
+          "delegacion" : {
+            "type" : "string"
+          },
+          "estado" : {
+            "type" : "string"
+          },
+          "fechaHoraCreacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "latitud" : {
+            "type" : "string"
+          },
+          "logo" : {
+            "type" : "string"
+          },
+          "longitud" : {
+            "type" : "string"
+          },
+          "nelatitud" : {
+            "type" : "string"
+          },
+          "nelongitud" : {
+            "type" : "string"
+          },
+          "nexterior" : {
+            "type" : "string"
+          },
+          "ninterior" : {
+            "type" : "string"
+          },
+          "nombre" : {
+            "type" : "string"
+          },
+          "pais" : {
+            "type" : "string"
+          },
+          "razonSocial" : {
+            "type" : "string"
+          },
+          "referencia1" : {
+            "type" : "string"
+          },
+          "referencia2" : {
+            "type" : "string"
+          },
+          "rfc" : {
+            "type" : "string"
+          },
+          "slogan" : {
+            "type" : "string"
+          },
+          "swlatitud" : {
+            "type" : "string"
+          },
+          "swlongitud" : {
+            "type" : "string"
+          },
+          "telefono" : {
+            "type" : "string"
+          },
+          "usuario" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "numPedidos" : {
+            "type" : "integer"
+          },
+          "numClientes" : {
+            "type" : "integer"
+          },
+          "calificacion" : {
+            "type" : "integer"
+          },
+          "fechaHoraUltimoPedido" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "dispositivos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Dispositivop"
+            }
+          },
+          "horarios" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "HorariosProveedor"
+            }
+          },
+          "productos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Producto"
+            }
+          },
+          "servicio" : {
+            "$ref" : "Servicio"
+          }
+        }
+      },
+      "Dispositivop" : {
+        "id" : "Dispositivop",
+        "type" : "object",
+        "properties" : {
+          "idDispositivo" : {
+            "type" : "integer"
+          },
+          "esDefault" : {
+            "type" : "integer"
+          },
+          "fechaHoraCreacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "gcmid" : {
+            "type" : "string"
+          },
+          "proveedor" : {
+            "$ref" : "Proveedor"
+          },
+          "imei" : {
+            "type" : "string"
+          },
+          "modelo" : {
+            "type" : "string"
+          },
+          "plataforma" : {
+            "type" : "string"
+          },
+          "tipoDispositivo" : {
+            "type" : "string"
+          }
+        }
+      },
+      "HorariosProveedor" : {
+        "id" : "HorariosProveedor",
+        "type" : "object",
+        "properties" : {
+          "idHorario" : {
+            "type" : "integer"
+          },
+          "abrimos" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "cerramos" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "proveedor" : {
+            "$ref" : "Proveedor"
+          },
+          "tipoHorario" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "Cuenta" : {
+        "id" : "Cuenta",
+        "type" : "object",
+        "properties" : {
+          "idCuenta" : {
+            "type" : "integer"
+          },
+          "fechaHoraCreacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "telefono" : {
+            "type" : "string"
+          },
+          "usuario" : {
+            "type" : "string"
+          },
+          "numPedidos" : {
+            "type" : "integer"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "fechaHoraUltimoPedido" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "direcciones" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Direccion"
+            }
+          },
+          "dispositivos" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Dispositivo"
+            }
+          }
+        }
+      },
+      "Direccion" : {
+        "id" : "Direccion",
+        "type" : "object",
+        "properties" : {
+          "idDireccion" : {
+            "type" : "integer"
+          },
+          "calle" : {
+            "type" : "string"
+          },
+          "calle1" : {
+            "type" : "string"
+          },
+          "calle2" : {
+            "type" : "string"
+          },
+          "colonia" : {
+            "type" : "string"
+          },
+          "cp" : {
+            "type" : "string"
+          },
+          "delegacion" : {
+            "type" : "string"
+          },
+          "esDefault" : {
+            "type" : "integer"
+          },
+          "estado" : {
+            "type" : "string"
+          },
+          "fechaHoraCreacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "latitud" : {
+            "type" : "string"
+          },
+          "longitud" : {
+            "type" : "string"
+          },
+          "nexterior" : {
+            "type" : "string"
+          },
+          "ninterior" : {
+            "type" : "string"
+          },
+          "pais" : {
+            "type" : "string"
+          },
+          "referencia1" : {
+            "type" : "string"
+          },
+          "referencia2" : {
+            "type" : "string"
+          },
+          "alias" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "integer"
+          },
+          "cuenta" : {
+            "$ref" : "Cuenta"
+          }
+        }
+      },
+      "Dispositivo" : {
+        "id" : "Dispositivo",
+        "type" : "object",
+        "properties" : {
+          "idDispositivo" : {
+            "type" : "integer"
+          },
+          "esDefault" : {
+            "type" : "integer"
+          },
+          "fechaHoraCreacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "gcmid" : {
+            "type" : "string"
+          },
+          "imei" : {
+            "type" : "string"
+          },
+          "modelo" : {
+            "type" : "string"
+          },
+          "plataforma" : {
+            "type" : "string"
+          },
+          "tipoDispositivo" : {
+            "type" : "string"
+          },
+          "cuenta" : {
+            "$ref" : "Cuenta"
+          }
+        }
+      },
+      "PedidoCollection" : {
+        "id" : "PedidoCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Pedido"
+            }
+          }
+        }
+      },
+      "Grafico" : {
+        "id" : "Grafico",
+        "type" : "object",
+        "properties" : {
+          "label" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "number",
+            "format" : "float"
+          }
+        }
+      },
+      "GraficoCollection" : {
+        "id" : "GraficoCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Grafico"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.insertPedido" : {
+        "request" : {
+          "$ref" : "Pedido"
+        },
+        "response" : {
+          "$ref" : "Pedido"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listHistoricoPedidosByProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "PedidoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getPedido" : {
+        "response" : {
+          "$ref" : "Pedido"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listPedidosByProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "PedidoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.countActivePedidosByProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "Proveedor"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listHistoricoPedidosByCuenta" : {
+        "request" : {
+          "$ref" : "Cuenta"
+        },
+        "response" : {
+          "$ref" : "PedidoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getHistoricoPedidosByMesProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "GraficoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getHistoricoGananciaByMesProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "GraficoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getComentariosPedidosByProveedor" : {
+        "response" : {
+          "$ref" : "PedidoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.countTotalPedidosByProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "Proveedor"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.listPedidosByCuenta" : {
+        "request" : {
+          "$ref" : "Cuenta"
+        },
+        "response" : {
+          "$ref" : "PedidoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.PedidoEndpoint.getHistoricoPedidosByDayProveedor" : {
+        "request" : {
+          "$ref" : "Proveedor"
+        },
+        "response" : {
+          "$ref" : "GraficoCollection"
+        }
+      }
+    }
+  }
+}

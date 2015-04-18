@@ -1,0 +1,141 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://steam-form-673.appspot.com/_ah/api",
+  "name" : "cproductoendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://steam-form-673.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "jtails.mx",
+  "ownerName" : "jtails.mx",
+  "packagePath" : "homelike.model.beans",
+  "methods" : {
+    "cproductoendpoint.listCProductoByServicio" : {
+      "path" : "listCProductoByServicio",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.CProductoEndpoint.listCProductoByServicio",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "cproductoendpoint.listCProducto" : {
+      "path" : "cproducto",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com" ],
+      "clientIds" : [ "429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com", "429890560769-1s0nbteb1ip8f1pp2g0l72c1vd30ds8v.apps.googleusercontent.com" ],
+      "rosyMethod" : "mx.jtails.homelike.model.endpoints.CProductoEndpoint.listCProducto",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Servicio" : {
+        "id" : "Servicio",
+        "type" : "object",
+        "properties" : {
+          "idServicio" : {
+            "type" : "integer"
+          },
+          "nombre" : {
+            "type" : "string"
+          },
+          "image" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CProducto" : {
+        "id" : "CProducto",
+        "type" : "object",
+        "properties" : {
+          "idCProducto" : {
+            "type" : "integer"
+          },
+          "descripcion" : {
+            "type" : "string"
+          },
+          "presentacion" : {
+            "type" : "string"
+          },
+          "servicio" : {
+            "$ref" : "Servicio"
+          }
+        }
+      },
+      "CProductoCollection" : {
+        "id" : "CProductoCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "CProducto"
+            }
+          }
+        }
+      },
+      "CollectionResponse_CProducto" : {
+        "id" : "CollectionResponse_CProducto",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "CProducto"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "mx.jtails.homelike.model.endpoints.CProductoEndpoint.listCProductoByServicio" : {
+        "request" : {
+          "$ref" : "Servicio"
+        },
+        "response" : {
+          "$ref" : "CProductoCollection"
+        }
+      },
+      "mx.jtails.homelike.model.endpoints.CProductoEndpoint.listCProducto" : {
+        "response" : {
+          "$ref" : "CollectionResponse_CProducto"
+        }
+      }
+    }
+  }
+}

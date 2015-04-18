@@ -61,6 +61,9 @@ public class Pedido implements Serializable {
 	@JoinColumn(name="id_cantidad_pago")
 	private CantidadPago cantidadPago;
 
+	//0 nuevo
+	//1 aceptado proveedor
+	//2 finalizado
 	private int status;
 
 	//bi-directional many-to-one association to DetallePedido
