@@ -108,6 +108,9 @@
     <string name="loading_services">[ Cargando servicios ]</string>
     <string name="loading_orders">[ Cargando pedidos ]</string>
     <string name="loading_suggestions">[ Cargando catálogo ]</string>
+    <string name="wait_provider"> [ Buscando proveedores ]</string>
+    <string name="loading_comments_provider">[ Cargando comentarios ]</string>
+    <string name="finish_order">Mi pedido ha llegado</string>
 
     <!-- Address -->
     <string name="location">Ubicación</string>

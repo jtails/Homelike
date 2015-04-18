@@ -105,8 +105,11 @@
     <string name="loading_order">Loading order…</string>
     <string name="delivery_address">Delivery address:</string>
     <string name="loading_services">[ Loading services ]</string>
-    <string name="loading_orders">[ Cargando pedidos ]</string>
+    <string name="loading_orders">[ Loading orders ]</string>
     <string name="loading_suggestions">[ Loading suggestions ]</string>
+    <string name="wait_provider"> [ Searching providers ]</string>
+    <string name="loading_comments_provider"> [ Loading comments ]</string>
+    <string name="finish_order"> My order has arrived </string>
 
     <!-- Address -->
     <string name="location">Location</string>
