@@ -1,6 +1,7 @@
 package mx.jtails.homelike.model.endpoints;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -48,24 +49,55 @@ public class CorteEndpoint {
 			if(!corteM.haveCurrentCorteByProveedor(corte)){
 				//Obtenemos referencia al objeto proveedor persistido
 				Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(corte.getProveedor().getIdProveedor()));
-				//Obtenemos los pedidos a dia vencido con status terminado
-				List<Pedido> pedidos=pedidoM.listPedidosByInicioCorteProveedor(pproveedor);
-				Date FechaHoraInicio=pedidos.get(0).getFechaHoraPedido();
-				Date FechaHoraFin=pedidos.get(pedidos.size()-1).getFechaHoraPedido();
+				//Verificamos si es el primer corte del Proveedor, o si debe generarse a partir de la fecha de su ultimo corte
+				Date fechaUltimoCorte=corteM.getLastCorteByProveedor(corte);
+				
+				List<Pedido> pedidos=null;
+				Date FechaHoraInicio=null;
+				Date FechaHoraFin=null;
+				Calendar calendar=Calendar.getInstance();
+				calendar.setTime(new Date());
+				calendar.add(Calendar.DAY_OF_MONTH,-1);
+				FechaHoraFin=calendar.getTime();
+				
+				if(fechaUltimoCorte!=null){
+					//Obtenemos los pedidos a partir de la fecha del ultimo corte con status terminado
+					calendar.setTime(fechaUltimoCorte);
+					calendar.add(Calendar.DAY_OF_MONTH,-1);
+					fechaUltimoCorte=calendar.getTime();
+					pedidos=pedidoM.listPedidosByFechaCorteProveedor(pproveedor, fechaUltimoCorte);
+					FechaHoraInicio=fechaUltimoCorte;
+					logger.warning("Corte recurrente");
+				}else{
+					//Obtenemos los pedidos a dia vencido con status terminado
+					pedidos=pedidoM.listPedidosByInicioCorteProveedor(pproveedor);
+					FechaHoraInicio=pedidos.get(0).getFechaHoraPedido();
+					logger.warning("Primer corte proveedor");
+				}
+				
 				logger.warning("Fecha inicio: "+FechaHoraInicio.toString());
 				logger.warning("Fecha fin: "+FechaHoraFin.toString());
 				logger.warning("No.Pedidos: "+pedidos.size());
-			
-				//Preparamos el corte
-				corte.setFechaHoraInicio(FechaHoraInicio);
-				corte.setFechaHoraFin(FechaHoraFin);
-				corte.setNopedidos(pedidos.size());
-				corte.setAdeudo(pedidos.size());
-				corte.setStatus(0);
-				corte.setDescripcion("Corte - Inicio:"+FechaHoraInicio+", Fin:"+FechaHoraFin);
-				corte.setProveedor(pproveedor);
-				//Se realiza corte con pedidos a dia vencido
-				return corteM.insertCorte(corte);
+				
+				//Verificamos que existan pedidos en el rango de fechas
+				if(pedidos!=null && pedidos.size()>0){
+					//Preparamos el corte
+					corte.setFechaHoraInicio(FechaHoraInicio);
+					corte.setFechaHoraFin(FechaHoraFin);
+					corte.setNopedidos(pedidos.size());
+					corte.setAdeudo(pedidos.size());
+					corte.setStatus(0);
+					corte.setDescripcion("Corte - Inicio:"+FechaHoraInicio+", Fin:"+FechaHoraFin);
+					corte.setProveedor(pproveedor);
+					//Se realiza corte con pedidos a dia vencido
+					return corteM.insertCorte(corte);
+				}else{
+					Corte Ncorte=new Corte();
+					Ncorte.setStatus(-2);//No existen pedidos para realizar un corte
+					Ncorte.setDescripcion("No existen pedidos para el periodo de corte");
+					logger.warning("No existen pedidos para el periodo de corte");
+					return Ncorte;
+				}
 			}else{
 				Corte Ncorte=new Corte();
 				Ncorte.setStatus(-1);//Tiene corte actual

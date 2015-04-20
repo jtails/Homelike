@@ -42,6 +42,20 @@ public class PagoEndpoint {
 			CorteManager corteM=new CorteManager();
 			//Obtenemos referencia al objeto corte persistido
 			Corte pcorte=corteM.getCorte(Long.valueOf(pago.getCorte().getIdCorte()));
+			
+			//Realizamos la suma de los pagos para verificar si el adeudo ha sido cubierto
+			float cantidad_pagada=0;
+			List<Pago> pagos=pcorte.getPagos();
+			for(Pago p:pagos){
+				cantidad_pagada+=p.getCantidad();
+			}
+			cantidad_pagada+=pago.getCantidad();
+			
+			//Si el adeudo ha sido pagado, actualizamos el status del corte
+			if(cantidad_pagada>=pcorte.getAdeudo()){
+				pcorte.setStatus(1);
+				corteM.updateCorte(pcorte);
+			}
 			pago.setCorte(pcorte);
 			return pagoM.insertPago(pago);
 		//}else{

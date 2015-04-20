@@ -51,6 +51,27 @@ public class CorteManager {
 	}
 	
 	@SuppressWarnings({ "unchecked", "unused" })
+	public Date getLastCorteByProveedor(Corte corte) {
+
+		EntityManager mgr = null;
+		Cursor cursor = null;
+		List<Corte> cortes = null;
+		try {
+			mgr = getEntityManager();
+			Query query = mgr.createQuery("select MAX(Corte.fechaHoraCorte) from Corte as Corte where Corte.proveedor.idProveedor=:idProveedor").setParameter("idProveedor",corte.getProveedor().getIdProveedor());
+			if(query.getSingleResult()!=null){
+				Date fechaHoraCorte=(Date)query.getSingleResult();
+				logger.warning(fechaHoraCorte.toString());
+				return fechaHoraCorte;
+			}
+		} finally {
+			mgr.close();
+		}
+		return null;
+	}
+
+	
+	@SuppressWarnings({ "unchecked", "unused" })
 	public boolean haveCurrentCorteByProveedor(Corte corte) {
 
 		EntityManager mgr = null;
@@ -80,6 +101,7 @@ public class CorteManager {
 		return false;
 	}
 
+	
 	/**
 	 * This method gets the entity having primary key id. It uses HTTP GET method.
 	 *
@@ -132,7 +154,7 @@ public class CorteManager {
 			if (!containsCorte(corte)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.persist(corte);
+			mgr.merge(corte);
 		} finally {
 			mgr.close();
 		}
