@@ -16,6 +16,7 @@
 		<class>mx.jtails.homelike.model.beans.Corte</class>
 		<class>mx.jtails.homelike.model.beans.Pago</class>
 		
+		
 		<properties>
         	<property name="datanucleus.storeManagerType" value="rdbms"/>
         	<property name="datanucleus.identifier.case" value="LowerCase"/>

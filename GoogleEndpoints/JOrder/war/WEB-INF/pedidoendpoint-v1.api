@@ -500,6 +500,12 @@
               "$ref" : "Dispositivop"
             }
           },
+          "regiones" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Regiones"
+            }
+          },
           "horarios" : {
             "type" : "array",
             "items" : {
@@ -547,6 +553,34 @@
             "type" : "string"
           },
           "tipoDispositivo" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Regiones" : {
+        "id" : "Regiones",
+        "type" : "object",
+        "properties" : {
+          "idRegion" : {
+            "type" : "integer"
+          },
+          "fechaHoraSegmentacion" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "proveedor" : {
+            "$ref" : "Proveedor"
+          },
+          "nelatitud" : {
+            "type" : "string"
+          },
+          "nelongitud" : {
+            "type" : "string"
+          },
+          "swlatitud" : {
+            "type" : "string"
+          },
+          "swlongitud" : {
             "type" : "string"
           }
         }

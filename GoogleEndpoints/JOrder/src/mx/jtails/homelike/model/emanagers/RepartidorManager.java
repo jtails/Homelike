@@ -124,7 +124,7 @@ public class RepartidorManager {
 		Repartidor repartidor = null;
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from Repartidor as Repartidor where usuario=:usuario").setParameter("usuario",p.getUsuario());
+			Query query = mgr.createQuery("select from Repartidor as Repartidor where usuario=:usuario").setParameter("usuario",r.getUsuario());
 			List<Repartidor> repartidores=(List<Repartidor>) query.getResultList();
 			if(repartidores!=null && repartidores.size()>0){
 				repartidor = repartidores.get(0);

@@ -117,6 +117,10 @@ public class Proveedor implements Serializable {
 	@OneToMany(mappedBy="proveedor",cascade = {CascadeType.PERSIST},fetch=FetchType.EAGER)
 	private List<Dispositivop> dispositivos;
 	
+	//bi-directional many-to-one association to Regions
+	@OneToMany(mappedBy="proveedor",cascade = {CascadeType.PERSIST},fetch=FetchType.EAGER)
+	private List<Regiones> regiones;
+	
 	//bi-directional many-to-one association to Pedido
 	@JsonIgnore
 	@OneToMany(mappedBy="proveedor",fetch=FetchType.LAZY)
@@ -453,6 +457,29 @@ public class Proveedor implements Serializable {
 		dispositivo.setProveedor(null);
 
 		return dispositivo;
+	}
+	
+	
+	public List<Regiones> getRegiones() {
+		return this.regiones;
+	}
+
+	public void setRegiones(List<Regiones> regiones) {
+		this.regiones = regiones;
+	}
+	
+	public Regiones addRegion(Regiones region) {
+		getRegiones().add(region);
+		region.setProveedor(this);
+
+		return region;
+	}
+
+	public Regiones removeRegion(Regiones region) {
+		getRegiones().remove(region);
+		region.setProveedor(null);
+
+		return region;
 	}
 
 }

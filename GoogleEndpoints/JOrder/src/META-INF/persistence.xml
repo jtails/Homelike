@@ -21,6 +21,7 @@
     <class>mx.jtails.homelike.model.beans.Dispositivop</class>
     <class>mx.jtails.homelike.model.beans.Dispositivor</class>
     <class>mx.jtails.homelike.model.beans.Repartidor</class>
+    <class>mx.jtails.homelike.model.beans.Regiones</class>
         
         <properties>
         	<property name="datanucleus.storeManagerType" value="rdbms"/>

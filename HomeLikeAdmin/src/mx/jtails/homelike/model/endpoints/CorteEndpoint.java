@@ -71,17 +71,19 @@ public class CorteEndpoint {
 				}else{
 					//Obtenemos los pedidos a dia vencido con status terminado
 					pedidos=pedidoM.listPedidosByInicioCorteProveedor(pproveedor);
-					FechaHoraInicio=pedidos.get(0).getFechaHoraPedido();
-					logger.warning("Primer corte proveedor");
+					if(pedidos!=null && pedidos.size()>0){
+						FechaHoraInicio=pedidos.get(0).getFechaHoraPedido();
+						logger.warning("Primer corte proveedor");
+					}
 				}
-				
-				logger.warning("Fecha inicio: "+FechaHoraInicio.toString());
-				logger.warning("Fecha fin: "+FechaHoraFin.toString());
-				logger.warning("No.Pedidos: "+pedidos.size());
 				
 				//Verificamos que existan pedidos en el rango de fechas
 				if(pedidos!=null && pedidos.size()>0){
 					//Preparamos el corte
+					logger.warning("Fecha inicio: "+FechaHoraInicio.toString());
+					logger.warning("Fecha fin: "+FechaHoraFin.toString());
+					logger.warning("No.Pedidos: "+pedidos.size());
+					
 					corte.setFechaHoraInicio(FechaHoraInicio);
 					corte.setFechaHoraFin(FechaHoraFin);
 					corte.setNopedidos(pedidos.size());

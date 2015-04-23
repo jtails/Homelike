@@ -171,8 +171,8 @@
 
 			setcoordinate(nelat,nelng,swlat,swlng);
 			var bounds = new google.maps.LatLngBounds(
-				new google.maps.LatLng(nelat,swlng),
-				new google.maps.LatLng(swlat,nelng)
+				new google.maps.LatLng(swlat,swlng),//swlat,swlng
+				new google.maps.LatLng(nelat,nelng)//nelat,nelng
 			);
 
 			// Define a rectangle and set its editable property to true.
@@ -180,9 +180,9 @@
 				bounds: bounds,
 				editable: true
 			});
-
 			rectangle.setMap(map);
-		// [END region_rectangle]
+			
+			// [END region_rectangle]
 
 		//Add an event listener on the rectangle.
 			google.maps.event.addListener(rectangle, 'bounds_changed', showNewRect);

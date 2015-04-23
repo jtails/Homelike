@@ -1,0 +1,3 @@
+# Module jorder
+# RPC service class, partial path of RPC policy file
+mx.jtails.homelike.client.GreetingService, F91FB8CB93042AA34AB6B3DACB573BC4.gwt.rpc

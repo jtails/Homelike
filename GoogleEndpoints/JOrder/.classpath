@@ -12,7 +12,6 @@
 	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/Driver (GOOGLE)"/>
 	<classpathentry kind="lib" path="C:/Users/EquipoSKY/Documents/GitHub/Homelike/Homelike/GoogleEndpoints/JOrder/war/WEB-INF/lib/commons-beanutils-1.9.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/EquipoSKY/Documents/GitHub/Homelike/Homelike/GoogleEndpoints/JOrder/war/WEB-INF/lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/com.google.appengine.server.runtimeTarget/Google App Engine">
 		<attributes>
@@ -26,6 +25,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/EquipoSKY/Documents/GitHub/Homelike/Homelike/GoogleEndpoints/JOrder/war/WEB-INF/lib/json_simple-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/EquipoSKY/Documents/GitHub/Homelike/Homelike/GoogleEndpoints/JOrder/war/WEB-INF/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.wtp.jpa.DATANUCLEUS_CONTAINER">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="../"/>

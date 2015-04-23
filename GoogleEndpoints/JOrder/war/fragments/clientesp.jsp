@@ -39,8 +39,20 @@
 					</div>
 					<div class="widget-content">
 						<div id="message"></div>
+						
 						<div id="map-canvas"></div>
-						<div class="widget-foot"></div>
+						<div class="widget-foot">
+							<div>
+                    			<ul class="pagination">
+                    			    <li><a href="#">Segmentacion</a></li>
+                        			<li><a href="#" id="0">1</a></li>
+                        			<li><a href="#" id="2">2</a></li>
+                        			<li><a href="#" id="4">4</a></li>
+                        			<li><a href="#" id="9">9</a></li>
+                        			<li><a id='btnseg' name='btnseg' style='cursor: pointer'>Guardar</a></li>
+                      			</ul>
+							</div>
+						</div>
 					</div>
 					<!-- Widget ends -->
 					
