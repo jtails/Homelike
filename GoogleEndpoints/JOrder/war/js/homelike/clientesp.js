@@ -11,8 +11,22 @@
 	google.appengine.homelike.WEB_CLIENT_ID='429890560769-1ahgmrm6v3o8o8diehah95j7locgshj3.apps.googleusercontent.com';
 	google.appengine.homelike.EMAIL_SCOPE='https://www.googleapis.com/auth/userinfo.email';
 	
-	var coordenadas=[];
-	var rectangles=[];
+	
+	//Contiene la lista de regiones agregadas al mapa y sus correspondientes coordenadas
+	//No se agrega la region principal a la lista
+	var coordinates=[];
+	var regions=[];
+	
+	//Coordenadas del proveedor y su area de cobertura
+	var lat;
+	var lng;
+	var nelat;
+	var nelng;
+	var swlat;
+	var swlng;
+	
+	//Referencia al mapa
+	var map;
 	
 	//Inside your callback function, load your Endpoint:
 	function init() {
@@ -33,11 +47,12 @@
 	        color: '#fff' 
 	    } , message: 'Espere un momento... cargando clientes' });
 		
-		apisToLoad = 3; // must match number of calls to gapi.client.load()
+		apisToLoad = 4; // must match number of calls to gapi.client.load()
 		//var ROOT = 'http://localhost:8888/_ah/api';
 		var ROOT = 'https://homelike-dot-steam-form-673.appspot.com/_ah/api';
 		gapi.client.load('cuentaendpoint', 'v1',loadCallback, ROOT);
 		gapi.client.load('regionesendpoint', 'v1',loadCallback, ROOT);
+		gapi.client.load('proveedorendpoint', 'v1',loadCallback, ROOT);
 		gapi.client.load('oauth2', 'v2', loadCallback);
 	}
 	
@@ -67,13 +82,20 @@
 		gapi.client.regionesendpoint.insertRegion({'proveedor':{'idProveedor': idProveedor},'nelatitud': nelatitud,'nelongitud': nelongitud,
 											'swlatitud': swlatitud,'swlongitud': swlongitud}).execute(
 		function(output){
-			console.log(output);
+			//console.log(output);
 		});
 	}
 	
+	google.appengine.homelike.regiones.delete = function(idProveedor){
+		gapi.client.regionesendpoint.deleteRegiones({'idProveedor': idProveedor}).execute(
+		function(output){
+			//console.log(output);
+		});
+	}
+	
+	
+	
 	//--------------------------------------------------
-	var map;
-	var rectangle;
 	
 	function locate(lat,lng){
 		var myLatlng = new google.maps.LatLng(lat,lng);
@@ -108,49 +130,39 @@
 		});
 	}
 	
-	function setRectangle(nelat,nelng,swlat,swlng){
+	function addRegion(nelat,nelng,swlat,swlng){
 		// [START region_rectangle]
 		var bounds = new google.maps.LatLngBounds(
 			new google.maps.LatLng(swlat,swlng),//swlat,swlng
 			new google.maps.LatLng(nelat,nelng)//nelat,nelng
 		);
-		// Define a rectangle and set its editable property to true.
-		rectangle = new google.maps.Rectangle({
+		// Define a rectangle.
+		var rectangle = new google.maps.Rectangle({
 			bounds: bounds,
-			editable: false
+			//editable: true,
+			//draggable: true,
+			fillColor: '#FFCC33'
 		});
-
 		rectangle.setMap(map);
 		// [END region_rectangle]
-		
+		return rectangle;
 	}
 	
 	//google.maps.event.addDomListener(window, 'load', initialize);
 	
 	//----------------------------------------------
 
-	
 	function clearRegions(){
-		for(var i=0;i<rectangles.length;i++)
-			rectangles[i].setMap(null);
-		coordenadas=[];
-		rectangles=[];
+		for(var i=0;i<regions.length;i++)
+			regions[i].setMap(null);
+		coordinates=[];
+		regions=[];
 	}
 	
-	function setRegions(c,c1){
-		var nelat=$('#nelatitud').val();
-  		var nelng=$('#nelongitud').val();
-  		var swlat=$('#swlatitud').val();
-  		var swlng=$('#swlongitud').val();
-  		
-  		
+	
+	function setNewRegions(c,c1){
   		var dltlat=(parseFloat(nelat)-parseFloat(swlat))/c;
   		var dltlng=(parseFloat(nelng)-parseFloat(swlng))/c1;
-		
-		//coordenadas=new Array(c*c1);
-		//rectangles=new Array(c*c1);
-		
-		var colors=["#99FF66","#CC0099","#6633FF","#CCFF33","#FFCC33","#FF33FF","#99FF66","#CC0099","#6633FF","#CCFF33","#FFCC33","#FF33FF","#99FF66","#CC0099","#6633FF","#CCFF33","#FFCC33","#FF33FF","#99FF66","#CC0099","#6633FF","#CCFF33","#FFCC33","#FF33FF","#CCFF33"];
 		var x=0;
 			for(var i=1;i<=c;i++){
 				for(var j=1;j<=c1;j++){
@@ -165,39 +177,30 @@
 						"nelatitud":nelatitud,
 						"nelongitud":nelongitud
 					};
-					coordenadas.push(bound);
-					
-					var boundsx = new google.maps.LatLngBounds(
-						new google.maps.LatLng(swlatitud,swlongitud),
-						new google.maps.LatLng(nelatitud,nelongitud)
-					);
-					rectanglex = new google.maps.Rectangle({
-						bounds: boundsx,
-						editable: true,
-						draggable: true,
-						fillColor: colors[4]
-					});
-					rectanglex.setMap(map);
-					rectangles.push(rectanglex);
+					coordinates.push(bound);
+					var currentRegion=addRegion(nelatitud,nelongitud,swlatitud,swlongitud);
+					regions.push(currentRegion);
 				}
 			}
 	}
 	
 	
-	function setMap(){
-		var latitud=$('#latitud').val();
-  		var longitud=$('#longitud').val();
-		var nelatitud=$('#nelatitud').val();
-  		var nelongitud=$('#nelongitud').val();
-  		var swlatitud=$('#swlatitud').val();
-  		var swlongitud=$('#swlongitud').val();
-  		$.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+latitud+","+longitud+"&sensor=false", function( json ) {
+	function setInitialMap(){
+		lat=$('#latitud').val();
+  		lng=$('#longitud').val();
+		nelat=$('#nelatitud').val();
+  		nelng=$('#nelongitud').val();
+  		swlat=$('#swlatitud').val();
+  		swlng=$('#swlongitud').val();
+  		
+  		$.getJSON( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=false", function( json ) {
   			if(json.results[0]!=undefined){
   				lat=json.results[0].geometry.location.lat;
   				lng=json.results[0].geometry.location.lng;
   				locate(lat,lng);
-  				setRectangle(nelatitud,nelongitud,swlatitud,swlongitud);
-  		  		google.appengine.homelike.clientes.clientesinRage(document.querySelector('#idProveedor').value,parseFloat(nelatitud)+.04,parseFloat(nelongitud)+.04,parseFloat(swlatitud)-.04,parseFloat(swlongitud)-.04);
+  				//Establecemos la region del area de cobertura
+  				addRegion(nelat,nelng,swlat,swlng);
+  		  		google.appengine.homelike.clientes.clientesinRage(document.querySelector('#idProveedor').value,parseFloat(nelat)+.04,parseFloat(nelng)+.04,parseFloat(swlat)-.04,parseFloat(swlng)-.04);
   			}else{
   				$("#message").addClass("alert alert-warning"); 
   				$("#message").text("Ubicacion no encontrada");
@@ -205,6 +208,65 @@
   		});
   	}
 	
+	function loadCurrentRegions(){
+		idProveedor=document.querySelector('#idProveedor').value;
+		gapi.client.proveedorendpoint.getProveedor({'idProveedor': idProveedor}).execute(
+			function(output){
+				currentRegions = output.regiones || [];
+				for(var i=0;i<currentRegions.length;i++){
+					var currentRegion=addRegion(currentRegions[i].nelatitud,
+							currentRegions[i].nelongitud,
+							currentRegions[i].swlatitud,
+							currentRegions[i].swlongitud
+					);
+					regions.push(currentRegion);
+				}
+		});
+	}
+	
+	
+	function addRegionsEvents(){
+		for(var i=0;i<=9;i++){
+			$("#"+i).click(function(){
+				numRegions=parseInt($(this).attr('id'));
+				clearRegions();
+				switch(numRegions){
+					case 0: 
+						setNewRegions(0,0);
+						break;
+					case 2: 
+						setNewRegions(2,1);
+						break;
+					case 4: 
+						setNewRegions(2,2);
+						break;
+					case 9: 
+						setNewRegions(3,3);
+						break;
+				}	
+			});
+		}
+		$("#btnseg").click(function(){
+			//Eliminamos las regiones del proveedor
+	  		google.appengine.homelike.regiones.delete(
+	  			document.querySelector('#idProveedor').value
+	  		);
+	  		
+			for(var i=0;i<coordinates.length;i++){		
+				var coordinate=coordinates[i];
+				var nelatitud=coordinate.nelatitud;
+		  		var nelongitud=coordinate.nelongitud;
+		  		var swlatitud=coordinate.swlatitud;
+		  		var swlongitud=coordinate.swlongitud;
+		 
+		  		//Agregamos las nuevas regiones del proveedor
+				google.appengine.homelike.regiones.insert(
+						document.querySelector('#idProveedor').value,
+						nelatitud,nelongitud,swlatitud,swlongitud
+				); 
+			}
+		});
+	}
 	
 	
 	//---------------------OAuth 2.0-----------------------------
@@ -221,40 +283,9 @@
 			gapi.client.oauth2.userinfo.get().execute(function(output) {
 		    if(output!=undefined && output.verified_email!=undefined){
 		    	if(output.verified_email){
-		    		setMap();
-		    		for(var i=0;i<=9;i++){
-		    			$("#"+i).click(function(){
-							regions=parseInt($(this).attr('id'));
-							clearRegions();
-							switch(regions){
-								case 0: 
-									setRegions(0,0);
-									break;
-								case 2: 
-									setRegions(2,1);
-									break;
-								case 4: 
-									setRegions(2,2);
-									break;
-								case 9: 
-									setRegions(3,3);
-									break;
-							}	
-						});
-		    		}
-		    		$("#btnseg").click(function(){
-		    			for(var i=0;i<coordenadas.length;i++){
-		    				var coordenada=coordenadas[i];
-		    				var nelat=coordenada.nelatitud;
-		    		  		var nelng=coordenada.nelongitud;
-		    		  		var swlat=coordenada.swlatitud;
-		    		  		var swlng=coordenada.swlongitud;
-		    				google.appengine.homelike.regiones.insert(
-		    						document.querySelector('#idProveedor').value,
-		    						nelat,nelng,swlat,swlng
-		    				); 
-		    			}
-		    		});
+		    		setInitialMap();
+		    		loadCurrentRegions();
+		    		addRegionsEvents();
 		    	}
 		    }else{
 		    	alert('No Login');

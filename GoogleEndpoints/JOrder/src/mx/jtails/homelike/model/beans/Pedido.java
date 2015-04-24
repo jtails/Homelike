@@ -60,6 +60,10 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_cantidad_pago")
 	private CantidadPago cantidadPago;
+	
+	@ManyToOne
+	@JoinColumn(name="id_region")
+	private Regiones region;
 
 	//0 nuevo
 	//1 aceptado proveedor
@@ -231,5 +235,14 @@ public class Pedido implements Serializable {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
+	
+	public Regiones getRegion() {
+		return region;
+	}
+
+	public void setRegion(Regiones region) {
+		this.region = region;
+	}
+
 
 }

@@ -75,7 +75,7 @@ public class CuentaManager {
 	
 	
 	@SuppressWarnings({ "unchecked"})
-	public List<Cuenta> getClientesinRagne(String nelatitud,String swlatitud,String swlongitud,String nelongitud) {
+	public List<Cuenta> getClientesinRange(String nelatitud,String swlatitud,String swlongitud,String nelongitud) {
 		EntityManager mgr = null;
 		List<Cuenta> clientes = null;
 		try {

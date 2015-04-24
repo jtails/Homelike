@@ -217,7 +217,7 @@ public class CuentaEndpoint {
 			PedidoManager pedidoM=new PedidoManager();
 			List<Cuenta> cuentas;
 			logger.warning("Coordenadas Proveedor: "+proveedor.getNelatitud()+","+proveedor.getSwlatitud()+","+proveedor.getSwlongitud()+","+proveedor.getNelongitud());
-			cuentas=cuentaM.getClientesinRagne(proveedor.getNelatitud(), proveedor.getSwlatitud(),proveedor.getSwlongitud(),proveedor.getNelongitud());
+			cuentas=cuentaM.getClientesinRange(proveedor.getNelatitud(), proveedor.getSwlatitud(),proveedor.getSwlongitud(),proveedor.getNelongitud());
 			logger.warning("Clientes encontrados : "+cuentas.size());
 			//Verificamos si el cliente tiene pedidos con el proveedor
 			for(Cuenta cuenta:cuentas){

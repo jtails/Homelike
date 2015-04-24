@@ -76,7 +76,7 @@ public class ProveedorManager {
 	
 	
 	@SuppressWarnings({ "unchecked"})
-	public List<Proveedor> getProveedoresinRagne(String latitud,String longitud, int idServicio) {
+	public List<Proveedor> getProveedoresinRange(String latitud,String longitud, int idServicio) {
 		EntityManager mgr = null;
 		List<Proveedor> proveedores = null;
 

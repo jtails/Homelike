@@ -48,7 +48,7 @@ public class ProveedorEndpoint {
 	public List<Proveedor> getProveedoresinRange(@Named("latitud") String latitud,@Named("longitud") String longitud,@Named("idServicio") int idServicio,User user)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
-			List<Proveedor> proveedores=proveedorM.getProveedoresinRagne(latitud, longitud,idServicio);
+			List<Proveedor> proveedores=proveedorM.getProveedoresinRange(latitud, longitud,idServicio);
 			logger.warning("Proveedores encontrados: "+proveedores.size());
 			
 			for(Proveedor proveedor:proveedores){
@@ -85,12 +85,12 @@ public class ProveedorEndpoint {
 	 * @return
 	 * Retorna un objeto Proveedor persistido
 	 */
-	@ApiMethod(name = "getProveedor")
-	public Proveedor getProveedor(@Named("id") Long id/*,User user*/)throws OAuthRequestException, IOException  {
+	@ApiMethod(name = "getProveedor",path="getProveedor",httpMethod="POST")
+	public Proveedor getProveedor(Proveedor proveedor/*,User user*/)throws OAuthRequestException, IOException  {
 		//if(user!=null){
 			ProveedorManager proveedorM=new ProveedorManager();
-			Proveedor proveedor=proveedorM.getProveedor(id);
-			return proveedor;
+			Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(proveedor.getIdProveedor()));
+			return pproveedor;
 		//}
 		//return null;
 	}

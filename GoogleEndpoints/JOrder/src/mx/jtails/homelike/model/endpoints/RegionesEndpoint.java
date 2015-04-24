@@ -58,5 +58,25 @@ public class RegionesEndpoint {
 		//}
 		//return null;
 	}
+	
+	/**
+	 * Elimina las regiones de un proveedor
+	 * @param proveedor
+	 * El proveedor con su ID
+	 * @param user
+	 * El usuario autenticado con Google
+	 */
+	@ApiMethod(name = "deleteRegiones",path="deleteRegiones",httpMethod="POST")
+	public void deleteRegiones(Proveedor proveedor/*,User user*/)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			ProveedorManager proveedorM=new ProveedorManager();
+			Proveedor pproveedor=proveedorM.getProveedor(Long.valueOf(proveedor.getIdProveedor()));
+			RegionesManager regionesM=new RegionesManager();
+			for(Regiones region:pproveedor.getRegiones()){
+				regionesM.removeRegiones(Long.valueOf(region.getIdRegion()));
+			}
+		//}
+		//return null;
+	}
 
 }

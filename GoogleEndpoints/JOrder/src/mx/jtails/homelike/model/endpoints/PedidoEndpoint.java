@@ -10,6 +10,7 @@ import mx.jtails.homelike.model.beans.Grafico;
 import mx.jtails.homelike.model.beans.Pedido;
 import mx.jtails.homelike.model.beans.Producto;
 import mx.jtails.homelike.model.beans.Proveedor;
+import mx.jtails.homelike.model.beans.Regiones;
 import mx.jtails.homelike.model.emanagers.CantidadPagoManager;
 import mx.jtails.homelike.model.emanagers.CuentaManager;
 import mx.jtails.homelike.model.emanagers.DireccionManager;
@@ -334,6 +335,14 @@ public class PedidoEndpoint {
 				pedido.setDispositivo(pdispositivo);
 				pedido.setDireccion(pdireccion);
 				pedido.setCantidadPago(pcantidad);
+				
+				//Obtenemos referencia a la region de cobertura del proveedor
+				Regiones region=getRegionByLatLng(pproveedor,pdireccion);
+				if(region!=null)
+					logger.warning("Region Pedido en proveedor: "+region.getIdRegion());
+				else
+					logger.warning("Region Pedido en proveedor: Sin region");
+				pedido.setRegion(region);
 		
 				List<DetallePedido> dpedidos=pedido.getDetallePedido();
 				for(DetallePedido dpedido:dpedidos){
@@ -424,6 +433,23 @@ public class PedidoEndpoint {
 			}
 		//}
 		//return null;
+	}
+	
+	public Regiones getRegionByLatLng(Proveedor proveedor,Direccion direccion){
+		float lat=Float.valueOf(direccion.getLatitud());
+		float lng=Float.valueOf(direccion.getLongitud());
+		logger.warning(proveedor.getRegiones().size()+"");
+		for(Regiones region:proveedor.getRegiones()){
+			float nelat=Float.valueOf(region.getNelatitud());
+			float nelng=Float.valueOf(region.getNelongitud());
+			float swlat=Float.valueOf(region.getSwlatitud());
+			float swlng=Float.valueOf(region.getSwlongitud());
+			logger.warning("lat: "+lat+" lng: "+lng);
+			if(lat>swlat && lat<nelat && lng>swlng && lng<nelng){
+				return region;
+			}
+		}
+		return null;
 	}
 	
 }
