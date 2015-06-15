@@ -32,5 +32,7 @@
 			<attribute name="owner.project.facets" value="jpt.jpa"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/EquipoSKY/Documents/GitHub/Homelike/Homelike/GoogleEndpoints/JOrder/war/WEB-INF/lib/appengine-gcs-client-0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/EquipoSKY/Documents/GitHub/Homelike/Homelike/GoogleEndpoints/JOrder/war/WEB-INF/lib/guava-15.0.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

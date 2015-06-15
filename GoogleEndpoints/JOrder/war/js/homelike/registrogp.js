@@ -36,6 +36,13 @@
 		gapi.client.load('oauth2', 'v2', loadCallback);
 	}
 	
+	function addEvents(){
+		$("#back").click(function(){
+			parent.history.back();
+			return false;
+		});
+	}
+	
 	google.appengine.homelike.proveedores.listservicio = function(){
 		gapi.client.servicioendpoint.listServicio().execute(
 		
@@ -74,6 +81,7 @@
 		    if(output!=undefined && output.verified_email!=undefined){
 		    	if(output.verified_email){
 		    		google.appengine.homelike.proveedores.listservicio();
+		    		addEvents();
 		    	}
 		    }else{
 		    	alert('No Login');

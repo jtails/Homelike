@@ -54,7 +54,7 @@
     <url-pattern>/clientes</url-pattern>
   </servlet-mapping>-->
   
-    <servlet>
+  <servlet>
     <servlet-name>ofertaproveedor</servlet-name>
     <servlet-class>mx.jtails.homelike.view.servlets.OfertaProveedorServlet</servlet-class>
   </servlet>
@@ -62,6 +62,17 @@
   <servlet-mapping>
     <servlet-name>ofertaproveedor</servlet-name>
     <url-pattern>/ofertaproveedor</url-pattern>
+  </servlet-mapping>
+  
+  
+ <servlet>
+    <servlet-name>reportesproveedor</servlet-name>
+    <servlet-class>mx.jtails.homelike.view.servlets.ReportesPServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>reportesproveedor</servlet-name>
+    <url-pattern>/reportesproveedor</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

@@ -1,13 +1,14 @@
 package mx.jtails.homelike.model.emanagers;
 
-import mx.jtails.homelike.model.beans.Pedido;
 import mx.jtails.homelike.model.beans.Proveedor;
+import mx.jtails.homelike.model.endpoints.PedidoEndpoint;
 
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JPACursorHelper;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
@@ -16,6 +17,7 @@ import javax.persistence.Query;
 
 
 public class ProveedorManager {
+	private static final Logger logger = Logger.getLogger(ProveedorManager.class.getName());
 
 	/**
 	 * This method lists all the entities inserted in datastore.
@@ -82,7 +84,8 @@ public class ProveedorManager {
 
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from Proveedor as Proveedor where nelatitud>:latitud and swlatitud<:latitud and swlongitud>:longitud and nelongitud<:longitud and servicio.idServicio=:idServicio and status=:status").setParameter("latitud",latitud).setParameter("longitud",longitud).setParameter("idServicio", idServicio).setParameter("status",1);
+			Query query = mgr.createQuery("select from Proveedor as Proveedor where nelatitud>:latitud and swlatitud<:latitud and swlongitud<:longitud and nelongitud>:longitud and servicio.idServicio=:idServicio and status=:status").setParameter("latitud",latitud).setParameter("longitud",longitud).setParameter("idServicio", idServicio).setParameter("status",1);
+			logger.warning("lat:"+latitud+" lng:"+longitud);
 			proveedores = (List<Proveedor>) query.getResultList();
 		} finally {
 			mgr.close();

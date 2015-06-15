@@ -44,7 +44,7 @@
 						<div class="widget-foot">
 							<div>
                     			<ul class="pagination">
-                    			    <li><a href="#">Segmentacion</a></li>
+                    			    <li><a>Numero de Regiones</a></li>
                         			<li><a href="#" id="0">1</a></li>
                         			<li><a href="#" id="2">2</a></li>
                         			<li><a href="#" id="4">4</a></li>

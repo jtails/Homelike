@@ -60,7 +60,7 @@
                                           <div class="form-group">
                                             <label class="control-label col-lg-3" for="name">Nombre</label>
                                             <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="nombre" name="nombre" value="${sessionScope.proveedor.nombre}">
+                                              <input type="text" class="form-control" id="nombre" name="nombre" value="${sessionScope.proveedor.nombre}" data-validation="required">
                                             </div>
                                           </div>   
                                           <input type="hidden" class="form-control" id="logo" name="logo" value="${sessionScope.proveedor.logo}">
@@ -68,25 +68,25 @@
                                           <div class="form-group">
                                             <label class="control-label col-lg-3" for="name">Slogan</label>
                                             <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="slogan" name="slogan" value="${sessionScope.proveedor.slogan}">
+                                              <input type="text" class="form-control" id="slogan" name="slogan" value="${sessionScope.proveedor.slogan}" data-validation="required">
                                             </div>
                                           </div>
                                           <div class="form-group">
                                             <label class="control-label col-lg-3" for="name">Rfc</label>
                                             <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="rfc" name="rfc" value="${sessionScope.proveedor.rfc}">
+                                              <input type="text" class="form-control" id="rfc" name="rfc" value="${sessionScope.proveedor.rfc}" data-validation="alphanumeric">
                                             </div>
                                           </div>
                                           <div class="form-group">
                                             <label class="control-label col-lg-3" for="name">Razon Social</label>
                                             <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="razon" name="razon" value="${sessionScope.proveedor.razonSocial}">
+                                              <input type="text" class="form-control" id="razon" name="razon" value="${sessionScope.proveedor.razonSocial}" data-validation="required">
                                             </div>
                                           </div>
                                           <div class="form-group">
                                             <label class="control-label col-lg-3" for="name">Telefono</label>
                                             <div class="col-lg-9">
-                                              <input type="text" class="form-control" id="telefono" name="telefono" value="${sessionScope.proveedor.telefono}">
+                                              <input type="text" class="form-control" id="telefono" name="telefono" value="${sessionScope.proveedor.telefono}" data-validation="number">
                                             </div>
                                           </div>
                                           <div class="form-group">
@@ -111,7 +111,7 @@
                                             <div class="col-lg-9 col-lg-offset-3">
                                               <input type="hidden" id="opcion" name="opcion" value="registrodp"/>
                                               <input type="hidden" id="idProveedor" name="idProveedor" value="${sessionScope.proveedor.idProveedor}"/>
-                                              <button type="reset" class="btn btn-sm btn-default">Cancelar</button>
+                                              <button type="button" id="back" name="back" class="btn btn-sm btn-default">Cancelar</button>
                                               <button type="submit" class="btn btn-sm btn-info" name="btnenviar" id="btnenviar">Siguiente</button>
                                             </div>
                                           </div>
@@ -124,7 +124,16 @@
     </div>    
   </div> 
 </div>
- 
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.2.1/jquery.form-validator.min.js"></script>
+<script>
+$.validate({
+	  errorMessage : false,
+	  showErrorMessage : false,
+	  errorMessagePosition: null
+	});
+</script>
+
   </body>
 </html>
 

@@ -69,6 +69,11 @@ public class Pedido implements Serializable {
 	//1 aceptado proveedor
 	//2 finalizado
 	private int status;
+	
+	//0 Activo
+	//1 Cancelado
+	private int canceladop;
+	private int canceladoc;
 
 	//bi-directional many-to-one association to DetallePedido
 	@OneToMany(mappedBy="pedido",cascade = {CascadeType.PERSIST},fetch=FetchType.EAGER)
@@ -244,5 +249,20 @@ public class Pedido implements Serializable {
 		this.region = region;
 	}
 
+	public int getCanceladop() {
+		return canceladop;
+	}
+
+	public void setCanceladop(int canceladop) {
+		this.canceladop = canceladop;
+	}
+
+	public int getCanceladoc() {
+		return canceladoc;
+	}
+
+	public void setCanceladoc(int canceladoc) {
+		this.canceladoc = canceladoc;
+	}
 
 }

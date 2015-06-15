@@ -30,6 +30,9 @@
 <!-- Matter -->
 
 <div class="matter">
+	<div class="container">
+		<a href="reportesproveedor" id="export"><i class="fa fa-file fa-3x"></i>Exportar</a>
+	</div>
 	<div class="container" id="productos">
 		<div class="row">
 			<div class="col-md-12">
@@ -87,7 +90,13 @@
 														aria-label="CSS grade: activate to sort column ascending"
 														style="width: 114px;" colspan="1" rowspan="1"
 														aria-controls="data-table" tabindex="0"
-														role="columnheader" class="sorting">Confirmar pedido
+														role="columnheader" class="sorting">Region
+													</th>
+													<th
+														aria-label="CSS grade: activate to sort column ascending"
+														style="width: 150px;" colspan="1" rowspan="1"
+														aria-controls="data-table" tabindex="0"
+														role="columnheader" class="sorting">Status
 													</th>
 												</tr>
 											</thead>

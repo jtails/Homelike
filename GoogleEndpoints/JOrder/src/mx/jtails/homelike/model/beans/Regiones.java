@@ -45,6 +45,21 @@ public class Regiones implements Serializable {
 	private String swlatitud;
 
 	private String swlongitud;
+	
+	private String label;
+	
+	
+	//0- Activo
+	//1- Inactivo (Eliminado)
+	private int status;
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public int getIdRegion() {
 		return this.idRegion;
@@ -100,6 +115,14 @@ public class Regiones implements Serializable {
 
 	public void setSwlongitud(String swlongitud) {
 		this.swlongitud = swlongitud;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 }

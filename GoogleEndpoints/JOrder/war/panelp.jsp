@@ -47,7 +47,7 @@
 <script src="js/homelike/panelp.js"></script>
 <script src="https://apis.google.com/js/client.js?onload=init"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-
+<script src="js/markerclusterer.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -134,6 +134,9 @@
 				aria-labelledby="myModalLabel" aria-hidden="true">
 		</div>
 		<div id="modalBox2" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+		</div>
+		<div id="modalBox3" class="modal fade" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
 		</div>
 

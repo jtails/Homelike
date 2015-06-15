@@ -43,7 +43,7 @@
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal"
 				aria-hidden="true">Cancelar</button>
-			<input type="text" id="id"/>
+			<input type="hidden" id="id"/>
 			<button type="button" class="btn btn-primary" id="btnenviar">Confirmar
 				Pedido</button>
 		</div>

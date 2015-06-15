@@ -8,12 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.google.api.server.spi.response.CollectionResponse;
-
 import mx.jtails.homelike.model.beans.Proveedor;
 import mx.jtails.homelike.model.beans.Servicio;
-import mx.jtails.homelike.model.emanagers.ServicioManager;
+
 
 
 public class ProveedorServlet extends HttpServlet{

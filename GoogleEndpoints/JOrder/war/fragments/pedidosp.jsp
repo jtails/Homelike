@@ -31,6 +31,9 @@
 <!-- Matter -->
 
 <div class="matter">
+	<div class="container">
+		<a href="reportesproveedor" id="export"><i class="fa fa-file fa-3x"></i>Exportar</a>
+	</div>
 	<div class="container" id="pedidos">
 	</div>
 	<div id="message"></div>

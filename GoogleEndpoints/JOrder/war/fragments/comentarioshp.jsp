@@ -47,7 +47,7 @@
 														</div>
 														<div class="chat-content">
 															<div class="chat-meta">
-																Comentario entrega proveedor : <span class="pull-right" id="fechaHoraAceptacion"></span>
+																Comentario confirmación : <span class="pull-right" id="fechaHoraAceptacion"></span>
 															</div>
 															<div id="comentarioProveedor"></div>
 															<div class="clearfix"></div>
@@ -59,7 +59,7 @@
 														</div>
 														<div class="chat-content">
 															<div class="chat-meta">
-																Comentario entrega cliente : <span class="pull-right" id="fechaHoraEntrega"></span>
+																Comentario entrega : <span class="pull-right" id="fechaHoraEntrega"></span>
 															</div>
 															<div id="comentarioEntregaCliente"></div>
 															<div class="clearfix"></div>

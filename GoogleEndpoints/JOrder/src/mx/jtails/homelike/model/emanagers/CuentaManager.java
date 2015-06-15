@@ -82,7 +82,7 @@ public class CuentaManager {
 			mgr = getEntityManager();
 			//El Query comentado deberia ser el correcto, por temas de la implementación de DATANUCLEUS se tuvo que mover la parte de la condicion de las longitudes negativas, si se ejecuta el query por fuera en Mysql si funciona
 			//Query query = mgr.createQuery("select Direccion.cuenta from Direccion as Direccion where :nelatitud>Direccion.latitud and :swlatitud<Direccion.latitud and :swlongitud<Direccion.longitud and :nelongitud>Direccion.longitud").setParameter("nelatitud",nelatitud).setParameter("swlatitud",swlatitud).setParameter("swlongitud",swlongitud).setParameter("nelongitud",nelongitud);
-			Query query = mgr.createQuery("select Direccion.cuenta from Direccion as Direccion where :nelatitud>Direccion.latitud and :swlatitud<Direccion.latitud and :swlongitud>Direccion.longitud and :nelongitud<Direccion.longitud").setParameter("nelatitud",nelatitud).setParameter("swlatitud",swlatitud).setParameter("swlongitud",swlongitud).setParameter("nelongitud",nelongitud);
+			Query query = mgr.createQuery("select Direccion.cuenta from Direccion as Direccion where :nelatitud>Direccion.latitud and :swlatitud<Direccion.latitud and :swlongitud<Direccion.longitud and :nelongitud>Direccion.longitud").setParameter("nelatitud",nelatitud).setParameter("swlatitud",swlatitud).setParameter("swlongitud",swlongitud).setParameter("nelongitud",nelongitud);
 			clientes = (List<Cuenta>) query.getResultList();
 		} finally {
 			mgr.close();

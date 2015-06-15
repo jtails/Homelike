@@ -80,6 +80,12 @@ google.appengine.homelike.pedidos.update = function(idPedido,comentarioProveedor
 }
 	
 function addRow(pedido,detallePedido,direccion,proveedor,cuenta){
+	var controles;
+	if(pedido.status<1 && pedido.canceladop==0){
+		controles="<a id='spedidoc-"+pedido.idPedido+"' href='#'>Confirmar pedido</a>";
+	}else{
+		controles="";
+	}
 	$("#pedidos").append(	
 			"<div class='row'>"+
 				"<div class='col-md-12'>"+
@@ -110,7 +116,7 @@ function addRow(pedido,detallePedido,direccion,proveedor,cuenta){
 									"<li><a id='gpedidoc-"+pedido.idPedido+"' href='#'>Productos</a></li>"+
 									"<li><a id='dirpedidoc-"+pedido.idPedido+"' href='#'>Direccion envio</a></li>"+
 									//"<li><a id='compedidoc-"+pedido.idPedido+"' href='#'>Comentarios</a></li>"+
-									"<li><a id='spedidoc-"+pedido.idPedido+"' href='#'>Confirmar pedido</a></li>"+
+									"<li>"+controles+"</li>"+
 								"</ul>"+
 								"<div class='clearfix'></div>"+
 							"</div>"+
@@ -197,72 +203,8 @@ function addRow(pedido,detallePedido,direccion,proveedor,cuenta){
 		);
 		setMap(direccion.latitud,direccion.longitud,"map-canvasc-"+pedido.idPedido);
 	});	
-		
-	/*$("#compedidoc-"+pedido.idPedido).click(function(){
-		$("#pcontenido-"+pedido.idPedido).html(
-			"<div class='matter'>"+
-				"<div class='container'>"+
-					"<div class='row'>"+
-			            "<div class='col-md-6'>"+
-			            	"<div class='widget'>"+
-			                	"<div class='widget-head'>"+
-			                  		"<div class='pull-left'>Comentarios</div>"+
-			                  		"<div class='widget-icons pull-right'>"+
-			                    		"<a href='#' class='wminimize'><i class='fa fa-chevron-up'></i></a>"+ 
-			                    		"<a href='#' class='wclose'><i class='fa fa-times'></i></a>"+
-			                  		"</div>"+  
-			                  		"<div class='clearfix'></div>"+
-			                	"</div>"+
-			                	"<div class='widget-content'>"+
-			                  		"<ul class='activity'>"+
-			                  			"<li>"+
-			                  				"<i class='fa fa-comment-o'></i>"+
-			                  				"<strong>Comentario cliente </strong>"+
-			                  				((pedido.comentarioCliente!=undefined)?pedido.comentarioCliente:"")+
-			                  			"</li>"+
-			                  			"<li>"+
-		                  					"<i class='fa fa-comments-o'></i>"+
-		                  					"<strong>Comentario entrega proveedor </strong>"+
-		                  					((pedido.comentarioProveedor!=undefined)?pedido.comentarioProveedor:"")+
-		                  				"</li>"+
-		                  				"<li>"+
-	                  						"<i class='fa fa-comment-o'></i>"+
-	                  						"<strong>Comentario entrega cliente </strong>"+
-	                  						((pedido.comentarioEntregaCliente!=undefined)?pedido.comentarioEntregaCliente:"")+
-	                  					"</li>"+
-	                  					"<li>"+
-                  							"<i class='fa fa-comments-o'></i>"+
-                  							"<strong>Comentario proveedor </strong>"+
-                  							((pedido.comentarioEntregaProveedor!=undefined)?pedido.comentarioEntregaProveedor:"")+
-                  						"</li>"+
-			                  		"</ul>"+
-			                	"</div>"+
-			              	"</div>"+
-			            "</div>"+ 
-			    	"</div>"+
-				"</div>"+
-			"</div>"		
-		);
-	});*/
-	
-	
-	/*$("#compedidoc-"+pedido.idPedido).click(function(){
-		$("#pcontenido-"+pedido.idPedido).html(
-			"<div style='position: relative; overflow: hidden; width: auto; height: 350px;' class='slimScrollDiv'>"+
-				"<div style='overflow: hidden; width: auto; height: 350px;' class='padd scroll-chat'>"+
-					"<ul class='chats' id='comentarios-"+pedido.idPedido+"'>"+
-					"</ul>"+
-				"</div>"+
-				"<div style='background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.3); width: 5px; position: absolute; top: 0px; border-radius: 7px; z-index: 99; right: 1px; height: 272.829px; display: none; opacity: 0.4;' class='slimScrollBar'></div>"+
-				"<div style='width: 5px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: none repeat scroll 0% 0% rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;' class='slimScrollRail'></div>"+
-			"</div>"
-		);
-		setComentarios(pedido);
-	});*/	
-	
 	
 	$("#spedidoc-"+pedido.idPedido).click(function(){
-		if(pedido.status<1){
 			$("#pcontenido-"+pedido.idPedido).html(
 			"<div class='matter'>"+
 				"<div class='container'>"+
@@ -297,73 +239,8 @@ function addRow(pedido,detallePedido,direccion,proveedor,cuenta){
 			$("#btnapedido-"+pedido.idPedido).click(function(){
 				google.appengine.homelike.pedidos.update(pedido.idPedido,$("#comentarioe-"+pedido.idPedido).val(),1,new Date());
 			});
-		}else{
-			$("#pcontenido-"+pedido.idPedido).html("<div class='alert alert-success'>Pedido confirmado!!</div>");
-		}
 	});
 }
-
-/*function setComentarios(pedido){
-	$("#comentarios-"+pedido.idPedido).html(
-		"<li class='by-me'>"+
-			"<div class='avatar pull-left'>"+
-				"<img src='img/logo_.png' alt=''>"+
-			"</div>"+
-			"<div class='chat-content'>"+
-				"<div class='chat-meta'>"+
-					"Comentario cliente : <span class='pull-right'>"+
-					((pedido.fechaHoraPedido!=undefined)?new Date(pedido.fechaHoraPedido).toLocaleDateString():"")+" "+
-					((pedido.fechaHoraPedido!=undefined)?new Date(pedido.fechaHoraPedido).toLocaleTimeString():"")+
-					"</span>"+
-				"</div>"+
-				((pedido.comentarioCliente!=undefined)?pedido.comentarioCliente:"")+
-				"<div class='clearfix'></div>"+
-			"</div>"+
-		"</li>"+
-		"<li class='by-other'>"+
-			"<div class='avatar pull-right'>"+
-				"<img src='img/logo_.png' alt=''>"+
-			"</div>"+
-			"<div class='chat-content'>"+
-				"<div class='chat-meta'>"+
-					"Comentario entrega proveedor : <span class='pull-right'>"+
-					((pedido.fechaHoraAceptacion!=undefined)?new Date(pedido.fechaHoraAceptacion).toLocaleDateString():"")+" "+
-					((pedido.fechaHoraAceptacion!=undefined)?new Date(pedido.fechaHoraAceptacion).toLocaleTimeString():"")+
-					"</span>"+
-				"</div>"+
-				((pedido.comentarioProveedor!=undefined)?pedido.comentarioProveedor:"")+
-				"<div class='clearfix'></div>"+
-			"</div>"+
-		"</li>"+
-		"<li class='by-me'>"+
-			"<div class='avatar pull-left'>"+
-				"<img src='img/logo_.png' alt=''>"+
-			"</div>"+
-			"<div class='chat-content'>"+
-				"<div class='chat-meta'>"+
-					"Comentario entrega cliente : <span class='pull-right'>"+
-					((pedido.fechaHoraEntrega!=undefined)?new Date(pedido.fechaHoraEntrega).toLocaleDateString():"")+" "+
-					((pedido.fechaHoraEntrega!=undefined)?new Date(pedido.fechaHoraEntrega).toLocaleTimeString():"")+
-					"</span>"+
-				"</div>"+
-				((pedido.comentarioEntregaCliente!=undefined)?pedido.comentarioEntregaCliente:"")+
-				"<div class='clearfix'></div>"+
-			"</div>"+
-		"</li>"+
-		"<li class='by-other'>"+
-			"<div class='avatar pull-right'>"+
-				"<img src='img/logo_.png' alt=''>"+
-			"</div>"+
-			"<div class='chat-content'>"+
-				"<div class='chat-meta'>"+
-					"Comentario proveedor : <span class='pull-right'></span>"+
-				"</div>"+
-				((pedido.comentarioEntregaProveedor!=undefined)?pedido.comentarioEntregaProveedor:"")+
-				"<div class='clearfix'></div>"+
-			"</div>"+
-		"</li>"
-	);
-}*/
 
 
 function setgPedido(pedido,detallePedido){
@@ -414,12 +291,16 @@ function setgPedido(pedido,detallePedido){
 
 function setStatus(pedido){
 	var statusString;
-	if(pedido.status==0)
-		statusString='Nuevo';
-	if(pedido.status==1)
-		statusString='Confirmado proveedor';
-	if(pedido.status==3)
-		statusString='Confirmado cliente'
+	if(pedido.canceladop==1){
+		statusString='Cancelado por Proveedor';
+	}else{
+		if(pedido.status==0)
+			statusString='Nuevo';
+		if(pedido.status==1)
+			statusString='Confirmado proveedor';
+		if(pedido.status==3)
+			statusString='Confirmado cliente';
+	}
 	$("#status-"+pedido.idPedido).html(
 		"<span>Status : </span>"+statusString+
 		"<a href='#' class='wminimize'><i class='fa fa-chevron-up'></i></a>"+

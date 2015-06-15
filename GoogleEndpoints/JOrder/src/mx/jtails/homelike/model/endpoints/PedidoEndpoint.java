@@ -64,6 +64,31 @@ public class PedidoEndpoint {
 		//return null;
 	}
 	
+	
+	/**
+	 * Actualiza el pedido, cancela el pedido por el proveedor
+	 * @param pedido
+	 * El pedido a ser actualizado
+	 * @param user
+	 * El usuario autenticado con Google
+	 * @return
+	 * Retorna el objeto pedido persistido,este contiene el ID del pedido actualizado
+	 */
+	//Podria ser eliminado
+	@ApiMethod(name = "cancelapPedido",path="cancelapPedido",httpMethod="POST")
+	public Pedido cancelapPedido(Pedido pedido,User user)throws OAuthRequestException, IOException  {
+		//if(user!=null){
+			PedidoManager pedidoM=new PedidoManager();
+			//Obtenemos referencia al objeto pedido persistido
+			Pedido ppedido=pedidoM.getPedido(Long.valueOf(pedido.getIdPedido()));
+			ppedido.setCanceladop(1);
+			logger.warning("Pedido cancelado proveedor: "+pedido.getIdPedido());
+			return pedidoM.updatePedido(ppedido);
+		//}
+		//return null;
+	}
+	
+	
 	/**
 	 * Permite obtener los pedidos con Status 2(Pedidos terminados)
 	 * @param cuenta
@@ -298,7 +323,7 @@ public class PedidoEndpoint {
 	}
 
 	/**
-	 * Persiste el objeto Pedido con referencias a direccion,dispositivo,Cuenta y Proveedor ,si el pedido ya esta persistida realiza una operacion update
+	 * Persiste el objeto Pedido con referencias a direccion,dispositivo,Cuenta y Proveedor ,si el pedido ya esta persistido realiza una operacion update
 	 * @param pedido
 	 * El pedido a ser agregado o actualizado
 	 * @param user
@@ -381,9 +406,10 @@ public class PedidoEndpoint {
 				return ppedido;
 			}else{
 				Pedido ppedido=pedidoM.getPedido(Long.valueOf(pedido.getIdPedido()));
-				ppedido.setStatus(pedido.getStatus());
 				Calendar calendar=Calendar.getInstance();
+				//Pedido aceptado proveedor
 				if(pedido.getStatus()==1){
+					ppedido.setStatus(pedido.getStatus());
 					ppedido.setComentarioProveedor(pedido.getComentarioProveedor());
 					ppedido.setFechaHoraAceptacion(calendar.getTime());
 					logger.warning("Pedido aceptado proveedor: "+user+" "+pedido.getComentarioProveedor());
@@ -413,9 +439,11 @@ public class PedidoEndpoint {
 					}else{
 						logger.warning("La cuenta no tiene un dispositivo asociado,"+user);
 					}
-					//
 				}
+				
+				//Pedido terminado cliente
 				if(pedido.getStatus()==2){
+					ppedido.setStatus(pedido.getStatus());
 					ppedido.setComentarioEntregaCliente(pedido.getComentarioEntregaCliente());
 					ppedido.setCalificacion(pedido.getCalificacion());
 					
@@ -429,24 +457,33 @@ public class PedidoEndpoint {
 					ppedido.setFechaHoraEntrega(calendar.getTime());
 					logger.warning("Pedido entregado cliente: "+user+" "+pedido.getComentarioEntregaCliente());
 				}
+				//Pedido Cancelado por el Proveedor
+				if(pedido.getCanceladop()==1){
+					ppedido.setCanceladop(pedido.getCanceladop());
+					logger.warning("Pedido cancelado proveedor: "+pedido.getIdPedido());
+				}
 				return pedidoM.updatePedido(ppedido);
 			}
 		//}
 		//return null;
 	}
 	
+	
 	public Regiones getRegionByLatLng(Proveedor proveedor,Direccion direccion){
 		float lat=Float.valueOf(direccion.getLatitud());
 		float lng=Float.valueOf(direccion.getLongitud());
 		logger.warning(proveedor.getRegiones().size()+"");
 		for(Regiones region:proveedor.getRegiones()){
-			float nelat=Float.valueOf(region.getNelatitud());
-			float nelng=Float.valueOf(region.getNelongitud());
-			float swlat=Float.valueOf(region.getSwlatitud());
-			float swlng=Float.valueOf(region.getSwlongitud());
-			logger.warning("lat: "+lat+" lng: "+lng);
-			if(lat>swlat && lat<nelat && lng>swlng && lng<nelng){
-				return region;
+			//Regiones activas
+			if(region.getStatus()==0){
+				float nelat=Float.valueOf(region.getNelatitud());
+				float nelng=Float.valueOf(region.getNelongitud());
+				float swlat=Float.valueOf(region.getSwlatitud());
+				float swlng=Float.valueOf(region.getSwlongitud());
+				logger.warning("lat: "+lat+" lng: "+lng);
+				if(lat>swlat && lat<nelat && lng>swlng && lng<nelng){
+					return region;
+				}
 			}
 		}
 		return null;

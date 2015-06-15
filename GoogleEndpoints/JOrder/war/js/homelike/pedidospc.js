@@ -50,12 +50,39 @@ google.appengine.homelike.pedidos.update = function(idPedido,comentario,status,d
 	});
 }
 
+google.appengine.homelike.pedidos.cancelapPedido = function(idPedido){
+	gapi.client.pedidoendpoint.insertPedido({'idPedido': idPedido,'canceladop':1}).execute(
+		function(output){
+			var pedido=output;
+			$("#btncancelar-"+pedido.idPedido).attr('disabled',true);
+			$('#modalBox3').modal('hide');
+	});
+}
+
+
 function addEvents(){
 	$("#vclasica").click(function(){
 		$("#contenido").load("fragments/pedidosp.jsp");
 	});
 	
+	/*$("#export").click(function(){
+		$.ajax({type: 'post',
+			url: 'reportesproveedor',
+			success: function(){
+			}
+		});
+	});*/
+	
 	$("#modalBox").load("fragments/comentarioshp.jsp");
+	$("#modalBox3").load("fragments/confirmacion.jsp",function() {
+		//Evento lanzado cuando se confirma la cancelacion de un pedido, 
+		//recordar que el ModalBox es Generico y que cada cliente en cada navegador Web solo tendra una instancia de este
+		var btnenviar = document.querySelector('#btnenviarC');
+		btnenviar.addEventListener('click', function(e) {
+			var idPedido=$("#idConfirmacion").val();
+			google.appengine.homelike.pedidos.cancelapPedido(idPedido);
+		});
+	});
 	$("#modalBox2").load("fragments/pedidospcm.jsp",function() {
 		//Evento lanzado cuando se confirma un pedido, recordar que el ModalBox es Generico y que cada cliente en cada navegador Web solo tendra una instancia de este
 		var btnenviar = document.querySelector('#btnenviar');
@@ -64,6 +91,7 @@ function addEvents(){
 			google.appengine.homelike.pedidos.update(idPedido,$("#comentario").val(),1,new Date());
 		});
 	});
+	
 }
 
 
@@ -82,25 +110,35 @@ google.appengine.homelike.pedidos.list = function(idProveedor){
 					var detallePedido=pedido.detallePedido;
 					var direccion=pedido.direccion;
 					var proveedor=pedido.proveedor;
+					var region=pedido.region!=undefined?pedido.region.label:"";
 					var style='odd';
 					if(i % 2 == 0)
 						style='odd';
 					else
 						style='even';
-					addRow(style,pedido,detallePedido,direccion,proveedor);
+					addRow(style,pedido,detallePedido,direccion,proveedor,region);
 				}
 				$.unblockUI();
 			}
 	});
 }
 
-function addRow(style,pedido,detallePedido,direccion,proveedor){
+function addRow(style,pedido,detallePedido,direccion,proveedor,region){
 	var total=0;
 	var dpedido="";
-	var status;
-	if(pedido.status>=1){
-		status="disabled";
+	var controles;
+	if(pedido.canceladop==1){
+		controles="Cancelado por Proveedor";
+	}else{
+		if(pedido.status>=1){	
+			controles="<a href='#modalBox2' disabled class='btn btn-sm btn-info' id='btnapedido-"+pedido.idPedido+"' data-toggle='modal'>Confirmar pedido</a>";
+			controles+="<a href='#modalBox3' class='btn btn-sm btn-default' id='btncancelar-"+pedido.idPedido+"' data-toggle='modal'>xxx</a>";
+		}else{
+			controles="<a href='#modalBox2' class='btn btn-sm btn-info' id='btnapedido-"+pedido.idPedido+"' data-toggle='modal'>Confirmar pedido</a>";
+			controles+="<a href='#modalBox3' class='btn btn-sm btn-default' id='btncancelar-"+pedido.idPedido+"' data-toggle='modal'>xxx</a>";
+		}
 	}
+	
 	for(var i=0;i<detallePedido.length;i++){
 		total+=detallePedido[i].producto.costoUnitario*detallePedido[i].cantidad;
 		if(detallePedido[i].producto.cproducto!=undefined)
@@ -119,8 +157,9 @@ function addRow(style,pedido,detallePedido,direccion,proveedor){
 					" Comentarios"+
 				"</a>"+
 			"</td>"+
+			"<td class=' '>"+region+"</td>"+
 			"<td>"+
-				"<a href='#modalBox2' "+status+" class='btn btn-sm btn-info' id='btnapedido-"+pedido.idPedido+"' data-toggle='modal'>Confirmar pedido</a>"+
+				controles+
 			"</td>"+
 		"</tr>"
 	);
@@ -140,7 +179,10 @@ function addRow(style,pedido,detallePedido,direccion,proveedor){
 	$("#btnapedido-"+pedido.idPedido).click(function(){
 		$("#comentario").val("");
 		$("#id").val(pedido.idPedido);
-	});	
+	});
+	$("#btncancelar-"+pedido.idPedido).click(function(){
+		$("#idConfirmacion").val(pedido.idPedido);
+	});
 }
 
 

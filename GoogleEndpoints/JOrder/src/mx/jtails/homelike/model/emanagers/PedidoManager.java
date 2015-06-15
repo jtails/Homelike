@@ -100,7 +100,7 @@ public class PedidoManager {
 		List<Pedido> pedidos = null;
 		try {
 			mgr = getEntityManager();
-			Query query = mgr.createQuery("select from Pedido as Pedido where Pedido.proveedor.idProveedor=:idProveedor and Pedido.status<>:status order by (Pedido.fechaHoraPedido)").setParameter("idProveedor",proveedor.getIdProveedor()).setParameter("status",2);
+			Query query = mgr.createQuery("select from Pedido as Pedido where Pedido.proveedor.idProveedor=:idProveedor and Pedido.status<>:status order by Pedido.region.idRegion,Pedido.fechaHoraPedido").setParameter("idProveedor",proveedor.getIdProveedor()).setParameter("status",2);
 			pedidos = (List<Pedido>) query.getResultList();
 		} finally {
 			mgr.close();

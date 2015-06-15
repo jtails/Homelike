@@ -16,6 +16,8 @@
 	//No se agrega la region principal a la lista
 	var coordinates=[];
 	var regions=[];
+	var labels=[];
+	var markers=[];
 	
 	//Coordenadas del proveedor y su area de cobertura
 	var lat;
@@ -66,8 +68,10 @@
 				for(var i=0;i<output.items.length;i++){
 					var cuenta=output.items[i];
 					var direccion=cuenta.direcciones[0];
-					setMarker(direccion.latitud,direccion.longitud,direccion.alias,cuenta.numPedidos);
+					var marker=setMarker(direccion.latitud,direccion.longitud,direccion.alias,cuenta.numPedidos);
+					markers.push(marker);
 				}
+				var markerCluster = new MarkerClusterer(map, markers);
 				$.unblockUI();
 			}else{
 				 $("#message").addClass("alert alert-warning"); 
@@ -78,21 +82,13 @@
 		});
 	}
 	
-	google.appengine.homelike.regiones.insert = function(idProveedor,nelatitud,nelongitud,swlatitud,swlongitud){
-		gapi.client.regionesendpoint.insertRegion({'proveedor':{'idProveedor': idProveedor},'nelatitud': nelatitud,'nelongitud': nelongitud,
-											'swlatitud': swlatitud,'swlongitud': swlongitud}).execute(
+	google.appengine.homelike.regiones.insertRegiones = function(regiones,idProveedor){
+		gapi.client.regionesendpoint.insertRegion({'regiones':regiones,'idProveedor':idProveedor}).execute(
 		function(output){
-			//console.log(output);
+			$("#message").addClass("alert alert-warning"); 
+			$("#message").text("Regiones actualizadas");
 		});
 	}
-	
-	google.appengine.homelike.regiones.delete = function(idProveedor){
-		gapi.client.regionesendpoint.deleteRegiones({'idProveedor': idProveedor}).execute(
-		function(output){
-			//console.log(output);
-		});
-	}
-	
 	
 	
 	//--------------------------------------------------
@@ -124,10 +120,11 @@
 		alias=numPedidos+' Pedido[s]';
 		var marker = new google.maps.Marker({
     		position: myLatlng,
-    		map: map,
+    		//map: map,
     		title: alias,
     		icon: icono
 		});
+		return marker;
 	}
 	
 	function addRegion(nelat,nelng,swlat,swlng){
@@ -148,15 +145,31 @@
 		return rectangle;
 	}
 	
+	
+	function addMessage(coordinate,message){
+	     var marker = new google.maps.Marker({
+	    	 position: new google.maps.LatLng(
+		 	        	parseFloat(coordinate.swlatitud)+((parseFloat(coordinate.nelatitud)-parseFloat(coordinate.swlatitud))/2),
+			        	parseFloat(coordinate.swlongitud)+((parseFloat(coordinate.nelongitud)-parseFloat(coordinate.swlongitud))/2)
+			 ),
+			 map: map,
+			 icon: 'img/numbers/number_'+message+'.png'
+		});
+	    labels.push(marker);
+	}
+	
 	//google.maps.event.addDomListener(window, 'load', initialize);
 	
 	//----------------------------------------------
 
 	function clearRegions(){
-		for(var i=0;i<regions.length;i++)
+		for(var i=0;i<regions.length;i++){
 			regions[i].setMap(null);
+			labels[i].setMap(null);
+		}
 		coordinates=[];
 		regions=[];
+		labels=[];
 	}
 	
 	
@@ -180,6 +193,7 @@
 					coordinates.push(bound);
 					var currentRegion=addRegion(nelatitud,nelongitud,swlatitud,swlongitud);
 					regions.push(currentRegion);
+					addMessage(bound,++x);
 				}
 			}
 	}
@@ -214,12 +228,19 @@
 			function(output){
 				currentRegions = output.regiones || [];
 				for(var i=0;i<currentRegions.length;i++){
-					var currentRegion=addRegion(currentRegions[i].nelatitud,
-							currentRegions[i].nelongitud,
-							currentRegions[i].swlatitud,
-							currentRegions[i].swlongitud
-					);
-					regions.push(currentRegion);
+					//Regiones activas
+					if(currentRegions[i].status==0){
+						var bound={
+							"swlatitud":currentRegions[i].swlatitud,
+							"swlongitud":currentRegions[i].swlongitud,
+							"nelatitud":currentRegions[i].nelatitud,
+							"nelongitud":currentRegions[i].nelongitud
+						};
+						
+						var currentRegion=addRegion(bound.nelatitud,bound.nelongitud,bound.swlatitud,bound.swlongitud);
+						regions.push(currentRegion);
+						addMessage(bound,currentRegions[i].label);
+					}
 				}
 		});
 	}
@@ -247,12 +268,8 @@
 			});
 		}
 		$("#btnseg").click(function(){
-			//Eliminamos las regiones del proveedor
-	  		google.appengine.homelike.regiones.delete(
-	  			document.querySelector('#idProveedor').value
-	  		);
-	  		
-			for(var i=0;i<coordinates.length;i++){		
+	  		var regiones=[];
+			for(var i=0;i<coordinates.length;i++){
 				var coordinate=coordinates[i];
 				var nelatitud=coordinate.nelatitud;
 		  		var nelongitud=coordinate.nelongitud;
@@ -260,11 +277,17 @@
 		  		var swlongitud=coordinate.swlongitud;
 		 
 		  		//Agregamos las nuevas regiones del proveedor
-				google.appengine.homelike.regiones.insert(
-						document.querySelector('#idProveedor').value,
-						nelatitud,nelongitud,swlatitud,swlongitud
-				); 
+		  		regiones.push({
+		  				'proveedor': {'idProveedor': idProveedor},
+		  				'nelatitud': nelatitud,
+		  				'nelongitud': nelongitud,
+						'swlatitud': swlatitud,
+						'swlongitud': swlongitud,
+						'label': i+1
+				});
 			}
+			google.appengine.homelike.regiones.insertRegiones(regiones,idProveedor); 
+			//$("#contenido").load("fragments/clientesp.jsp");
 		});
 	}
 	
